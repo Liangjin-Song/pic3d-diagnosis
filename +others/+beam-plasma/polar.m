@@ -1,0 +1,19 @@
+N=16388;
+i1=600;
+i2=800;
+i=3;
+j=64;
+inv=4;
+eet=ex_lx(i:inv:N,j);
+ee1=eet(i1:i2);
+eet=ey_lx(i:inv:N,j);
+ee2=eet(i1:i2);
+%
+emax1=max(abs(ee1));
+emax2=max(abs(ee2));
+emax=max(emax1,emax2);
+ee1=ee1/emax;
+ee2=ee2/emax;
+figure
+plot(ee1,ee2,'k');
+axis([-1 1 -1 1])

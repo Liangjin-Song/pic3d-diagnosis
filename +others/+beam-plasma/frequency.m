@@ -1,0 +1,9 @@
+wpe=2.0;
+nt=1024;
+tt=16384*4/40;
+pi=3.1415926;
+w=2*pi/tt;
+%wp=wpe;
+wp=sqrt(25/1836)*wpe;
+xx=0:w/wp:w/wp*nt;
+plot(xx,fw)

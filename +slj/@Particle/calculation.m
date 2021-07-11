@@ -1,0 +1,91 @@
+function obj=calculation(obj)
+%%
+% @info: writen by Liangjin Song on 20210408
+% @brief: calculation - calculate some parameters about the particle
+% @param: obj - the Particle object
+% @return: obj - the Particle object
+%%
+obj=calc_kinetic_xyz(obj);
+obj=calc_velocity_fac(obj);
+obj=calc_electric_field_fac(obj);
+obj=calc_magnetic_moment(obj);
+end
+
+%% ======================================================================== %%
+function obj=calc_kinetic_xyz(obj)
+%%
+% @brief: calculate the kinetic energy in three direction
+% @param: obj - the Particle object
+% @return: obj - the Particle object
+%%
+    obj.value.kx=0.5*obj.m*obj.value.vx.^2;
+    obj.value.ky=0.5*obj.m*obj.value.vy.^2;
+    obj.value.kz=0.5*obj.m*obj.value.vz.^2;
+end
+
+%% ======================================================================== %%
+function [para, perp]=calc_fac(bx,by,bz,mx,my,mz)
+%%
+% @brief: calculate the field aligned component
+% @param: bx, by, bz - the magnetic field
+% @param: mx, ny, mz - the vector
+% @return: para - the parallel component
+% @return: perp - the perpendicular component
+%%
+    b=sqrt(bx.^2+by.^2+bz.^2);
+    para=(mx.*bx+my.*by+mz.*bz)./b;
+    perp=sqrt(mx.^2+my.^2+mz.^2-para.^2);
+end
+
+%% ======================================================================== %%
+function obj=calc_velocity_fac(obj)
+%%
+% @brief: calculate the parallel and perpendicular velocity
+% @param: obj - the Particle object
+% @return: obj - the Particle object
+%%
+    vx=obj.value.vx;
+    vy=obj.value.vy;
+    vz=obj.value.vz;
+    bx=obj.value.bx;
+    by=obj.value.by;
+    bz=obj.value.bz;
+    [para, perp]=calc_fac(bx,by,bz,vx,vy,vz);
+    obj.value.v_para=para;
+    obj.value.v_perp=perp;
+    %% the kinetic energy at fac
+    obj.value.k_para=0.5*obj.m*para.^2;
+    obj.value.k_perp=0.5*obj.m*perp.^2;
+end
+
+%% ======================================================================== %%
+function obj=calc_electric_field_fac(obj)
+%%
+% @brief: calculate the parallel and perpendicular electric field
+% @param: obj - the Particle object
+% @return: obj - the Particle object
+%%
+    ex=obj.value.ex;
+    ey=obj.value.ey;
+    ez=obj.value.ez;
+    bx=obj.value.bx;
+    by=obj.value.by;
+    bz=obj.value.bz;
+    [para, perp]=calc_fac(bx,by,bz,ex,ey,ez);
+    obj.value.e_para=para;
+    obj.value.e_perp=perp;
+end
+
+%% ======================================================================== %%
+function obj=calc_magnetic_moment(obj)
+%%
+% calculate the magnetic moment
+% @param: obj - the Particle object
+% @return: obj - the Particle object
+%%
+    bx=obj.value.bx;
+    by=obj.value.by;
+    bz=obj.value.bz;
+    b=sqrt(bx.^2+by.^2+bz.^2);
+    obj.value.mu=obj.value.k_perp./b;
+end

@@ -41,9 +41,9 @@ if is
     set(h,'YTick',[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]','YTicklabel',{'10^1','10^2','10^3','10^4','10^5','10^6','10^7','10^8','10^9','10^{10}','10^{11}','10^{12}','10^{13}','10^{14}','10^{15}'});
     end
 end
-% axis on
-% set(gca,'fontsize',16,'DataAspectRatio',[1 1 1],'PlotBoxAspectRatio',[1 1 1],...
-%     'Xminortick','on','Yminortick','on','tickdir','out')
+axis on
+set(gca,'fontsize',16,'DataAspectRatio',[1 1 1],'PlotBoxAspectRatio',[1 1 1],...
+    'Xminortick','on','Yminortick','on','tickdir','out')
 % set the figure
 if nargin == 4
     slj.Plot.set_field_figure(extra);

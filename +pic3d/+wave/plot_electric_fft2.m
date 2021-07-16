@@ -6,8 +6,8 @@
 clear;
 %% parameters
 % directory
-indir='E:\PIC\wave-particle\bistream\data5';
-outdir='E:\PIC\wave-particle\bistream\out5';
+indir='E:\PIC\wave-particle\whistler\data';
+outdir='E:\PIC\wave-particle\whistler\out';
 prm=slj.Parameters(indir, outdir);
 % time
 tt=50.05:0.05:100;
@@ -102,7 +102,7 @@ wk=slj.Wave(Ex,fk,fw);
 % k = [-kmax:kmin:-kmin,0,kmin:kmin:kmax];
 % f = fw*(0:round(nt/2)-1)/nt;
 [kk,ff]=meshgrid(wk.k,wk.w);
-
+figure;
 p=pcolor(kk,ff,wk.wk);
 colorbar;
 shading flat;
@@ -111,12 +111,12 @@ p.FaceColor = 'interp';
 colormap('jet');
 xlabel('k [\lambda_D^{-1}]');
 ylabel('\omega [\omega_{pe}]');
-xlim([-0.05,0.05]);
-ylim([0,0.001]);
+xlim([-1,1]);
+ylim([0,0.005]);
 set(gca,'FontSize',14);
 
 ts=(prm.value.fpe*prm.value.debye)/prm.value.c;
-k=0.25*ts;
+k=0.2*ts;
 mx=0:0.1:10;
 my=k*mx;
 hold on

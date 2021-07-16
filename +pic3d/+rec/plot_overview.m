@@ -6,8 +6,8 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Simulation\KH1v2\data';
-outdir='E:\Simulation\KH1v2\out';
+indir='E:\Simulation\KH1\data';
+outdir='E:\Simulation\KH1\out\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0:100;

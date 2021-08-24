@@ -18,4 +18,16 @@ methods (Access = public, Static)
 end
 
 %% ======================================================================== %%
+%% some vector operation
+methods (Access = public, Static)
+    fd = cross(A, B);
+end
+
+%% ======================================================================== %%
+%% some physics value
+methods (Access = public, Static)
+    fd = poynting_vector(E, B, mu);
+end
+
+%% ======================================================================== %%
 end

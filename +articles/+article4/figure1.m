@@ -1,157 +1,136 @@
-% function figure1()
-%% figure 1
-% writen by Liangjin Song on 20210623
-% the magnetic reconnection rate and the average energy gained by per particle
-% the energy spectrum
+% function figure3_2()
+%% plot the Ez, Ey, Nic
+% writen by Liangjin Song on 20210626
 %%
+clear;
 run('articles.article4.parameters.m');
-%% panel a
-% magnetic reconnection rate
-dt=0.1;
-norm=prm.value.vA*dt/prm.value.wci;
-xrange=[0,50];
-cd(indir);
-rate=load('flux2d.dat');
-ttm=rate(:,1);
-mrate=diff(rate)/norm;
 
-% average energy gained by per particle
-cd(indir);
-en=load('energy.dat');
-nt=size(en,1);
-dB=zeros(1,nt);
-di=zeros(1,nt);
-de=zeros(1,nt);
-dic=zeros(1,nt);
-dice=zeros(1,nt);
-rdi=zeros(1,nt);
-rde=zeros(1,nt);
-rdic=zeros(1,nt);
-rdice=zeros(1,nt);
+%% the time
+tt=16;
 
-for t=2:nt
-    dB(t)=en(t,2)-en(1,2);
-    de(t)=en(t,3)-en(1,3);
-    di(t)=en(t,4)-en(1,4);
-    dice(t)=en(t,5)-en(1,5);
-    dic(t)=en(t,6)-en(1,6);
-end
-sum=-(di+de+dic+dice);
-% the energy change ratio
-dB=abs(dB);
-for t=2:nt
-    rdi(t)=di(t)/dB(t);
-    rde(t)=de(t)/dB(t);
-    rdic(t)=dic(t)/dB(t);
-    rdice(t)=dice(t)/dB(t);
-end
-% the number of ions
-Ni=3.6929e+08;
-% the number of cold ions
-Nic=1.2307e+09;
-% average
-% ions
-adi=di/Ni;
-% electrons
-ade=(de+dice)/(Ni+Nic);
-% cold ions
-adic=dic/Nic;
-% normalization
-tta=0.1*(0:size(en,1)-1);
-norm=0.5*prm.value.mi*prm.value.vA*prm.value.vA;
+%% set the figure
+f=figure('Position',[1000,10,600,800]);
+ha=slj.Plot.subplot(3,2,[0.005,0.085],[0.085,0.07],[0.12,0.07]);
 
-%% panel b
-tt1=0;
-tt2=15;
-tt3=25;
-tt4=35;
-tt5=50;
+%% for E field
+E=prm.read('E',tt);
+ss=prm.read('stream',tt);
+%% the line
+xz=50;
+dir=1;
+lf=E.get_line2d(xz, dir, prm, prm.value.vA);
+ll=prm.value.lz;
+%% the figure property
+dh=0.03;
+extra.ylabel='Z [c/\omega_{pi}]';
+extra.xrange=[40,60];
+extra.yrange=[-5,5];
+extra.linerange=[-1,1];
+%% for Ez
+axes(ha(1));
+extra.caxis=[-1,1];
+extra.ColorbarPosition='north';
+hbar=slj.Plot.overview(E.z, ss, prm.value.lx, prm.value.lz, prm.value.vA, extra);
+% set the colorbar
+pos=get(hbar,'Position');
+pos(2)=pos(2)+dh;
+set(hbar,'Position',pos);
+set(hbar,'AxisLocation','out');
+hbar.Label.String='Ez';
+extra=rmfield(extra,'caxis');
 
-c=0.5;
-vA=0.0125;
-cva=c/vA;
-cva=cva*cva;
+%% the line for Ez
+axes(ha(2));
+lz=slj.Physics.filter1d(lf.lz,5);
+% lz=lf.lz;
+plot(lz,ll,'-k','LineWidth',2);
+% set(gca,'Yticklabel',[]);
+set(gca,'xaxislocation','top')
+set(gca,'XTick',[-0.5,0,0.5]);
+ylim(extra.linerange);
+% set the figure
+shh=0.035;
+rth=0.685;
+rtw=0.3;
+pos=get(ha(2),'Position');
+pos(2)=pos(2)+shh;
+pos(4)=pos(4)*rth;
+pos(3)=pos(3)*rtw;
+set(ha(2),'Position',pos);
+set(gca,'FontSize',extra.FontSize);
 
-%% read data
-cd(indir);
-sm1=reset_spectrum(prm.read('spctrmh',tt1),cva);
-sm2=reset_spectrum(prm.read('spctrmh',tt2),cva);
-sm3=reset_spectrum(prm.read('spctrmh',tt3),cva);
-sm4=reset_spectrum(prm.read('spctrmh',tt4),cva);
-sm5=reset_spectrum(prm.read('spctrmh',tt5),cva);
-xx=-4:0.1:4;
 
-%% figure
-f=figure('Position',[500,500,1000,400]);
-axes('Position',[0.09,0.2,0.35,0.7]);
-% subplot(1,2,1);
-yyaxis left
-plot(ttm(1:end-1),mrate(:,2),'k','LineWidth',2);
-xlim(xrange);
-ylabel('E_R');
-set(gca,'ycolor','k');
-yyaxis right
-plot(tta, adi/norm, '-r', 'LineWidth', 2); hold on
-plot(tta, ade/norm, '-b', 'LineWidth', 2);
-plot(tta, adic/norm, '-m', 'LineWidth', 2); hold off
-legend('E_R','Ion', 'Electron', 'Cold Ion','Location','Best');
-xlabel('\Omega_{ci}t');
-ylabel('E_{aver} [m_iv_{A}^2/2]');
-set(gca,'FontSize',14);
-set(gca,'xcolor','k');
-set(gca,'ycolor','r');
+%% for Ey
+axes(ha(3));
+extra.ColorbarPosition='north';
+hbar=slj.Plot.overview(E.y, ss, prm.value.lx, prm.value.lz, prm.value.vA, extra);
+% set the colorbar
+pos=get(hbar,'Position');
+pos(2)=pos(2)+dh;
+set(hbar,'Position',pos);
+set(hbar,'AxisLocation','out');
+hbar.Label.String='Ey';
 
-% subplot(1,2,2);
-axes('Position',[0.62,0.2,0.35,0.7]);
-plot(xx, log10(sm1),'-k','LineWidth',2); hold on
-plot(xx,log10(sm2),'-r','LineWidth',2);
-plot(xx,log10(sm3),'-g','LineWidth',2);
-plot(xx,log10(sm4),'-b','LineWidth',2);
-plot(xx,log10(sm5),'-m','LineWidth',2); hold off
-legend({['\Omega_{ci} t=',num2str(tt1)],['\Omega_{ci} t=',num2str(tt2)],['\Omega_{ci} t=',num2str(tt3)],['\Omega_{ci} t=',num2str(tt4)],['\Omega_{ci} t=',num2str(tt5)]});
-xlim([-4,4]);
-ylim([0,10]);
-yticks(0:1:10);
-yticklabels({'0','10^{1}','10^{2}','10^{3}','10^{4}','10^{5}','10^{6}','10^{7}','10^{8}','10^{9}','10^{10}'});
-xlabel('E_{ic} [m_iv_{A}^2]');
-ylabel('f_{ic}');
-xticks(-4:1:4);
-xticklabels({'10^{-4}','10^{-3}','10^{-2}','10^{-1}','10^{0}','10^{1}','10^{2}','10^{3}','10^{4}'});
-set(gca,'FontSize',14);
+%% the line for Ey
+axes(ha(4));
+ly=slj.Physics.filter1d(lf.ly,5);
+% ly=lf.ly;
+plot(ly,ll,'-k','LineWidth',2);
+% set(gca,'Yticklabel',[]);
+set(gca,'xaxislocation','top')
+% set(gca,'XTick',[-0.5,0,0.5]);
+ylim(extra.yrange);
+% set the figure
+pos=get(ha(4),'Position');
+pos(2)=pos(2)+shh;
+pos(4)=pos(4)*rth;
+pos(3)=pos(3)*rtw;
+set(ha(4),'Position',pos);
+set(gca,'FontSize',extra.FontSize);
 
-%% save
+
+%% for Nic
+Nic=prm.read('Nh',tt);
+Ne=prm.read('Ne',tt);
+Nhe=prm.read('Nhe',tt);
+Ni=prm.read('Nl',tt);
+axes(ha(5));
+extra.xlabel='X [c/\omega_{pi}]';
+% extra=rmfield(extra,'caxis');
+extra.ColorbarPosition='north';
+hbar=slj.Plot.overview(Nic, ss, prm.value.lx, prm.value.lz, prm.value.n0, extra);
+% set the colorbar
+pos=get(hbar,'Position');
+pos(2)=pos(2)+dh;
+set(hbar,'Position',pos);
+set(hbar,'AxisLocation','out');
+hbar.Label.String='Nic';
+
+
+%% the line for Nic
+axes(ha(6));
+ln=Nic.get_line2d(xz, dir, prm, prm.value.n0);
+le=Ne.get_line2d(xz, dir, prm, prm.value.n0);
+lhe=Nhe.get_line2d(xz, dir, prm, prm.value.n0);
+li=Ni.get_line2d(xz, dir, prm, prm.value.n0);
+le=le+lhe;
+extra.linerange=[-1,1];
+ln=slj.Physics.filter1d(ln,5);
+plot(ln,ll,'-k','LineWidth',2); hold on
+plot(le,ll,'-r','LineWidth',2);
+plot(li,ll,'-b','LineWidth',2); hold off
+legend('N_{ic}','N_e','N_i','Position',[0.566111109148264 0.00926459068209344 0.123333332190911 0.102499997131526]);
+% set(gca,'Yticklabel',[]);
+set(gca,'xaxislocation','top')
+ylim(extra.linerange);
+% set the figure
+pos=get(ha(6),'Position');
+pos(2)=pos(2)+shh;
+pos(4)=pos(4)*rth;
+pos(3)=pos(3)*rtw;
+set(ha(6),'Position',pos);
+set(gca,'FontSize',extra.FontSize);
+
+%% save the figure
 cd(outdir);
-print(f,'-dpng','-r300','figure1.png');
-
-
-function sm=reset_spectrum(sp,cva2)
-ns=length(sp);
-xx=-4:0.1:4;
-nx=length(xx);
-sm=zeros(1,nx);
-for i=1:ns
-    k=log10(i/ns*cva2);
-    if k<=-4
-        k=1;
-    elseif k>=4
-        k=nx;
-    else
-        k=round((nx-1)*(k-4)/8+nx);
-    end
-    sm(k)=sm(k)+sp(i);
-end
-% sm=filter1d(sm);
-end
-
-function sp=filter1d(sm)
-n=1;
-ns=length(sm);
-sp=zeros(1,ns);
-sp(1)=sm(1);
-sp(ns)=sm(ns);
-for i=1:n
-    for j=2:ns-1
-        sp(j)=sm(j-1)*0.25+sm(j)*0.6+sm(j+1)*0.25;
-    end
-end
-end
+print('-dpng','-r300','figure1.png');

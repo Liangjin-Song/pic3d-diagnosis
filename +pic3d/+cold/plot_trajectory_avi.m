@@ -2,7 +2,7 @@
 % writen by Liangjin Song on 20210505
 clear;
 %% parameters
-id={'1599194011'};
+id={'1479944291'};
 indir='E:\PIC\Cold-Ions\mie100\data';
 outdir='E:\PIC\Cold-Ions\mie100\out\Oral';
 prm=slj.Parameters(indir,outdir);
@@ -15,7 +15,7 @@ end
 function write_avi(prm, id)
 aviname=[prm.outdir,'\trajh_id',id,'.avi'];
 % xrange=[prm.value.lx(1),prm.value.lx(end)];
-xrange=[40,80];
+xrange=[0,60];
 % yrange=[-Ly/2,Ly/2];
 yrange=[-15,15];
 %% read data
@@ -23,8 +23,10 @@ prt=prm.read(['trajh_id',id]);
 norm=prm.value.tem*prm.value.tle*prm.value.thl/prm.value.coeff;
 % prt.value.k=prt.value.k/norm;
 prt=prt.norm_energy(norm);
-cr=[0, max(prt.value.k(1:2501))];
-tt=prt.value.time(1:2501);
+% trange=1:2501;
+trange=1:2351;
+cr=[0, max(prt.value.k(trange))];
+tt=prt.value.time(trange);
 % cr=[0, max(prt.value.k(1:1001))];
 % tt=prt.value.time(1:1001);
 %% environment

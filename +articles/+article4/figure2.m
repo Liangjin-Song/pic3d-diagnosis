@@ -1,219 +1,157 @@
-% function figure2()
-%% figure 2
-% writen by Liangjin Song on 20210624
-% the particle information in the spectrum
+% function figure1()
 %%
-clear;
+% writen by Liangjin Song on 20210623
+% the magnetic reconnection rate and the average energy gained by per particle
+% the energy spectrum
+%%
 run('articles.article4.parameters.m');
-%% particle's ID
-id1='295320754';
-id2='1599194011';
-id3='1479944291';
+%% panel a
+% magnetic reconnection rate
+dt=0.1;
+norm=prm.value.vA*dt/prm.value.wci;
+xrange=[0,50];
+cd(indir);
+rate=load('flux2d.dat');
+ttm=rate(:,1);
+mrate=diff(rate)/norm;
 
-%% particle's time information
-tt1=45;
-tt2=50;
-tt3=41;
+% average energy gained by per particle
+cd(indir);
+en=load('energy.dat');
+nt=size(en,1);
+dB=zeros(1,nt);
+di=zeros(1,nt);
+de=zeros(1,nt);
+dic=zeros(1,nt);
+dice=zeros(1,nt);
+rdi=zeros(1,nt);
+rde=zeros(1,nt);
+rdic=zeros(1,nt);
+rdice=zeros(1,nt);
 
-%% figure property
-extra.xlabel='X [c/\omega_{pi}]';
-extra.ylabel='Z [c/\omega_{pi}]';
-extra.FontSize=16;
+for t=2:nt
+    dB(t)=en(t,2)-en(1,2);
+    de(t)=en(t,3)-en(1,3);
+    di(t)=en(t,4)-en(1,4);
+    dice(t)=en(t,5)-en(1,5);
+    dic(t)=en(t,6)-en(1,6);
+end
+sum=-(di+de+dic+dice);
+% the energy change ratio
+dB=abs(dB);
+for t=2:nt
+    rdi(t)=di(t)/dB(t);
+    rde(t)=de(t)/dB(t);
+    rdic(t)=dic(t)/dB(t);
+    rdice(t)=dice(t)/dB(t);
+end
+% the number of ions
+Ni=3.6929e+08;
+% the number of cold ions
+Nic=1.2307e+09;
+% average
+% ions
+adi=di/Ni;
+% electrons
+ade=(de+dice)/(Ni+Nic);
+% cold ions
+adic=dic/Nic;
+% normalization
+tta=0.1*(0:size(en,1)-1);
+norm=0.5*prm.value.mi*prm.value.vA*prm.value.vA;
 
-%% particle's information
-norm=prm.value.tem*prm.value.tle*prm.value.thl/prm.value.coeff;
-trange=1:2501;
+%% panel b
+tt1=0;
+tt2=15;
+tt3=25;
+tt4=35;
+tt5=50;
 
-% particle 1
-prt1=prm.read(['trajh_id',id1]);
-den1=prt1.acceleration_direction(prm);
-den1.x=den1.x/norm;
-den1.y=den1.y/norm;
-den1.z=den1.z/norm;
-prt1=prt1.norm_energy(norm);
-prt1=prt1.norm_electric_field(prm);
-prt1=prt1.norm_velocity(prm);
-% particle 2
-prt2=prm.read(['trajh_id',id2]);
-den2=prt2.acceleration_direction(prm);
-den2.x=den2.x/norm;
-den2.y=den2.y/norm;
-den2.z=den2.z/norm;
-prt2=prt2.norm_energy(norm);
-prt2=prt2.norm_electric_field(prm);
-prt2=prt2.norm_velocity(prm);
-% particle 3
-prt3=prm.read(['trajh_id',id3]);
-den3=prt3.acceleration_direction(prm);
-den3.x=den3.x/norm;
-den3.y=den3.y/norm;
-den3.z=den3.z/norm;
-prt3=prt3.norm_energy(norm);
-prt3=prt3.norm_electric_field(prm);
-prt3=prt3.norm_velocity(prm);
+c=0.5;
+vA=0.0125;
+cva=c/vA;
+cva=cva*cva;
 
+%% read data
+cd(indir);
+sm1=reset_spectrum(prm.read('spctrmh',tt1),cva);
+sm2=reset_spectrum(prm.read('spctrmh',tt2),cva);
+sm3=reset_spectrum(prm.read('spctrmh',tt3),cva);
+sm4=reset_spectrum(prm.read('spctrmh',tt4),cva);
+sm5=reset_spectrum(prm.read('spctrmh',tt5),cva);
+xx=-4:0.1:4;
 
 %% figure
-fpos=[0,0,1200,500];
+f=figure('Position',[500,500,1000,400]);
+axes('Position',[0.09,0.2,0.35,0.7]);
+% subplot(1,2,1);
+yyaxis left
+plot(ttm(1:end-1),mrate(:,2),'k','LineWidth',2);
+xlim(xrange);
+ylabel('E_R');
+set(gca,'ycolor','k');
+yyaxis right
+plot(tta, adi/norm, '-r', 'LineWidth', 2); hold on
+plot(tta, ade/norm, '-b', 'LineWidth', 2);
+plot(tta, adic/norm, '-m', 'LineWidth', 2); hold off
+legend('E_R','Ion', 'Electron', 'Cold Ion','Location','Best','Position',[0.0925000009387732 0.756875003390014 0.113999998122454 0.241249993219972]);
+xlabel('\Omega_{ci}t');
+ylabel('E_{aver}');
+set(gca,'FontSize',14);
+set(gca,'xcolor','k');
+set(gca,'ycolor','r');
 
-f=figure('Position',fpos);
-pos1=[0.1,0.3,0.2,0];
-dp=0.11;
-pos1(4)=pos1(3)*fpos(3)/(fpos(4));
-%
-pos2=pos1;
-pos2(1)=pos1(1)+pos1(3)+dp;
-pos2(4)=pos2(3)*fpos(3)/(fpos(4));
-% axes('Position',pos2);
-%
-pos3=pos2;
-pos3(1)=dp+pos2(1)+pos2(3);
-pos3(4)=pos3(3)*fpos(3)/(fpos(4));
-% axes('Position',pos3);
+% subplot(1,2,2);
+axes('Position',[0.62,0.2,0.35,0.7]);
+plot(xx, log10(sm1),'-k','LineWidth',2); hold on
+plot(xx,log10(sm2),'-r','LineWidth',2);
+plot(xx,log10(sm3),'-g','LineWidth',2);
+plot(xx,log10(sm4),'-b','LineWidth',2);
+plot(xx,log10(sm5),'-m','LineWidth',2); hold off
+legend({['\Omega_{ci} t=',num2str(tt1)],['\Omega_{ci} t=',num2str(tt2)],['\Omega_{ci} t=',num2str(tt3)],['\Omega_{ci} t=',num2str(tt4)],['\Omega_{ci} t=',num2str(tt5)]});
+xlim([-4,4]);
+ylim([0,10]);
+yticks(0:1:10);
+yticklabels({'0','10^{1}','10^{2}','10^{3}','10^{4}','10^{5}','10^{6}','10^{7}','10^{8}','10^{9}','10^{10}'});
+xlabel('E_{ic} [m_iv_A^2]');
+ylabel('f_{ic}');
+xticks(-4:1:4);
+xticklabels({'10^{-4}','10^{-3}','10^{-2}','10^{-1}','10^{0}','10^{1}','10^{2}','10^{3}','10^{4}'});
+set(gca,'FontSize',14);
 
-%% part 1, the particle's trajectory
-% particle 1
-% subplot(1,3,1);
-axes('Position',pos1);
-ss=prm.read('stream',tt1);
-cr=[0, max(prt1.value.k(trange))];
-slj.Plot.stream(ss,prm.value.lx,prm.value.lz);
-hold on
-p=patch(prt1.value.rx(trange),prt1.value.rz(trange),[prt1.value.k(trange(1:end-1));NaN],'edgecolor','flat','facecolor','none');
-caxis(cr);
-colormap('jet');
-colorbar;
-xlim([20,35]);
-ylim([-8,8]);
-set(p,'LineWidth',3);
-xlabel(extra.xlabel);
-ylabel(extra.ylabel);
-set(gca,'FontSize',extra.FontSize);
-
-% particle 2
-% subplot(1,3,2);
-axes('Position',pos2);
-ss=prm.read('stream',tt2);
-cr=[0, max(prt2.value.k(trange))];
-slj.Plot.stream(ss,prm.value.lx,prm.value.lz);
-hold on
-p=patch(prt2.value.rx(trange),prt2.value.rz(trange),[prt2.value.k(trange(1:end-1));NaN],'edgecolor','flat','facecolor','none');
-caxis(cr);
-colormap('jet');
-colorbar;
-xlim([49,70]);
-ylim([-11,11]);
-set(p,'LineWidth',3);
-xlabel(extra.xlabel);
-ylabel(extra.ylabel);
-set(gca,'FontSize',extra.FontSize);
-
-% particle 3
-% subplot(1,3,3);
-axes('Position',pos3);
-ss=prm.read('stream',tt3);
-cr=[0, max(prt3.value.k(trange))];
-slj.Plot.stream(ss,prm.value.lx,prm.value.lz);
-hold on
-p=patch(prt3.value.rx(1:2367),prt3.value.rz(1:2367),[prt3.value.k(1:2366);NaN],'edgecolor','flat','facecolor','none');
-set(p,'LineWidth',3);
-p=patch(prt3.value.rx(2368:trange(end)),prt3.value.rz(2368:trange(end)),[prt3.value.k(2368:trange(end-1));NaN],'edgecolor','flat','facecolor','none');
-set(p,'LineWidth',3);
-caxis(cr);
-colormap('jet');
-colorbar;
-xlim([22,52]);
-ylim([-16,16]);
-xlabel(extra.xlabel);
-ylabel(extra.ylabel);
-set(gca,'YTickMode','auto');
-set(gca,'FontSize',extra.FontSize);
-%% save figure2-1
+%% save
 cd(outdir);
-print(f,'-dpng','-r300','figure2-1.png');
+print(f,'-dpng','-r300','figure2.png');
 
 
-%% particle's trajectory
-extra=[];
-fpos(4)=850;
-f=figure('Position',fpos);
-ha=slj.Plot.subplot(4,3,[0.02,0.12],[0.1,0.05],[0.06,0.06]);
+function sm=reset_spectrum(sp,cva2)
+ns=length(sp);
+xx=-4:0.1:4;
+nx=length(xx);
+sm=zeros(1,nx);
+for i=1:ns
+    k=log10(i/ns*cva2);
+    if k<=-4
+        k=1;
+    elseif k>=4
+        k=nx;
+    else
+        k=round((nx-1)*(k-4)/8+nx);
+    end
+    sm(k)=sm(k)+sp(i);
+end
+% sm=filter1d(sm);
+end
 
-%% particle 1
-extra.xrange=[40,50];
-particle_information(ha, 1, prt1, den1, trange, extra);
-%% particle 2
-extra.xrange=[0,50];
-particle_information(ha, 2, prt2, den2, trange, extra);
-%% particle 3
-cmd='obj.value.rx(2368:end)=obj.value.rx(2368:end)-100;';
-prt3=prt3.command(cmd);
-particle_information(ha, 3, prt3, den3, trange, extra);
-%% save figure2-2
-cd(outdir);
-print(f,'-dpng','-r300','figure2-2.png');
-
-
-function particle_information(ha, np, prt, den, trange, extra)
-lx=prt.value.time(trange);
-% extra.xrange=[lx(1),lx(end)];
-axes(ha(np));
-ly.l1=prt.value.k(trange);
-ly.l2=prt.value.kx(trange);
-ly.l3=prt.value.ky(trange);
-ly.l4=prt.value.kz(trange);
-extra.LineStyle={'-', '-', '-', '-'};
-extra.LineColor={'k', 'r', 'b', 'm'};
-extra.legend={'K', 'Kx', 'Ky', 'Kz'};
-extra.ylabel='Kic';
-extra.Location='west';
-slj.Plot.linen(lx, ly, extra);
-set(gca,'XTicklabel',[]);
-
-axes(ha(np+6));
-ly=[];
-ly.l1=den.x(trange);
-ly.l2=den.y(trange);
-ly.l3=den.z(trange);
-extra.LineStyle={'-', '-', '-'};
-extra.LineColor={'r', 'b', 'g'};
-extra.legend={'qVxEx', 'qVyEy', 'qVzEz'};
-extra.ylabel='Kic';
-extra.Location='northwest';
-slj.Plot.linen(lx, ly, extra);
-set(gca,'XTicklabel',[]);
-
-% axes(ha(np+6));
-% extra.ylabelr='\mu';
-% extra.ylabell='\kappa';
-% extra.yranger=[0,100];
-% extra.yrangel=[0,10];
-% slj.Plot.plotyy1(lx, prt.value.kappa(trange), prt.value.mu(trange), extra);
-% set(gca,'XTicklabel',[]);
-% extra=rmfield(extra,'yranger');
-% extra=rmfield(extra,'yrangel');
-
-axes(ha(np+3));
-ly=[];
-ly.l1=prt.value.bx(trange);
-ly.l2=prt.value.by(trange);
-ly.l3=prt.value.bz(trange);
-ly.l4=sqrt(ly.l1.^2+ly.l2.^2+ly.l3.^2);
-extra.LineStyle={'-', '-', '-', '--'};
-extra.LineColor={'r', 'b', 'g', 'k'};
-extra.legend={'Bx', 'By', 'Bz', '|B|'};
-extra.ylabel='B';
-extra.Location='west';
-slj.Plot.linen(lx, ly, extra);
-extra=rmfield(extra,'Location');
-set(gca,'XTicklabel',[]);
-
-axes(ha(np+9));
-extra.ylabell='X [c/\omega_{pi}]';
-extra.ylabelr='Z [c/\omega_{pi}]';
-% extra.yrangel=[40,80];
-% extra.yranger=[-1,1];
-extra.xlabel='\Omega_{ci}t';
-% prt.value.rx(2368:end)=prt.value.rx(2368:end)-100;
-slj.Plot.plotyy1(lx, prt.value.rx(trange), prt.value.rz(trange), extra);
+function sp=filter1d(sm)
+n=1;
+ns=length(sm);
+sp=zeros(1,ns);
+sp(1)=sm(1);
+sp(ns)=sm(ns);
+for i=1:n
+    for j=2:ns-1
+        sp(j)=sm(j-1)*0.25+sm(j)*0.6+sm(j+1)*0.25;
+    end
+end
 end

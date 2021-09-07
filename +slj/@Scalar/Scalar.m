@@ -40,6 +40,11 @@ methods (Access = public)
     fd = get_box(obj, xx, yy, zz);
 end
 
+%% ======================================================================== %%
+%% gradient
+methods (Access = public)
+    fd = gradient(obj, prm);
+end
 
 %% ======================================================================== %%
 end

@@ -76,7 +76,7 @@ ly.l3=den.z(trange);
 extra.LineStyle={'-', '-', '-'};
 extra.LineColor={'r', 'b', 'g'};
 if np == 1
-    extra.legend={'qVxEx', 'qVyEy', 'qVzEz'};
+    extra.legend={'\int_0^{ t}qVxEx dt', '\int_0^{ t}qVyEy dt', '\int_0^{ t}qVzEz dt'};
     extra.ylabel='Kic';
     extra.Location='northwest';
 end

@@ -45,7 +45,7 @@ p=patch(prt.value.rx(trange0),prt.value.rz(trange0),[prt.value.k(trange0(1:end-1
 caxis(cr);
 colormap('jet');
 cb=colorbar;
-cb.Label.String='K_{ic}';
+% cb.Label.String='K_{ic}';
 cb.Label.FontSize=extra.FontSize;
 xlim([30,50]);
 ylim([-5,5]);
@@ -73,7 +73,7 @@ p=patch(ry(trange),prt.value.rz(trange),[prt.value.k(trange(1):trange(end-1)); N
 colormap('jet');
 set(p,'LineWidth',3);
 cb=colorbar;
-cb.Label.String='K_{ic}';
+% cb.Label.String='K_{ic}';
 cb.Label.FontSize=extra.FontSize;
 caxis([0,max(prt.value.k(trange))]);
 xtick=6:10;
@@ -108,7 +108,7 @@ set(gca,'YTick',ytick,'Yticklabel',ytkble);
 colormap('jet');
 set(p,'LineWidth',3);
 cb=colorbar;
-cb.Label.String='K_{ic}';
+% cb.Label.String='K_{ic}';
 cb.Label.FontSize=extra.FontSize;
 caxis([0,max(prt.value.k(trange))]);
 hold on
@@ -138,7 +138,7 @@ set(gca,'YTick',ytick,'Yticklabel',ytkble);
 colormap('jet');
 set(p,'LineWidth',3);
 cb=colorbar;
-cb.Label.String='K_{ic}';
+% cb.Label.String='K_{ic}';
 cb.Label.FontSize=extra.FontSize;
 caxis([0,max(prt.value.k(trange))]);
 hold on

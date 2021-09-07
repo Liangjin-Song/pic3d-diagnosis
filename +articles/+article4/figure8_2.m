@@ -19,8 +19,8 @@ ne='PVe_ts102564_x1460-1505_y986-1015_z0-1';
 
 %% for cold ions
 name=nic;
-extra.isovalue=150;
-extra.presion=100;
+extra.isovalue=20;
+extra.presion=50;
 extra.xlabel='Vic_x';
 extra.ylabel='Vic_y';
 extra.zlabel='Vic_z';
@@ -32,9 +32,9 @@ print('-dpng','-r300','figure8-2.png');
 name=ni;
 extra.isovalue=30;
 extra.presion=40;
-extra.xlabel='Vi_x';
-extra.ylabel='Vi_y';
-extra.zlabel='Vi_z';
+extra.xlabel='Vih_x';
+extra.ylabel='Vih_y';
+extra.zlabel='Vih_z';
 f2=plot_3d_distribution_function(prm, name, extra);
 cd(outdir);
 print('-dpng','-r300','figure8-3.png');

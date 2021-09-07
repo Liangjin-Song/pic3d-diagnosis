@@ -37,7 +37,7 @@ dst=dst.dstv(prm.value.vA, extra.precv);
 extra.range1=5;
 extra.range2=3;
 extra.range3=5;
-plot_species_distribution_function(dst,2,ha,extra,'Vi')
+plot_species_distribution_function(dst,2,ha,extra,'Vih')
 
 %% for hot electrons
 % the speed precision

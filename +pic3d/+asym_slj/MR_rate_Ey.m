@@ -6,14 +6,14 @@
 clear;
 %% parameters
 % directory
-indir='E:\PIC\Asym\Asym_ncold\data';
-outdir='E:\PIC\Asym\Asym_ncold\out\Global';
+indir='E:\PIC\Asym\Asym_cold\data';
+outdir='E:\PIC\Asym\Asym_cold\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0:100;
 % the box size
-nx=20;
-nz=10;
+nx=0;
+nz=0;
 
 %% the loop
 nt=length(tt);
@@ -37,13 +37,15 @@ for t=1:nt
     [~,ix]=min(abs(lbz(lrf:rrf)));
     ix=ix+lrf-1;
     iz=inz(ix);
-    disp(prm.value.lx(ix));
-    disp(prm.value.lz(iz));
-    disp(Ey(iz,ix));
     %% the reconnection electric field in a box
     Ey=Ey(iz-nz:iz+nz,ix-nx:ix+nx);
     rate(t)=mean(Ey(:));
 end
 rate=rate/prm.value.vA;
 plot(tt,rate,'-k','LineWidth',2);
+xlabel('\Omega_{ci}t');
+ylabel('Ey');
+set(gca,'FontSize',16);
+cd(outdir);
+print('-dpng','-r300','MR_rate_by_Ey.png');
 % end

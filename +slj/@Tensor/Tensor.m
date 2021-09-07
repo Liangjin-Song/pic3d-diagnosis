@@ -40,6 +40,7 @@ methods (Access = public)
         fd = (obj.xx+obj.yy+obj.zz)/3;
         fd = slj.Scalar(fd);
     end
+    fd=divergence(obj, prm);
 end
 
 %% ======================================================================== %%

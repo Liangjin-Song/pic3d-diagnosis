@@ -38,7 +38,7 @@ p=patch(prt.value.rx(range),prt.value.rz(range),[prt.value.k(range(1:end-1));NaN
 caxis(cr);
 colormap('jet');
 cb=colorbar('North');
-cb.Label.String='K_{ic}';
+% cb.Label.String='K_{ic}';
 cb.Label.FontSize=extra.FontSize;
 pos=get(cb,'Position');
 pos(2)=pos(2)+dh;
@@ -67,7 +67,7 @@ set(gca,'YTick',ytick,'Yticklabel',ytkble);
 colormap('jet');
 set(p,'LineWidth',3);
 cb=colorbar;
-cb.Label.String='K_{ic}';
+% cb.Label.String='K_{ic}';
 cb.Label.FontSize=extra.FontSize;
 caxis([0,max(prt.value.k(range))]);
 hold on
@@ -97,7 +97,7 @@ p=patch(ry(range),prt.value.rz(range),[prt.value.k(range(1):range(end-1)); NaN],
 colormap('jet');
 set(p,'LineWidth',3);
 cb=colorbar;
-cb.Label.String='K_{ic}';
+% cb.Label.String='K_{ic}';
 cb.Label.FontSize=extra.FontSize;
 caxis([0,max(prt.value.k(range))]);
 xtick=0:1:3;
@@ -128,7 +128,7 @@ ly.l3=den.y(range);
 ly.l4=den.z(range);
 extra.LineStyle={'-', '-', '-', '-'};
 extra.LineColor={'k', 'r', 'b', 'g'};
-extra.legend={'K', 'qVxEx', 'qVyEy', 'qVzEz'};
+extra.legend={'K', '\int_0^{ t}qVxEx dt', '\int_0^{ t}qVyEy dt', '\int_0^{ t}qVzEz dt'};
 extra.ylabel='Kic';
 extra.Location='northwest';
 extra.xlabel='\Omega_{ci}t';

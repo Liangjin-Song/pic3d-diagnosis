@@ -6,14 +6,14 @@ outdir='E:\PIC\Cold-Ions\mie100\out\Spectrum';
 prm=slj.Parameters(indir,outdir);
 %% the time of the energy spectrum
 tt1=0;
-tt2=15;
+tt2=14;
 tt3=25;
-tt4=35;
+tt4=45;
 tt5=50;
 
 %% species
-spc='spctrml';
-sp='i';
+spc='spctrmh';
+sp='ic';
 
 %% transformation from mc^2 to mvA^2
 c=prm.value.c;

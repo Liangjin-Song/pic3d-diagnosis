@@ -28,6 +28,6 @@ elseif prm.value.dimension == 2
     fd.y(:,end)=fd.y(:,end-1);
     fd.z(:,end)=fd.z(:,end-1);
 else
-    %% three dimension simulation
+    error('Parameters error!');
 end
 end

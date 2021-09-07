@@ -39,6 +39,7 @@ end
 %% field operation
 methods (Access = public)
     fd = curl(obj, prm);
+    fd = divergence(obj, prm);
 end
 
 %% ======================================================================== %%

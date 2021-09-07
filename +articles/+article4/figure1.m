@@ -9,6 +9,69 @@ run('articles.article4.parameters.m');
 tt=16;
 
 %% set the figure
+f=figure('Position',[500,200,1000,400]);
+ha=slj.Plot.subplot(1,2,[0.004,0.05],[0.085,0.07],[0.12,0.01]);
+dh=0.11;
+shh=0.157;
+rth=0.62;
+rtw=0.2;
+xz=50;
+dir=1;
+extra.xrange=[40,60];
+extra.yrange=[-5,5];
+%% for Nic
+ss=prm.read('stream',tt);
+Nic=prm.read('Nh',tt);
+Ne=prm.read('Ne',tt);
+Nhe=prm.read('Nhe',tt);
+Ni=prm.read('Nl',tt);
+axes(ha(1));
+extra.xlabel='X [c/\omega_{pi}]';
+extra.ylabel='Z [c/\omega_{pi}]';
+extra.ColorbarPosition='North';
+hbar=slj.Plot.overview(Nic, ss, prm.value.lx, prm.value.lz, prm.value.n0, extra);
+hold on
+plot([50,50],[-5,5],'--r','LineWidth',1.5);
+% set the colorbar
+pos=get(hbar,'Position');
+pos(2)=pos(2)+dh;
+set(hbar,'Position',pos);
+set(hbar,'AxisLocation','out');
+hbar.Label.String='Nic';
+
+
+%% the line for Nic
+axes(ha(2));
+ln=Nic.get_line2d(xz, dir, prm, prm.value.n0);
+le=Ne.get_line2d(xz, dir, prm, prm.value.n0);
+lhe=Nhe.get_line2d(xz, dir, prm, prm.value.n0);
+li=Ni.get_line2d(xz, dir, prm, prm.value.n0);
+le=le+lhe;
+ll=prm.value.lz;
+extra.linerange=[-1,1];
+ln=slj.Physics.filter1d(ln,5);
+plot(ln,ll,'-k','LineWidth',2); hold on
+plot(le,ll,'-r','LineWidth',2);
+plot(li,ll,'-b','LineWidth',2); hold off
+legend('N_{ic}','N_e','N_{ih}','Position',[0.58166666500167 0.0109518342154768 0.0739999993145465 0.222499993741512]);
+% set(gca,'Yticklabel',[]);
+set(gca,'xaxislocation','top')
+ylim(extra.linerange);
+% set the figure
+pos=get(ha(2),'Position');
+pos(2)=pos(2)+shh;
+pos(4)=pos(4)*rth;
+pos(3)=pos(3)*rtw;
+set(ha(2),'Position',pos);
+set(gca,'FontSize',extra.FontSize);
+
+%% save the figure
+cd(outdir);
+print('-dpng','-r300','figure1.png');
+
+
+%{
+%% set the figure
 f=figure('Position',[1000,10,600,800]);
 ha=slj.Plot.subplot(3,2,[0.005,0.085],[0.085,0.07],[0.12,0.07]);
 
@@ -134,3 +197,5 @@ set(gca,'FontSize',extra.FontSize);
 %% save the figure
 cd(outdir);
 print('-dpng','-r300','figure1.png');
+%}
+

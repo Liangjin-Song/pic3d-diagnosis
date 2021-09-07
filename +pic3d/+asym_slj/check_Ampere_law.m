@@ -5,8 +5,8 @@
 %%
 clear;
 %% parameters
-indir='E:\PIC\Asym\Asym_cold_drv1v3\data';
-outdir='E:\PIC\Asym\Asym_cold_drv1v3\out\Global';
+indir='E:\PIC\Asym\Test';
+outdir='E:\PIC\Asym\Test';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0;
@@ -63,9 +63,9 @@ f.png(prm,['Jy_x=',num2str(z0),'_t',num2str(tt,'%06.2f')]);
 
 % Jy for Jl, Jh, and Je
 ll=[];
-ll.ljl=lje.ly;
+ll.ljl=ljl.ly;
 ll.ljh=ljh.ly;
-ll.lje=ljl.ly;
+ll.lje=lje.ly;
 extra.legend={'Ji','Jic','Je'};
 f=slj.Plot;
 f.linen(prm.value.lz,ll,extra);

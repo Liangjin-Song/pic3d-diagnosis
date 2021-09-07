@@ -35,10 +35,11 @@ for t=1:nt
     %% the magnetic flux along the current sheet
     flux(t)=sum(lbz(1:ix),'All');
 end
+flux=flux*prm.value.wpi;
 plot(tt,flux,'-k','LineWidth',2);
 xlabel('\Omega_{ci}t');
-ylabel('E_R');
+ylabel('\Psi [B_0/\omega_{pi}]');
 set(gca,'FontSize',16);
 cd(outdir);
-% print('-dpng','-r300','MR_rate_by_Ey.png');
+print('-dpng','-r300','magnetic_flux.png');
 % end

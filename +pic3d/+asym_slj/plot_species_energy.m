@@ -1,7 +1,7 @@
 % function plot_species_energy()
 clear;
-indir='E:\PIC\Asym\Asym_cold_drv1v3\data';
-outdir='E:\PIC\Asym\Asym_cold_drv1v3\out\Global';
+indir='E:\Asym\asym_cold_Nr2\data';
+outdir='E:\Asym\asym_cold_Nr2\out\Global';
 %% plot energy
 h1=figure;
 en=load([indir,'\energy.dat']);

@@ -1,12 +1,17 @@
-% function check_Ampere_law
+% function check_Ampere_law(indir,outdir)
 %%
 % @info: writen by Liangjin Song on 20210802
 % @brief: check Ampere law for the asymmetric reconnection model with cold ions (asym_rec_slj)
 %%
 clear;
 %% parameters
+<<<<<<< Updated upstream
 indir='E:\PIC\Asym\Test';
 outdir='E:\PIC\Asym\Test';
+=======
+indir='E:\Asym\asym_cold_Nr2\data';
+outdir='E:\Asym\asym_cold_Nr2\out\Global';
+>>>>>>> Stashed changes
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0;

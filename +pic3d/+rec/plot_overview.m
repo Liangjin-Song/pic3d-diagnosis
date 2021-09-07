@@ -6,11 +6,11 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Simulation\KH1\data';
-outdir='E:\Simulation\KH1\out\Overview';
+indir='E:\KH\data';
+outdir='E:\KH\out\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:100;
+tt=0:0.2:100;
 % the variable name
 varname={'B','E','J','Vi','Ve','Ni','Ne'};
 % varname={'J'};

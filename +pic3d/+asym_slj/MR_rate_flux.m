@@ -6,11 +6,11 @@
 clear;
 %% parameters
 % directory
-indir='E:\PIC\Asym\Asym_cold\data';
-outdir='E:\PIC\Asym\Asym_cold\out\Global';
+indir='E:\Asym\Cold\data';
+outdir='E:\Asym\Cold\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:100;
+tt=0:200;
 
 %% the loop
 nt=length(tt);
@@ -35,10 +35,12 @@ for t=1:nt
     %% the magnetic flux along the current sheet
     flux(t)=sum(lbz(1:ix),'All');
 end
-plot(tt,flux,'-k','LineWidth',2);
+b0=abs(prm.value.bm-prm.value.bs)/2;
+nflux=flux*prm.value.fpi/b0;
+plot(tt,nflux,'-k','LineWidth',2);
 xlabel('\Omega_{ci}t');
-ylabel('E_R');
+ylabel('\Psi [B_0/\omega_{pi}]');
 set(gca,'FontSize',16);
 cd(outdir);
-% print('-dpng','-r300','MR_rate_by_Ey.png');
+print('-dpng','-r300','magnetic_flux.png');
 % end

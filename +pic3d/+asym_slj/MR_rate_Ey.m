@@ -6,11 +6,16 @@
 clear;
 %% parameters
 % directory
+<<<<<<< Updated upstream
 indir='E:\PIC\Asym\Asym_cold\data';
 outdir='E:\PIC\Asym\Asym_cold\out\Global';
+=======
+indir='E:\Asym\asym_cold_Nr2\data';
+outdir='E:\Asym\asym_cold_Nr2\out\Global';
+>>>>>>> Stashed changes
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:100;
+tt=0:200;
 % the box size
 nx=0;
 nz=0;
@@ -42,10 +47,19 @@ for t=1:nt
     rate(t)=mean(Ey(:));
 end
 rate=rate/prm.value.vA;
+<<<<<<< Updated upstream
 plot(tt,rate,'-k','LineWidth',2);
+=======
+f=figure;
+plot(tt,-rate,'-k','LineWidth',2);
+>>>>>>> Stashed changes
 xlabel('\Omega_{ci}t');
 ylabel('Ey');
 set(gca,'FontSize',16);
 cd(outdir);
+<<<<<<< Updated upstream
 print('-dpng','-r300','MR_rate_by_Ey.png');
+=======
+print('-dpng','-r300','MR_rate_Ey.png');
+>>>>>>> Stashed changes
 % end

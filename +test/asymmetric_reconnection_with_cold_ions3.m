@@ -3,13 +3,13 @@
 clear;
 %% parameters
 % directory
-dir='E:\Download';
+dir='E:\Asym\NCold\out\Parameters';
 % the range
 y=-20:0.01:20;
 % the current sheet position
 y0=0;
 % the half width of the current sheet
-L=1;
+L=0.6;
 
 % Br =|Bsheath∕Bsphere|, the magnetic field ratio between both sides of the current sheet
 Br=0.5;
@@ -17,7 +17,7 @@ Br=0.5;
 Nr=5;
 
 % density ratio between cold ions and the total plasma density at the magnetosphere side
-phi=1;
+phi=0;
 
 % the distance between cold ions and the current sheet
 s=0;

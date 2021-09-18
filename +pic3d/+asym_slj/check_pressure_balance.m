@@ -1,13 +1,13 @@
-% function check_pressure_balance()
+% function check_pressure_balance(indir, outdir)
 %%
 % @info: writen by Liangjin Song on 20210804
 % @brief: check the pressure balance of the asym_rec_3s_slj model
 %%
-clear;
+% clear;
 %% parameters
 % input/output directory
-indir='E:\PIC\Asym\Asym_cold_drv1v3\data';
-outdir='E:\PIC\Asym\Asym_cold_drv1v3\out\Global';
+indir='E:\Asym\asym_cold_Nr2\data';
+outdir='E:\Asym\asym_cold_Nr2\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0;

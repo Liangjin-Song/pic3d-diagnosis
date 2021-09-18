@@ -1,12 +1,12 @@
-function check_neutrality()
+% function check_neutrality(indir, outdir)
 %%
 % @info: writen by Liangjin Song on 20210811
 % @brief: check plasma neutrality for the asymmetric reconnection model with cold ions (asym_rec_slj)
 %%
-clear;
+% clear;
 %% parameters
-indir='E:\PIC\Asym\Asym_cold_drv1v3\data';
-outdir='E:\PIC\Asym\Asym_cold_drv1v3\out\Global';
+indir='E:\Asym\asym_cold_Nr2\data';
+outdir='E:\Asym\asym_cold_Nr2\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0;

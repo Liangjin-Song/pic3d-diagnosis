@@ -9,7 +9,7 @@ run('articles.article4.parameters.m');
 
 %% time
 tt=32;
-tt0=1601;
+tt0=1451;
 
 %% figure
 extra.xlabel='X [c/\omega_{pi}]';
@@ -30,7 +30,8 @@ prt=prt.norm_energy(norm);
 prt=prt.norm_electric_field(prm);
 
 %% 
-trange=1451:2101;
+% trange=1451:2101;
+trange=1:1451;
 star=trange(1):50:trange(end);
 
 %% figure

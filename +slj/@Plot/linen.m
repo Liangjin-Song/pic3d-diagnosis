@@ -1,4 +1,4 @@
-function linen(lx, ly, extra)
+function h=linen(lx, ly, extra)
 %%
 % @info: writen by Liangjin Song on 20210504
 % @brief: linen - plot multiply lines
@@ -23,12 +23,12 @@ hold off
 if is
     [term, is]=slj.Plot.get_term(extra,'Location');
     if is
-        legend(name, 'Location', term);
+        h=legend(name, 'Location', term);
     else
-        legend(name, 'Location', 'Best');
+        h=legend(name, 'Location', 'Best');
     end
 else
-    legend;
+    h=legend;
 end
 %% range
 [term, is] = slj.Plot.get_term(extra,'xrange');

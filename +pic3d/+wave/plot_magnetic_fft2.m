@@ -6,28 +6,31 @@
 clear;
 %% parameters
 % directory
-indir='E:\PIC\wave-particle\bistream\data2';
-outdir='E:\PIC\wave-particle\bistream\out2';
+indir='E:\PIC\wave-particle\whistler\data5';
+outdir='E:\PIC\wave-particle\whistler\out5';
 prm=slj.Parameters(indir, outdir);
 % time
-tt=50.05:0.05:100;
+% tt=[51:157,158.01:280.01,281:321,322.04:362.04,363.03:403.03,404.02:444.02,445.01:485.01,486:500];
+% tt=[0:232,233.01:396.01,397.02:499.02];
+tt=121:150;
 %% figure style
 extra=[];
 %% the electric field as the function of the position and the time
 nt=length(tt);
-Ex=zeros(nt,prm.value.nx);
+Bx=zeros(nt,prm.value.nx);
 for t=1:nt
     %% read data
-    E=prm.read('E',tt(t));
-    Ex(t,:)=E.x;
+    B=prm.read('B',tt(t));
+    Bx(t,:)=B.z;
 end
 
 %% the 2d fast Fourier Transform fft for both time and position
-fw=0.05*prm.value.fce;
+fw=prm.value.fce;
 fk=prm.value.debye;
-wk=slj.Wave(Ex,fk,fw);
+wk=slj.Wave(Bx,fk,fw);
 
 [kk,ff]=meshgrid(wk.k,wk.w);
+
 figure;
 p=pcolor(kk,ff,wk.wk);
 colorbar;
@@ -36,14 +39,15 @@ axis on;
 p.FaceColor = 'interp';
 colormap('jet');
 xlabel('k [\lambda_D^{-1}]');
-ylabel('\omega [\omega_{pe}]');
-xlim([-40,40]);
-ylim([0,0.1]);
+ylabel('\omega [\omega_{ce}]');
+xlim([-400,400]);
+ylim([0,1]);
 set(gca,'FontSize',14);
 
-ts=(prm.value.fpe*prm.value.debye)/prm.value.c;
-k=0.2*ts;
-mx=0:0.1:100;
-my=k*mx;
-hold on
-plot(mx,my,'--r','LineWidth',2);
+% f=0:0.001:prm.value.fce;
+% k=sqrt(f./(prm.value.fce-f))/prm.value.de;
+% hold on
+% plot(k/fk, f/fw,'-r','LineWidth',2);
+
+cd(outdir);
+print('-r300','-dpng','Bz_fft2.png');

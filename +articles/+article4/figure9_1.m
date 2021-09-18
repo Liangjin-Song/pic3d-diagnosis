@@ -6,10 +6,10 @@
 clear;
 run('articles.article4.parameters.m');
 %% particle's ID
-id3='1479944291';
+id3='1466770715';
 
 %% particle's time information
-tt3=41;
+tt3=32;
 
 %% figure property
 extra.xlabel='X [c/\omega_{pi}]';
@@ -72,7 +72,7 @@ prt3=prt3.command(cmd);
 particle_information(ha, 1, prt3, den3, trange, extra);
 %% save figure
 cd(outdir);
-print(f,'-dpng','-r300','figure5.png');
+print(f,'-dpng','-r300','figure9_1.png');
 
 
 function particle_information(ha, np, prt, den, trange, extra)
@@ -126,5 +126,5 @@ extra.ylabelr='Z [c/\omega_{pi}]';
 % extra.yranger=[-1,1];
 extra.xlabel='\Omega_{ci}t';
 % prt.value.rx(2368:end)=prt.value.rx(2368:end)-100;
-slj.Plot.plotyy1(lx, prt.value.rx(trange), prt.value.rz(trange), extra);
+slj.Plot.plotyy1(lx, [prt.value.rx(1:2367);prt.value.rx(2368:2501)+100], prt.value.rz(trange), extra);
 end

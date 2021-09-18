@@ -6,10 +6,10 @@
 clear;
 %% parameters
 indir='E:\PIC\Cold-Ions\mie100\data';
-outdir='E:\PIC\Cold-Ions\mie100\out\Distribution_Function\Diagnose\DF\common';
+outdir='E:\PIC\Cold-Ions\mie100\out\Distribution_Function\Diagnose\DF\30-34';
 prm=slj.Parameters(indir,outdir);
 file=[outdir,'\common.txt'];
-name='PVh_ts102564_x1460-1505_y986-1015_z0-1';
+name='PVh_ts108974_x1401-1448_y986-1015_z0-1';
 %% figure properties
 extra.precv=120;
 extra.range=2.5;
@@ -35,20 +35,20 @@ for i=1:nid
     f=figure;
     plot_distribution_function(dsta,extra,1);
     hold on
-    plot(v.y,v.z,'*k','LineWidth',5);
-    print(f,'-dpng','-r300',[num2str(id(i)),'_y-z_position.png']);
+    plot(v.y,v.z,'*g','LineWidth',5);
+    print(f,'-dpng','-r300',[num2str(id(i)),'_y-z_position',name,'.png']);
     close(f);
     f=figure; 
     plot_distribution_function(dsta,extra,2);
     hold on
-    plot(v.x,v.z,'*k','LineWidth',5);
-    print(f,'-dpng','-r300',[num2str(id(i)),'_x-z_position.png']);
+    plot(v.x,v.z,'*g','LineWidth',5);
+    print(f,'-dpng','-r300',[num2str(id(i)),'_x-z_position_',name,'.png']);
     close(f)
     f=figure; 
     plot_distribution_function(dsta,extra,3);
     hold on
-    plot(v.x,v.y,'*k','LineWidth',5);
-    print(f,'-dpng','-r300',[num2str(id(i)),'_x-y_position.png']);
+    plot(v.x,v.y,'*g','LineWidth',5);
+    print(f,'-dpng','-r300',[num2str(id(i)),'_x-y_position_',name,'.png']);
     close(f)
 end
 

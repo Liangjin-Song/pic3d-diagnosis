@@ -7,17 +7,18 @@ clear;
 %% parameters
 % directory
 indir='E:\PIC\Cold-Ions\mie100\data';
-outdir='E:\PIC\Cold-Ions\mie100\out\Distribution_Function\Diagnose\DF';
+outdir='E:\PIC\Cold-Ions\mie100\out\Distribution_Function\Diagnose\DF\Other';
 prm=slj.Parameters(indir, outdir);
 % the file name of distribution function
-name='PVh_ts99359_x1785-1875_y988-1013_z0-1';
+name='PVh_ts102564_x1460-1505_y986-1015_z0-1';
 % velocity direction
-vdir=1;
-xrange=[44.5,45.5];
-zrange=[0,0.1];
-yrange=[0,1];
+vdir=3;
+xrange=[36.9,37.2];
+% xrange=[34.48,35.48];
+zrange=[-0.16,0.16];
+yrange=[-10,10];
 %% the figure style
-range=1;
+range=2.5;
 extra.colormap='moon';
 extra.xrange=[-range,range];
 extra.yrange=[-range,range];
@@ -45,4 +46,4 @@ dst=dst.intgrtv(vdir);
 %% plot figure
 f=slj.Plot();
 f.field2d(dst.value, dst.ll, dst.ll,extra);
-% f.png(prm,[name,suffix,'_sub',num2str(xrange(1)),'-',num2str(xrange(2))]);
+f.png(prm,[name,suffix,'_sub',num2str(xrange(1)),'-',num2str(xrange(2))]);

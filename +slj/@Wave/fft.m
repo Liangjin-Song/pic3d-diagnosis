@@ -20,13 +20,13 @@ end
 wk=slj.Wave.wkfft2d(fd,nx,nt,icnt);
 obj.wk=[fliplr(wk(4:2:end,1:2:(end-1))'),wk(1:2:end,1:2:(end-1))'];
 
-kmin = 2/(nx*fk);
+
+kmin = fk*2*pi;
 kmax = kmin*(nx/2-1);
 obj.k=[-kmax:kmin:-kmin,0,kmin:kmin:kmax];
 
-ren.t=0.006695/2;
-isdiag=49.95/ren.t;
-wmin = 2*pi/(ren.t*2)/2/(nt/2)/isdiag;
+
+wmin = fw*2*pi;
 wmax = wmin*(nt/2);
 obj.w = 0:wmin:(wmax-wmin);
 % obj.w=fw*(0:round(nt/2)-1)/nt;

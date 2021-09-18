@@ -11,7 +11,7 @@ norm=prm.value.n0*prm.value.vA*prm.value.vA;
 
 %% set the figure
 f=figure('Position',[500,10,600,800]);
-ha=slj.Plot.subplot(2,1,[0.0001,0.05],[0.085,0.07],[0.15,0.05]);
+ha=slj.Plot.subplot(2,1,[0.004,0.05],[0.085,0.07],[0.12,0.01]);
 
 xz=0;
 dir=0;
@@ -42,7 +42,9 @@ pos=get(hbar,'Position');
 pos(2)=pos(2)+dh;
 set(hbar,'Position',pos);
 set(hbar,'AxisLocation','out');
+
 set(gca,'XTicklabel',[]);
+
 
 %% Jic dot E, line
 %%
@@ -68,8 +70,6 @@ plot(ll,l2,'-g','LineWidth',lw);
 plot(ll,l3,'-b','LineWidth',lw); hold off
 xlim(extra.xrange);
 xlabel('X [c/\omega_{pi}]');
-
-set(gca,'FontSize',extra.FontSize);
 
 function JE=calc_J_dot_E(prm,name,tt)
 N=prm.read(['N',name],tt);

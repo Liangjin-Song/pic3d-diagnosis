@@ -4,7 +4,7 @@ clear;
 indir='E:\PIC\Cold-Ions\mie100\data';
 outdir='E:\PIC\Cold-Ions\mie100\out\Distribution_Function\Diagnose\Island\common';
 file=[outdir,'\common.txt'];
-name='PVh_ts99359_x2120-2143_y988-1014_z0-1';
+name='PVh_ts96200_x1513-1560_y986-1015_z0-1';
 %% read data
 cd(indir);
 prm=Parameters(indir,outdir);

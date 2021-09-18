@@ -6,11 +6,11 @@
 clear;
 %% parameters
 % directory
-indir='E:\PIC\wave-particle\whistler\data';
-outdir='E:\PIC\wave-particle\whistler\out';
+indir='E:\PIC\wave-particle\whistler\data5';
+outdir='E:\PIC\wave-particle\whistler\out5';
 prm=slj.Parameters(indir, outdir);
 % the file name of distribution function
-name='PVe_ts24000_x0-400_y0-1_z0-1';
+name='PVe_ts0_x0-2600_y0-1_z0-1';
 %% the figure style
 extra.colormap='moon';
 extra.xrange=[-20,20];

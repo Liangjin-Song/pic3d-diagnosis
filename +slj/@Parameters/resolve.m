@@ -63,6 +63,11 @@ elseif strcmp(value.model, 'asym_rec_3s_slj')
     value.n0=(value.nts+value.ntm)/2;
     value=reset_system_size(value);
     value=length_scale(value);
+elseif strcmp(value.model, 'turbulence')
+    cmd='value=resolve_turbulence(value, key, word);';
+    value=for_parameters(cmd, value);
+    value=reset_system_size(value);
+    value=length_scale(value, value.de);
 else
     error(['Unrecognized model: ',value.model]);
 end
@@ -149,22 +154,26 @@ value.reset=true;
 end
 
 %% ======================================================================== %%
-function value=length_scale(value)
+function value=length_scale(value, ds)
 %%
 % @brief: set the vector in three direction
 % @param: value - the parameters structure containing system size
+% @param: ds - the length scale should be normalized, default is ion inertial length
 % @return: value - the parameters structure
 %%
+if nargin == 1
+    ds=value.di;
+end
 if value.nx > 1
-    value.Lx=value.nx/value.di;
+    value.Lx=value.nx/ds;
     value.lx=linspace(0, value.Lx, value.nx);
 end
 if value.ny > 1
-    value.Ly=value.ny/value.di;
+    value.Ly=value.ny/ds;
     value.ly=linspace(0, value.Ly, value.ny);
 end
 if value.nz > 1
-    value.Lz=value.nz/value.di;
+    value.Lz=value.nz/ds;
     value.lz=linspace(-value.Lz/2, value.Lz/2, value.nz);
 end
 end
@@ -673,3 +682,71 @@ else
     error(['Unrecognized key: ',char(key)]);
 end
 end
+
+%% ======================================================================== %%
+function value=resolve_turbulence(value, key, word)
+%%
+% @brief: read the parameters of turbulence model
+% @param: value - the structure containing the parameters
+% @param: key - a string indicating the term
+% @param: word - a string indicating the value
+%%
+if strcmp(key, 'simulation model') || strcmp(key, 'boundary condition') || strcmp(key,'length in the x direction') || strcmp(key,'length in the y direction') || strcmp(key,'length in the z direction') || strcmp(key,'speed of light')
+elseif strcmp(key, 'mass ratio between ion and electron')
+    value.mie=str2num(word);
+elseif strcmp(key, 'temperature ratio between ion and electron')
+    value.tie=str2num(word);
+elseif strcmp(key,'ratio between electron plasma frequency and electron gyrofrequency')
+    value.rpg=str2num(word);
+elseif strcmp(key,'beta value')
+    value.beta=str2num(word);
+elseif strcmp(key,'electron temperature')
+    value.te=str2num(word);
+elseif strcmp(key,'magnetic field')
+elseif strcmp(key,'ion inertial length')
+    value.di=str2num(word);
+elseif strcmp(key,'electron inertial length')
+    value.de=str2num(word);
+elseif strcmp(key, 'number density of plasma')
+    value.np=str2num(word);
+    value.n0=value.np;
+elseif strcmp(key,'number of particles per cell')
+    value.ppc=str2num(word);
+elseif strcmp(key,'number of particles representing unit density')
+    value.coeff=str2num(word);
+elseif strcmp(key,'electron plasma frequency')
+    value.fpe=str2num(word);
+elseif strcmp(key,'electron gyrofrequency')
+    value.fce=str2num(word);
+    value.w=value.fce;
+elseif strcmp(key,'ion plasma frequency')
+    value.fpi=str2num(word);
+elseif strcmp(key,'ion gyrofrequency')
+    value.wci=str2num(word);
+elseif strcmp(key,'mass of electron')
+    value.me=str2num(word);
+elseif strcmp(key,'charge of electron')
+    value.qe=str2num(word);
+elseif strcmp(key,'mass of ion')
+    value.mi=str2num(word);
+elseif strcmp(key,'charge of ion')
+    value.qi=str2num(word);
+elseif strcmp(key,'electron thermal velocity')
+    value.veth=str2num(word);
+elseif strcmp(key,'ion thermal velocity')
+    value.vith=str2num(word);
+elseif strcmp(key,'debye length')
+    value.debye=str2num(word);
+elseif strcmp(key,'ion lamor radius')
+    value.rli=str2num(word);
+elseif strcmp(key,'electron lamor radius')
+    value.rle=str2num(word);
+elseif strcmp(key,'ion alfven speed')
+    value.vA=str2num(word);
+elseif strcmp(key,'the perturbation')
+    value.perturb=str2num(word);
+else
+    error(['Unrecognized key: ',char(key)]);
+end
+end
+

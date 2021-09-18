@@ -5,11 +5,14 @@
 % the particle's information which is at the DF
 %%
 clear;
-run('articles.article4.parameters.m');
-
+indir='E:\PIC\Cold-Ions\mie100\data';
+outdir='E:\PIC\Cold-Ions\mie100\out\';
+prm=slj.Parameters(indir,outdir);
 %% time
 tt=32;
 tt0=1601;
+% tt=20;
+% tt0=1001;
 
 %% figure
 extra.xlabel='X [c/\omega_{pi}]';
@@ -19,10 +22,6 @@ extra.FontSize=16;
 
 %% particles
 id=uint64(1466770715);
-% id=uint64(1266864751);
-% id=uint64(1267265581);
-% id=uint64(1359645935);
-% id=uint64(1371805878);
 norm=prm.value.mi*prm.value.vA*prm.value.vA;
 prt=prm.read(['trajh_id',num2str(id)]);
 den=prt.acceleration_direction(prm);
@@ -30,7 +29,8 @@ prt=prt.norm_energy(norm);
 prt=prt.norm_electric_field(prm);
 
 %% 
-trange=1451:2101;
+% trange=1451:2501;
+trange=1:2501;
 star=trange(1):50:trange(end);
 
 %% figure
@@ -58,7 +58,7 @@ xlabel(extra.xlabel);
 ylabel(extra.ylabel);
 set(gca,'FontSize',extra.FontSize);
 cd(outdir);
-% print(f1,'-dpng','-r300','figure9-1.png');
+print(f1,'-dpng','-r300','figure9-1.png');
 
 %% particle's trajectory in Y-Z plane
 vA=prm.value.vA;
@@ -80,35 +80,25 @@ cb=colorbar;
 % cb.Label.String='K_{ic}';
 cb.Label.FontSize=extra.FontSize;
 caxis([0,max(prt.value.k(trange))]);
-xtick=6:10;
-xtkble={'6','7','8','9','10'};
-ytick=-2.5:0.5:0;
-ytkble={'-2.5','-2','-1.5','-1','-0.5','0'};
-set(gca,'XTick',xtick,'Xticklabel',xtkble);
-set(gca,'YTick',ytick,'Yticklabel',ytkble);
+
 hold on;
 plot(ry(star),prt.value.rz(star),'*k','LineWidth',8);
 plot(ry(tt0),prt.value.rz(tt0),'*r','LineWidth',8);
 plot(ry(star(1)),prt.value.rz(star(1)),'*g','LineWidth',8); % begin
 plot(ry(star(end)),prt.value.rz(star(end)),'*b','LineWidth',8); % end
 hold off
-xlim([6,10]);
-ylim([-2.5,0]);
 xlabel('Y [c/\omega_{pi}]');
 ylabel('Z [c/\omega_{pi}]');
 set(gca,'FontSize',extra.FontSize);
 cd(outdir);
-% print(f2,'-dpng','-r300','figure9-2.png');
+print(f2,'-dpng','-r300','figure9-2.png');
+
+
+
 
 %% vy-vz
 f3=figure;
 p=patch(vy(trange),vz(trange),[prt.value.k(trange(1):trange(end-1)); NaN],'edgecolor','flat','facecolor','none');
-xtick=-1:0.5:1;
-xtkble={'-1','-0.5','0','0.5','1'};
-ytick=-0.8:0.2:0.8;
-ytkble={'-0.8','-0.6','-0.4','-0.2','0','0.2','0.4','0.6','0.8'};
-set(gca,'XTick',xtick,'Xticklabel',xtkble);
-set(gca,'YTick',ytick,'Yticklabel',ytkble);
 colormap('jet');
 set(p,'LineWidth',3);
 cb=colorbar;
@@ -121,24 +111,16 @@ plot(vy(tt0),vz(tt0),'*r','LineWidth',8); % distribution position
 plot(vy(star(1)),vz(star(1)),'*g','LineWidth',8); % begin
 plot(vy(star(end)),vz(star(end)),'*b','LineWidth',8); % end
 hold off
-xlim([-1,1]);
-ylim([-0.8,0.8]);
 xlabel('Vic_y');
 ylabel('Vic_z');
 set(gca,'FontSize',extra.FontSize);
 cd(outdir);
-% print(f3,'-dpng','-r300','figure9-3.png');
+print(f3,'-dpng','-r300','figure9-3.png');
 
 %% vx-vy
 f4=figure;
 vx=prt.value.vx/vA;
 p=patch(vx(trange),vy(trange),[prt.value.k(trange(1):trange(end-1)); NaN],'edgecolor','flat','facecolor','none');
-xtick=-1.9:0.1:-1.4;
-ytick=-1:0.5:1;
-xtkble={'-1.9','-1.8','-1.7','-1.6','-1.5','-1.4'};
-ytkble={'-1','-0.5','0','0.5','1'};
-set(gca,'XTick',xtick,'Xticklabel',xtkble);
-set(gca,'YTick',ytick,'Yticklabel',ytkble);
 colormap('jet');
 set(p,'LineWidth',3);
 cb=colorbar;
@@ -151,10 +133,30 @@ plot(vx(tt0),vy(tt0),'*r','LineWidth',8); % distribution position
 plot(vx(star(1)),vy(star(1)),'*g','LineWidth',8); % begin
 plot(vx(star(end)),vy(star(end)),'*b','LineWidth',8); % end
 hold off
-xlim([-1.9,-1.4]);
-ylim([-1,1]);
 xlabel('Vic_x');
 ylabel('Vic_y');
 set(gca,'FontSize',extra.FontSize);
 cd(outdir);
-% print(f4,'-dpng','-r300','figure9-4.png');
+print(f4,'-dpng','-r300','figure9-4.png');
+
+%% x-y trajectory
+f2=figure;
+p=patch(prt.value.rx(trange),ry(trange),[prt.value.k(trange(1):trange(end-1)); NaN],'edgecolor','flat','facecolor','none');
+colormap('jet');
+set(p,'LineWidth',3);
+cb=colorbar;
+% cb.Label.String='K_{ic}';
+cb.Label.FontSize=extra.FontSize;
+caxis([0,max(prt.value.k(trange))]);
+
+hold on;
+plot(prt.value.rx(star),ry(star),'*k','LineWidth',8);
+plot(prt.value.rx(tt0),ry(tt0),'*r','LineWidth',8);
+plot(prt.value.rx(star(1)),ry(star(1)),'*g','LineWidth',8); % begin
+plot(prt.value.rx(star(end)),ry(star(end)),'*b','LineWidth',8); % end
+hold off
+xlabel('X [c/\omega_{pi}]');
+ylabel('Y [c/\omega_{pi}]');
+set(gca,'FontSize',extra.FontSize);
+cd(outdir);
+print(f2,'-dpng','-r300','figure9-5.png');

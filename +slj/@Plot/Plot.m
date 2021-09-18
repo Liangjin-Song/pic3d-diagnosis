@@ -64,9 +64,10 @@ end
 %% plot the line
 methods (Access = public, Static)
     line(lx, ly, extra);
-    linen(lx, ly, extra);
+    h=linen(lx, ly, extra);
     plotyy1(lx, lhs, rhs, extra);
     [ax, h1, h2] = plotyyn(lx, lhs, rhs, extra);
+    H = arrow(X, Y, varargin);
 end
 
 %% ======================================================================== %%

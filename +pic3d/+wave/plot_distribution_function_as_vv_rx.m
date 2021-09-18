@@ -1,4 +1,4 @@
-function plot_distribution_function_as_vv_rx()
+% function plot_distribution_function_as_vv_rx()
 %
 % @info: writen by Liangjin Song on 20210607 
 % @brief: plot the distribution function as the function of velocity and rx
@@ -6,11 +6,11 @@ function plot_distribution_function_as_vv_rx()
 clear;
 % parameters
 % directory
-indir='E:\PIC\wave-particle\whistler\data';
-outdir='E:\PIC\wave-particle\whistler\out';
+indir='E:\PIC\wave-particle\test';
+outdir='E:\PIC\wave-particle\test';
 prm=slj.Parameters(indir, outdir);
 % the file name of distribution function
-name='PVe_ts0_x0-400_y0-1_z0-1';
+name='PVe_ts0_x0-2600_y0-1_z0-1';
 % velocity direction
 vdir=2;
 % the figure style

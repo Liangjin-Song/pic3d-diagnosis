@@ -31,6 +31,7 @@ JE=JE*Nic;
 % figure;
 axes(ha(1));
 dh=0.05;
+daxs=0.1;
 extra.ylabel='Z [c/\omega_{pi}]';
 extra.ColorbarPosition='North';
 extra.caxis=[-1.5,1.5];
@@ -38,6 +39,11 @@ hbar=slj.Plot.overview(JE, ss, prm.value.lx, prm.value.lz, norm, extra);
 hold on
 % plot([50,50],[-5,5],'--r','LineWidth',1.5);
 % set the colorbar
+pos=get(ha(1),'Position');
+pos(2)=pos(2)-daxs;
+set(ha(1),'Position',pos);
+
+
 pos=get(hbar,'Position');
 pos(2)=pos(2)+dh;
 set(hbar,'Position',pos);

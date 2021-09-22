@@ -8,10 +8,22 @@ function fd = divergence(obj, prm)
 %%
 fd=obj.x;
 if prm.value.dimension == 2
-    % the plane is in the x-z plane
-    fd(1:end-1,1:end-1)=obj.x(1:end-1,2:end)-obj.x(1:end-1,1:end-1)+obj.z(2:end,1:end-1)-obj.z(1:end-1,1:end-1);
-    fd(end,:)=fd(end-1,:);
-    fd(:,end)=fd(:,end-1);
+    nx=prm.value.nx;
+    if prm.value.reset
+        % the plane is in the x-z plane
+        nz=prm.value.nz;
+    else
+        % the plane is in the x-y plane
+        nz=prm.value.ny;
+    end
+    for k=1:nz-1
+        for i=1:nx-1
+            fd(k,i)=obj.x(k,i+1)-obj.x(k,i)+obj.z(k+1,i)-obj.z(k,i);
+        end
+    end
+    % boundary condition
+    fd(:,nx)=fd(:,1);
+    fd(nz,:)=fd(nz-1,:);
     fd=slj.Scalar(fd);
 else
     error('Parameters error!');

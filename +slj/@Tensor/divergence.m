@@ -12,11 +12,13 @@ if prm.value.dimension == 2
     v.z=obj.xz;
     v=slj.Vector(v);
     fdx=v.divergence(prm);
+    v=[];
     v.x=obj.xy;
     v.y=obj.yy;
     v.z=obj.yz;
     v=slj.Vector(v);
     fdy=v.divergence(prm);
+    v=[];
     v.x=obj.xz;
     v.y=obj.yz;
     v.z=obj.zz;

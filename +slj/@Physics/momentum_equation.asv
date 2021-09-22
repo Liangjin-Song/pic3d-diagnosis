@@ -13,9 +13,12 @@ function [vxB, divP, vv] = momentum_equation(prm, name, tt)
 %%
 
 %% vxB term
-v=prm.read(['V',name],tt);
+V=prm.read(['V',name],tt);
 B=prm.read('B',tt);
-vxB=v.cross(B);
+vb.x=B.y.*V.z-B.z.*V.y;
+vb.y=B.z.*V.x-B.x.*V.z;
+vb.z=B.x.*V.y-B.y.*V.x;
+vx
 
 %% nabla dot P term
 P=prm.read(['P',name],tt);
@@ -30,12 +33,15 @@ divP=slj.Vector(divP);
 vx=slj.Scalar(v.x);
 vy=slj.Scalar(v.y);
 vz=slj.Scalar(v.z);
-vx=vx.gra(prm);
-vv.x=vx.dot(v);
-vy=vy.divergence(prm);
-vv.y=vy.dot(v);
-vz=vz.divergence(prm);
-vv.z=vz.dot(v);
+vx=vx.gradient(prm);
+vx=vx.dot(v);
+vv.x=vx.value;
+vy=vy.gradient(prm);
+vy=vy.dot(v);
+vv.y=vy.value;
+vz=vz.gradient(prm);
+vz=vz.dot(v);
+vv.z=vz.value;
 vv=slj.Vector(vv);
 
 end

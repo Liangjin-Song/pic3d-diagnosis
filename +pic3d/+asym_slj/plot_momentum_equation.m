@@ -32,9 +32,14 @@ vdv=slj.Vector(vdv);
 
 V1=prm.read(['V',name],tt-dt);
 V2=prm.read(['V',name],tt+dt);
-Vt.x=(V2.x-V1.x)*prm.value.wci;
-Vt.y=(V2.y-V1.y)*prm.value.wci;
-Vt.z=(V2.z-V1.z)*prm.value.wci;
+N1=prm.read(['N',name],tt-dt);
+N2=prm.read(['N',name],tt+dt);
+Vt.x=(V2.x.*N2.value-V1.x.*N1.value)*prm.value.wci/2;
+Vt.y=(V2.y.*N2.value-V1.y.*N1.value)*prm.value.wci/2;
+Vt.z=(V2.z.*N2.value-V1.z.*N1.value)*prm.value.wci/2;
+Vt.x=(m/q)*Vt.x./N;
+Vt.y=(m/q)*Vt.y./N;
+Vt.z=(m/q)*Vt.z./N;
 Vt=slj.Vector(Vt);
 
 %% get the line

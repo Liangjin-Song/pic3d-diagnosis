@@ -41,6 +41,7 @@ methods (Access = public)
     fd = curl(obj, prm);
     fd = divergence(obj, prm);
     fd = dot(lhs, rhs);
+    fd = cross(lhs, rhs);
 end
 
 %% ======================================================================== %%

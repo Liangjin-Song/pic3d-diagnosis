@@ -12,10 +12,10 @@ prm=slj.Parameters(indir,outdir);
 % time
 tt=0;
 % the variable name
-varname={'B','E','J','Vi','Ve','Ni','Ne'};
+varname={'B','E','J','Vi','Ve','Ni','Ne','divB','divE'};
 % varname={'J'};
 % figure style
-extra.Visible=false;
+extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
 extra.yrange=[prm.value.lz(1), prm.value.lz(end)];
 % extra.xrange=[60,90];
@@ -39,6 +39,13 @@ for t=1:nt
             % scalar field
             case {'Ni', 'Ne'}
                 norm=prm.value.n0;
+                fig=slj.Plot(extra);
+                fig.field2d(fd.value/norm, lx, ly, extra);
+                title([name,'   \Omega_{ci}t=',num2str(tt(t))]);
+                fig.png(prm, [name,'_t',num2str(tt(t),'%06.2f')]);
+                fig.close();
+            case {'divB', 'divE'}
+                norm=1;
                 fig=slj.Plot(extra);
                 fig.field2d(fd.value/norm, lx, ly, extra);
                 title([name,'   \Omega_{ci}t=',num2str(tt(t))]);

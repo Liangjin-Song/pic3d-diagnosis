@@ -30,4 +30,11 @@ methods (Access = public, Static)
 end
 
 %% ======================================================================== %%
+%% some equation
+methods (Access = public, Static)
+    [vxB, divP, vv] = momentum_equation(prm, name, charge, mass);
+end
+
+
+%% ======================================================================== %%
 end

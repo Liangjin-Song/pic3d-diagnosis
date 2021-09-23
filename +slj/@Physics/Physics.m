@@ -32,7 +32,7 @@ end
 %% ======================================================================== %%
 %% some equation
 methods (Access = public, Static)
-    [vxB, divP, vv] = momentum_equation(prm, name, charge, mass);
+    [vxB, divP, nvv, nvt] = momentum_equation(prm, name, tt, dt, q, m);
 end
 
 

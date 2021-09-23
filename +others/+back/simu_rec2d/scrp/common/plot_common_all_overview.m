@@ -3,7 +3,7 @@
 clear;
 indir='E:\rec2d_M100B02T02Bs6Bg10\data';
 outdir='E:\rec2d_M100B02T02Bs6Bg10\out\Overview';
-tt=20:92;
+tt=0:19;
 c=0.6;
 n0=355.07578;
 wci=0.000750;

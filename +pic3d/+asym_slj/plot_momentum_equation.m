@@ -7,7 +7,7 @@ prm=slj.Parameters(indir,outdir);
 
 tt=100;
 dt=1;
-name='l';
+name='h';
 
 q=prm.value.qi;
 m=prm.value.mi;
@@ -15,45 +15,64 @@ m=prm.value.mi;
 norm=prm.value.vA;
 xz=50;
 dir=1;
+pxz=prm.value.nz/2;
+dxz=100;
+
+%% figure proterty
+xrange=[-10,10];
 
 %% momentum equation
 E=prm.read('E',tt);
+[vxB, divP, nvv, nvt] = slj.Physics.momentum_equation(prm, name, tt, dt, q, m);
 
-[vxB, dP, vv] = slj.Physics.momentum_equation(prm, name, tt);
-divP.x=dP.x/q;
-divP.y=dP.y/q;
-divP.z=dP.z/q;
-divP=slj.Vector(divP);
+%% filter
+n=5;
+E=E.filter2d(n);
+vxB=vxB.filter2d(n);
+divP=divP.filter2d(n);
+nvv=nvv.filter2d(n);
+nvt=nvt.filter2d(n);
 
-vdv.x=vv.x*m/q;
-vdv.y=vv.y*m/q;
-vdv.z=vv.z*m/q;
-vdv=slj.Vector(vdv);
-
-V1=prm.read(['V',name],tt-dt);
-V2=prm.read(['V',name],tt+dt);
-N1=prm.read(['N',name],tt-dt);
-N2=prm.read(['N',name],tt+dt);
-Vt.x=(V2.x.*N2.value-V1.x.*N1.value)*prm.value.wci/2;
-Vt.y=(V2.y.*N2.value-V1.y.*N1.value)*prm.value.wci/2;
-Vt.z=(V2.z.*N2.value-V1.z.*N1.value)*prm.value.wci/2;
-Vt.x=(m/q)*Vt.x./N;
-Vt.y=(m/q)*Vt.y./N;
-Vt.z=(m/q)*Vt.z./N;
-Vt=slj.Vector(Vt);
 
 %% get the line
-eee=E.get_line2d(xz, dir, prm, norm);
-vxb=vxB.get_line2d(xz, dir, prm, norm);
-dvp=divP.get_line2d(xz, dir, prm, norm);
-vdv=vdv.get_line2d(xz, dir, prm, norm);
-vpt=Vt.get_line2d(xz, dir, prm, norm);
+% eee=E.get_line2d(xz, dir, prm, norm);
+% vxb=vxB.get_line2d(xz, dir, prm, norm);
+% dvp=divP.get_line2d(xz, dir, prm, norm);
+% vpv=nvv.get_line2d(xz, dir, prm, norm);
+% vpt=nvt.get_line2d(xz, dir, prm, norm);
+
+% eee=eee.lz;
+% vxb=vxb.lz;
+% dvp=dvp.lz;
+% vpv=vpv.lz;
+% vpt=vpt.lz;
+
+eee=E.y(:,pxz-dxz:pxz+dxz);
+vxb=vxB.y(:,pxz-dxz:pxz+dxz);
+dvp=divP.y(:,pxz-dxz:pxz+dxz);
+vpv=nvv.y(:,pxz-dxz:pxz+dxz);
+vpt=nvt.y(:,pxz-dxz:pxz+dxz);
+eee=sum(eee,2);
+vxb=sum(vxb,2);
+dvp=sum(dvp,2);
+vpv=sum(vpv,2);
+vpt=sum(vpt,2);
+
+tot=vxb+dvp+vpv+vpt;
 
 %% figure
 ll=prm.value.lz;
 figure;
-plot(ll,eee.ly,'--k','LineWidth',2); hold on
-plot(ll,vxb.ly,'-r','LineWidth',2);
-plot(ll,dvp.ly,'-g','LineWidth',2);
-plot(ll,vdv.ly,'-b','LineWidth',2);
-plot(ll,vpt.ly,'-m','LineWidth',2); hold off
+plot(ll,eee,'-k','LineWidth',2); hold on
+plot(ll,tot,'--k','LineWidth',2);
+plot(ll,vxb,'-r','LineWidth',2);
+plot(ll,dvp,'-g','LineWidth',2);
+plot(ll,vpv,'-b','LineWidth',2);
+plot(ll,vpt,'-m','LineWidth',2); hold off
+xlim(xrange);
+legend('E','Sum','-V\times B','\nabla \cdot P/qn','m/qn\nabla\cdot(nVV)','m/qn \partial nV/\partial t','Location','Best')
+xlabel('Z [c/\omega_{pi}]');
+ylabel('Ey');
+set(gca,'FontSize',14);
+cd(outdir);
+print('-dpng','-r300',['Ey_cold_ion_t',num2str(tt),'_x',num2str(xz),'.png']);

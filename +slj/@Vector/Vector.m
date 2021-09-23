@@ -42,6 +42,7 @@ methods (Access = public)
     fd = divergence(obj, prm);
     fd = dot(lhs, rhs);
     fd = cross(lhs, rhs);
+    fd = filter2d(obj,n);
 end
 
 %% ======================================================================== %%

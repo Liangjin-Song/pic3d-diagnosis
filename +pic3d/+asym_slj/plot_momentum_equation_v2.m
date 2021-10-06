@@ -26,7 +26,7 @@ Lx=nx/di;
 Ly=ny/di;
 
 xrange=[0,Lx];
-yrange=[-5,5];
+yrange=[-10,10];
 xrange=yrange;
 
 pxt=prm.value.nz/2;
@@ -35,15 +35,15 @@ dpx=100;
 cd(indir)
 E=pic3d_read_data('E',tt,nx,ny,nz);
 B=pic3d_read_data('B',tt,nx,ny,nz);
-Ve=pic3d_read_data('Ve',tt,nx,ny,nz);
-Ne=pic3d_read_data('Ne',tt,nx,ny,nz);
-Pe=pic3d_read_data('Pe',tt,nx,ny,nz);
+Ve=pic3d_read_data('Vh',tt,nx,ny,nz);
+Ne=pic3d_read_data('Nh',tt,nx,ny,nz);
+Pe=pic3d_read_data('Ph',tt,nx,ny,nz);
 % previous
-pVe=pic3d_read_data('Ve',tt-1,nx,ny,nz);
-pNe=pic3d_read_data('Ne',tt-1,nx,ny,nz);
+pVe=pic3d_read_data('Vh',tt-1,nx,ny,nz);
+pNe=pic3d_read_data('Nh',tt-1,nx,ny,nz);
 % next
-nVe=pic3d_read_data('Ve',tt+1,nx,ny,nz);
-nNe=pic3d_read_data('Ne',tt+1,nx,ny,nz);
+nVe=pic3d_read_data('Vh',tt+1,nx,ny,nz);
+nNe=pic3d_read_data('Nh',tt+1,nx,ny,nz);
 
 %% calculation of electron moment equation
 %% - V cross B
@@ -90,8 +90,6 @@ dp.z=pic3d_simu_filter2d(dp.z);
 nvv.z=pic3d_simu_filter2d(nvv.z);
 nv.z=pic3d_simu_filter2d(nv.z);
 
-
-
 %% get the line
 [~,lx]=get_line_data(E.y,Lx,Ly,x0,vA,dir);
 % [lvb,~]=get_line_data(vb.y,Lx,Ly,x0,vA,dir);
@@ -120,9 +118,9 @@ p4=plot(lx,lnvv,'-b','LineWidth',1.5);
 p5=plot(lx,lnv,'-m','LineWidth',1.5);
 p6=plot(lx,sm,'-k','LineWidth',1.5); hold off
 xlabel('X [c/\omega_{pi}]')
-ylabel('Ez')
+ylabel('Ey')
 xlim(xrange);
-title(['\Omega_{ci}t =',num2str(tt)]);
+% title(['\Omega_{ci}t =',num2str(tt)]);
 set(gca,'FontSize',14);
 lh=legend([p1;p2;p3],'E','-V\times B','\nabla \cdot P /(qN)','FontSize',14);
 set(lh,'box','off');

@@ -51,6 +51,7 @@ methods (Access = public, Static)
     stream(fd, lx, ly, number, color);
     h=overview(fd, ss, lx, ly, norm, extra);
     set_field_figure(extra);
+    plot_vector(vx,vy,Lx,Ly,kav,scale,color);
 end
 
 %% ======================================================================== %%

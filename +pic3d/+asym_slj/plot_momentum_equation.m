@@ -1,16 +1,16 @@
 % function plot_momentum_equation
-clear;
+% clear;
 %% parameters
-indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Momentum';
+indir='E:\Asym\asym_cold_Nr1\data';
+outdir='E:\Asym\asym_cold_Nr1\out\Global';
 prm=slj.Parameters(indir,outdir);
 
 tt=100;
 dt=1;
-name='h';
+name='e';
 
-q=prm.value.qi;
-m=prm.value.mi;
+q=prm.value.qe;
+m=prm.value.me;
 
 norm=prm.value.vA;
 xz=50;
@@ -26,7 +26,7 @@ E=prm.read('E',tt);
 [vxB, divP, nvv, nvt] = slj.Physics.momentum_equation(prm, name, tt, dt, q, m);
 
 %% filter
-n=5;
+n=3;
 E=E.filter2d(n);
 vxB=vxB.filter2d(n);
 divP=divP.filter2d(n);
@@ -35,28 +35,28 @@ nvt=nvt.filter2d(n);
 
 
 %% get the line
-% eee=E.get_line2d(xz, dir, prm, norm);
-% vxb=vxB.get_line2d(xz, dir, prm, norm);
-% dvp=divP.get_line2d(xz, dir, prm, norm);
-% vpv=nvv.get_line2d(xz, dir, prm, norm);
-% vpt=nvt.get_line2d(xz, dir, prm, norm);
+eee=E.get_line2d(xz, dir, prm, norm);
+vxb=vxB.get_line2d(xz, dir, prm, norm);
+dvp=divP.get_line2d(xz, dir, prm, norm);
+vpv=nvv.get_line2d(xz, dir, prm, norm);
+vpt=nvt.get_line2d(xz, dir, prm, norm);
 
-% eee=eee.lz;
-% vxb=vxb.lz;
-% dvp=dvp.lz;
-% vpv=vpv.lz;
-% vpt=vpt.lz;
+eee=eee.ly;
+vxb=vxb.ly;
+dvp=dvp.ly;
+vpv=vpv.ly;
+vpt=vpt.ly;
 
-eee=E.y(:,pxz-dxz:pxz+dxz);
-vxb=vxB.y(:,pxz-dxz:pxz+dxz);
-dvp=divP.y(:,pxz-dxz:pxz+dxz);
-vpv=nvv.y(:,pxz-dxz:pxz+dxz);
-vpt=nvt.y(:,pxz-dxz:pxz+dxz);
-eee=sum(eee,2);
-vxb=sum(vxb,2);
-dvp=sum(dvp,2);
-vpv=sum(vpv,2);
-vpt=sum(vpt,2);
+% eee=E.z(:,pxz-dxz:pxz+dxz);
+% vxb=vxB.z(:,pxz-dxz:pxz+dxz);
+% dvp=divP.z(:,pxz-dxz:pxz+dxz);
+% vpv=nvv.z(:,pxz-dxz:pxz+dxz);
+% vpt=nvt.z(:,pxz-dxz:pxz+dxz);
+% eee=sum(eee,2);
+% vxb=sum(vxb,2);
+% dvp=sum(dvp,2);
+% vpv=sum(vpv,2);
+% vpt=sum(vpt,2);
 
 tot=vxb+dvp+vpv+vpt;
 
@@ -75,4 +75,4 @@ xlabel('Z [c/\omega_{pi}]');
 ylabel('Ey');
 set(gca,'FontSize',14);
 cd(outdir);
-print('-dpng','-r300',['Ey_cold_ion_t',num2str(tt),'_x',num2str(xz),'.png']);
+% print('-dpng','-r300',['Ey_cold_ion_t',num2str(tt),'_x',num2str(xz),'.png']);

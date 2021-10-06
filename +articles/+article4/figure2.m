@@ -6,11 +6,16 @@
 clear;
 run('articles.article4.parameters.m');
 %% particle's ID
-id1='295320754';
-id2='1599194011';
+%% id1='295320754';
+% id1='1138935235';
+% id1='1378547472';
+% id1='1406693454';
+id1='1303130000';
+%% id2='1599194011';
+id2='1607749403';
 
 %% particle's time information
-tt1=45;
+tt1=34;
 tt2=50;
 % tt3=41;
 
@@ -76,7 +81,7 @@ pos=get(hbar,'Position');
 pos(2)=pos(2)+dh;
 set(hbar,'Position',pos);
 set(hbar,'AxisLocation','out');
-xlim([20,35]);
+xlim([30,45]);
 ylim([-5,5]);
 set(p,'LineWidth',3);
 xlabel(extra.xlabel);
@@ -120,6 +125,7 @@ den1=prt1.acceleration_direction(prm);
 den1.x=den1.x/norm;
 den1.y=den1.y/norm;
 den1.z=den1.z/norm;
+den1.x=smooth1d(den1.x);
 prt1=prt1.norm_energy(norm);
 prt1=prt1.norm_electric_field(prm);
 prt1=prt1.norm_velocity(prm);
@@ -140,15 +146,15 @@ prt2=prt2.norm_velocity(prm);
 % ha=slj.Plot.subplot(4,2,[0.02,0.1],[0.09,0.05],[0.09,0.1]);
 
 %% particle 1
-extra.xrange=[40,50];
+extra.xrange=[20,40];
 particle_information(ha, 1, prt1, den1, trange, extra);
 %% particle 2
 extra.xrange=[0,50];
 particle_information(ha, 2, prt2, den2, trange, extra);
 
-%% save figure
-cd(outdir);
-print(f,'-dpng','-r300','figure2.png');
+% %% save figure
+% cd(outdir);
+% print(f,'-dpng','-r300','figure2.png');
 
 %%
 function particle_information(ha, np, prt, den, trange, extra)
@@ -175,6 +181,8 @@ ly=[];
 ly.l1=den.x(trange);
 ly.l2=den.y(trange);
 ly.l3=den.z(trange);
+% ly.l4=ly.l1+ly.l2+ly.l3;
+% ly.l5=prt.value.k(trange);
 extra.LineStyle={'-', '-', '-'};
 extra.LineColor={'r', 'b', 'g'};
 if np == 1
@@ -214,4 +222,15 @@ else
 end
 extra.xlabel='\Omega_{ci}t';
 slj.Plot.plotyy1(lx, prt.value.rx(trange), prt.value.rz(trange), extra);
+end
+
+function sfd=smooth1d(lfd)
+n=0;
+nt=length(lfd);
+sfd=lfd;
+for i=1:n
+    for j=2:nt-1
+        sfd(j)=sfd(j-1)*0.25+sfd(j)*0.5+sfd(j+1)*0.25;
+    end
+end
 end

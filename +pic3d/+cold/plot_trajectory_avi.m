@@ -4,7 +4,7 @@ clear;
 %% parameters
 id={'1479944291'};
 indir='E:\PIC\Cold-Ions\mie100\data';
-outdir='E:\PIC\Cold-Ions\mie100\out\Oral';
+outdir='E:\PIC\Cold-Ions\mie100\out\';
 prm=slj.Parameters(indir,outdir);
 nid=length(id);
 for i=1:nid

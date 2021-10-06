@@ -6,10 +6,11 @@
 clear;
 run('articles.article4.parameters.m');
 %% particle's ID
-id3='1479944291';
+%% id3='1479944291';
+id3='1575474944';
 
 %% particle's time information
-tt3=41;
+tt3=30;
 
 %% figure property
 extra.xlabel='X [c/\omega_{pi}]';
@@ -34,9 +35,9 @@ prt3=prt3.norm_velocity(prm);
 
 
 %% figure
-dh=0.02;
+dh=0.028;
 daxs=0.05;
-fpos=[1000,10,500,1000];
+fpos=[1000,10,600,1000];
 f=figure('Position',fpos);
 ha=slj.Plot.subplot(5,1,[0.013,0.12],[0.1,0.1],[0.15,0.15]);
 
@@ -54,9 +55,9 @@ ss=prm.read('stream',tt3);
 cr=[0, max(prt3.value.k(trange))];
 slj.Plot.stream(ss,prm.value.lx,prm.value.lz);
 hold on
-p=patch(prt3.value.rx(1:2367),prt3.value.rz(1:2367),[prt3.value.k(1:2366);NaN],'edgecolor','flat','facecolor','none');
+p=patch(prt3.value.rx(1:2134),prt3.value.rz(1:2134),[prt3.value.k(1:2133);NaN],'edgecolor','flat','facecolor','none');
 set(p,'LineWidth',3);
-p=patch(prt3.value.rx(2368:trange(end)),prt3.value.rz(2368:trange(end)),[prt3.value.k(2368:trange(end-1));NaN],'edgecolor','flat','facecolor','none');
+p=patch(prt3.value.rx(2135:trange(end)),prt3.value.rz(2135:trange(end)),[prt3.value.k(2135:trange(end-1));NaN],'edgecolor','flat','facecolor','none');
 set(p,'LineWidth',3);
 caxis(cr);
 colormap('jet');
@@ -72,8 +73,8 @@ set(hbar,'Position',pos);
 set(hbar,'AxisLocation','out');
 
 
-xlim([0,52]);
-ylim([-10,10]);
+xlim([30,52]);
+ylim([-5,5]);
 xlabel(extra.xlabel);
 ylabel(extra.ylabel);
 set(gca,'YTickMode','auto');
@@ -82,13 +83,14 @@ set(gca,'FontSize',extra.FontSize);
 %% particle's trajectory
 extra=[];
 extra.FontSize=12;
+extra.xrange=[5,35];
 %% particle 3
-cmd='obj.value.rx(2368:end)=obj.value.rx(2368:end)-100;';
+cmd='obj.value.rx(2135:end)=obj.value.rx(2135:end)-100;';
 prt3=prt3.command(cmd);
 particle_information(ha, 2, prt3, den3, trange, extra);
 %% save figure
 cd(outdir);
-print(f,'-dpng','-r300','figure3.png');
+% print(f,'-dpng','-r300','figure5.png');
 
 
 function particle_information(ha, np, prt, den, trange, extra)
@@ -142,7 +144,7 @@ set(gca,'XTicklabel',[]);
 axes(ha(np+3));
 extra.ylabell='X [c/\omega_{pi}]';
 extra.ylabelr='Z [c/\omega_{pi}]';
-% extra.yrangel=[40,80];
+extra.yrangel=[25,52];
 % extra.yranger=[-1,1];
 extra.xlabel='\Omega_{ci}t';
 % prt.value.rx(2368:end)=prt.value.rx(2368:end)-100;

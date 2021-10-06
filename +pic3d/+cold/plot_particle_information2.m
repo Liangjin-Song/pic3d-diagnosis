@@ -9,10 +9,8 @@ indir='E:\PIC\Cold-Ions\mie100\data';
 outdir='E:\PIC\Cold-Ions\mie100\out\';
 prm=slj.Parameters(indir,outdir);
 %% time
-tt=32;
-tt0=1601;
-% tt=20;
-% tt0=1001;
+tt=34;
+tt0=1701;
 
 %% figure
 extra.xlabel='X [c/\omega_{pi}]';
@@ -21,7 +19,7 @@ extra.ColorbarPosition='north';
 extra.FontSize=16;
 
 %% particles
-id=uint64(1466770715);
+id=uint64(1303130000);
 norm=prm.value.mi*prm.value.vA*prm.value.vA;
 prt=prm.read(['trajh_id',num2str(id)]);
 den=prt.acceleration_direction(prm);
@@ -29,8 +27,8 @@ prt=prt.norm_energy(norm);
 prt=prt.norm_electric_field(prm);
 
 %% 
-% trange=1451:2501;
-trange=1:2501;
+% trange=1:2501;
+trange=1251:2001;
 star=trange(1):50:trange(end);
 
 %% figure

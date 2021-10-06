@@ -7,8 +7,12 @@ run('articles.article4.parameters.m');
 
 %% the time
 tt=30;
+tt0=16;
+tt2=25;
+tt3=40;
+
 z0=prm.value.nz/2;
-dz=40;
+dz=80;
 norm=prm.value.n0*prm.value.vA*prm.value.vA;
 anorm=prm.value.vA*prm.value.vA;
 
@@ -35,7 +39,7 @@ ss=prm.read('stream',tt);
 axes(ha(1));
 extra.ylabel='Z [c/\omega_{pi}]';
 extra.ColorbarPosition='North';
-extra.caxis=[-0.5,0.5];
+extra.caxis=[-0.1,0.1];
 hbar=slj.Plot.overview(JE, ss, prm.value.lx, prm.value.lz, norm, extra);
 hold on
 plot([0,100],[0,0],'--r','LineWidth',1.5);
@@ -54,15 +58,39 @@ set(gca,'XTicklabel',[]);
 l1=JE.value(z0-dz:z0+dz, :);
 l1=mean(l1,1)/norm;
 
+JE=calc_J_dot_E(prm,name,tt0);
+l0=JE.value(z0-dz:z0+dz, :);
+l0=mean(l0,1)/norm;
+
+JE=calc_J_dot_E(prm,name,tt2);
+l2=JE.value(z0-dz:z0+dz, :);
+l2=mean(l2,1)/norm;
+
+JE=calc_J_dot_E(prm,name,tt3);
+JE=prm.read('J',25);
+JE=slj.Scalar(JE.y);
+l3=JE.value(z0-dz:z0+dz, :);
+l3=mean(l3,1)/prm.value.n0;
+
+
 %% figure
 ll=prm.value.lx;
 lw=2;
 axes(ha(2));
-plot(ll,l1,'-r','LineWidth',lw);
+p0=plot(ll,l0,'-r','LineWidth',lw); hold on
+p1=plot(ll,l1,'-b','LineWidth',lw);
+% p3=plot(ll,l3,'-m','LineWidth',lw);
+plot([0,100],[0,0],'--g','LineWidth',1.5);
 xlim(extra.xrange);
+legend([p0;p1],['\Omega_{ci}t=',num2str(tt0)],['\Omega_{ci}t=',num2str(tt2)]);
 xlabel('X [c/\omega_{pi}]');
 ylabel('J_{ic}\cdot E');
 set(gca,'FontSize',extra.FontSize);
+
+
+
+
+
 
 %% plot the overview of the average Jic dot E
 % read data
@@ -104,7 +132,7 @@ set(gca,'FontSize',extra.FontSize);
 
 %%
 cd(outdir);
-print('-dpng','-r300','figure4.png');
+print('-dpng','-r300','figure2.png');
 
 
 function JE=calc_J_dot_E(prm,name,tt)

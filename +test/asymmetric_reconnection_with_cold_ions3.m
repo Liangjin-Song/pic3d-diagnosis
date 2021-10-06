@@ -1,9 +1,9 @@
-%% asymmetric reconnection with cold ions initialization
+%% asymmetric reconnection with cold ions initialization (slj_model)
 % writen by Liangjin Song
 clear;
 %% parameters
 % directory
-dir='E:\Asym\NCold\out\Parameters';
+dir='E:\Download';
 % the range
 y=-20:0.01:20;
 % the current sheet position
@@ -12,9 +12,9 @@ y0=0;
 L=0.6;
 
 % Br =|Bsheath∕Bsphere|, the magnetic field ratio between both sides of the current sheet
-Br=0.5;
+Br=1/3;
 % nr=nsheath∕nsphere the density ratio between both sides of the current sheet
-Nr=5;
+Nr=1.5;
 
 % density ratio between cold ions and the total plasma density at the magnetosphere side
 phi=0;
@@ -23,13 +23,13 @@ phi=0;
 s=0;
 
 % temperature ratio between hot ions and cold ions at the magnetosphere side
-theta2=500;
+theta2=1;
 
 % the temperature ratio between electron and hot ion
-theta1=0.2;
+theta1=0.1;
 
 % the beta value at the magnetosheat
-betas=10;
+betas=12;
 
 % the light speed
 c=0.5;

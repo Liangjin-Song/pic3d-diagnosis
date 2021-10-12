@@ -29,7 +29,7 @@ theta2=1;
 theta1=0.1;
 
 % the beta value at the magnetosheat
-betas=12;
+betas=20;
 
 % the light speed
 c=0.5;

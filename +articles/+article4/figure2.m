@@ -1,236 +1,109 @@
-% function figure3()
-%%
-% writen by Liangjin Song on 20210624
-% the particle information in the spectrum at the DF and the second island
+% function figure2()
+%% plot the Ez, Ey, Nic
+% writen by Liangjin Song on 20210626
 %%
 clear;
 run('articles.article4.parameters.m');
-%% particle's ID
-%% id1='295320754';
-% id1='1138935235';
-% id1='1378547472';
-% id1='1406693454';
-id1='1303130000';
-%% id2='1599194011';
-id2='1607749403';
 
-%% particle's time information
-tt1=34;
-tt2=50;
-% tt3=41;
+%% the time
+tt=30;
+tt0=30;
 
-%% figure property
-extra.xlabel='X [c/\omega_{pi}]';
-extra.ylabel='Z [c/\omega_{pi}]';
-extra.ColorbarPosition='north';
+z0=prm.value.nz/2;
+dz=80;
+norm=prm.value.n0*prm.value.vA*prm.value.vA;
+anorm=prm.value.vA*prm.value.vA;
+
+%% set the figure
+f=figure('Position',[500,10,600,800]);
+ha=slj.Plot.subplot(2,1,[0.0001,0.1],[0.13,0.07],[0.13,0.05]);
+
+xz=0;
+dir=0;
+xz2=48;
+dir2=1;
+dh=0.055;
+daxs=0.025;
+extra.xrange=[30,70];
+extra.yrange=[-10,10];
 extra.FontSize=12;
 
-%% particle's information
-% norm=prm.value.tem*prm.value.tle*prm.value.thl/prm.value.coeff;
-norm=prm.value.mi*prm.value.vA.^2;
-trange=1:2501;
-
-% particle 1
-prt1=prm.read(['trajh_id',id1]);
-den1=prt1.acceleration_direction(prm);
-den1.x=den1.x/norm;
-den1.y=den1.y/norm;
-den1.z=den1.z/norm;
-prt1=prt1.norm_energy(norm);
-prt1=prt1.norm_electric_field(prm);
-prt1=prt1.norm_velocity(prm);
-% particle 2
-prt2=prm.read(['trajh_id',id2]);
-den2=prt2.acceleration_direction(prm);
-den2.x=den2.x/norm;
-den2.y=den2.y/norm;
-den2.z=den2.z/norm;
-prt2=prt2.norm_energy(norm);
-prt2=prt2.norm_electric_field(prm);
-prt2=prt2.norm_velocity(prm);
-
-
-%% figure
-dh=0.035;
-daxs=0.05;
-% f=figure('Position',[500,100,800,500]);
-% ha=slj.Plot.subplot(1,2,[0.09,0.07],[0.1,0.07],[0.1,0.06]);
-% extra=[];
-fpos=[800,10,800,1000];
-f=figure('Position',fpos);
-ha=slj.Plot.subplot(5,2,[0.015,0.1],[0.07,0.1],[0.09,0.1]);
-
-
-%% part 1, the particle's trajectory
-% particle 1
+%% plot the overview of the Jic dot E
+% read data
+name='h';
+JE=calc_J_dot_E(prm,name,tt);
+ss=prm.read('stream',tt);
+% figure;
 axes(ha(1));
-ss=prm.read('stream',tt1);
-cr=[0, max(prt1.value.k(trange))];
-slj.Plot.stream(ss,prm.value.lx,prm.value.lz,40);
+extra.ylabel='Z [c/\omega_{pi}]';
+extra.ColorbarPosition='North';
+extra.caxis=[-0.5,0.5];
+hbar=slj.Plot.overview(JE, ss, prm.value.lx, prm.value.lz, norm, extra);
 hold on
-p=patch(prt1.value.rx(trange),prt1.value.rz(trange),[prt1.value.k(trange(1:end-1));NaN],'edgecolor','flat','facecolor','none');
-caxis(cr);
-colormap('jet');
-
+plot([0,100],[0,0],'--r','LineWidth',1.5);
 pos=get(ha(1),'Position');
-pos(2)=pos(2)+daxs;
+pos(2)=pos(2)-daxs;
 set(ha(1),'Position',pos);
 
-hbar=colorbar(extra.ColorbarPosition);
 pos=get(hbar,'Position');
 pos(2)=pos(2)+dh;
 set(hbar,'Position',pos);
 set(hbar,'AxisLocation','out');
-xlim([30,45]);
-ylim([-5,5]);
-set(p,'LineWidth',3);
-xlabel(extra.xlabel);
-ylabel(extra.ylabel);
-set(gca,'FontSize',extra.FontSize);
+set(gca,'XTicklabel',[]);
 
-% particle 2
+%% Jic dot E, line
+%%
+l1=JE.value(z0-dz:z0+dz, :);
+l1=mean(l1,1)/norm;
+
+%% figure
+ll=prm.value.lx;
+lw=2;
 axes(ha(2));
-ss=prm.read('stream',tt2);
-cr=[0, max(prt2.value.k(trange))];
-slj.Plot.stream(ss,prm.value.lx,prm.value.lz,40);
-hold on
-p=patch(prt2.value.rx(trange),prt2.value.rz(trange),[prt2.value.k(trange(1:end-1));NaN],'edgecolor','flat','facecolor','none');
-caxis(cr);
-colormap('jet');
-
-pos=get(ha(2),'Position');
-pos(2)=pos(2)+daxs;
-set(ha(2),'Position',pos);
-
-hbar=colorbar(extra.ColorbarPosition);
-pos=get(hbar,'Position');
-pos(2)=pos(2)+dh;
-set(hbar,'Position',pos);
-set(hbar,'AxisLocation','out');
-xlim([49,70]);
-ylim([-7,7]);
-set(p,'LineWidth',3);
-xlabel(extra.xlabel);
-% ylabel(extra.ylabel);
+p0=plot(ll,l1,'-r','LineWidth',lw); hold on
+plot([0,100],[0,0],'--b','LineWidth',1.5);
+xlim(extra.xrange);
+xlabel('X [c/\omega_{pi}]');
+ylabel('J_{ic}\cdot E');
 set(gca,'FontSize',extra.FontSize);
 
-%%
-norm=prm.value.mi*prm.value.vA.^2;
-trange=1:2501;
-extra=[];
-extra.FontSize=12;
-% particle 1
-prt1=prm.read(['trajh_id',id1]);
-den1=prt1.acceleration_direction(prm);
-den1.x=den1.x/norm;
-den1.y=den1.y/norm;
-den1.z=den1.z/norm;
-den1.x=smooth1d(den1.x);
-prt1=prt1.norm_energy(norm);
-prt1=prt1.norm_electric_field(prm);
-prt1=prt1.norm_velocity(prm);
-% particle 2
-prt2=prm.read(['trajh_id',id2]);
-den2=prt2.acceleration_direction(prm);
-den2.x=den2.x/norm;
-den2.y=den2.y/norm;
-den2.z=den2.z/norm;
-prt2=prt2.norm_energy(norm);
-prt2=prt2.norm_electric_field(prm);
-prt2=prt2.norm_velocity(prm);
 
-%% particle's trajectory
-% extra=[];
-% fpos=[1000,100,800,850];
-% f=figure('Position',fpos);
-% ha=slj.Plot.subplot(4,2,[0.02,0.1],[0.09,0.05],[0.09,0.1]);
+%% text box
+annotation(f,'textbox',...
+    [0.0683333333333334 0.875250001005828 0.0941666643569867 0.0462499989941716],...
+    'String',{'(a)'},...
+    'LineStyle','none',...
+    'FontSize',18,...
+    'FontName','Times New Roman');
 
-%% particle 1
-extra.xrange=[20,40];
-particle_information(ha, 1, prt1, den1, trange, extra);
-%% particle 2
-extra.xrange=[0,50];
-particle_information(ha, 2, prt2, den2, trange, extra);
+annotation(f,'textbox',...
+    [0.128333333333334 0.485250001005828 0.0958333309739829 0.0462499989941716],...
+    'String',{'(b)'},...
+    'LineStyle','none',...
+    'FontSize',18,...
+    'FontName','Times New Roman');
 
-% %% save figure
-% cd(outdir);
-% print(f,'-dpng','-r300','figure2.png');
 
 %%
-function particle_information(ha, np, prt, den, trange, extra)
-lx=prt.value.time(trange);
-% extra.xrange=[lx(1),lx(end)];
-axes(ha(np+2));
-ly.l1=prt.value.k(trange);
-ly.l2=prt.value.kx(trange);
-ly.l3=prt.value.ky(trange);
-ly.l4=prt.value.kz(trange);
-extra.LineStyle={'-', '-', '-', '-'};
-extra.LineColor={'k', 'r', 'b', 'm'};
-if np == 1
-    extra.legend={'K', 'Kx', 'Ky', 'Kz'};
-    extra.ylabel='Kic';
-    extra.Location='west';
-end
-h=slj.Plot.linen(lx, ly, extra);
-set(h,'box','off');
-set(gca,'XTicklabel',[]);
+cd(outdir);
+print(f,'-dpng','-r300','figure2.png');
+% print(f,'-depsc','-painters','figure2.eps');
+print(f,'-depsc','figure2.eps');
 
-axes(ha(np+4+2));
-ly=[];
-ly.l1=den.x(trange);
-ly.l2=den.y(trange);
-ly.l3=den.z(trange);
-% ly.l4=ly.l1+ly.l2+ly.l3;
-% ly.l5=prt.value.k(trange);
-extra.LineStyle={'-', '-', '-'};
-extra.LineColor={'r', 'b', 'g'};
-if np == 1
-    extra.legend={'\int_0^{ t}qVxEx dt', '\int_0^{ t}qVyEy dt', '\int_0^{ t}qVzEz dt'};
-    extra.ylabel='Kic';
-    extra.Location='northwest';
-end
-h=slj.Plot.linen(lx, ly, extra);
-set(h,'box','off');
-set(gca,'XTicklabel',[]);
 
-axes(ha(np+2+2));
-ly=[];
-ly.l1=prt.value.bx(trange);
-ly.l2=prt.value.by(trange);
-ly.l3=prt.value.bz(trange);
-ly.l4=sqrt(ly.l1.^2+ly.l2.^2+ly.l3.^2);
-extra.LineStyle={'-', '-', '-', '--'};
-extra.LineColor={'r', 'b', 'g', 'k'};
-if np == 1
-    extra.legend={'Bx', 'By', 'Bz', '|B|'};
-    extra.ylabel='B';
-    extra.Location='west';
-end
-h=slj.Plot.linen(lx, ly, extra);
-if np == 1
-    extra=rmfield(extra,'Location');
-    set(h,'box','off');
-end
-set(gca,'XTicklabel',[]);
-
-axes(ha(np+6+2));
-if np == 1
-    extra.ylabell='X [c/\omega_{pi}]';
-else
-    extra.ylabelr='Z [c/\omega_{pi}]';
-end
-extra.xlabel='\Omega_{ci}t';
-slj.Plot.plotyy1(lx, prt.value.rx(trange), prt.value.rz(trange), extra);
+function JE=calc_J_dot_E(prm,name,tt)
+N=prm.read(['N',name],tt);
+V=prm.read(['V',name],tt);
+E=prm.read('E',tt);
+JE=V.dot(E);
+JE=JE*N;
+JE=JE.filter2d(3);
 end
 
-function sfd=smooth1d(lfd)
-n=0;
-nt=length(lfd);
-sfd=lfd;
-for i=1:n
-    for j=2:nt-1
-        sfd(j)=sfd(j-1)*0.25+sfd(j)*0.5+sfd(j+1)*0.25;
-    end
-end
+function JE=calc_aver_J_dot_E(prm,name,tt)
+N=prm.read(['N',name],tt);
+V=prm.read(['V',name],tt);
+E=prm.read('E',tt);
+JE=V.dot(E);
+JE=JE.filter2d(5);
 end

@@ -75,4 +75,4 @@ xlabel('Z [c/\omega_{pi}]');
 ylabel('Ey');
 set(gca,'FontSize',14);
 cd(outdir);
-% print('-dpng','-r300',['Ey_cold_ion_t',num2str(tt),'_x',num2str(xz),'.png']);
+print('-dpng','-r300',['Ey_cold_ion_t',num2str(tt),'_x',num2str(xz),'.png']);

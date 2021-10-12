@@ -2,6 +2,7 @@
 clear;
 indir='E:\Asym\asym_cold_Nr2\data';
 outdir='E:\Asym\asym_cold_Nr2\out\Global';
+prm=slj.Parameters(indir,outdir);
 %% plot energy
 h1=figure;
 en=load([indir,'\energy.dat']);
@@ -14,7 +15,7 @@ plot(tt,en(:,5),'r','LineWidth',2);
 plot(tt,en(:,6),'k','LineWidth',2); hold off
 xlim([0,tt(end)]);
 legend('E','B','Electron','Ion','Cold Ion','Total Energy');
-xlabel('\omega_{ci}t');
+xlabel('\Omega_{ci}t');
 ylabel('Energy');
 set(gca,'FontSize',14);
 cd(outdir);
@@ -32,9 +33,49 @@ end
 
 plot(tt,rate,'k','LineWidth',2);
 % plot([9333,9333],[-0.02,0.18],'--r','LineWidth',1); hold off
-xlabel('\omega_{ci}t');
+xlabel('\Omega_{ci}t');
 ylabel('(E(t)-E(1))/E(1)');
 xlim([0,tt(end)]);
 set(gca,'FontSize',14);
 cd(outdir)
 print(h2, '-dpng','-r300','energy_rate.png');
+
+%% the energy change
+de=en(:,:)-en(1,:);
+h3=figure;
+plot(tt,de(:,2),'g','LineWidth',2); hold on
+plot(tt,de(:,3),'b','LineWidth',2);
+plot(tt,de(:,4),'m','LineWidth',2);
+plot(tt,de(:,5),'r','LineWidth',2); hold off
+xlim([0,tt(end)]);
+legend('B','Electron','Ion','Cold Ion','Location','Best');
+xlabel('\Omega_{ci}t');
+ylabel('dE');
+xlim([0,tt(end)]);
+set(gca,'FontSize',14);
+cd(outdir)
+print(h3, '-dpng','-r300','energy_change.png');
+
+%% the average energy change
+Ni=prm.read('Nl',0);
+Ni=sum(sum(Ni.value));
+Ne=prm.read('Ne',0);
+Ne=sum(sum(Ne.value));
+Nh=prm.read('Nh',0);
+Nh=sum(sum(Nh.value));
+aEe=de(:,3)/Ne;
+aEi=de(:,4)/Ni;
+aEh=de(:,5)/Nh;
+
+h4=figure;
+plot(tt,aEe,'k','LineWidth',2); hold on
+plot(tt,aEi,'r','LineWidth',2);
+plot(tt,aEh,'b','LineWidth',2);hold off
+xlim([0,tt(end)]);
+legend('Electron','Ion','Cold Ion','Location','Best');
+xlabel('\Omega_{ci}t');
+ylabel('dE_{aver}');
+xlim([0,tt(end)]);
+set(gca,'FontSize',14);
+cd(outdir)
+print(h4, '-dpng','-r300','average_energy_change.png');

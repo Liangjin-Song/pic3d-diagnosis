@@ -1,4 +1,4 @@
-% function figure8()
+% function figure4_2()
 %%
 % writen by Liangjin Song on 20210720
 % the 3D distribution function at the DF
@@ -24,9 +24,16 @@ extra.presion=50;
 extra.xlabel='Vic_x';
 extra.ylabel='Vic_y';
 extra.zlabel='Vic_z';
-f1=plot_3d_distribution_function(prm, name, extra);
+plot_3d_distribution_function(prm, name, extra);
+% annotation(gcf,'textbox',...
+%     [0.294642857142857 0.777571430487293 0.0937499977382167 0.0880952361793745],...
+%     'String',{'(j)'},...
+%     'LineStyle','none',...
+%     'FontSize',18,...
+%     'FontName','Times New Roman');
 cd(outdir);
-print('-dpng','-r300','figure8-2.png');
+% print('-dpng','-r300','figure4-2.png');
+% print('-depsc','figure4_2.eps');
 
 %% for ions
 name=ni;
@@ -37,7 +44,14 @@ extra.ylabel='Vih_y';
 extra.zlabel='Vih_z';
 f2=plot_3d_distribution_function(prm, name, extra);
 cd(outdir);
-print('-dpng','-r300','figure8-3.png');
+% annotation(gcf,'textbox',...
+%     [0.2 0.701380954296817 0.102678568900696 0.0880952361793745],...
+%     'String',{'(k)'},...
+%     'LineStyle','none',...
+%     'FontSize',18,...
+%     'FontName','Times New Roman');
+print('-dpng','-r300','figure4-3.png');
+print('-depsc','figure4_3.eps');
 
 %% for ions
 name=ne;
@@ -47,8 +61,15 @@ extra.xlabel='Ve_x';
 extra.ylabel='Ve_y';
 extra.zlabel='Ve_z';
 f3=plot_3d_distribution_function(prm, name, extra);
+% annotation(gcf,'textbox',...
+%     [0.239285714285714 0.718047620963483 0.0937499977382167 0.0880952361793745],...
+%     'String',{'(l)'},...
+%     'LineStyle','none',...
+%     'FontSize',18,...
+%     'FontName','Times New Roman');
 cd(outdir);
-print('-dpng','-r300','figure8-4.png');
+print('-dpng','-r300','figure4-4.png');
+print('-depsc','figure4_4.eps');
 
 function f=plot_3d_distribution_function(prm, name, extra)
 dst=prm.read(name);

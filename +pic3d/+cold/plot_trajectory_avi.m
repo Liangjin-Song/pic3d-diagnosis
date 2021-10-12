@@ -2,7 +2,7 @@
 % writen by Liangjin Song on 20210505
 clear;
 %% parameters
-id={'1479944291'};
+id={'1303130000'};
 indir='E:\PIC\Cold-Ions\mie100\data';
 outdir='E:\PIC\Cold-Ions\mie100\out\';
 prm=slj.Parameters(indir,outdir);

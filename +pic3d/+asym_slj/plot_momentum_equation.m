@@ -1,11 +1,11 @@
 % function plot_momentum_equation
 % clear;
 %% parameters
-indir='E:\Asym\asym_cold_Nr1\data';
-outdir='E:\Asym\asym_cold_Nr1\out\Global';
+indir='E:\PIC\Cold-Ions\mie100\data';
+outdir='E:\PIC\Cold-Ions\mie100\out';
 prm=slj.Parameters(indir,outdir);
 
-tt=100;
+tt=20;
 dt=1;
 name='e';
 
@@ -13,8 +13,8 @@ q=prm.value.qe;
 m=prm.value.me;
 
 norm=prm.value.vA;
-xz=50;
-dir=1;
+xz=0;
+dir=0;
 pxz=prm.value.nz/2;
 dxz=100;
 
@@ -61,7 +61,7 @@ vpt=vpt.ly;
 tot=vxb+dvp+vpv+vpt;
 
 %% figure
-ll=prm.value.lz;
+ll=prm.value.lx;
 figure;
 plot(ll,eee,'-k','LineWidth',2); hold on
 plot(ll,tot,'--k','LineWidth',2);

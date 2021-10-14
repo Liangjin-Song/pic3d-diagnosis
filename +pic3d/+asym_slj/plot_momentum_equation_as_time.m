@@ -1,16 +1,16 @@
-% function plot_Ey_as_time
+% function plot_momentum_equation_as_time
 clear;
 %% parameters
-indir='E:\Asym\NCold\data';
-outdir='E:\Asym\NCold\out\Global';
+indir='E:\Asym\NCold2\data';
+outdir='E:\Asym\NCold2\out\Momentum';
 prm=slj.Parameters(indir,outdir);
 
-tt=1:199;
+tt=1:169;
 dt=1;
-name='l';
+name='e';
 
-q=prm.value.qi;
-m=prm.value.mi;
+q=prm.value.qe;
+m=prm.value.me;
 
 norm=prm.value.vA;
 
@@ -52,6 +52,17 @@ for t=1:nt
 end
 
 rate=rate/prm.value.vA;
+rate0=rate;
+%% smooth
+
+rate(1,:)=smoothdata(rate0(1,:));
+rate(2,:)=smoothdata(rate0(2,:),'movmean',7);
+rate(3,:)=smoothdata(rate0(3,:),'movmean',7);
+rate(4,:)=smoothdata(rate0(4,:));
+rate(5,:)=smoothdata(rate0(5,:));
+
+
+
 tot=rate(2,:)+rate(3,:)+rate(4,:)+rate(5,:);
 f=figure;
 plot(tt,-rate(1,:),'-k','LineWidth',2); hold on
@@ -63,7 +74,7 @@ plot(tt,-tot,'--k','LineWidth',2); hold off
 legend('Ey', '-V\times B', '\nabla \cdot P/qn','m/qn\nabla\cdot(nVV)','m/qn \partial nV/\partial t','Sum','Location','Best');
 xlabel('\Omega_{ci}t');
 ylabel('Ey');
-set(gca,'FontSize',16);
+set(gca,'FontSize',14);
 cd(outdir);
-% print('-dpng','-r300','MR_rate_by_Ey.png');
+print('-dpng','-r300','Electron_momentum_by_Ey_as_time.png');
 

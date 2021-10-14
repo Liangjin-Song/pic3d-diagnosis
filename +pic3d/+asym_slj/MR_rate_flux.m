@@ -6,11 +6,11 @@
 clear;
 %% parameters
 % directory
-indir='E:\Asym\asym_cold_Nr2\data';
-outdir='E:\Asym\asym_cold_Nr2\out\Global';
+indir='E:\Asym\NCold2\data';
+outdir='E:\Asym\NCold2\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:200;
+tt=0:170;
 
 %% the loop
 nt=length(tt);
@@ -37,10 +37,23 @@ for t=1:nt
 end
 b0=abs(prm.value.bm-prm.value.bs)/2;
 nflux=flux*prm.value.fpi/b0;
+f1=figure;
 plot(tt,nflux,'-k','LineWidth',2);
 xlabel('\Omega_{ci}t');
 ylabel('\Psi [B_0/\omega_{pi}]');
+xlim([tt(1) tt(end)]);
 set(gca,'FontSize',16);
 cd(outdir);
-print('-dpng','-r300','magnetic_flux.png');
+print(f1,'-dpng','-r300','magnetic_flux.png');
+
+rate=flux(2:end)-flux(1:end-1);
+nrate=rate/(prm.value.vA*1/prm.value.wci);
+f2=figure;
+plot(tt(1:end-1),nrate,'-k','LineWidth',2);
+xlabel('\Omega_{ci}t');
+ylabel('E_R');
+xlim([tt(1) tt(end)]);
+set(gca,'FontSize',16);
+cd(outdir);
+print(f2,'-dpng','-r300','MR_rate_by_flux.png');
 % end

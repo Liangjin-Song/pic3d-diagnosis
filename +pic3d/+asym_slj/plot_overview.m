@@ -1,18 +1,19 @@
-function plot_overview(indir, outdir)
+% function plot_overview(indir, outdir)
 %%
 % @info: writen by Liangjin Song on 20210802
 % @brief: plot the overview for the asymmetric reconnection model with cold ions (asym_rec_slj)
 %%
-% clear;
+clear;
 %% parameters
 % input/output directory
-% indir='E:\Asym\NCold\data';
-% outdir='E:\Asym\NCold\out\Overview';
+indir='E:\Asym\NCold2\data';
+outdir='E:\Asym\NCold2\out\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:200;
+tt=0:170;
 % the variable name
-varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
+% varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
+varname={'B','E','J','Vl','Ve','Nl','Ne', 'divB', 'divE'};
 % varname={'E'};
 % figure style
 extra.Visible=false;

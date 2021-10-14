@@ -5,8 +5,8 @@
 %%
 % clear;
 %% parameters
-indir='E:\Asym\asym_cold_Nr2\data';
-outdir='E:\Asym\asym_cold_Nr2\out\Global';
+indir='E:\Asym\NCold2\data';
+outdir='E:\Asym\NCold2\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0;

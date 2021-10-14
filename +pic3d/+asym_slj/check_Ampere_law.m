@@ -5,13 +5,8 @@
 %%
 clear;
 %% parameters
-<<<<<<< Updated upstream
-indir='E:\PIC\Asym\Test';
-outdir='E:\PIC\Asym\Test';
-=======
-indir='E:\Asym\asym_cold_Nr2\data';
-outdir='E:\Asym\asym_cold_Nr2\out\Global';
->>>>>>> Stashed changes
+indir='E:\Asym\NCold2\data';
+outdir='E:\Asym\NCold2\out\Parameters';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0;

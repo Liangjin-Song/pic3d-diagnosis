@@ -1,37 +1,37 @@
 % function plot_momentum_equation
 % clear;
 %% parameters
-indir='E:\PIC\Cold-Ions\mie100\data';
-outdir='E:\PIC\Cold-Ions\mie100\out';
+indir='E:\Asym\NCold2\data';
+outdir='E:\Asym\NCold2\out\Momentum';
 prm=slj.Parameters(indir,outdir);
 
-tt=20;
+tt=100;
 dt=1;
-name='e';
+name='l';
 
-q=prm.value.qe;
-m=prm.value.me;
+q=prm.value.qi;
+m=prm.value.mi;
 
 norm=prm.value.vA;
-xz=0;
-dir=0;
+xz=50.025;
+dir=1;
 pxz=prm.value.nz/2;
 dxz=100;
 
 %% figure proterty
-xrange=[-10,10];
+xrange=[-25,25];
 
 %% momentum equation
 E=prm.read('E',tt);
 [vxB, divP, nvv, nvt] = slj.Physics.momentum_equation(prm, name, tt, dt, q, m);
 
 %% filter
-n=3;
-E=E.filter2d(n);
-vxB=vxB.filter2d(n);
-divP=divP.filter2d(n);
-nvv=nvv.filter2d(n);
-nvt=nvt.filter2d(n);
+% n=3;
+% E=E.filter2d(n);
+% vxB=vxB.filter2d(n);
+% divP=divP.filter2d(n);
+% nvv=nvv.filter2d(n);
+% nvt=nvt.filter2d(n);
 
 
 %% get the line
@@ -58,10 +58,30 @@ vpt=vpt.ly;
 % vpv=sum(vpv,2);
 % vpt=sum(vpt,2);
 
-tot=vxb+dvp+vpv+vpt;
+%% smooth data
+eee0=eee;
+vxb0=vxb;
+dvp0=dvp;
+vpv0=vpv;
+vpt0=vpt;
 
+eee=smoothdata(eee0);
+vxb=smoothdata(vxb0);
+dvp=smoothdata(dvp0,'movmean',160);
+vpv=smoothdata(vpv0,'movmean',20);
+vpt=smoothdata(vpt0,'movmean',20);
+
+% vxb=smoothdata(vxb0,'movmedian',20);
+% vxb=smoothdata(vxb,'movmean');
+% dvp=smoothdata(dvp0,'movmean',80);
+% vpv=smoothdata(vpv0,'movmean');
+% vpt=smoothdata(vpt0,'movmean');
+
+
+tot=vxb+dvp+vpv+vpt;
+% tot=smoothdata(tot);
 %% figure
-ll=prm.value.lx;
+ll=prm.value.lz;
 figure;
 plot(ll,eee,'-k','LineWidth',2); hold on
 plot(ll,tot,'--k','LineWidth',2);
@@ -73,6 +93,6 @@ xlim(xrange);
 legend('E','Sum','-V\times B','\nabla \cdot P/qn','m/qn\nabla\cdot(nVV)','m/qn \partial nV/\partial t','Location','Best')
 xlabel('Z [c/\omega_{pi}]');
 ylabel('Ey');
-set(gca,'FontSize',14);
+set(gca,'FontSize',12);
 cd(outdir);
-print('-dpng','-r300',['Ey_cold_ion_t',num2str(tt),'_x',num2str(xz),'.png']);
+print('-dpng','-r300',['Ey_ion_t',num2str(tt),'_x',num2str(xz),'.png']);

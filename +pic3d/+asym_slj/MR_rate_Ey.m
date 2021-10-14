@@ -6,14 +6,14 @@
 clear;
 %% parameters
 % directory
-indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Global';
+indir='E:\Asym\NCold2\data';
+outdir='E:\Asym\NCold2\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:200;
+tt=0:170;
 % the box size
-nx=0;
-nz=0;
+nx=4;
+nz=4;
 
 %% the loop
 nt=length(tt);
@@ -46,6 +46,7 @@ f=figure;
 plot(tt,-rate,'-k','LineWidth',2);
 xlabel('\Omega_{ci}t');
 ylabel('Ey');
+xlim([tt(1) tt(end)]);
 set(gca,'FontSize',16);
 cd(outdir);
 print('-dpng','-r300','MR_rate_by_Ey.png');

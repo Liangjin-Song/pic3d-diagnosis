@@ -6,16 +6,16 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\PIC\Turbulence\data';
-outdir='E:\PIC\Turbulence\out';
+indir='E:\PIC\Turbulence\test';
+outdir='E:\PIC\Turbulence\test';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:170;
+tt=0;
 % the variable name
 varname={'B','E','J','Vi','Ve','Ni','Ne','divB','divE'};
 % varname={'J'};
 % figure style
-extra.Visible=false;
+extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
 extra.yrange=[prm.value.lz(1), prm.value.lz(end)];
 % extra.xrange=[60,90];

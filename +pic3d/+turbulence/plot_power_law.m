@@ -2,11 +2,11 @@
 %%
 clear;
 %%
-indir='E:\PIC\Turbulence\data';
-outdir='E:\PIC\Turbulence\out\power';
+indir='E:\PIC\Turbulence\test';
+outdir='E:\PIC\Turbulence\test';
 prm=slj.Parameters(indir,outdir);
 
-tt=150;
+tt=0;
 name='B';
 norm=1;
 

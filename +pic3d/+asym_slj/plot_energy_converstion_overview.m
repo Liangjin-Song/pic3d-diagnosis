@@ -1,4 +1,4 @@
-% function plot_energy_converstion
+% function plot_energy_converstion_overview
 clear;
 %% parameters
 indir='E:\Asym\NCold\data';

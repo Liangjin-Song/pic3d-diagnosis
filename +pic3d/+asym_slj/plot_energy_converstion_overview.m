@@ -5,7 +5,7 @@ indir='E:\Asym\NCold\data';
 outdir='E:\Asym\NCold\out\Energy_Conversion';
 prm=slj.Parameters(indir,outdir);
 
-tt=0:200;
+tt=100;
 name='l';
 
 nt=length(tt);

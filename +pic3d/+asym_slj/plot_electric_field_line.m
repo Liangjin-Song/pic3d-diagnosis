@@ -5,7 +5,7 @@ indir='E:\Asym\Cold\data';
 outdir='E:\Asym\Cold\out\Analysis\Ion';
 prm=slj.Parameters(indir,outdir);
 
-tt=96;
+tt=100;
 
 xz=50;
 dir=1;
@@ -53,9 +53,8 @@ for t=1:nt
 
     %% save figure
     cd(outdir);
-    print('-dpng','-r300',['E_t',num2str(tt(t)),'.png']);
+    print('-dpng','-r300',['E_t',num2str(tt(t)),'_line.png']);
 %     close(gcf);
 end
-
 
 % end

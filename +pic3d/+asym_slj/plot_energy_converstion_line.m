@@ -84,6 +84,6 @@ for t=1:nt
 
     %% save figure
     cd(outdir);
-    print('-dpng','-r300',['J',sfx,'_dot_E_t',num2str(tt(t)),'.png']);
+    print('-dpng','-r300',['J',sfx,'_dot_E_t',num2str(tt(t)),'_line.png']);
 %     close(gcf);
 end

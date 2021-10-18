@@ -2,13 +2,13 @@
 clear;
 %% parameters
 indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Analysis\Ion';
+outdir='E:\Asym\Cold\out\Analysis\Electron';
 prm=slj.Parameters(indir,outdir);
 
 tt=100;
-name='l';
+name='e';
 
-xz=50;
+xz=49;
 dir=1;
 
 nt=length(tt);

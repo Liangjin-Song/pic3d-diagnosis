@@ -1,23 +1,21 @@
-%% function plot_plasma_current_line
+%% function plot_J_E_B_line
 clear;
 %% parameters
-indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Analysis\Electron';
+indir='E:\Asym\NCold\data';
+outdir='E:\Asym\Cold\out\Analysis\Ion';
 prm=slj.Parameters(indir,outdir);
 
 tt=100;
-name='e';
+name='l';
 
-xz=49;
+xz=50;
 dir=1;
 
 nt=length(tt);
 
-extra=[];
-extra.xlabel='X [c/\omega_{pi}]';
-extra.ylabel='Z [c/\omega_{pi}]';
-
-norm=prm.value.n0*prm.value.vA;
+normE=prm.value.vA;
+normJ=prm.value.n0*prm.value.vA;
+normB=1;
 
 xrange=[-5,5];
 
@@ -41,44 +39,56 @@ else
     error('Parameters Error!');
 end
 
-
 for t=1:nt
     %% read data
+    E=prm.read('E',tt(t));
+    B=prm.read('B',tt(t));
     V=prm.read(['V',name],tt(t));
     N=prm.read(['N',name],tt(t));
+
     %% calculation
+    % current
     Jx=slj.Scalar(N.value.*V.x);
     Jy=slj.Scalar(N.value.*V.y);
     Jz=slj.Scalar(N.value.*V.z);
-    if strcmp(name, 'e')
+    
+    if name == 'e'
         Jx=slj.Scalar(-Jx.value);
         Jy=slj.Scalar(-Jy.value);
         Jz=slj.Scalar(-Jz.value);
     end
-    
+    % energy conversion
+    JEx=slj.Scalar(Jx.value.*E.x);
+    JEy=slj.Scalar(Jy.value.*E.y);
+    JEz=slj.Scalar(Jz.value.*E.z);
 
     %% get line
-    ljx=Jx.get_line2d(xz,dir,prm,norm);
-    ljy=Jy.get_line2d(xz,dir,prm,norm);
-    ljz=Jz.get_line2d(xz,dir,prm,norm);
+    lj=Jz.get_line2d(xz,dir,prm,normJ);
+    le=E.get_line2d(xz,dir,prm,normE);
+    le=le.lz;
+    lb=B.get_line2d(xz,dir,prm,normB);
+    lb=lb.lx;
+    lje=JEz.get_line2d(xz,dir,prm,normJ*normE);
+
 
     %% plot figure
-    plot(ll, ljx, 'r', 'LineWidth', 2); hold on
-    plot(ll, ljy, 'b', 'LineWidth', 2);
-    plot(ll, ljz, 'm', 'LineWidth', 2); hold off
+    plot(ll, lj*10, '-r', 'LineWidth', 2); hold on
+    plot(ll, le, '-b', 'LineWidth', 2);
+    plot(ll, lb, '-m', 'LineWidth', 2);
+    plot(ll, lje*10, '-k', 'LineWidth', 2); hold off
+
 
     %% set figure
     xlim(xrange);
-    legend(['J',sfx,'x'], ['J',sfx,'y'], ['J',sfx,'z'], 'Location', 'Best');
+    legend(['J',sfx,'z*10'], 'Ez', 'Bx',['J',sfx,'zEz*10'], 'Location', 'Best');
     xlabel('Z [c/\omega_{pi}]');
-    ylabel(['J',sfx]);
     title(['profiles  ', pstr,' = ',num2str(xz)]);
     set(gca,'FontSize',14);
 
     %% save figure
     cd(outdir);
-    % print('-dpng','-r300',['J',sfx,'_t',num2str(tt(t)),'_line.png']);
-%     close(gcf);
+    print('-dpng','-r300',['J',sfx,'_E_B_t',num2str(tt(t)),'_line.png']);
+    % close(gcf);
 end
 
 

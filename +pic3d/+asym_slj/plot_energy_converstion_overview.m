@@ -2,11 +2,11 @@
 clear;
 %% parameters
 indir='E:\Asym\NCold\data';
-outdir='E:\Asym\NCold\out\Energy_Conversion';
+outdir='E:\Asym\Cold\out\Analysis\Electron';
 prm=slj.Parameters(indir,outdir);
 
 tt=100;
-name='l';
+name='e';
 
 nt=length(tt);
 
@@ -25,8 +25,8 @@ for t=1:nt
     %% calculation
     JE=E.dot(V);
     JE=JE*N;
-    slj.Plot.overview(JE.value, ss, prm.value.lx, prm.value.lz, norm, extra);
+    slj.Plot.overview(-JE.value, ss, prm.value.lx, prm.value.lz, norm, extra);
     cd(outdir);
-    print('-dpng','-r300',['Ji_dot_E_t',num2str(tt(t)),'.png']);
+    print('-dpng','-r300',['Je_dot_E_t',num2str(tt(t)),'.png']);
     close(gcf);
 end

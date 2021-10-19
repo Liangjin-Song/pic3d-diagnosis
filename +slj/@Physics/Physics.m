@@ -36,10 +36,14 @@ methods (Access = public, Static)
 end
 
 %% ======================================================================== %%
-%% some equation
+%% energy conversion equation
 methods (Access = public, Static)
+    %% bulk kinetic energy conversion
     K = kinetic_energy(m, N, V);
     [pKt, divKV, qVE, divPV] = kinetic_energy_conversion(prm, name, tt, dt, q, m);
+    %% thermal energy conversion
+    U = thermal_energy(P);
+    [pUt, divPV, divQ, divH] = thermal_energy_conversion(prm, name, tt, dt);
 end
 
 

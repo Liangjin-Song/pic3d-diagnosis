@@ -12,7 +12,7 @@ function [pKt, divKV, qVE, divPV] = kinetic_energy_conversion(prm, name, tt, dt,
 % @return: divKV - - nabla dot (KV)
 % @return: qVE - qnV dot E
 % @return: divPV - -(nabla dot P) dot V
-% the kinetic energy conversion equation is
+% the bulk kinetic energy conversion equation is
 %       \frac{\partial K}{\partial t} = - \nabla \cdot (K \vec{v}) + qn\vec{v} \cdot \vec{E} - (\nabla \cdot \vec{\vec{P}}) \cdot \vec{v}
 %%
 

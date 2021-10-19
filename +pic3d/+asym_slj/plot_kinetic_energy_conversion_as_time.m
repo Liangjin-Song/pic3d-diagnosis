@@ -2,12 +2,12 @@
 clear;
 %% parameters
 indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Analysis\Electron';
+outdir='E:\Asym\Cold\out\Analysis\Ion';
 prm=slj.Parameters(indir,outdir);
 
 tt=1:199;
 dt=1;
-name='e';
+name='l';
 
 xrange=[tt(1)-1,tt(end)+1];
 
@@ -92,7 +92,7 @@ set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-% print('-dpng','-r300',['J',sfx,'_E_B_t',num2str(tt(t)),'_line.png']);
+print('-dpng','-r300',[sfx,'_bulk_kinetic_conversion_as_time.png']);
 % close(gcf);
 
 

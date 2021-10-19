@@ -35,6 +35,13 @@ methods (Access = public, Static)
     [vxB, divP, nvv, nvt] = momentum_equation(prm, name, tt, dt, q, m);
 end
 
+%% ======================================================================== %%
+%% some equation
+methods (Access = public, Static)
+    K = kinetic_energy(m, N, V);
+    [pKt, divKV, qVE, divPV] = kinetic_energy_conversion(prm, name, tt, dt, q, m);
+end
+
 
 %% ======================================================================== %%
 end

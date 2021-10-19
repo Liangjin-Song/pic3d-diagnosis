@@ -1,7 +1,5 @@
 # pic3d-diagnosis
 
-
-
 ## Introduction
 
 Diagnosis of pic3d simulation code. Using matlab for diagnosis. Before using this code, you must have the data obtained by the particle-in-cell simulation code which is developed by the author.
@@ -10,8 +8,6 @@ Diagnosis of pic3d simulation code. Using matlab for diagnosis. Before using thi
 + `pic3d`: the package including some diagnosis for the specific model.
 + `articles`: Drawings for published articles
 + `others`: Previous code or code from elsewhere.
-
-
 
 ## Basic usage
 
@@ -22,11 +18,8 @@ Diagnosis of pic3d simulation code. Using matlab for diagnosis. Before using thi
   outdir='E:\PIC\Cold-Ions\mie100\out';
   prm=slj.Parameters(indir, outdir);
   ```
-
 + read the field data, such the magnetic field when $t=0$
 
   ```matlab
   b=prm.read('B', 0);
   ```
-
-  

@@ -44,6 +44,9 @@ methods (Access = public, Static)
     %% thermal energy conversion
     U = thermal_energy(P);
     [pUt, divPV, divQ, divH] = thermal_energy_conversion(prm, name, tt, dt);
+    %% temperature
+    T = temperature(P, N);
+    [pTt, divQ, PddivV, pdivV, VdivT] = energy_density_conversion(prm, name, tt, dt);
 end
 
 

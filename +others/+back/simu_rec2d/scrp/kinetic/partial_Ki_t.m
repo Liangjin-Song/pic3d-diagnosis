@@ -2,12 +2,12 @@
 % writen by Liangjin Song on 20190519 
 %
 clear;
-indir='/data/simulation/rec2d_M25SBg00Sx/data/';
-outdir='/data/simulation/rec2d_M25SBg00Sx/out/line/kinetic/time/';
-tt=50:97;
+indir='E:\Asym\Cold\data';
+outdir='E:\Asym\Cold\out\Analysis\Ion';
+tt=100;
 di=20;
-ndx=4000;
-ndy=2000;
+ndx=2000;
+ndy=1000;
 Lx=ndx/di;
 Ly=ndy/di;
 mi=0.035000;

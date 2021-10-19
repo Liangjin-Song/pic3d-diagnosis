@@ -1,7 +1,7 @@
 %% function plot_J_E_B_line
 clear;
 %% parameters
-indir='E:\Asym\NCold\data';
+indir='E:\Asym\Cold\data';
 outdir='E:\Asym\Cold\out\Analysis\Ion';
 prm=slj.Parameters(indir,outdir);
 

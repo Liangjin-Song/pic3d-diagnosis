@@ -33,7 +33,7 @@ switch name
     case {'Ne', 'Nl', 'Nh', 'Nhe', 'Ni', 'stream', 'divE', 'divB', 'Nshi', 'Nshe', 'Nspi', 'Nspe', 'Nsph', 'Nsphe'}
         fd = reshape_scalar(fd, nx, ny, nz);
         fd = slj.Scalar(fd);
-    case {'B', 'E', 'J', 'Vi', 'Ve', 'Vl', 'Vh', 'Vhe', 'Vshi', 'Vshe', 'Vspi', 'Vspe', 'Vsph', 'Vsphe'}
+    case {'B', 'E', 'J', 'Vi', 'Ve', 'Vl', 'Vh', 'Vhe', 'Vshi', 'Vshe', 'Vspi', 'Vspe', 'Vsph', 'Vsphe', 'qfluxe', 'qfluxi', 'qfluxl', 'qfluxh'}
         fd = reshape_vector(fd, nx, ny, nz, reset);
         fd = slj.Vector(fd);
     case {'Pi', 'Pe', 'Pl', 'Ph', 'Phe', 'Pshi', 'Pshe', 'Pspi', 'Pspe', 'Psph', 'Psphe'}

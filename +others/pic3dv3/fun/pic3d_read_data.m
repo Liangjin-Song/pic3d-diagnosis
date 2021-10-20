@@ -30,7 +30,8 @@ elseif nargin == 5
     if strcmp(name,'Ni') || strcmp(name,'Ne') || strcmp(name,'stream') || strcmp(name,'divB') || strcmp(name,'divJ') || strcmp(name,'divE') || strcmp(name,'Nl') || strcmp(name,'Nh') || strcmp(name,'Nhe') || strcmp(name,'Nshi') || strcmp(name,'Nshe') || strcmp(name,'Nspi') || strcmp(name,'Nspe') || strcmp(name,'Nsph') || strcmp(name,'Nsphe')
         data=field(name,time);
         data=scalar(data,nx,ny,nz);
-    elseif strcmp(name,'B') || strcmp(name,'E') || strcmp(name,'J') || strcmp(name,'Vi') || strcmp(name,'Ve') || strcmp(name,'Vh') || strcmp(name,'Vhe') || strcmp(name,'Vl') || strcmp(name,'Amp') || strcmp(name,'qfluxi') || strcmp(name,'qfluxe') || strcmp(name,'qfluxh') || strcmp(name,'qfluxhe') || strcmp(name,'Vshi') || strcmp(name,'Vshe') || strcmp(name,'Vspi') || strcmp(name,'Vspe') || strcmp(name,'Vsph') || strcmp(name,'Vsphe')      
+    elseif strcmp(name,'B') || strcmp(name,'E') || strcmp(name,'J') || strcmp(name,'Vi') || strcmp(name,'Ve') || strcmp(name,'Vh') || strcmp(name,'Vhe') || strcmp(name,'Vl') || strcmp(name,'Amp') || strcmp(name,'qfluxi') || strcmp(name,'qfluxe') || strcmp(name,'qfluxh') || strcmp(name,'qfluxhe') || strcmp(name,'Vshi') || strcmp(name,'Vshe') || strcmp(name,'Vspi') || strcmp(name,'Vspe') || strcmp(name,'Vsph') || strcmp(name,'Vsphe') ...
+             || strcmp(name,'qfluxi') || strcmp(name,'qfluxe') || strcmp(name,'qfluxl') || strcmp(name,'qfluxh')
         data=field(name,time);
         data=vector(data,nx,ny,nz);
     elseif strcmp(name,'Pi') || strcmp(name,'Pe') || strcmp(name,'Pl') || strcmp(name,'Ph') || strcmp(name,'Phe')

@@ -1,20 +1,20 @@
-indir='E:\PIC\Cold-Ions\data';
-outdir='E:\PIC\Cold-Ions\benchmark';
-nx=1200;
-ny=800;
+indir='E:\Asym\Cold\data';
+outdir='E:\Asym\Cold\out\Analysis\Electron';
+nx=2000;
+ny=1000;
 nz=1;
 di=20;
 
-mi=0.499998;
-me=0.02;
+mi=4.493999;
+me=0.179760;
 n0=800.003418;
 
 vthi=0.016137;
 vthic=0.001614;
 vthe=0.036084;
 
-norm=0.5*n0*mi*vthi*vthi;
-
+% norm=0.5*n0*mi*vthi*vthi;
+norm =1;
 Lx=nx/di;
 Ly=ny/di;
 

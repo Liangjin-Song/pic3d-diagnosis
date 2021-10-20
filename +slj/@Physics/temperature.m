@@ -7,6 +7,6 @@ function T = temperature(P, N)
 % @param: N - the plasma density
 % @return: T - the temperature
 %%
-T = P.xx + P.yy + P.zz;
+T = (P.xx + P.yy + P.zz)/3;
 T = slj.Scalar(T./N.value);
 end

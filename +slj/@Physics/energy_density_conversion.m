@@ -28,4 +28,47 @@ divQ = divQ.divergence(prm);
 divQ = slj.Scalar(-2.*divQ.value./(N.value.*3));
 
 %% -\frac{2}{3}\frac{1}{n}(\vec{\vec{P}}' \cdot \nabla) \cdot \vec{v}
+P=prm.read(['P', name], tt);
+p=(P.xx+P.yy+P.zz)/3;
+pdxx=P.xx-p;
+pdxy=P.xy;
+pdxz=P.xz;
+pdyy=P.yy-p;
+pdyz=P.yz;
+pdzz=P.zz-p;
+
+% calculate (P' dot gradient) dot v
+V=prm.read(['V', name], tt);
+VV=slj.Scalar(V.x);
+g=VV.gradient(prm);
+px=g.x.*pdxx+g.y.*pdxy+g.z.*pdxz;
+VV=slj.Scalar(V.y);
+g=VV.gradient(prm);
+py=g.x.*pdxy+g.y.*pdyy+g.z.*pdyz;
+VV=slj.Scalar(V.z);
+g=VV.gradient(prm);
+pz=g.x.*pdxz+g.y.*pdyz+g.z.*pdzz;
+
+px=px./N.value;
+px=-2*px/3;
+
+py=py./N.value;
+py=-2*py/3;
+
+pz=pz./N.value;
+pz=-2*pz/3;
+
+PddivV=slj.Scalar(px+py+pz);
+
+%% -\frac{2}{3}\frac{1}{n}p\nabla \cdot \vec{v}
+VV=V.divergence(prm);
+p=(P.xx+P.yy+P.zz)/3;
+pdivV=VV.value.*p./N.value;
+pdivV=slj.Scalar(-2*pdivV/3);
+
+%% -\vec{v}\cdot\nabla T
+T = slj.Physics.temperature(P, N);
+g=T.gradient(prm);
+VdivT=V.x.*g.x+V.y.*g.y+V.z.*g.z;
+VdivT=slj.Scalar(-VdivT);
 end

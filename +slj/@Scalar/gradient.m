@@ -6,23 +6,27 @@ function fd = gradient(obj, prm)
 % @param: prm - the Parameters
 % @return: fd - fd = nabla obj, and it is a Vector object
 %%
-fd.x=obj.value;
-fd.y=obj.value;
-fd.z=obj.value;
 if prm.value.dimension == 2
     % the plane is in the x-z plane
-    fd.x(1:end-1,1:end-1)=obj.value(1:end-1,2:end)-obj.value(1:end-1,1:end-1);
-    fd.y(:,:)=0;
-    fd.z(1:end-1,1:end-1)=obj.value(2:end,1:end-1)-obj.value(1:end-1,1:end-1);
+    nx=size(obj.value,2);
+    nz=size(obj.value,1);
+    fd.x=zeros(nz,nx);
+    fd.y=zeros(nz,nx);
+    fd.z=zeros(nz,nx);
+    for k=1:nz-1
+        for i=1:nx-1
+            fd.x(k,i)=obj.value(k,i+1)-obj.value(k,i);
+            fd.z(k,i)=obj.value(k+1,i)-obj.value(k,i);
+        end
+    end
     % boundary
-    fd.x(end,:)=fd.x(end-1,:);
-    fd.y(end,:)=fd.y(end-1,:);
-    fd.z(end,:)=fd.z(end-1,:);
-    fd.x(:,end)=fd.x(:,end-1);
-    fd.y(:,end)=fd.y(:,end-1);
-    fd.z(:,end)=fd.z(:,end-1);
-    fd=slj.Vector(fd);
+    fd.x(:,nx)=fd.x(:,1);
+    fd.z(:,nx)=fd.z(:,1);
+    fd.x(nz,:)=fd.x(nz-1,:);
+    fd.z(nz,:)=fd.z(nz-1,:);
 else
     error('Parameters error!');
 end
+
+fd=slj.Vector(fd);
 end

@@ -2,7 +2,7 @@
 clear;
 %% parameters
 indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Analysis\Cold_Ion';
+outdir='E:\Asym\Cold\out\Analysis\Ion';
 prm=slj.Parameters(indir,outdir);
 
 tt=1:199;
@@ -43,7 +43,7 @@ for t=1:nt
     B=prm.read('B',tt(t));
 
     %% calculation
-    [pTt, divQ, PddivV, pdivV, VdivT] = slj.Physics.energy_density_conversion(prm, name, tt, dt);
+    [pTt, divQ, PddivV, pdivV, VdivT] = slj.Physics.energy_density_conversion(prm, name, tt(t), dt);
 
     %% the current sheet index in z-direction
     [~,inz]=min(abs(B.x));

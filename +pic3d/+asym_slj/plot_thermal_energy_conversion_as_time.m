@@ -2,12 +2,12 @@
 clear;
 %% parameters
 indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Analysis\Ion';
+outdir='E:\Asym\Cold\out\Analysis\Cold_Ion';
 prm=slj.Parameters(indir,outdir);
 
 tt=1:199;
 dt=1;
-name='e';
+name='h';
 
 xrange=[tt(1)-1,tt(end)+1];
 
@@ -93,7 +93,7 @@ set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-% print('-dpng','-r300',[sfx,'_thermal_energy_conversion_as_time.png']);
+print('-dpng','-r300',[sfx,'_thermal_energy_conversion_as_time.png']);
 % close(gcf);
 
 

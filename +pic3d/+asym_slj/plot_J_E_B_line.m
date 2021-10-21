@@ -2,13 +2,13 @@
 clear;
 %% parameters
 indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Analysis\Ion';
+outdir='E:\Asym\Cold\out\Analysis\Electron';
 prm=slj.Parameters(indir,outdir);
 
 tt=100;
-name='l';
+name='h';
 
-xz=50;
+xz=51;
 dir=1;
 
 nt=length(tt);
@@ -65,22 +65,21 @@ for t=1:nt
     %% get line
     lj=Jz.get_line2d(xz,dir,prm,normJ);
     le=E.get_line2d(xz,dir,prm,normE);
-    le=le.lz;
     lb=B.get_line2d(xz,dir,prm,normB);
-    lb=lb.lx;
     lje=JEz.get_line2d(xz,dir,prm,normJ*normE);
 
 
     %% plot figure
     plot(ll, lj*10, '-r', 'LineWidth', 2); hold on
-    plot(ll, le, '-b', 'LineWidth', 2);
-    plot(ll, lb, '-m', 'LineWidth', 2);
+    plot(ll, le.lz, '-b', 'LineWidth', 2);
+    plot(ll, le.ly, '-g', 'LineWidth', 2);
+    plot(ll, lb.lx, '-m', 'LineWidth', 2);
     plot(ll, lje*10, '-k', 'LineWidth', 2); hold off
 
 
     %% set figure
     xlim(xrange);
-    legend(['J',sfx,'z*10'], 'Ez', 'Bx',['J',sfx,'zEz*10'], 'Location', 'Best');
+    legend(['J',sfx,'z*10'], 'Ez', 'Ey', 'Bx',['J',sfx,'zEz*10'], 'Location', 'Best');
     xlabel('Z [c/\omega_{pi}]');
     title(['profiles  ', pstr,' = ',num2str(xz)]);
     set(gca,'FontSize',14);

@@ -8,7 +8,7 @@ prm=slj.Parameters(indir,outdir);
 tt=100;
 name='e';
 
-xz=49;
+xz=51;
 dir=1;
 
 nt=length(tt);

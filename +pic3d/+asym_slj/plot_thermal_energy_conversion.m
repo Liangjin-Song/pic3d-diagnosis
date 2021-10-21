@@ -2,14 +2,14 @@
 clear;
 %% parameters
 indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Analysis\Electron';
+outdir='E:\Asym\Cold\out\Analysis\Ion';
 prm=slj.Parameters(indir,outdir);
 
 tt=100;
 dt=1;
-name='l';
+name='h';
 
-xz=50;
+xz=10;
 dir=1;
 
 nt=length(tt);
@@ -83,7 +83,7 @@ set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-% print('-dpng','-r300',['J',sfx,'_E_B_t',num2str(tt(t)),'_line.png']);
+print('-dpng','-r300',[sfx,'_thermal_energy_t',num2str(tt),'_line_', pstr,' = ',num2str(xz),'.png']);
 % close(gcf);
 
 

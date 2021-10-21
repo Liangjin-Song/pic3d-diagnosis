@@ -5,7 +5,7 @@ indir='E:\Asym\Cold\data';
 outdir='E:\Asym\Cold\out\Overview';
 prm=slj.Parameters(indir,outdir);
 
-tt=0:200;
+tt=10;
 name='h';
 
 nt=length(tt);
@@ -34,7 +34,7 @@ for t=1:nt
     N=prm.read(['N',name],tt(t));
     ss=prm.read('stream',tt(t));
     %% calculation
-    T=slj.Scalar((P.xx+P.yy+P.zz)./N.value);
+    T=slj.Scalar((P.xx+P.yy+P.zz)./(N.value.*3));
 
     %% figure
     slj.Plot.overview(T, ss, prm.value.lx, prm.value.lz, norm, extra);

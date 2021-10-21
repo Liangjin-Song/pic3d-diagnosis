@@ -1,7 +1,7 @@
 % function plot_energy_converstion_overview
 clear;
 %% parameters
-indir='E:\Asym\NCold\data';
+indir='E:\Asym\Cold\data';
 outdir='E:\Asym\Cold\out\Analysis\Electron';
 prm=slj.Parameters(indir,outdir);
 

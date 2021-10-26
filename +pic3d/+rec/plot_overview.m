@@ -6,14 +6,14 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\KH\data';
-outdir='E:\KH\out\Overview';
+indir='E:\PIC\Test';
+outdir='E:\PIC\Test';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0:0.2:100;
 % the variable name
-varname={'B','E','J','Vi','Ve','Ni','Ne'};
-% varname={'J'};
+% varname={'B','E','J','Vi','Ve','Ni','Ne'};
+varname={'divB'};
 % figure style
 extra.Visible=false;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
@@ -110,6 +110,13 @@ for t=1:nt
                 fig.overview(fd.z, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title([name,'_z   \Omega_{ci}t=',num2str(tt(t))]);
                 fig.png(prm, [name,'z_t',num2str(tt(t),'%06.2f')]);
+                fig.close();
+            case {'divB', 'divE'}
+                norm=1;
+                fig=slj.Plot(extra);
+                fig.overview(fd, ss, prm.value.lx, prm.value.lz, norm, extra);
+                title([name,'   \Omega_{ci}t=',num2str(tt(t))]);
+                fig.png(prm, [name,'_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
         end
     end

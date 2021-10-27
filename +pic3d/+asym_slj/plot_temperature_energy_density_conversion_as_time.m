@@ -1,18 +1,18 @@
-% function plot_kinetic_energy_conversion_as_time
+% function plot_temperature_energy_density_conversion_as_time
 clear;
 %% parameters
-indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Analysis\Cold_Ion';
+indir='E:\Asym\Cold2\data';
+outdir='E:\Asym\Cold2\out\Global';
 prm=slj.Parameters(indir,outdir);
 
-tt=1:199;
+tt=1:50;
 dt=1;
 name='h';
 
 xrange=[tt(1)-1,tt(end)+1];
 
 % the box and box size
-nx=10;
+nx=20;
 nz=10;
 
 if name == 'l'

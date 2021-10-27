@@ -1,11 +1,11 @@
-% function plot_thermal_energy(name)
+% function plot_thermal_energy_overview(name)
 clear;
 %%
-indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Overview';
+indir='E:\Asym\Cold2\data';
+outdir='E:\Asym\Cold2\out\Energy\Thermal';
 prm=slj.Parameters(indir,outdir);
 
-tt=0:200;
+tt=0:70;
 name='h';
 
 nt=length(tt);

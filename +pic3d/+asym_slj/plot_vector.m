@@ -1,12 +1,12 @@
 % function plot_vector
 clear;
 %% parameters
-indir='E:\Asym\NCold\data';
-outdir='E:\Asym\NCold\out\Vector';
+indir='E:\Asym\Cold2\data';
+outdir='E:\Asym\Cold2\out\Vector';
 prm=slj.Parameters(indir,outdir);
 
-tt=105;
-name='e';
+tt=30;
+name='h';
 
 nt=length(tt);
 
@@ -23,7 +23,7 @@ for t=1:nt
     slj.Plot.overview(B.y, ss, prm.value.lx, prm.value.lz, norm, extra);
     hold on
     slj.Plot.plot_vector(V.x,V.z,prm.value.Lx,prm.value.Lz,50,4,'r');
-    title(['\Omega_{ci}t=',num2str(tt)]);
+    title(['By, Vic, \Omega_{ci}t=',num2str(tt)]);
     cd(outdir);
-    print('-dpng','-r300',['Vector_electron_t',num2str(tt(t)),'_By.png']);
+    print('-dpng','-r300',['Vector_cold_ions_t',num2str(tt(t)),'_By.png']);
 end

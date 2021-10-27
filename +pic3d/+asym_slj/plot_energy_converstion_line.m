@@ -1,14 +1,14 @@
 % function plot_energy_converstion_line
 clear;
 %% parameters
-indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Analysis\Electron';
+indir='E:\Asym\Cold2\data';
+outdir='E:\Asym\Cold2\out\Energy\Line';
 prm=slj.Parameters(indir,outdir);
 
-tt=100;
-name='e';
+tt=22;
+name='h';
 
-xz=51;
+xz=30;
 dir=1;
 
 nt=length(tt);
@@ -79,11 +79,11 @@ for t=1:nt
     legend(['J',sfx,' \cdot E'], ['J',sfx,'xEx'], ['J',sfx,'yEy'], ['J',sfx,'zEz'], 'Location', 'Best');
     xlabel('Z [c/\omega_{pi}]');
     ylabel(['J',sfx,'\cdot E']);
-    title(['profiles  ', pstr,' = ',num2str(xz)]);
+    title(['\Omega_{ci}t = ',num2str(tt(t)),', profiles  ', pstr,' = ',num2str(xz)]);
     set(gca,'FontSize',14);
 
     %% save figure
     cd(outdir);
-    print('-dpng','-r300',['J',sfx,'_dot_E_t',num2str(tt(t)),'_line.png']);
+    print('-dpng','-r300',['J',sfx,'_dot_E_t',num2str(tt(t)),'_', pstr,' = ',num2str(xz),'.png']);
 %     close(gcf);
 end

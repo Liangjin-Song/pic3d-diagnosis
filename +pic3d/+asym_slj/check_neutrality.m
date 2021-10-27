@@ -5,8 +5,8 @@
 %%
 % clear;
 %% parameters
-indir='E:\Asym\NCold2\data';
-outdir='E:\Asym\NCold2\out\Global';
+indir='E:\Asym\Cold2\data';
+outdir='E:\Asym\Cold2\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0;
@@ -32,9 +32,10 @@ l.tot=l.nl+l.nh;
 %% plot figure
 extra.legend={'Ni','Nic','Ne','Ni+Nic'};
 extra.LineStyle={'--','-.','-','--'};
-extra.LineColor={'r','g','b','k'};
+extra.LineColor={'r','b','g','k'};
 extra.ylabel='N';
 extra.xlabel='Z [c/\omega_{pi}]';
+extra.LineWidth=2;
 f=slj.Plot;
 f.linen(prm.value.lz,l,extra);
 f.png(prm,['N_x=',num2str(z0),'_t',num2str(tt,'%06.2f')]);

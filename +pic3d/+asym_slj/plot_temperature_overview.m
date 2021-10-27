@@ -1,11 +1,11 @@
-% function plot_temperature(name)
+% function plot_temperature_overview(name)
 clear;
 %% 
-indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Overview';
+indir='E:\Asym\Cold2\data';
+outdir='E:\Asym\Cold2\out\Energy\Temperature';
 prm=slj.Parameters(indir,outdir);
 
-tt=10;
+tt=30;
 name='h';
 
 nt=length(tt);
@@ -40,8 +40,8 @@ for t=1:nt
     slj.Plot.overview(T, ss, prm.value.lx, prm.value.lz, norm, extra);
     title(['T',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
     cd(outdir);
-    print('-dpng','-r300',['T',sfx,'_t',num2str(tt(t)),'.png']);
-    close(gcf);
+    % print('-dpng','-r300',['T',sfx,'_t',num2str(tt(t)),'.png']);
+    % close(gcf);
 end
 
 

@@ -6,11 +6,11 @@
 clear;
 %% parameters
 % directory
-indir='E:\Asym\NCold2\data';
-outdir='E:\Asym\NCold2\out\Global';
+indir='E:\Asym\asym_cold_Nr1\data';
+outdir='E:\Asym\asym_cold_Nr1\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:170;
+tt=0:151;
 
 %% the loop
 nt=length(tt);
@@ -52,7 +52,7 @@ f2=figure;
 plot(tt(1:end-1),nrate,'-k','LineWidth',2);
 xlabel('\Omega_{ci}t');
 ylabel('E_R');
-xlim([tt(1) tt(end)]);
+xlim([tt(1) tt(end)-1]);
 set(gca,'FontSize',16);
 cd(outdir);
 print(f2,'-dpng','-r300','MR_rate_by_flux.png');

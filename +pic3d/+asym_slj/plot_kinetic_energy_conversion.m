@@ -1,13 +1,13 @@
 % function plot_kinetic_energy_conversion
 clear;
 %% parameters
-indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Analysis\Cold_Ion';
+indir='E:\Asym\Cold2\data';
+outdir='E:\Asym\Cold2\out\Energy';
 prm=slj.Parameters(indir,outdir);
 
-tt=100;
+tt=22;
 dt=1;
-name='h';
+name='e';
 
 xz=10;
 dir=1;

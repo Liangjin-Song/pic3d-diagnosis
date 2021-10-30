@@ -10,12 +10,12 @@ indir='E:\PIC\Test';
 outdir='E:\PIC\Test';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:0.2:100;
+tt=0;
 % the variable name
 % varname={'B','E','J','Vi','Ve','Ni','Ne'};
 varname={'divB'};
 % figure style
-extra.Visible=false;
+extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
 extra.yrange=[prm.value.lz(1), prm.value.lz(end)];
 % extra.xrange=[60,90];

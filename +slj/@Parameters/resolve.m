@@ -110,13 +110,13 @@ if strcmp(key, 'simulation model')
 elseif strcmp(key, 'boundary condition')
     value.boundary=resolve_boundary_condition(string(word));
 elseif strcmp(key,'length in the x direction')
-    value.nx=str2num(word);
+    value.nx=str2double(word);
 elseif strcmp(key,'length in the y direction')
-    value.ny=str2num(word);
+    value.ny=str2double(word);
 elseif strcmp(key,'length in the z direction')
-    value.nz=str2num(word);
+    value.nz=str2double(word);
 elseif strcmp(key,'speed of light')
-    value.c=str2num(word);
+    value.c=str2double(word);
 end
 end
 
@@ -188,120 +188,120 @@ function value=resolve_rec3s_1harris(value, key, word)
 %%
 if strcmp(key, 'simulation model') || strcmp(key, 'boundary condition') || strcmp(key,'length in the x direction') || strcmp(key,'length in the y direction') || strcmp(key,'length in the z direction') || strcmp(key,'speed of light')
 elseif strcmp(key, 'mass ratio between light ion and electron')
-    value.mle=str2num(word);
+    value.mle=str2double(word);
     value.mie=value.mle;
 elseif strcmp(key, 'mass ratio between heavy ion and light ion')
-    value.mhl=str2num(word);
+    value.mhl=str2double(word);
 elseif strcmp(key,'charge ratio between heavy ion and light ion')
-    value.qhl=str2num(word);
+    value.qhl=str2double(word);
 elseif strcmp(key,'background density ratio between heavy ion and light ion')
-    value.bhl=str2num(word);
+    value.bhl=str2double(word);
 elseif strcmp(key,'temperature ratio between light ion and electron')
-    value.tle=str2num(word);
+    value.tle=str2double(word);
 elseif strcmp(key,'temperature ratio between heavy ion and light ion')
-    value.thl=str2num(word);
+    value.thl=str2double(word);
 elseif strcmp(key,'beta value in the magneotsheath')
-    value.betas=str2num(word);
+    value.betas=str2double(word);
 elseif strcmp(key,'ratio between electron plasma frequency and electron gyrofrequency')
-    value.rpg=str2num(word);
+    value.rpg=str2double(word);
 elseif strcmp(key,'magnetosphere electron temperature')
-    value.tem=str2num(word);
+    value.tem=str2double(word);
 elseif strcmp(key,'magnetosheath electron temperature')
-    value.tes=str2num(word);
+    value.tes=str2double(word);
 elseif strcmp(key,'asympotic magnetosphere magnetic field')
-    value.bm=str2num(word);
+    value.bm=str2double(word);
 elseif strcmp(key,'asympotic magnetosheath magnetic field')
-    value.bs=str2num(word);
+    value.bs=str2double(word);
 elseif strcmp(key,'guide field')
-    value.bg=str2num(word);
+    value.bg=str2double(word);
 elseif strcmp(key,'initial perturbation')
-    value.perturb=str2num(word);
+    value.perturb=str2double(word);
 elseif strcmp(key,'heavy ion inertial length')
-    value.dh=str2num(word);
+    value.dh=str2double(word);
 elseif strcmp(key,'light ion inertial length')
-    value.dl=str2num(word);
+    value.dl=str2double(word);
     value.di=value.dl;
 elseif strcmp(key,'electron inertial length')
-    value.de=str2num(word);
+    value.de=str2double(word);
 elseif strcmp(key,'halfthickness of current sheet')
-    value.hcs=str2num(word);
+    value.hcs=str2double(word);
 elseif strcmp(key,'light ion density in magnetosphere side')
-    value.nlm=str2num(word);
+    value.nlm=str2double(word);
 elseif strcmp(key,'density in magnetosphere side')
-    value.nim=str2num(word);
+    value.nim=str2double(word);
 elseif strcmp(key,'light ion density in magnetosheath side')
-    value.nls=str2num(word);
+    value.nls=str2double(word);
 elseif strcmp(key,'density in magnetosheath side')
-    value.nis=str2num(word);
+    value.nis=str2double(word);
 elseif strcmp(key,'number of light ion in current sheet')
-    value.nlcs=str2num(word);
+    value.nlcs=str2double(word);
     value.n0=value.nlcs;
 elseif strcmp(key,'number of particles in current sheet')
-    value.n0=str2num(word);
+    value.n0=str2double(word);
 elseif strcmp(key,'number of light ion per cell')
-    value.ppcl=str2num(word);
+    value.ppcl=str2double(word);
 elseif strcmp(key,'number of particles per cell')
-    value.ppc=str2num(word);
+    value.ppc=str2double(word);
 elseif strcmp(key,'number of heavy ion per cell')
-    value.ppch=str2num(word);
+    value.ppch=str2double(word);
 elseif strcmp(key,'number of particles representing unit density')
-    value.coeff=str2num(word);
+    value.coeff=str2double(word);
 elseif strcmp(key,'density ratio between light ion background and Harris')
-    value.rbh=str2num(word);
+    value.rbh=str2double(word);
 elseif strcmp(key,'density ratio between background and Harris')
-    value.rbh=str2num(word);
+    value.rbh=str2double(word);
 elseif strcmp(key,'electron plasma frequency')
-    value.fpe=str2num(word);
+    value.fpe=str2double(word);
 elseif strcmp(key,'electron gyrofrequency')
-    value.fce=str2num(word);
+    value.fce=str2double(word);
 elseif strcmp(key,'light ion plasma frequency')
-    value.fpl=str2num(word);
+    value.fpl=str2double(word);
     value.fpi=value.fpl;
 elseif strcmp(key,'light ion gyrofrequency')
-    value.fcl=str2num(word);
+    value.fcl=str2double(word);
     value.wci=value.fcl;
     value.w=value.wci;
 elseif strcmp(key,'heavy ion plasma frequency')
-    value.fph=str2num(word);
+    value.fph=str2double(word);
 elseif strcmp(key,'heavy ion gyrofrequency')
-    value.fch=str2num(word);
+    value.fch=str2double(word);
 elseif strcmp(key,'mass of electron')
-    value.me=str2num(word);
+    value.me=str2double(word);
 elseif strcmp(key,'charge of electron')
-    value.qe=str2num(word);
+    value.qe=str2double(word);
 elseif strcmp(key,'mass of light ion')
-    value.ml=str2num(word);
+    value.ml=str2double(word);
     value.mi=value.ml;
 elseif strcmp(key,'charge of light ion')
-    value.ql=str2num(word);
+    value.ql=str2double(word);
     value.qi=value.ql;
 elseif strcmp(key,'mass of heavy ion')
-    value.mh=str2num(word);
+    value.mh=str2double(word);
 elseif strcmp(key,'charge of heavy ion')
-    value.qh=str2num(word);
+    value.qh=str2double(word);
 elseif strcmp(key,'electron thermal velocity')
-    value.veth=str2num(word);
+    value.veth=str2double(word);
 elseif strcmp(key,'light ion thermal velocity')
-    value.vlth=str2num(word);
+    value.vlth=str2double(word);
 elseif strcmp(key,'heavy ion thermal velocity')
-    value.vhth=str2num(word);
+    value.vhth=str2double(word);
 elseif strcmp(key,'debye length')
-    value.debye=str2num(word);
+    value.debye=str2double(word);
 elseif strcmp(key,'heavy ion lamor radius')
-    value.rlh=str2num(word);
+    value.rlh=str2double(word);
 elseif strcmp(key,'light ion lamor radius')
-    value.rll=str2num(word);
+    value.rll=str2double(word);
 elseif strcmp(key,'electron lamor radius')
-    value.rle=str2num(word);
+    value.rle=str2double(word);
 elseif strcmp(key,'electron alfven speed')
-    value.vAe=str2num(word);
+    value.vAe=str2double(word);
 elseif strcmp(key,'light ion alfven speed')
-    value.vAl=str2num(word);
+    value.vAl=str2double(word);
     value.vA=value.vAl;
 elseif strcmp(key,'magnetosheath ion alfven speed')
-    value.vA=str2num(word);
+    value.vA=str2double(word);
 elseif strcmp(key,'heavy ion alfven speed')
-    value.vAh=str2num(word);
+    value.vAh=str2double(word);
 else
     error(['Unrecognized key: ',char(key)]);
 end
@@ -317,53 +317,53 @@ function value=resolve_wave_particle(value, key, word)
 %%
 if strcmp(key, 'simulation model') || strcmp(key, 'boundary condition') || strcmp(key,'length in the x direction') || strcmp(key,'length in the y direction') || strcmp(key,'length in the z direction') || strcmp(key,'speed of light')
 elseif strcmp(key, 'mass ratio between ion and electron')
-    value.mie=str2num(word);
+    value.mie=str2double(word);
 elseif strcmp(key, 'temperature ratio between ion and electron')
-    value.tie=str2num(word);
+    value.tie=str2double(word);
 elseif strcmp(key,'ratio between electron plasma frequency and electron gyrofrequency')
-    value.rpg=str2num(word);
+    value.rpg=str2double(word);
 elseif strcmp(key,'beta value')
-    value.beta=str2num(word);
+    value.beta=str2double(word);
 elseif strcmp(key,'magnetic field')
 elseif strcmp(key,'ion inertial length')
-    value.di=str2num(word);
+    value.di=str2double(word);
 elseif strcmp(key,'electron inertial length')
-    value.de=str2num(word);
+    value.de=str2double(word);
 elseif strcmp(key, 'number density of plasma')
-    value.np=str2num(word);
+    value.np=str2double(word);
 elseif strcmp(key,'number of particles per cell')
-    value.ppc=str2num(word);
+    value.ppc=str2double(word);
 elseif strcmp(key,'number of particles representing unit density')
-    value.coeff=str2num(word);
+    value.coeff=str2double(word);
 elseif strcmp(key,'electron plasma frequency')
-    value.fpe=str2num(word);
+    value.fpe=str2double(word);
 elseif strcmp(key,'electron gyrofrequency')
-    value.fce=str2num(word);
+    value.fce=str2double(word);
     value.w=value.fce;
 elseif strcmp(key,'ion plasma frequency')
-    value.fpi=str2num(word);
+    value.fpi=str2double(word);
 elseif strcmp(key,'ion gyrofrequency')
-    value.wci=str2num(word);
+    value.wci=str2double(word);
 elseif strcmp(key,'mass of electron')
-    value.me=str2num(word);
+    value.me=str2double(word);
 elseif strcmp(key,'charge of electron')
-    value.qe=str2num(word);
+    value.qe=str2double(word);
 elseif strcmp(key,'mass of ion')
-    value.mi=str2num(word);
+    value.mi=str2double(word);
 elseif strcmp(key,'charge of ion')
-    value.qi=str2num(word);
+    value.qi=str2double(word);
 elseif strcmp(key,'electron thermal velocity')
-    value.veth=str2num(word);
+    value.veth=str2double(word);
 elseif strcmp(key,'ion thermal velocity')
-    value.vith=str2num(word);
+    value.vith=str2double(word);
 elseif strcmp(key,'debye length')
-    value.debye=str2num(word);
+    value.debye=str2double(word);
 elseif strcmp(key,'ion lamor radius')
-    value.rli=str2num(word);
+    value.rli=str2double(word);
 elseif strcmp(key,'electron lamor radius')
-    value.rle=str2num(word);
+    value.rle=str2double(word);
 elseif strcmp(key,'ion alfven speed')
-    value.vA=str2num(word);
+    value.vA=str2double(word);
 else
     error(['Unrecognized key: ',char(key)]);
 end
@@ -379,104 +379,104 @@ function value=resolve_asym_rec_3s(value, key, word)
 %%
 if strcmp(key, 'simulation model') || strcmp(key, 'boundary condition') || strcmp(key,'length in the x direction') || strcmp(key,'length in the y direction') || strcmp(key,'length in the z direction') || strcmp(key,'speed of light')
 elseif strcmp(key, 'mass ratio between light ion and electron')
-    value.mle=str2num(word);
+    value.mle=str2double(word);
     value.mie=value.mle;
 elseif strcmp(key, 'mass ratio between heavy ion and light ion')
-    value.mhl=str2num(word);
+    value.mhl=str2double(word);
 elseif strcmp(key,'charge ratio between heavy ion and light ion')
-    value.qhl=str2num(word);
+    value.qhl=str2double(word);
 elseif strcmp(key,'temperature ratio between light ion and electron')
-    value.tle=str2num(word);
+    value.tle=str2double(word);
 elseif strcmp(key,'temperature ratio between heavy ion and light ion')
-    value.thl=str2num(word);
+    value.thl=str2double(word);
 elseif strcmp(key,'ratio between electron plasma frequency and electron gyrofrequency')
-    value.rpg=str2num(word);
+    value.rpg=str2double(word);
 elseif strcmp(key,'magnetosphere electron temperature')
-    value.tem=str2num(word);
+    value.tem=str2double(word);
 elseif strcmp(key,'magnetosheath electron temperature')
-    value.tes=str2num(word);
+    value.tes=str2double(word);
 elseif strcmp(key,'magnetosphere light ion temperature')
-    value.tlm=str2num(word);
+    value.tlm=str2double(word);
 elseif strcmp(key,'magnetosheath light ion temperature')
-    value.tls=str2num(word);
+    value.tls=str2double(word);
 elseif strcmp(key,'magnetosphere heavy ion temperature')
-    value.thm=str2num(word);
+    value.thm=str2double(word);
 elseif strcmp(key,'asympotic magnetosphere magnetic field')
-    value.bm=str2num(word);
+    value.bm=str2double(word);
 elseif strcmp(key,'asympotic magnetosheath magnetic field')
-    value.bs=str2num(word);
+    value.bs=str2double(word);
 elseif strcmp(key,'guide field')
-    value.bg=str2num(word);
+    value.bg=str2double(word);
 elseif strcmp(key,'initial perturbation')
-    value.perturb=str2num(word);
+    value.perturb=str2double(word);
 elseif strcmp(key,'heavy ion inertial length')
-    value.dh=str2num(word);
+    value.dh=str2double(word);
 elseif strcmp(key,'light ion inertial length')
-    value.dl=str2num(word);
+    value.dl=str2double(word);
     value.di=value.dl;
 elseif strcmp(key,'electron inertial length')
-    value.de=str2num(word);
+    value.de=str2double(word);
 elseif strcmp(key,'halfthickness of current sheet')
-    value.hcs=str2num(word);
+    value.hcs=str2double(word);
 elseif strcmp(key,'total ion density in magnetosphere side')
-    value.ntm=str2num(word);
+    value.ntm=str2double(word);
 elseif strcmp(key,'total ion density in magnetosheath side')
-    value.nts=str2num(word);
+    value.nts=str2double(word);
 elseif strcmp(key,'light ion density in magnetosphere side')
-    value.nlm=str2num(word);
+    value.nlm=str2double(word);
 elseif strcmp(key,'light ion density in magnetosheath side')
-    value.nls=str2num(word);
+    value.nls=str2double(word);
 elseif strcmp(key,'heavy ion density in magnetosphere side')
-    value.nhm=str2num(word);
+    value.nhm=str2double(word);
 elseif strcmp(key,'number of light ion per cell')
-    value.ppc=str2num(word);
+    value.ppc=str2double(word);
 elseif strcmp(key,'number of particles representing unit density')
-    value.coeff=str2num(word);
+    value.coeff=str2double(word);
 elseif strcmp(key,'electron plasma frequency')
-    value.fpe=str2num(word);
+    value.fpe=str2double(word);
 elseif strcmp(key,'electron gyrofrequency')
-    value.fce=str2num(word);
+    value.fce=str2double(word);
 elseif strcmp(key,'light ion plasma frequency')
-    value.fpl=str2num(word);
+    value.fpl=str2double(word);
     value.fpi=value.fpl;
 elseif strcmp(key,'light ion gyrofrequency')
-    value.fcl=str2num(word);
+    value.fcl=str2double(word);
     value.wci=value.fcl;
     value.w=value.wci;
 elseif strcmp(key,'heavy ion plasma frequency')
-    value.fph=str2num(word);
+    value.fph=str2double(word);
 elseif strcmp(key,'heavy ion gyrofrequency')
-    value.fch=str2num(word);
+    value.fch=str2double(word);
 elseif strcmp(key,'mass of electron')
-    value.me=str2num(word);
+    value.me=str2double(word);
 elseif strcmp(key,'charge of electron')
-    value.qe=str2num(word);
+    value.qe=str2double(word);
 elseif strcmp(key,'mass of light ion')
-    value.ml=str2num(word);
+    value.ml=str2double(word);
     value.mi=value.ml;
 elseif strcmp(key,'charge of light ion')
-    value.ql=str2num(word);
+    value.ql=str2double(word);
     value.qi=value.ql;
 elseif strcmp(key,'mass of heavy ion')
-    value.mh=str2num(word);
+    value.mh=str2double(word);
 elseif strcmp(key,'charge of heavy ion')
-    value.qh=str2num(word);
+    value.qh=str2double(word);
 elseif strcmp(key,'electron thermal velocity')
-    value.veth=str2num(word);
+    value.veth=str2double(word);
 elseif strcmp(key,'light ion thermal velocity')
-    value.vlth=str2num(word);
+    value.vlth=str2double(word);
 elseif strcmp(key,'heavy ion thermal velocity')
-    value.vhth=str2num(word);
+    value.vhth=str2double(word);
 elseif strcmp(key,'debye length')
-    value.debye=str2num(word);
+    value.debye=str2double(word);
 elseif strcmp(key,'heavy ion lamor radius')
-    value.rlh=str2num(word);
+    value.rlh=str2double(word);
 elseif strcmp(key,'light ion lamor radius')
-    value.rll=str2num(word);
+    value.rll=str2double(word);
 elseif strcmp(key,'electron lamor radius')
-    value.rle=str2num(word);
+    value.rle=str2double(word);
 elseif strcmp(key,'light ion alfven speed')
-    value.vAl=str2num(word);
+    value.vAl=str2double(word);
     value.vA=value.vAl;
 else
     error(['Unrecognized key: ',char(key)]);
@@ -492,73 +492,73 @@ function value=resolve_rec_2harris(value, key, word)
 %%
 if strcmp(key, 'simulation model') || strcmp(key, 'boundary condition') || strcmp(key,'length in the x direction') || strcmp(key,'length in the y direction') || strcmp(key,'length in the z direction') || strcmp(key,'speed of light')
 elseif strcmp(key, 'mass ratio between ion and electron')
-    value.mie=str2num(word);
+    value.mie=str2double(word);
 elseif strcmp(key,'temperature ratio between ion and electron')
-    value.tie=str2num(word);
+    value.tie=str2double(word);
 elseif strcmp(key,'beta value in the magneotsheath')
-    value.betas=str2num(word);
+    value.betas=str2double(word);
 elseif strcmp(key,'ratio between electron plasma frequency and electron gyrofrequency')
-    value.rpg=str2num(word);
+    value.rpg=str2double(word);
 elseif strcmp(key,'magnetosphere electron temperature')
-    value.tem=str2num(word);
+    value.tem=str2double(word);
 elseif strcmp(key,'magnetosheath electron temperature')
-    value.tes=str2num(word);
+    value.tes=str2double(word);
 elseif strcmp(key,'asympotic magnetosphere magnetic field')
-    value.bm=str2num(word);
+    value.bm=str2double(word);
 elseif strcmp(key,'asympotic magnetosheath magnetic field')
-    value.bs=str2num(word);
+    value.bs=str2double(word);
 elseif strcmp(key,'guide field')
-    value.bg=str2num(word);
+    value.bg=str2double(word);
 elseif strcmp(key,'initial perturbation')
-    value.perturb=str2num(word);
+    value.perturb=str2double(word);
 elseif strcmp(key,'ion inertial length')
-    value.di=str2num(word);
+    value.di=str2double(word);
 elseif strcmp(key,'electron inertial length')
-    value.de=str2num(word);
+    value.de=str2double(word);
 elseif strcmp(key,'halfthickness of current sheet')
-    value.hcs=str2num(word);
+    value.hcs=str2double(word);
 elseif strcmp(key,'density in magnetosphere side')
-    value.nim=str2num(word);
+    value.nim=str2double(word);
 elseif strcmp(key,'density in magnetosheath side')
-    value.nis=str2num(word);
+    value.nis=str2double(word);
 elseif strcmp(key,'number of particles in current sheet')
-    value.n0=str2num(word);
+    value.n0=str2double(word);
 elseif strcmp(key,'number of particles per cell')
-    value.ppc=str2num(word);
+    value.ppc=str2double(word);
 elseif strcmp(key,'number of particles representing unit density')
-    value.coeff=str2num(word);
+    value.coeff=str2double(word);
 elseif strcmp(key,'density ratio between background and Harris')
-    value.rbh=str2num(word);
+    value.rbh=str2double(word);
 elseif strcmp(key,'electron plasma frequency')
-    value.fpe=str2num(word);
+    value.fpe=str2double(word);
 elseif strcmp(key,'electron gyrofrequency')
-    value.fce=str2num(word);
+    value.fce=str2double(word);
 elseif strcmp(key,'ion plasma frequency')
-    value.fpi=str2num(word);
+    value.fpi=str2double(word);
 elseif strcmp(key,'ion gyrofrequency')
-    value.fci=str2num(word);
+    value.fci=str2double(word);
     value.wci=value.fci;
     value.w=value.wci;
 elseif strcmp(key,'mass of electron')
-    value.me=str2num(word);
+    value.me=str2double(word);
 elseif strcmp(key,'charge of electron')
-    value.qe=str2num(word);
+    value.qe=str2double(word);
 elseif strcmp(key,'mass of ion')
-    value.mi=str2num(word);
+    value.mi=str2double(word);
 elseif strcmp(key,'charge of ion')
-    value.qi=str2num(word);
+    value.qi=str2double(word);
 elseif strcmp(key,'electron thermal velocity')
-    value.veth=str2num(word);
+    value.veth=str2double(word);
 elseif strcmp(key,'ion thermal velocity')
-    value.vith=str2num(word);
+    value.vith=str2double(word);
 elseif strcmp(key,'debye length')
-    value.debye=str2num(word);
+    value.debye=str2double(word);
 elseif strcmp(key,'ion lamor radius')
-    value.rli=str2num(word);
+    value.rli=str2double(word);
 elseif strcmp(key,'electron lamor radius')
-    value.rle=str2num(word);
+    value.rle=str2double(word);
 elseif strcmp(key,'magnetosheath ion alfven speed')
-    value.vA=str2num(word);
+    value.vA=str2double(word);
 else
     error(['Unrecognized key: ',char(key)]);
 end
@@ -575,109 +575,111 @@ function value=resolve_asym_rec_3s_slj(value, key, word)
 %%
 if strcmp(key, 'simulation model') || strcmp(key, 'boundary condition') || strcmp(key,'length in the x direction') || strcmp(key,'length in the y direction') || strcmp(key,'length in the z direction') || strcmp(key,'speed of light')
 elseif strcmp(key, 'mass ratio between light ion and electron')
-    value.mle=str2num(word);
+    value.mle=str2double(word);
     value.mie=value.mle;
 elseif strcmp(key, 'mass ratio between heavy ion and light ion')
-    value.mhl=str2num(word);
+    value.mhl=str2double(word);
 elseif strcmp(key,'charge ratio between heavy ion and light ion')
-    value.qhl=str2num(word);
+    value.qhl=str2double(word);
 elseif strcmp(key,'temperature ratio between light ion and electron')
-    value.tle=str2num(word);
+    value.tle=str2double(word);
 elseif strcmp(key,'temperature ratio between heavy ion and light ion')
-    value.thl=str2num(word);
+    value.thl=str2double(word);
 elseif strcmp(key,'ratio between electron plasma frequency and electron gyrofrequency')
-    value.rpg=str2num(word);
+    value.rpg=str2double(word);
 elseif strcmp(key,'magnetosphere electron temperature')
-    value.tem=str2num(word);
+    value.tem=str2double(word);
 elseif strcmp(key,'magnetosheath electron temperature')
-    value.tes=str2num(word);
+    value.tes=str2double(word);
 elseif strcmp(key,'magnetosphere light ion temperature')
-    value.tlm=str2num(word);
+    value.tlm=str2double(word);
 elseif strcmp(key,'magnetosheath light ion temperature')
-    value.tls=str2num(word);
+    value.tls=str2double(word);
 elseif strcmp(key,'magnetosphere heavy ion temperature')
-    value.thm=str2num(word);
+    value.thm=str2double(word);
 elseif strcmp(key,'asympotic magnetosphere magnetic field')
-    value.bm=str2num(word);
+    value.bm=str2double(word);
 elseif strcmp(key,'asympotic magnetosheath magnetic field')
-    value.bs=str2num(word);
+    value.bs=str2double(word);
 elseif strcmp(key,'guide field')
-    value.bg=str2num(word);
+    value.bg=str2double(word);
 elseif strcmp(key,'initial perturbation')
-    value.perturb=str2num(word);
+    value.perturb=str2double(word);
 elseif strcmp(key,'heavy ion inertial length')
-    value.dh=str2num(word);
+    value.dh=str2double(word);
 elseif strcmp(key,'light ion inertial length')
-    value.dl=str2num(word);
+    value.dl=str2double(word);
     value.di=value.dl;
 elseif strcmp(key,'electron inertial length')
-    value.de=str2num(word);
+    value.de=str2double(word);
 elseif strcmp(key,'halfthickness of current sheet')
-    value.hcs=str2num(word);
+    value.hcs=str2double(word);
 elseif strcmp(key,'total ion density in magnetosphere side')
-    value.ntm=str2num(word);
+    value.ntm=str2double(word);
 elseif strcmp(key,'total ion density in magnetosheath side')
-    value.nts=str2num(word);
+    value.nts=str2double(word);
 elseif strcmp(key,'light ion density in magnetosphere side')
-    value.nlm=str2num(word);
+    value.nlm=str2double(word);
 elseif strcmp(key,'light ion density in magnetosheath side')
-    value.nls=str2num(word);
+    value.nls=str2double(word);
 elseif strcmp(key,'heavy ion density in magnetosphere side')
-    value.nhm=str2num(word);
+    value.nhm=str2double(word);
 elseif strcmp(key,'number of ions per cell')
-    value.ppc=str2num(word);
+    value.ppc=str2double(word);
 elseif strcmp(key,'number of particles representing unit density')
-    value.coeff=str2num(word);
+    value.coeff=str2double(word);
+elseif strcmp(key,'total density ratio between the real and the model distribution')
+    value.knn=str2double(word);
 elseif strcmp(key,'electron plasma frequency')
-    value.fpe=str2num(word);
+    value.fpe=str2double(word);
 elseif strcmp(key,'electron gyrofrequency')
-    value.fce=str2num(word);
+    value.fce=str2double(word);
 elseif strcmp(key,'light ion plasma frequency')
-    value.fpl=str2num(word);
+    value.fpl=str2double(word);
     value.fpi=value.fpl;
 elseif strcmp(key,'light ion gyrofrequency')
-    value.fcl=str2num(word);
+    value.fcl=str2double(word);
     value.wci=value.fcl;
     value.w=value.wci;
 elseif strcmp(key,'heavy ion plasma frequency')
-    value.fph=str2num(word);
+    value.fph=str2double(word);
 elseif strcmp(key,'heavy ion gyrofrequency')
-    value.fch=str2num(word);
+    value.fch=str2double(word);
 elseif strcmp(key,'mass of electron')
-    value.me=str2num(word);
+    value.me=str2double(word);
 elseif strcmp(key,'charge of electron')
-    value.qe=str2num(word);
+    value.qe=str2double(word);
 elseif strcmp(key,'mass of light ion')
-    value.ml=str2num(word);
+    value.ml=str2double(word);
     value.mi=value.ml;
 elseif strcmp(key,'charge of light ion')
-    value.ql=str2num(word);
+    value.ql=str2double(word);
     value.qi=value.ql;
 elseif strcmp(key,'mass of heavy ion')
-    value.mh=str2num(word);
+    value.mh=str2double(word);
 elseif strcmp(key,'charge of heavy ion')
-    value.qh=str2num(word);
+    value.qh=str2double(word);
 elseif strcmp(key,'electron thermal velocity')
-    value.veth=str2num(word);
+    value.veth=str2double(word);
 elseif strcmp(key,'light ion thermal velocity')
-    value.vlth=str2num(word);
+    value.vlth=str2double(word);
 elseif strcmp(key,'heavy ion thermal velocity')
-    value.vhth=str2num(word);
+    value.vhth=str2double(word);
 elseif strcmp(key,'debye length')
-    value.debye=str2num(word);
+    value.debye=str2double(word);
 elseif strcmp(key,'heavy ion lamor radius')
-    value.rlh=str2num(word);
+    value.rlh=str2double(word);
 elseif strcmp(key,'light ion lamor radius')
-    value.rll=str2num(word);
+    value.rll=str2double(word);
 elseif strcmp(key,'electron lamor radius')
-    value.rle=str2num(word);
+    value.rle=str2double(word);
 elseif strcmp(key,'light ion alfven speed')
-    value.vAl=str2num(word);
+    value.vAl=str2double(word);
     value.vA=value.vAl;
 elseif strcmp(key,'distance between heavy ion and current sheet')
-    value.dcc=str2num(word);
+    value.dcc=str2double(word);
 elseif strcmp(key, 'the driven velocity in the magnetosheath side')
-    value.driven=str2num(word);
+    value.driven=str2double(word);
 else
     error(['Unrecognized key: ',char(key)]);
 end
@@ -693,58 +695,58 @@ function value=resolve_turbulence(value, key, word)
 %%
 if strcmp(key, 'simulation model') || strcmp(key, 'boundary condition') || strcmp(key,'length in the x direction') || strcmp(key,'length in the y direction') || strcmp(key,'length in the z direction') || strcmp(key,'speed of light')
 elseif strcmp(key, 'mass ratio between ion and electron')
-    value.mie=str2num(word);
+    value.mie=str2double(word);
 elseif strcmp(key, 'temperature ratio between ion and electron')
-    value.tie=str2num(word);
+    value.tie=str2double(word);
 elseif strcmp(key,'ratio between electron plasma frequency and electron gyrofrequency')
-    value.rpg=str2num(word);
+    value.rpg=str2double(word);
 elseif strcmp(key,'beta value')
-    value.beta=str2num(word);
+    value.beta=str2double(word);
 elseif strcmp(key,'electron temperature')
-    value.te=str2num(word);
+    value.te=str2double(word);
 elseif strcmp(key,'magnetic field')
 elseif strcmp(key,'ion inertial length')
-    value.di=str2num(word);
+    value.di=str2double(word);
 elseif strcmp(key,'electron inertial length')
-    value.de=str2num(word);
+    value.de=str2double(word);
 elseif strcmp(key, 'number density of plasma')
-    value.np=str2num(word);
+    value.np=str2double(word);
     value.n0=value.np;
 elseif strcmp(key,'number of particles per cell')
-    value.ppc=str2num(word);
+    value.ppc=str2double(word);
 elseif strcmp(key,'number of particles representing unit density')
-    value.coeff=str2num(word);
+    value.coeff=str2double(word);
 elseif strcmp(key,'electron plasma frequency')
-    value.fpe=str2num(word);
+    value.fpe=str2double(word);
 elseif strcmp(key,'electron gyrofrequency')
-    value.fce=str2num(word);
+    value.fce=str2double(word);
     value.w=value.fce;
 elseif strcmp(key,'ion plasma frequency')
-    value.fpi=str2num(word);
+    value.fpi=str2double(word);
 elseif strcmp(key,'ion gyrofrequency')
-    value.wci=str2num(word);
+    value.wci=str2double(word);
 elseif strcmp(key,'mass of electron')
-    value.me=str2num(word);
+    value.me=str2double(word);
 elseif strcmp(key,'charge of electron')
-    value.qe=str2num(word);
+    value.qe=str2double(word);
 elseif strcmp(key,'mass of ion')
-    value.mi=str2num(word);
+    value.mi=str2double(word);
 elseif strcmp(key,'charge of ion')
-    value.qi=str2num(word);
+    value.qi=str2double(word);
 elseif strcmp(key,'electron thermal velocity')
-    value.veth=str2num(word);
+    value.veth=str2double(word);
 elseif strcmp(key,'ion thermal velocity')
-    value.vith=str2num(word);
+    value.vith=str2double(word);
 elseif strcmp(key,'debye length')
-    value.debye=str2num(word);
+    value.debye=str2double(word);
 elseif strcmp(key,'ion lamor radius')
-    value.rli=str2num(word);
+    value.rli=str2double(word);
 elseif strcmp(key,'electron lamor radius')
-    value.rle=str2num(word);
+    value.rle=str2double(word);
 elseif strcmp(key,'ion alfven speed')
-    value.vA=str2num(word);
+    value.vA=str2double(word);
 elseif strcmp(key,'the perturbation')
-    value.perturb=str2num(word);
+    value.perturb=str2double(word);
 else
     error(['Unrecognized key: ',char(key)]);
 end

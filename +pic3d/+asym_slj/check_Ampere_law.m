@@ -48,9 +48,9 @@ lje=Jpe.get_line2d(z0,dir,prm,1);
 
 %% plot figure
 % Jy for Jp, Jc, Js
-ll.ljs=ljs.ly;
-ll.ljp=ljp.ly;
-ll.ljc=ljc.ly;
+ll.ljs=ljs.lz;
+ll.ljp=ljp.lz;
+ll.ljc=ljc.lz;
 extra.LineStyle={'-','-.','--'};
 extra.LineColor={'r','k','b'};
 extra.legend={'Js','Jp','Jc'};

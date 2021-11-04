@@ -12,9 +12,9 @@ prm=slj.Parameters(indir,outdir);
 % time
 tt=0;
 % the variable name
-varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
+% varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
 % varname={'B','E','J','Vl','Ve','Nl','Ne', 'divB', 'divE'};
-% varname={'Nl'};
+varname={'divE'};
 % figure style
 extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];

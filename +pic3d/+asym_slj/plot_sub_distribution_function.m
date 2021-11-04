@@ -6,19 +6,20 @@
 clear;
 %% parameters
 % directory
-indir='E:\Asym\Cold2\data';
-outdir='E:\Asym\Cold2\out\Distribution\Separatrix';
+indir='E:\Asym\cb1\data';
+outdir='E:\Asym\cb1\out\Distribution\X-line';
 prm=slj.Parameters(indir, outdir);
 % the file name of distribution function
-name='PVl_ts20010_x0-1000_y400-600_z0-1';
+name='PVh_ts12000_x0-1200_y300-500_z0-1';
 % velocity direction
-vdir=3;
-xrange=[14,16];
+vdir=1;
+xrange=[27,29];
 % xrange=[34.48,35.48];
-zrange=[-1,-0.5];
-yrange=[-10,10];
+zrange=[-1,0];
+yrange=[-100,100];
+precision=100;
 %% the figure style
-range=5;
+range=1;
 extra.colormap='moon';
 extra.xrange=[-range,range];
 extra.yrange=[-range,range];
@@ -52,10 +53,12 @@ end
 %% read data
 spc=prm.read(name);
 spc=spc.subposition(xrange,yrange,zrange);
-dst=spc.dstv(prm.value.vA);
+dst=spc.dstv(prm.value.vA,precision);
 dst=dst.intgrtv(vdir);
 
 %% plot figure
 f=slj.Plot();
 f.field2d(dst.value, dst.ll, dst.ll,extra);
-f.png(prm,[name,suffix,'_sub',num2str(xrange(1)),'-',num2str(xrange(2))]);
+% f.png(prm,[name,suffix,'_sub',num2str(xrange(1)),'-',num2str(xrange(2)),...
+%     '_',num2str(yrange(1)),'-',num2str(yrange(2)),...
+%     '_',num2str(zrange(1)),'-',num2str(zrange(2))]);

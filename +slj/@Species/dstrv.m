@@ -60,7 +60,7 @@ for i=1:np
         pv = obj.value.vz(i);
     end
     pv=round(slj.Physics.linear([lv(1), 1], [lv(end), length(lv)], pv));
-    frv(pv, pr) = frv(pv, pr) + 1;
+    frv(pv, pr) = frv(pv, pr) + obj.value.weight(i);
 end
 ll.lr=lr;
 ll.lv=lv;

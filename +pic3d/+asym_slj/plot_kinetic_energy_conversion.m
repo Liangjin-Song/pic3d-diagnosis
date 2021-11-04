@@ -1,20 +1,20 @@
 % function plot_kinetic_energy_conversion
 clear;
 %% parameters
-indir='E:\Asym\Cold2\data';
-outdir='E:\Asym\Cold2\out\Energy';
+indir='E:\Asym\cb1\data';
+outdir='E:\Asym\cb1\out\Conversion';
 prm=slj.Parameters(indir,outdir);
 
-tt=22;
+tt=30;
 dt=1;
-name='e';
+name='h';
 
-xz=10;
+xz=39;
 dir=1;
 
 nt=length(tt);
 
-xrange=[-5,5];
+xrange=[-10,10];
 
 if dir == 1
     ll = prm.value.lz;

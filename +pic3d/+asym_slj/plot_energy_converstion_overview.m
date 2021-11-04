@@ -1,12 +1,12 @@
 % function plot_energy_converstion_overview
 clear;
 %% parameters
-indir='E:\Asym\Cold2\data';
-outdir='E:\Asym\Cold2\out\Energy\JhE';
+indir='E:\Asym\cb1\data';
+outdir='E:\Asym\cb1\out\Overview';
 prm=slj.Parameters(indir,outdir);
 
-tt=0:70;
-name='e';
+tt=30;
+name='h';
 
 nt=length(tt);
 

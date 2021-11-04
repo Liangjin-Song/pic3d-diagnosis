@@ -36,6 +36,7 @@ value.rz=obj.value.rz(id);
 value.vx=obj.value.vx(id);
 value.vy=obj.value.vy(id);
 value.vz=obj.value.vz(id);
+value.weight=obj.value.weight(id);
 range.xrange=xrange;
 range.yrange=yrange;
 range.zrange=zrange;

@@ -1,25 +1,25 @@
 % function plot_momentum_equation
 % clear;
 %% parameters
-indir='E:\Asym\NCold2\data';
-outdir='E:\Asym\NCold2\out\Momentum';
+indir='E:\Asym\cb1\data';
+outdir='E:\Asym\cb1\out\Conversion';
 prm=slj.Parameters(indir,outdir);
 
-tt=100;
+tt=13;
 dt=1;
-name='l';
+name='h';
 
 q=prm.value.qi;
 m=prm.value.mi;
 
 norm=prm.value.vA;
-xz=50.025;
+xz=30;
 dir=1;
 pxz=prm.value.nz/2;
 dxz=100;
 
 %% figure proterty
-xrange=[-25,25];
+xrange=[-15,15];
 
 %% momentum equation
 E=prm.read('E',tt);
@@ -65,15 +65,15 @@ dvp0=dvp;
 vpv0=vpv;
 vpt0=vpt;
 
-eee=smoothdata(eee0);
-vxb=smoothdata(vxb0);
-dvp=smoothdata(dvp0,'movmean',160);
+eee=smoothdata(eee0,'movmean',20);
+vxb=smoothdata(vxb0,'movmean',20);
+dvp=smoothdata(dvp0,'movmean',20);
 vpv=smoothdata(vpv0,'movmean',20);
 vpt=smoothdata(vpt0,'movmean',20);
 
-% vxb=smoothdata(vxb0,'movmedian',20);
+% vxb=smoothdata(vxb0,'movmean');
 % vxb=smoothdata(vxb,'movmean');
-% dvp=smoothdata(dvp0,'movmean',80);
+% dvp=smoothdata(dvp0,'movmean');
 % vpv=smoothdata(vpv0,'movmean');
 % vpt=smoothdata(vpt0,'movmean');
 
@@ -93,6 +93,7 @@ xlim(xrange);
 legend('E','Sum','-V\times B','\nabla \cdot P/qn','m/qn\nabla\cdot(nVV)','m/qn \partial nV/\partial t','Location','Best')
 xlabel('Z [c/\omega_{pi}]');
 ylabel('Ey');
+title(['\Omega_{ci}t=',num2str(tt)]);
 set(gca,'FontSize',12);
 cd(outdir);
-print('-dpng','-r300',['Ey_ion_t',num2str(tt),'_x',num2str(xz),'.png']);
+print('-dpng','-r300',['Ey_cold_ion_t',num2str(tt),'_x',num2str(xz),'.png']);

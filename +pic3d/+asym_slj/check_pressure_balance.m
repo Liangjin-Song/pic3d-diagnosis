@@ -6,13 +6,13 @@
 % clear;
 %% parameters
 % input/output directory
-indir='E:\PIC\Test';
-outdir='E:\PIC\Test';
+indir='E:\Asym\cb1\data';
+outdir='E:\Asym\cb1\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0;
 % the line
-x0=5;
+z0=25;
 dir=1;
 % figure style
 extra.Visible=true;
@@ -39,10 +39,10 @@ Pe=(Pe.xx+Pe.yy+Pe.zz)/3;
 Pe=slj.Scalar(Pe);
 
 %% get the line
-pb=Pb.get_line2d(x0, dir, prm, 1);
-ph=Ph.get_line2d(x0, dir, prm, 1);
-pl=Pl.get_line2d(x0, dir, prm, 1);
-pe=Pe.get_line2d(x0, dir, prm, 1);
+pb=Pb.get_line2d(z0, dir, prm, 1);
+ph=Ph.get_line2d(z0, dir, prm, 1);
+pl=Pl.get_line2d(z0, dir, prm, 1);
+pe=Pe.get_line2d(z0, dir, prm, 1);
 al=pb+ph+pl+pe;
 
 %% figure
@@ -54,4 +54,9 @@ plot(ll,pl,'b','LineWidth', 2);
 plot(ll,pe,'m','LineWidth', 2);
 plot(ll,al,'k','LineWidth', 2); hold off
 legend('Pb','Pic','Pi','Pe','Sum');
+ylabel('P');
+xlabel('Z [c/\omega_{pi}]');
+set(gca,'FontSize',16);
+cd(outdir);
+print(f,'-dpng','-r300',['P_x=',num2str(z0),'_t',num2str(tt,'%06.2f'),'.png']);
 % end

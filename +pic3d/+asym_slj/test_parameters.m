@@ -3,7 +3,7 @@
 clear;
 %% parameters
 % directory
-dir='E:\Download';
+dir='E:\Asym\cn2\out\Global';
 % the range
 y=-20:0.01:20;
 % the current sheet position
@@ -14,16 +14,16 @@ L=1;
 % Br =|Bsheath∕Bsphere|, the magnetic field ratio between both sides of the current sheet
 Br=0.8;
 % nr=nsheath∕nsphere the density ratio between both sides of the current sheet
-Nr=2;
+Nr=5;
 
 % density ratio between cold ions and the total plasma density at the magnetosphere side
-phi=0.8;
+phi=0;
 
 % the distance between cold ions and the current sheet
 s=0;
 
 % temperature ratio between hot ions and cold ions at the magnetosphere side
-theta2=100;
+theta2=1;
 
 % the temperature ratio between electron and hot ion
 theta1=0.5;

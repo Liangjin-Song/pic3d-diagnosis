@@ -6,17 +6,22 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\PIC\Test';
-outdir='E:\PIC\Test';
+indir='E:\Asym\cb2\data';
+outdir='E:\Asym\cb2\out\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0;
+tt=0:8;
 % the variable name
+<<<<<<< HEAD
 % varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
 % varname={'B','E','J','Vl','Ve','Nl','Ne', 'divB', 'divE'};
 varname={'divE'};
+=======
+varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
+% varname={'Nh'};
+>>>>>>> 1827be0d38c300670c913559c738d082ae603d1e
 % figure style
-extra.Visible=true;
+extra.Visible=false;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
 extra.yrange=[prm.value.lz(1)+1, prm.value.lz(end)-1];
 extra.xlabel='X [c/\omega_{pi}]';

@@ -6,11 +6,11 @@
 clear;
 %% parameters
 % directory
-indir='E:\Asym\asym_cold_Nr1\data';
-outdir='E:\Asym\asym_cold_Nr1\out\Global';
+indir='E:\Asym\cb1\data';
+outdir='E:\Asym\cb1\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:151;
+tt=0:50;
 
 %% the loop
 nt=length(tt);
@@ -31,6 +31,7 @@ for t=1:nt
     %% the x-line position
     [~,ix]=min(abs(lbz(lrf:rrf)));
     ix=ix+lrf-1;
+        ix=prm.value.nx/2+20;
     iz=inz(ix);
     %% the magnetic flux along the current sheet
     flux(t)=sum(lbz(1:ix),'All');

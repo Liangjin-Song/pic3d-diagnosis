@@ -1,9 +1,10 @@
 % function plot_species_energy()
 clear;
-indir='E:\Asym\asym_cold_Nr1\data';
-outdir='E:\Asym\asym_cold_Nr1\out\Global';
+indir='E:\Asym\cb1\data';
+outdir='E:\Asym\cb1\out\Global';
 prm=slj.Parameters(indir,outdir);
-xrange=[0 150];
+xrange=[0 50];
+t0=1;
 %% plot energy
 h1=figure;
 en=load([indir,'\energy.dat']);
@@ -29,7 +30,7 @@ nt=length(tot);
 rate=zeros(1,nt);
 
 for t=1:nt
-    rate(t)=(tot(t)-tot(1))/tot(1);
+    rate(t)=(tot(t)-tot(t0))/tot(t0);
 end
 
 plot(tt,rate,'k','LineWidth',2);
@@ -42,7 +43,7 @@ cd(outdir)
 print(h2, '-dpng','-r300','energy_rate.png');
 
 %% the energy change
-de=en(:,:)-en(1,:);
+de=en(:,:)-en(t0,:);
 h3=figure;
 plot(tt,de(:,2),'g','LineWidth',2); hold on
 plot(tt,de(:,3),'b','LineWidth',2);

@@ -2,14 +2,14 @@
 %% plot the cold ions density profiles
 clear;
 %% parameters 
-indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Momentum';
+indir='E:\Asym\cb1\data';
+outdir='E:\Asym\cb1\data';
 prm=slj.Parameters(indir,outdir);
-name='Vl';
-component='z';
+name='B';
+component='x';
 norm=1;
-tt=100;
-xz=50.025;
+tt=30;
+xz=32;
 dir=1;
 extra.xrange=[-25,25];
 extra.LineStyle='-';

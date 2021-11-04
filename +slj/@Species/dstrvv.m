@@ -71,7 +71,7 @@ for i=1:np
     end
     pv1=round(slj.Physics.linear([lv1(1), 1], [lv1(end), length(lv1)], pv1));
     pv2=round(slj.Physics.linear([lv2(1), 1], [lv2(end), length(lv2)], pv2));
-    frv(pv1, pr, pv2) = frv(pv1, pr, pv2) + 1;
+    frv(pv1, pr, pv2) = frv(pv1, pr, pv2) + obj.value.weight(i);
 end
 ll.lr=lr;
 ll.lv1=lv1;

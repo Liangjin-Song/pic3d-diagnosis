@@ -5,8 +5,8 @@
 %%
 clear;
 %% parameters
-indir='E:\Asym\cb1\data';
-outdir='E:\Asym\cb1\out\Global';
+indir='E:\PIC\Test';
+outdir='E:\PIC\Test';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0;
@@ -48,9 +48,9 @@ lje=Jpe.get_line2d(z0,dir,prm,1);
 
 %% plot figure
 % Jy for Jp, Jc, Js
-ll.ljs=ljs.lz;
-ll.ljp=ljp.lz;
-ll.ljc=ljc.lz;
+ll.ljs=ljs.ly;
+ll.ljp=ljp.ly;
+ll.ljc=ljc.ly;
 extra.LineStyle={'-','-.','--'};
 extra.LineColor={'r','k','b'};
 extra.legend={'Js','Jp','Jc'};

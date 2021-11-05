@@ -2,16 +2,16 @@
 %% plot the cold ions density profiles
 clear;
 %% parameters 
-indir='E:\Asym\cb1\data';
-outdir='E:\Asym\cb1\data';
+indir='E:\PIC\Test';
+outdir='E:\PIC\Test';
 prm=slj.Parameters(indir,outdir);
 name='B';
 component='x';
 norm=1;
-tt=30;
-xz=32;
+tt=0;
+xz=5;
 dir=1;
-extra.xrange=[-25,25];
+extra.xrange=[-10,10];
 extra.LineStyle='-';
 extra.LineColor='k';
 extra.title=['\Omega_{ci}t=',num2str(tt)];

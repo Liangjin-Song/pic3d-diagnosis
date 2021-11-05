@@ -3,10 +3,10 @@
 % @info: writen by Liangjin Song on 20210811
 % @brief: check plasma neutrality for the asymmetric reconnection model with cold ions (asym_rec_slj)
 %%
-% clear;
+clear;
 %% parameters
-indir='E:\Asym\cb1\data';
-outdir='E:\Asym\cb1\out\Global';
+indir='E:\PIC\Test';
+outdir='E:\PIC\Test';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0;

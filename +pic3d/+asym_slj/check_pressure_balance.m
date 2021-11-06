@@ -6,13 +6,13 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Asym\cb20\data';
-outdir='E:\Asym\cb20\out';
+indir='E:\Asym\cb22\data';
+outdir='E:\Asym\cb22\out';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0;
+tt=1;
 % the line
-z0=5;
+z0=25;
 dir=1;
 % figure style
 extra.Visible=true;
@@ -73,6 +73,7 @@ plot(ll,al,'k','LineWidth', 2); hold off
 legend('Pb','Pic','Pi','Pe','Sum');
 ylabel('P');
 xlabel('Z [c/\omega_{pi}]');
+title(['\Omega_{ci}t = ',num2str(tt)]);
 set(gca,'FontSize',16);
 xlim(extra.yrange);
 cd(outdir);

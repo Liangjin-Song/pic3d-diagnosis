@@ -6,11 +6,11 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Asym\cb20\data';
-outdir='E:\Asym\cb20\out';
+indir='E:\Asym\cb22\data';
+outdir='E:\Asym\cb22\out';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=6:50;
+tt=0:15;
 % the variable name
 % varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
 % varname={'B','E','J','Vl','Ve','Nl','Ne', 'divB', 'divE'};

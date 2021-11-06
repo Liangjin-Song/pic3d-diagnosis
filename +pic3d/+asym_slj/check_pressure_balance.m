@@ -6,8 +6,8 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\PIC\Test';
-outdir='E:\PIC\Test';
+indir='E:\Asym\cb22\data';
+outdir='E:\Asym\cb22\out';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=1;
@@ -73,6 +73,7 @@ plot(ll,al,'k','LineWidth', 2); hold off
 legend('Pb','Pic','Pi','Pe','Sum');
 ylabel('P');
 xlabel('Z [c/\omega_{pi}]');
+title(['\Omega_{ci}t = ',num2str(tt)]);
 set(gca,'FontSize',16);
 xlim(extra.yrange);
 cd(outdir);

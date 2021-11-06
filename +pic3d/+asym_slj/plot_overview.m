@@ -6,15 +6,15 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\PIC\Test';
-outdir='E:\PIC\Test';
+indir='E:\Asym\cb22\data';
+outdir='E:\Asym\cb22\out';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0;
+tt=0:15;
 % the variable name
 % varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
 % varname={'B','E','J','Vl','Ve','Nl','Ne', 'divB', 'divE'};
-varname={'E'};
+varname={'B','E','J','divB', 'divE'};
 % figure style
 extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];

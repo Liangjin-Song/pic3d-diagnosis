@@ -6,8 +6,8 @@
 % clear;
 %% parameters
 % directory
-indir='E:\Asym\cb1\data';
-outdir='E:\Asym\cb1\out\Global';
+indir='E:\Asym\cb20\data';
+outdir='E:\Asym\cb20\out';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0:50;
@@ -18,6 +18,8 @@ nz=4;
 %% the loop
 nt=length(tt);
 rate=zeros(1,nt);
+iix=zeros(1,nt);
+iiz=zeros(1,nt);
 for t=1:nt
     %% read data
     B=prm.read('B',tt(t));
@@ -36,8 +38,10 @@ for t=1:nt
     %% the x-line position
     [~,ix]=min(abs(lbz(lrf:rrf)));
     ix=ix+lrf-1;
-    ix=prm.value.nx/2+20;
+    % ix=prm.value.nx/2+20;
     iz=inz(ix);
+    iix(t)=ix;
+    iiz(t)=iz;
     %% the reconnection electric field in a box
     Ey=Ey(iz-nz:iz+nz,ix-nx:ix+nx);
     rate(t)=mean(Ey(:));

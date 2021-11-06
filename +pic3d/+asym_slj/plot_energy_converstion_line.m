@@ -1,8 +1,8 @@
 % function plot_energy_converstion_line
 clear;
 %% parameters
-indir='E:\Asym\cb1\data';
-outdir='E:\Asym\cb1\out\Conservation';
+indir='E:\Asym\cb20\data';
+outdir='E:\Asym\cb20\out';
 prm=slj.Parameters(indir,outdir);
 
 tt=30;

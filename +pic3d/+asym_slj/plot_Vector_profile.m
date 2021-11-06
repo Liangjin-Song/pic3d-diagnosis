@@ -2,14 +2,14 @@
 %% plot the cold ions density profiles
 clear;
 %% parameters 
-indir='E:\PIC\Test';
-outdir='E:\PIC\Test';
+indir='E:\Asym\cb20\data';
+outdir='E:\Asym\cb20\out';
 prm=slj.Parameters(indir,outdir);
-name='B';
-component='x';
-norm=1;
-tt=0;
-xz=5;
+name='E';
+component='y';
+norm=prm.value.vA;
+tt=13;
+xz=25;
 dir=1;
 extra.xrange=[-10,10];
 extra.LineStyle='-';
@@ -29,13 +29,13 @@ else
 end
 if component=='x'
     lf=lf.lx;
-    extra.ylabel='B_{x}';
+    extra.ylabel=[name,'_{x}'];
 elseif component=='y'
     lf=lf.ly;
-    extra.ylabel='B_{y}';
+    extra.ylabel=[name,'_{y}'];
 elseif component=='z'
     lf=lf.lz;
-    extra.ylabel='B_{z}';
+    extra.ylabel=[name,'_{z}'];
 end
 f=slj.Plot();
 f.line(ll, lf, extra);

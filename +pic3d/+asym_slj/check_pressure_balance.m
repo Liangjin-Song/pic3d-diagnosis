@@ -10,9 +10,9 @@ indir='E:\PIC\Test';
 outdir='E:\PIC\Test';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0;
+tt=1;
 % the line
-z0=5;
+z0=15;
 dir=1;
 % figure style
 extra.Visible=true;

@@ -9,7 +9,7 @@ y=-20:0.01:20;
 % the current sheet position
 y0=0;
 % the half width of the current sheet
-L=0.5;
+L=0.8;
 
 % Br =|Bsheath∕Bsphere|, the magnetic field ratio between both sides of the current sheet
 Br=0.8;

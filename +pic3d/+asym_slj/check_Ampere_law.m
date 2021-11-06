@@ -12,7 +12,7 @@ prm=slj.Parameters(indir,outdir);
 tt=0;
 
 % line position
-z0=5;
+z0=15;
 dir=1;
 
 %% figure style

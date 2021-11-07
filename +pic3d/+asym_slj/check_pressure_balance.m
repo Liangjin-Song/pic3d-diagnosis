@@ -6,13 +6,13 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\PIC\Test';
-outdir='E:\PIC\Test';
+indir='E:\Asym\cb3\data';
+outdir='E:\Asym\cb3\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0;
 % the line
-z0=15;
+z0=5;
 dir=1;
 % figure style
 extra.Visible=true;

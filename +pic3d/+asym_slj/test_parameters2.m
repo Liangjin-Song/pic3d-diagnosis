@@ -1,23 +1,24 @@
-%% asymmetric reconnection with cold ions initialization
+%% asymmetric reconnection with cold ions initialization, asym-slj2
 % writen by Liangjin Song
 clear;
 %% parameters
 % directory
 dir='E:\PIC\Test';
 % the range
-y=-20:0.01:20;
+y=0:500;
 % the current sheet position
-y0=0;
+y0=250;
 % the half width of the current sheet
-L=0.8;
+L=16;
 
 % Br =|Bsheath∕Bsphere|, the magnetic field ratio between both sides of the current sheet
 Br=0.667;
-% nr=nsheath∕nsphere the density ratio between both sides of the current sheet
-Nr=1;
 
-% density ratio between cold ions and the total plasma density at the magnetosphere side
-phi=5/6;
+% Tr=Tsheath∕Tsphere the temperature ratio between both sides of the current sheet
+Tr=1/2;
+
+% density ratio between cold ions and the hot ions density at the magnetosphere side
+phi=5;
 
 % the distance between cold ions and the current sheet
 s=0;
@@ -26,9 +27,9 @@ s=0;
 theta2=100;
 
 % the temperature ratio between electron and hot ion
-theta1=0.5;
+theta1=0.25;
 
-% the beta value at the magnetosheat
+% the beta value at the magnetosheath
 betas=3;
 
 % the light speed
@@ -44,25 +45,49 @@ B=atanh((Br-1)/(Br+1));
 B=tanh((y-y0)/L+B);
 B=-B*(Br+1)/2-(Br-1)/2;
 B=B/Br;
+% figure
 f1=figure;
 plot(y,B,'-k','LineWidth',lw);
 xlabel('Z');
 ylabel('Bx');
 set(gca,'FontSize',fs);
-cd(dir);
-print(f1,'-r300','-dpng','B.png');
 
-%% the density profiles
-% the total plasma density profile
-N=tanh((y-y0)/L)+1;
-N=N*(Nr-1)/2+1;
-N=N/Nr;
-% the cold ions density profiles
-Nic=0.5*phi*(1-tanh((y-y0+s)/L))/Nr;
-% the hot ions density profiles
-Nih=N-Nic;
+
+%% the temperature
+% the hot ion temperature profile
+Tih=tanh((y-y0)/L)+1;
+Tih=Tih*(Tr-1)/2+1;
+Tih=Tih/Tr;
+% the electron temperature profile
+Te=Tih*theta1;
+% the cold ion temperature
+Tish=1;
+Tic=Tish/Tr;
+Tic=Tic/theta2;
 % figure
 f2=figure;
+plot(y,Tih,'-k','LineWidth',lw);
+xlabel('Z');
+ylabel('Tih');
+set(gca,'FontSize',fs);
+
+%% density
+% total pressure
+Bsh=-1;
+P=(1+betas)*Bsh*Bsh/(2*mu0);
+% cold ion density
+Bsp=Bsh/Br;
+PBsp=Bsp*Bsp/(2*mu0);
+Tisp=Tish/Tr;
+Tesp=Tisp*theta1;
+k=(P-PBsp)/(Tisp/phi + Tic + (1 + 1/phi)*Tesp);
+Nic=0.5*k*(1-tanh((y-y0+s)/L));
+% hot ion density
+Pb=B.*B/(2*mu0);
+Nih=(P - Pb - Nic.*Tic - Nic.*Te)./(Tih + Te);
+N=Nih+Nic;
+% figure
+f3=figure;
 plot(y,N,'-k','LineWidth',lw); hold on
 plot(y,Nic,'-r','LineWidth',lw);
 plot(y,Nih,'-b','LineWidth',lw); hold off
@@ -70,35 +95,10 @@ legend('Nic+Nih','Nic','Nih','Location','Best');
 xlabel('Z');
 ylabel('N');
 set(gca,'FontSize',fs);
-cd(dir);
-print(f2,'-r300','-dpng','N.png');
 
-%% the cold ions temperature
-Bsh=-1;
-Bsp=abs(Bsh)/Br;
-PBsh=Bsh*Bsh/(2*mu0);
-PBsp=Bsp*Bsp/(2*mu0);
-P=(1+betas)*PBsh;
-Nsh=1;
-Nsp=1/Nr;
-Nicp=phi*Nsp;
-Nisp=Nsp-Nicp;
-Tic=(P-PBsp)/(Nisp*theta2+Nicp+Nsp*theta1*theta2);
-
-%% the hot ions temperature profile
-Pb=B.*B/(2*mu0);
-Tih=(P-Pb-Nic*Tic)./(Nih+theta1*(Nic+Nih));
-f3=figure;
-plot(y,Tih,'-k','LineWidth',lw);
-xlabel('Z');
-ylabel('Tih');
-set(gca,'FontSize',fs);
-cd(dir);
-print(f3,'-r300','-dpng','T.png');
-
-%% the pressure
+%% pressure
 Pih=Tih.*Nih;
-Pe=theta1*Tih.*(Nih+Nic);
+Pe=Te.*N;
 Pic=Nic*Tic;
 Pp=Pih+Pe+Pic+Pb;
 f4=figure;
@@ -111,5 +111,6 @@ legend('P_{tot}','Pb','Pic','Pih','Pe','Location','Best');
 xlabel('Z');
 ylabel('Pressure');
 set(gca,'FontSize',fs);
-cd(dir);
-print(f4,'-r300','-dpng','P.png');
+
+% cd(dir);
+% print(f1,'-r300','-dpng','B.png');

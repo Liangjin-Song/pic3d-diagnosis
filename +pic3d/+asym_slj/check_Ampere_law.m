@@ -5,8 +5,8 @@
 %%
 clear;
 %% parameters
-indir='E:\Asym\cb22\data';
-outdir='E:\Asym\cb22\out';
+indir='E:\PIC\Test';
+outdir='E:\PIC\Test';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0;

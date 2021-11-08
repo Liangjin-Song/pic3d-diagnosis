@@ -1,13 +1,13 @@
 % function plot_momentum_equation
 % clear;
 %% parameters
-indir='E:\Asym\cb1\data';
-outdir='E:\Asym\cb1\out\Conversion';
+indir='E:\Asym\cb3\data';
+outdir='E:\Asym\cb3\out';
 prm=slj.Parameters(indir,outdir);
 
-tt=13;
+tt=39;
 dt=1;
-name='h';
+name='l';
 
 q=prm.value.qi;
 m=prm.value.mi;
@@ -41,11 +41,11 @@ dvp=divP.get_line2d(xz, dir, prm, norm);
 vpv=nvv.get_line2d(xz, dir, prm, norm);
 vpt=nvt.get_line2d(xz, dir, prm, norm);
 
-eee=eee.ly;
-vxb=vxb.ly;
-dvp=dvp.ly;
-vpv=vpv.ly;
-vpt=vpt.ly;
+eee=eee.lz;
+vxb=vxb.lz;
+dvp=dvp.lz;
+vpv=vpv.lz;
+vpt=vpt.lz;
 
 % eee=E.z(:,pxz-dxz:pxz+dxz);
 % vxb=vxB.z(:,pxz-dxz:pxz+dxz);
@@ -92,8 +92,8 @@ plot(ll,vpt,'-m','LineWidth',2); hold off
 xlim(xrange);
 legend('E','Sum','-V\times B','\nabla \cdot P/qn','m/qn\nabla\cdot(nVV)','m/qn \partial nV/\partial t','Location','Best')
 xlabel('Z [c/\omega_{pi}]');
-ylabel('Ey');
+ylabel('Ez');
 title(['\Omega_{ci}t=',num2str(tt)]);
 set(gca,'FontSize',12);
 cd(outdir);
-print('-dpng','-r300',['Ey_cold_ion_t',num2str(tt),'_x',num2str(xz),'.png']);
+% print('-dpng','-r300',['Ey_cold_ion_t',num2str(tt),'_x',num2str(xz),'.png']);

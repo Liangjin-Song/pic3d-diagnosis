@@ -10,7 +10,7 @@ indir='E:\Asym\cb3\data';
 outdir='E:\Asym\cb3\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0;
+tt=1;
 % the line
 z0=5;
 dir=1;
@@ -77,7 +77,6 @@ title(['\Omega_{ci}t = ',num2str(tt)]);
 set(gca,'FontSize',16);
 xlim(extra.yrange);
 cd(outdir);
-% print(f1,'-dpng','-r300',['P_x=',num2str(z0),'_t',num2str(tt,'%06.2f'),'.png']);
 % end
 
 %% figure, temperature
@@ -91,3 +90,5 @@ ylabel('Temperature * coeff');
 set(gca,'FontSize',16);
 xlim(extra.yrange);
 cd(outdir);
+print(f1,'-dpng','-r300',['P_x=',num2str(z0),'_t',num2str(tt,'%06.2f'),'.png']);
+print(f2,'-dpng','-r300',['T_x=',num2str(z0),'_t',num2str(tt,'%06.2f'),'.png']);

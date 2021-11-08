@@ -1,9 +1,9 @@
 % function plot_species_energy()
 clear;
-indir='E:\Asym\cb1\data';
-outdir='E:\Asym\cb1\out\Global';
+indir='E:\Asym\cb3\data';
+outdir='E:\Asym\cb3\out\Global';
 prm=slj.Parameters(indir,outdir);
-xrange=[0 50];
+xrange=[0 40];
 t0=1;
 %% plot energy
 h1=figure;

@@ -5,11 +5,11 @@ clear;
 % directory
 dir='E:\PIC\Test';
 % the range
-y=0:500;
+y=-15:0.1:15;
 % the current sheet position
-y0=250;
+y0=0;
 % the half width of the current sheet
-L=16;
+L=0.8;
 
 % Br =|Bsheath∕Bsphere|, the magnetic field ratio between both sides of the current sheet
 Br=0.667;

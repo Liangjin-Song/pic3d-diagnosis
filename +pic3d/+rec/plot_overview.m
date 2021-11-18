@@ -13,7 +13,7 @@ prm=slj.Parameters(indir,outdir);
 tt=0;
 % the variable name
 % varname={'B','E','J','Vi','Ve','Ni','Ne'};
-varname={'divB'};
+varname={'divE'};
 % figure style
 extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
@@ -22,7 +22,7 @@ extra.yrange=[prm.value.lz(1), prm.value.lz(end)];
 % extra.yrange=[9,15];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-
+extra=[];
 %% the length of the time and the variable name
 nt=length(tt);
 nvar=length(varname);

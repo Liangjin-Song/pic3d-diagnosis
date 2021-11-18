@@ -24,13 +24,13 @@ phi=5;
 s=0;
 
 % temperature ratio between hot ions and cold ions at the magnetosphere side
-theta2=100;
+theta2=10;
 
 % the temperature ratio between electron and hot ion
 theta1=0.25;
 
 % the beta value at the magnetosheath
-betas=3;
+betas=4;
 
 % the light speed
 c=0.5;
@@ -86,6 +86,7 @@ Nic=0.5*k*(1-tanh((y-y0+s)/L));
 Pb=B.*B/(2*mu0);
 Nih=(P - Pb - Nic.*Tic - Nic.*Te)./(Tih + Te);
 N=Nih+Nic;
+disp(N(end)/N(1));
 % figure
 f3=figure;
 plot(y,N,'-k','LineWidth',lw); hold on

@@ -6,11 +6,11 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Asym\cb3\data';
-outdir='E:\Asym\cb3\out\Global';
+indir='E:\PIC\Test';
+outdir='E:\PIC\Test';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=1;
+tt=0;
 % the line
 z0=5;
 dir=1;
@@ -35,14 +35,14 @@ Ne=prm.read('Ne',tt);
 Pb=B.sqre();
 mu0=1/(prm.value.c*prm.value.c);
 Pb=Pb.normalize(2*mu0);
-% Pl=(Pl.xx+Pl.yy+Pl.zz)/3;
-Pl=Pl.zz;
+Pl=(Pl.xx+Pl.yy+Pl.zz)/3;
+% Pl=Pl.zz;
 Pl=slj.Scalar(Pl);
-% Ph=(Ph.xx+Ph.yy+Ph.zz)/3;
-Ph=Ph.zz;
+Ph=(Ph.xx+Ph.yy+Ph.zz)/3;
+% Ph=Ph.zz;
 Ph=slj.Scalar(Ph);
-% Pe=(Pe.xx+Pe.yy+Pe.zz)/3;
-Pe=Pe.zz;
+Pe=(Pe.xx+Pe.yy+Pe.zz)/3;
+% Pe=Pe.zz;
 Pe=slj.Scalar(Pe);
 
 % temperature

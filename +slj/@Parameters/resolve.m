@@ -147,10 +147,12 @@ function value=reset_system_size(value)
 % @param: value - the parameters structure containing system size
 % @return: value - the parameters structure
 %%
-ny=value.nz;
-value.nz=value.ny;
-value.ny=ny;
-value.reset=true;
+if value.dimension < 3
+    ny=value.nz;
+    value.nz=value.ny;
+    value.ny=ny;
+    value.reset=true;
+end
 end
 
 %% ======================================================================== %%

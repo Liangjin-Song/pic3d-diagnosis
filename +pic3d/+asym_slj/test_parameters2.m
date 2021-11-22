@@ -9,10 +9,10 @@ y=-15:0.1:15;
 % the current sheet position
 y0=0;
 % the half width of the current sheet
-L=0.8;
+L=0.5;
 
 % Br =|Bsheath∕Bsphere|, the magnetic field ratio between both sides of the current sheet
-Br=0.667;
+Br=1/2;
 
 % Tr=Tsheath∕Tsphere the temperature ratio between both sides of the current sheet
 Tr=1/2;
@@ -24,13 +24,13 @@ phi=5;
 s=0;
 
 % temperature ratio between hot ions and cold ions at the magnetosphere side
-theta2=10;
+theta2=100;
 
 % the temperature ratio between electron and hot ion
-theta1=0.25;
+theta1=1/4;
 
 % the beta value at the magnetosheath
-betas=4;
+betas=1.36;
 
 % the light speed
 c=0.5;
@@ -76,7 +76,7 @@ set(gca,'FontSize',fs);
 Bsh=-1;
 P=(1+betas)*Bsh*Bsh/(2*mu0);
 % cold ion density
-Bsp=Bsh/Br;
+Bsp=-Bsh/Br;
 PBsp=Bsp*Bsp/(2*mu0);
 Tisp=Tish/Tr;
 Tesp=Tisp*theta1;
@@ -86,7 +86,6 @@ Nic=0.5*k*(1-tanh((y-y0+s)/L));
 Pb=B.*B/(2*mu0);
 Nih=(P - Pb - Nic.*Tic - Nic.*Te)./(Tih + Te);
 N=Nih+Nic;
-disp(N(end)/N(1));
 % figure
 f3=figure;
 plot(y,N,'-k','LineWidth',lw); hold on
@@ -115,3 +114,18 @@ set(gca,'FontSize',fs);
 
 % cd(dir);
 % print(f1,'-r300','-dpng','B.png');
+
+
+
+Bsh=abs(Bsh);
+Bsp=abs(Bsp);
+
+rho_sh=N(end);
+rho_sp=N(1);
+
+vA_asym=sqrt((Bsh*Bsp*(Bsh+Bsp))/(mu0*(rho_sh*Bsp+rho_sp*Bsh)));
+disp(['v_{A,asym} = ', num2str(vA_asym)]);
+
+disp(['Nsh/Nsp = ', num2str(N(end)/N(1))]);
+
+disp(['Nih_sh/Nih_sp = ', num2str(Nih(end)/Nih(1))]);

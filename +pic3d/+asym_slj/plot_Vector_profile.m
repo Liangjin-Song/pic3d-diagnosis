@@ -2,19 +2,20 @@
 %% plot the cold ions density profiles
 clear;
 %% parameters 
-indir='E:\Asym\cb20\data';
-outdir='E:\Asym\cb20\out';
+indir='E:\Asym\Cold1\data';
+outdir='E:\Asym\Cold1\out\Global';
 prm=slj.Parameters(indir,outdir);
-name='E';
-component='y';
-norm=prm.value.vA;
-tt=13;
+name='B';
+component='x';
+norm=1; % prm.value.vA;
+tt=0;
 xz=25;
 dir=1;
 extra.xrange=[-10,10];
 extra.LineStyle='-';
 extra.LineColor='k';
 extra.title=['\Omega_{ci}t=',num2str(tt)];
+extra.Fontsize=16;
 
 %% read data
 V=prm.read(name,tt);
@@ -39,4 +40,4 @@ elseif component=='z'
 end
 f=slj.Plot();
 f.line(ll, lf, extra);
-% f.png(prm,['Bz_t',num2str(tt)]);
+% f.png(prm,['Bx_t',num2str(tt)]);

@@ -6,11 +6,11 @@
 % clear;
 %% parameters
 % directory
-indir='E:\Asym\cb3\data';
-outdir='E:\Asym\cb3\out\Global';
+indir='E:\Asym\Case2\data';
+outdir='E:\Asym\Case2\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:40;
+tt=0:60;
 % the box size
 nx=4;
 nz=4;

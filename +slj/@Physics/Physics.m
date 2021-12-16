@@ -36,6 +36,7 @@ end
 %% some equation
 methods (Access = public, Static)
     [vxB, divP, nvv, nvt] = momentum_equation(prm, name, tt, dt, q, m);
+    [vxB, divP, nvv, nvt] = momentum_equation_velocity(prm, name, tt, dt, q, m);
 end
 
 %% ======================================================================== %%

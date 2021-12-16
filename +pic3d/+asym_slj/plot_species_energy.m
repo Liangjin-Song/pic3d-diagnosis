@@ -1,9 +1,9 @@
 % function plot_species_energy()
 clear;
-indir='E:\Asym\cb3\data';
-outdir='E:\Asym\cb3\out\Global';
+indir='E:\Asym\Cold1\data';
+outdir='E:\Asym\Cold1\out\Global';
 prm=slj.Parameters(indir,outdir);
-xrange=[0 40];
+xrange=[0 60];
 t0=1;
 %% plot energy
 h1=figure;
@@ -45,7 +45,7 @@ print(h2, '-dpng','-r300','energy_rate.png');
 %% the energy change
 de=en(:,:)-en(t0,:);
 h3=figure;
-plot(tt,de(:,2),'g','LineWidth',2); hold on
+plot(tt,de(:,2),'k','LineWidth',2); hold on
 plot(tt,de(:,3),'b','LineWidth',2);
 plot(tt,de(:,4),'m','LineWidth',2);
 plot(tt,de(:,5),'r','LineWidth',2); hold off
@@ -70,9 +70,9 @@ aEi=de(:,4)/Ni;
 aEh=de(:,5)/Nh;
 
 h4=figure;
-plot(tt,aEe,'k','LineWidth',2); hold on
-plot(tt,aEi,'r','LineWidth',2);
-plot(tt,aEh,'b','LineWidth',2);hold off
+plot(tt,aEe,'b','LineWidth',2); hold on
+plot(tt,aEi,'m','LineWidth',2);
+plot(tt,aEh,'r','LineWidth',2);hold off
 xlim([0,tt(end)]);
 legend('Electron','Hot Ion','Cold Ion','Location','Best');
 xlabel('\Omega_{ci}t');

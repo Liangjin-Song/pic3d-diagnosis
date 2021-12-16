@@ -1,15 +1,15 @@
 % function plot_temperature_energy_density_conversion
 clear;
 %% parameters
-indir='E:\Asym\Cold2\data';
-outdir='E:\Asym\Cold2\out\Energy\Line';
+indir='E:\Asym\Cold1\data';
+outdir='E:\Asym\Cold1\out\Energy\Cold';
 prm=slj.Parameters(indir,outdir);
 
-tt=30;
+tt=40;
 dt=1;
-name='l';
+name='h';
 
-xz=25;
+xz=2.5;
 dir=1;
 
 nt=length(tt);
@@ -56,15 +56,14 @@ lPddivV=PddivV.get_line2d(xz,dir,prm,norm);
 lpdivV=pdivV.get_line2d(xz, dir, prm,norm);
 lVdivT=VdivT.get_line2d(xz, dir, prm,norm);
 
-ltot = ldivQ + lPddivV + lpdivV + lVdivT;
-
 %% smooth
-% lpkt = smoothdata(lpkt);
-% ldivKV = smoothdata(ldivKV);
-% lqVE = smoothdata(lqVE);
-% ldivPV = smoothdata(ldivPV);
+ldivQ = smoothdata(ldivQ);
+lPddivV = smoothdata(lPddivV,'movmean',80);
+lpdivV = smoothdata(lpdivV,'movmean',80);
+lVdivT = smoothdata(lVdivT);
+lptt = smoothdata(lptt);
 
-
+ltot = ldivQ + lPddivV + lpdivV + lVdivT;
 %% plot figure
 figure;
 plot(ll, lptt, '-k', 'LineWidth', 2); hold on
@@ -81,7 +80,7 @@ legend('\partial T/\partial t', '-2\nabla\cdot Q/3N', '- 2(P'' \cdot \nabla) \cd
     '-V\cdot\nabla T', 'Sum', 'Location', 'Best');
 xlabel('Z [c/\omega_{pi}]');
 set(get(gca, 'YLabel'), 'String', ['\partial T',sfx,'/\partial t']);
-title(['profiles  ', pstr,' = ',num2str(xz)]);
+title(['\Omega_{ci}t = ',num2str(tt),'  profiles   ', 'x = ', num2str(xz)])
 set(gca,'FontSize',14);
 
 %% save figure

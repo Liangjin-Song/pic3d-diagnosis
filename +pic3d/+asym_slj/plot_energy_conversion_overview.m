@@ -1,12 +1,12 @@
-% function plot_energy_converstion_overview
-clear;
+% function plot_energy_conversion_overview(name)
+% clear;
 %% parameters
-indir='E:\Asym\cb1\data';
-outdir='E:\Asym\cb1\out\Overview';
+indir='E:\Asym\Cold1\data';
+outdir='E:\Asym\Cold1\out\Overview';
 prm=slj.Parameters(indir,outdir);
 
-tt=30;
-name='h';
+tt=31;
+name='e';
 
 nt=length(tt);
 
@@ -36,6 +36,7 @@ for t=1:nt
     ss=prm.read('stream',tt(t));
     %% calculation
     JE=E.dot(V);
+    % JE=slj.Scalar(V.y.*E.y);
     JE=JE*N;
     if name == 'e'
         JE=slj.Scalar(-JE.value);

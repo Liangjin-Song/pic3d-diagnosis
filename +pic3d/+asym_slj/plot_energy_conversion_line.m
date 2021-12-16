@@ -1,15 +1,15 @@
 % function plot_energy_converstion_line
 clear;
 %% parameters
-indir='E:\Asym\cb20\data';
-outdir='E:\Asym\cb20\out';
+indir='E:\Asym\Case2\data';
+outdir='E:\Asym\Case2\out\Energy';
 prm=slj.Parameters(indir,outdir);
 
-tt=30;
+tt=20;
 name='h';
 
-xz=0.5;
-dir=0;
+xz=27.5;
+dir=1;
 
 nt=length(tt);
 
@@ -19,7 +19,7 @@ extra.ylabel='Z [c/\omega_{pi}]';
 
 norm=prm.value.n0*prm.value.vA*prm.value.vA;
 
-xrange=[10,50];
+xrange=[-5,5];
 
 
 if dir == 1

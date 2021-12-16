@@ -1,5 +1,5 @@
 % function plot_momentum_equation
-% clear;
+clear;
 %% parameters
 indir='E:\Asym\cb3\data';
 outdir='E:\Asym\cb3\out';

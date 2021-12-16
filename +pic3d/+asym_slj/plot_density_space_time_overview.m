@@ -2,17 +2,17 @@
 %% parameters
 clear;
 % input/output directory
-indir='E:\Asym\cb1\data';
-outdir='E:\Asym\cb1\out\Space_Time';
+indir='E:\Asym\Case2\data';
+outdir='E:\Asym\Case2\out\Energy';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:50;
+tt=0:60;
 % variable name
 var='N';
 name = 'h';
 % line information
-dir = 0;
-xz = 2;
+dir = 1;
+xz = 25;
 % normalization
 norm=1;
 

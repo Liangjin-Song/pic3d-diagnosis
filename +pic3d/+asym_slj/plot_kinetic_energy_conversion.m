@@ -1,15 +1,15 @@
 % function plot_kinetic_energy_conversion
 clear;
 %% parameters
-indir='E:\Asym\cb1\data';
-outdir='E:\Asym\cb1\out\Conversion';
+indir='E:\Asym\Cold1\data';
+outdir='E:\Asym\Cold1\out\Energy\Cold';
 prm=slj.Parameters(indir,outdir);
 
-tt=30;
+tt=5;
 dt=1;
-name='h';
+name='l';
 
-xz=39;
+xz=10;
 dir=1;
 
 nt=length(tt);
@@ -55,10 +55,10 @@ lqVE=qVE.get_line2d(xz,dir,prm,norm);
 ldivPV=divPV.get_line2d(xz,dir,prm,norm);
 
 %% smooth
-% lpkt = smoothdata(lpkt);
-% ldivKV = smoothdata(ldivKV);
-% lqVE = smoothdata(lqVE);
-% ldivPV = smoothdata(ldivPV);
+lpkt = smoothdata(lpkt);
+ldivKV = smoothdata(ldivKV);
+lqVE = smoothdata(lqVE);
+ldivPV = smoothdata(ldivPV);
 
 ltot=ldivKV + ldivPV + lqVE;
 

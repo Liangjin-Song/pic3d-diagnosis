@@ -1,19 +1,19 @@
 % function plot_temperature_energy_density_conversion_as_time
 clear;
 %% parameters
-indir='E:\Asym\Cold2\data';
-outdir='E:\Asym\Cold2\out\Global';
+indir='E:\Asym\Cold1\data';
+outdir='E:\Asym\Cold1\out\Energy\Cold';
 prm=slj.Parameters(indir,outdir);
 
-tt=1:50;
+tt=1:60;
 dt=1;
 name='h';
 
 xrange=[tt(1)-1,tt(end)+1];
 
 % the box and box size
-nx=20;
-nz=10;
+nx=40;
+nz=20;
 
 if name == 'l'
     sfx='ih';
@@ -59,6 +59,9 @@ for t=1:nt
     [~,ix]=min(abs(lbz(lrf:rrf)));
     ix=ix+lrf-1;
     iz=inz(ix);
+    
+    ix=prm.value.nx/2;
+    iz=prm.value.nz/2;
 
     rate(1,t)=mean(pTt.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
     rate(2,t)=mean(divQ.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');

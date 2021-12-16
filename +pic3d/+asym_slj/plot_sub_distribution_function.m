@@ -6,11 +6,11 @@
 clear;
 %% parameters
 % directory
-indir='E:\Asym\cb1\data';
-outdir='E:\Asym\cb1\out\Distribution\X-line';
+indir='E:\Asym\Case2\data';
+outdir='E:\Asym\Case2\out\Distribution';
 prm=slj.Parameters(indir, outdir);
 % the file name of distribution function
-name='PVh_ts12000_x0-1200_y300-500_z0-1';
+name='PVh_ts11200_x400-1600_y380-620_z0-1';
 % velocity direction
 vdir=1;
 xrange=[27,29];

@@ -12,8 +12,8 @@ tt4=45;
 tt5=50;
 
 %% species
-spc='spctrmh';
-sp='ic';
+spc='spctrme';
+sp='e';
 
 %% transformation from mc^2 to mvA^2
 c=prm.value.c;
@@ -48,8 +48,8 @@ xticklabels({'10^{-4}','10^{-3}','10^{-2}','10^{-1}','10^{0}','10^{1}','10^{2}',
 set(gca,'FontSize',14);
 
 %% save the figures
-cd(outdir);
-print(f,'-dpng','-r300',['energy_spctrum_',sp,'.png']);
+% cd(outdir);
+% print(f,'-dpng','-r300',['energy_spctrum_',sp,'.png']);
 
 
 

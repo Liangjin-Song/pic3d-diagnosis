@@ -43,6 +43,8 @@ methods (Access = public)
     fd = dot(lhs, rhs);
     fd = cross(lhs, rhs);
     fd = filter2d(obj,n);
+    
+    [para, perp] = fac_vector(obj, B);
 end
 
 %% ======================================================================== %%

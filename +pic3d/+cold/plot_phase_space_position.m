@@ -3,23 +3,24 @@
 % plot the particle's position in the velocity phase space
 % writen by Liangjin Song on 20210628
 %%
-clear;
+% clear;
 %% parameters
 indir='E:\PIC\Cold-Ions\mie100\data';
-outdir='E:\PIC\Cold-Ions\mie100\out\Distribution_Function\Diagnose\DF\30-34';
+outdir='E:\PIC\Cold-Ions\mie100\out\Hot_ion\Island\Electron';
 prm=slj.Parameters(indir,outdir);
 file=[outdir,'\common.txt'];
-name='PVh_ts108974_x1401-1448_y986-1015_z0-1';
+name='PVl_ts99359_x2057-2193_y984-1009_z0-1';
 %% figure properties
-extra.precv=120;
-extra.range=2.5;
+extra.precv=100;
+extra.range=25;
 extra.xrange=[-extra.range,extra.range];
 extra.yrange=[-extra.range,extra.range];
 extra.colormap='moon';
 extra.log=true;
 %% read data
 cd(indir);
-id=uint64(load(file));
+% id=uint64(load(file));
+id=uint64(16190174);
 dst=prm.read(name);
 dsta=dst.dstv(prm.value.vA, extra.precv);
 % id=intersect(id,dst.value.id);
@@ -36,7 +37,7 @@ for i=1:nid
     plot_distribution_function(dsta,extra,1);
     hold on
     plot(v.y,v.z,'*g','LineWidth',5);
-    print(f,'-dpng','-r300',[num2str(id(i)),'_y-z_position',name,'.png']);
+    print(f,'-dpng','-r300',[num2str(id(i)),'_y-z_position_',name,'.png']);
     close(f);
     f=figure; 
     plot_distribution_function(dsta,extra,2);

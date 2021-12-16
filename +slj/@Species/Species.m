@@ -35,5 +35,11 @@ methods (Access = public)
     fd = subvelocity(obj, xrange, yrange, zrange);
 end
 
+%% find the particles' ID
+methods (Access = public)
+    id = rectangle_particle_id(obj, prm, vrange);
+    id = ring_particle_id(obj, prm, vdir, center, lradius, sradius);
+end
+
 %% ======================================================================== %%
 end

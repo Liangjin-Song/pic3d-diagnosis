@@ -18,7 +18,7 @@ methods (Access = public, Static)
 end
 
 %% ======================================================================== %%
-%% some vector operation
+%% some vector/tensor operation
 methods (Access = public, Static)
     fd = cross(A, B);
 end
@@ -27,6 +27,9 @@ end
 %% some physics value
 methods (Access = public, Static)
     fd = poynting_vector(E, B, mu);
+    [curv, R] = curvature(prm, B);
+    R = gyroradius(q, m, V, B);
+    K = kappa(prm, q, m, V, B);
 end
 
 %% ======================================================================== %%

@@ -76,9 +76,9 @@ else
     value.by=data(:,12);
     value.bz=data(:,13);
 end
-value.k=data(:,14);
+value.k=data(:,14)*m*val.c*val.c;
 value.kappa=data(:,15);
-fd=slj.Particle(id, q, m,value);
+fd=slj.Particle(id, q, m, value);
 fd=fd.calculation();
 end
 
@@ -144,7 +144,7 @@ value=[];
 value.id=slj.Parameters.read_binary_file([name,'_id.bsd'], 'uint64');
 value.id=value.id';
 prt=slj.Parameters.read_binary_file([name,'.bsd'],val.type);
-nvar=7;
+nvar=6;
 np=length(prt)/nvar;
 prt=reshape(prt,[nvar,np]);
 %% reshape the data
@@ -180,6 +180,6 @@ elseif val.dimension == 1
     value.rz=prt(6,:);
 end
 %% weight
-value.weight=prt(7,:);
+% value.weight=prt(7,:);
 fd = slj.Species(name, time, range, value);
 end

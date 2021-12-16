@@ -57,6 +57,11 @@ elseif strcmp(value.model, 'rec-2harris')
     value=for_parameters(cmd, value);
     value=reset_system_size(value);
     value=length_scale(value);
+elseif strcmp(value.model, 'rec-1harris')
+    cmd='value=resolve_rec_2harris(value, key, word);';
+    value=for_parameters(cmd, value);
+    % value=reset_system_size(value);
+    value=length_scale(value);
 elseif strcmp(value.model, 'asym_rec_3s_slj') || strcmp(value.model, 'asym_rec_3s_slj2')
     cmd='value=resolve_asym_rec_3s_slj(value, key, word);';
     value=for_parameters(cmd, value);

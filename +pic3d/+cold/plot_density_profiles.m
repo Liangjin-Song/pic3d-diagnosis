@@ -1,11 +1,12 @@
 % function plot_density_profiles
 %% plot the cold ions density profiles
-clear;
+% clear;
 %% parameters 
 indir='E:\PIC\Cold-Ions\mie100\data';
 outdir='E:\PIC\Cold-Ions\mie100\out';
-name='Nh';
-tt1=24;
+prm=slj.Parameters(indir,outdir);
+name='Nl';
+tt1=16;
 tt2=26;
 tt3=44;
 tt4=46;
@@ -19,7 +20,6 @@ extra.LineColor={'g','r','k','b'};
 extra.legend={['\Omega_{ci}t=',num2str(tt1)],['\Omega_{ci}t=',num2str(tt2)],['\Omega_{ci}t=',num2str(tt3)],['\Omega_{ci}t=',num2str(tt4)]};
 
 %% read data
-prm=slj.Parameters(indir,outdir);
 N1=prm.read(name,tt1);
 N2=prm.read(name,tt2);
 N3=prm.read(name,tt3);

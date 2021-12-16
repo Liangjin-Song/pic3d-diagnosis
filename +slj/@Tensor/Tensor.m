@@ -41,6 +41,7 @@ methods (Access = public)
         fd = slj.Scalar(fd);
     end
     fd=divergence(obj, prm);
+    fd = fac_tensor(obj, B, prm);
 end
 
 %% ======================================================================== %%

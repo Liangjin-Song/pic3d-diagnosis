@@ -1,14 +1,14 @@
 %% plot electron temperature line
 % writen by Liangjin Song on 20190810 
 clear;
-indir='/data/simulation/rec2d_M25SBg00Sx/data/';
-outdir='/data/simulation/rec2d_M25SBg00Sx/out/line/T/Te/';
-tt=0:0.5:97;
-di=20;
-z0=25;
+indir='E:\Simulation\rec2d_M100SBg00Sx\data';
+outdir='E:\Simulation\rec2d_M100SBg00Sx\out\line';
+tt=50;
+di=40;
+z0=15;
 c=0.6;
-ndx=4000;
-ndy=2000;
+ndx=4800;
+ndy=2400;
 Lx=ndx/di;
 Ly=ndy/di;
 nt=length(tt);

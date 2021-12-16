@@ -11,7 +11,7 @@ function isosurface(fd, lx, ly, lz, isovalue, extra)
 %%
 [~, is] = slj.Plot.get_term(extra, 'FaceColor');
 if ~is
-    extra.FaceColor='red';
+    extra.FaceColor='green';
 end
 [~, is] = slj.Plot.get_term(extra, 'EdgeColor');
 if ~is

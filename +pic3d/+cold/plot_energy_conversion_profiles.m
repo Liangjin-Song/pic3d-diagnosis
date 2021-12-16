@@ -1,16 +1,16 @@
-function plot_energy_conversion_profiles
+% function plot_energy_conversion_profiles
 %% plot the cold ions density profiles
 clear;
 %% parameters 
 indir='E:\PIC\Cold-Ions\mie100\data';
 outdir='E:\PIC\Cold-Ions\mie100\out';
-name='h';
+name='e';
 tt=30;
-xz=48.6;
-dir=1;
+xz=0;
+dir=0;
 extra.xlabel='Z [c/\omega_{pi}]';
 extra.ylabel='J_{ic}\cdot E';
-extra.xrange=[-3,3];
+extra.xrange=[30,70];
 % extra.yrange=[,0.1];
 extra.LineStyle={'-','-','-','-'};
 extra.LineColor={'k','r','g','b'};
@@ -22,15 +22,27 @@ norm=prm.value.n0*prm.value.vA*prm.value.vA;
 N=prm.read(['N',name],tt);
 V=prm.read(['V',name],tt);
 E=prm.read('E',tt);
-JEx=slj.Scalar(V.x.*E.x.*N.value);
+
+%% calculation
+sig=1;
+if strcmp(name,'e') || strcmp(name,'he')
+    sig=-1;
+end
+
+
+JEx=slj.Scalar(sig.*V.x.*E.x.*N.value);
 JEx=JEx.filter2d(3);
-JEy=slj.Scalar(V.y.*E.y.*N.value);
+JEy=slj.Scalar(sig.*V.y.*E.y.*N.value);
 JEy=JEy.filter2d(3);
-JEz=slj.Scalar(V.z.*E.z.*N.value);
+JEz=slj.Scalar(sig.*V.z.*E.z.*N.value);
 JEz=JEz.filter2d(3);
+
+
+
 JE=V.dot(E);
 JE=JE*N;
 JE=JE.filter2d(3);
+JE=slj.Scalar(sig.*JE.value);
 
 %% get the line
 lf.sum=JE.get_line2d(xz, dir, prm, norm);

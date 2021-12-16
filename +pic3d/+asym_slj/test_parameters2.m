@@ -15,7 +15,7 @@ L=0.5;
 Br=1/2;
 
 % Tr=Tsheath∕Tsphere the temperature ratio between both sides of the current sheet
-Tr=1/2;
+Tr=1/4;
 
 % density ratio between cold ions and the hot ions density at the magnetosphere side
 phi=5;
@@ -27,10 +27,10 @@ s=0;
 theta2=100;
 
 % the temperature ratio between electron and hot ion
-theta1=1/4;
+theta1=1/5;
 
 % the beta value at the magnetosheath
-betas=1.36;
+betas=8.3;
 
 % the light speed
 c=0.5;

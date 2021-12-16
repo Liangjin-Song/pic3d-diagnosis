@@ -11,15 +11,15 @@ prm=slj.Parameters(indir,outdir);
 
 %% variable information
 name='E';
-tt=45;
+tt=30;
 norm=prm.value.vA;
 
 %% figure properties
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra.title=['Ex, \Omega_{ci}t=',num2str(tt)];
-extra.xrange=[10,20];
+extra.title=['Ez, \Omega_{ci}t=',num2str(tt)];
+extra.xrange=[10,50];
 extra.yrange=[-5,5];
 extra.caxis=[-1.5,1.5];
 

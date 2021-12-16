@@ -19,6 +19,6 @@ if isa(ss,'slj.Scalar')
 end
 contour(lx, ly, ss, number, color);
 axis on
-set(gca,'fontsize',16,'DataAspectRatio',[1 1 1],'PlotBoxAspectRatio',[1 1 1],...
-    'Xminortick','on','Yminortick','on','tickdir','out')
+% set(gca,'fontsize',16,'DataAspectRatio',[1 1 1],'PlotBoxAspectRatio',[1 1 1],...
+%     'Xminortick','on','Yminortick','on','tickdir','out')
 end

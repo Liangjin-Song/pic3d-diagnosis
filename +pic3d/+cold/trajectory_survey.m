@@ -1,18 +1,47 @@
-% function trajectory_survey(obj, name)
 %% writen by Liangjin Song on 20210412
-%% 
+% plot the particles' information along the particles' trajectories.
 clear;
+%% 
 indir='E:\PIC\Cold-Ions\mie100\data';
-outdir='E:\PIC\Cold-Ions\mie100\out\Hot_ion\DF\Hot_Ion';
+outdir='E:\PIC\Cold-Ions\mie100\out\Trajectory\Electrons_Hot_ions';
 prm=slj.Parameters(indir,outdir);
-id='4756983';
-name=['trajl_id',id];
+filename='E:\PIC\Cold-Ions\mie100\kinetic\particles_id1.txt';
+show=false;
+%% species
+spcs={'e','he','l','h'};
 
 %% energy normalization
-norm=prm.value.mi*prm.value.vA.^2;
+norm=prm.value.mi*prm.value.vA*prm.value.vA;
 
 %% read data
-prt=prm.read(char(name));
+pid=uint64(load(filename));
+nid=length(pid);
+ns=length(spcs);
+for p=1:nid
+id=pid(p);
+cd(indir);
+for s=1:ns
+    spc=char(spcs(s));
+    name=['traj',spc,'_id',num2str(id)];
+    if exist([name,'.dat'],'file')~=0
+        break;
+    end
+end
+
+if strcmp(spc,'e')
+    spc='e';
+elseif strcmp(spc,'he')
+    spc='e';
+elseif strcmp(spc,'l')
+    spc='ih';
+else
+    spc='ic';
+end
+prt=prm.read(name);
+plot_trajectory_information(prm, name, prt,outdir, norm, spc, show);
+end
+
+function plot_trajectory_information(prm, name, prt,outdir, norm, spc, show)
 % prt.value.kappa(1)=prt.value.kappa(6);
 % prt.value.kappa(2)=prt.value.kappa(7);
 % prt.value.kappa(3)=prt.value.kappa(8);
@@ -34,7 +63,7 @@ lx=prt.value.time;
 extra.xrange=[0,40];
 
 %% plot figure
-f1=figure;
+f1=figure('Visible', show);
 set(f1, 'Position', [100,0,1500,5000])
 
 %% energy in rest frame
@@ -45,8 +74,8 @@ ly.l3=prt.value.ky;
 ly.l4=prt.value.kz;
 extra.LineStyle={'-', '-', '-', '-'};
 extra.LineColor={'k', 'r', 'b', 'm'};
-extra.legend={'Kic', 'Kx', 'Ky', 'Kz'};
-extra.ylabel='Kic';
+extra.legend={['K',spc], 'Kx', 'Ky', 'Kz'};
+extra.ylabel=['K',spc];
 extra.Location='west';
 slj.Plot.linen(lx, ly, extra);
 set(gca,'XTicklabel',[]);
@@ -61,7 +90,7 @@ ly.l3=prt.value.k;
 extra.LineStyle={'-', '-', '--'};
 extra.LineColor={'r', 'b', 'k'};
 extra.legend={'K_{||}', 'K_{\perp}', 'Kic'};
-extra.ylabel='Kic';
+extra.ylabel=['K',spc];
 slj.Plot.linen(lx, ly, extra);
 set(gca,'XTicklabel',[]);
 
@@ -88,10 +117,8 @@ subplot(6,2,4);
 extra.ylabell='\mu';
 extra.ylabelr='\kappa';
 extra.yranger=[0,10];
-extra.yrangel=[0,100];
 slj.Plot.plotyy1(lx, prt.value.mu, prt.value.kappa, extra);
 set(gca,'XTicklabel',[]);
-extra=rmfield(extra,'yrangel');
 extra=rmfield(extra,'yranger');
 
 
@@ -134,7 +161,7 @@ ly.l3=prt.value.vz;
 extra.LineStyle={'-', '-', '-'};
 extra.LineColor={'r', 'b', 'k'};
 extra.legend={'vx', 'vy', 'vz'};
-extra.ylabel='V_{ic}';
+extra.ylabel=['V_{',spc,'}'];
 extra.Location='west';
 slj.Plot.linen(lx, ly, extra);
 extra=rmfield(extra,'Location');
@@ -148,7 +175,7 @@ ly.l2=prt.value.v_perp;
 extra.LineStyle={'-', '-'};
 extra.LineColor={'r', 'k'};
 extra.legend={'v_{||}', 'v_{\perp}'};
-extra.ylabel='V_{ic}';
+extra.ylabel=['V_{',spc,'}'];
 extra.Location='west';
 slj.Plot.linen(lx, ly, extra);
 set(gca,'XTicklabel',[]);
@@ -166,7 +193,7 @@ ly.l5=ly.l2+ly.l3+ly.l4;
 extra.LineStyle={'-', '-', '-', '-', '--'};
 extra.LineColor={'k', 'r', 'b', 'g', 'k'};
 extra.legend={'K', 'qVxEx', 'qVyEy', 'qVzEz', 'Sum'};
-extra.ylabel='Kic';
+extra.ylabel=['K',spc];
 extra.Location='northwest';
 slj.Plot.linen(lx, ly, extra);
 set(gca,'XTicklabel',[]);
@@ -182,7 +209,7 @@ ly.l4=ly.l2+ly.l3;
 extra.LineStyle={'-', '-', '-', '--'};
 extra.LineColor={'k', 'r', 'b', 'k'};
 extra.legend={'K', 'qV_{||}E_{||}', 'qV_{\perp}E_{\perp}', 'Sum'};
-extra.ylabel='Kic';
+extra.ylabel=['K',spc];
 slj.Plot.linen(lx, ly, extra);
 set(gca,'XTicklabel',[]);
 
@@ -192,9 +219,7 @@ subplot(6,2,11);
 extra.ylabell='X [c/\omega_{pi}]';
 extra.ylabelr='Z [c/\omega_{pi}]';
 extra.xlabel='\Omega_{ci}t';
-extra.yrangel=[0,100];
 slj.Plot.plotyy1(lx, prt.value.rx, prt.value.rz, extra);
-extra=rmfield(extra,'yrangel');
 % set(gca,'XTicklabel',[]);
 
 
@@ -209,7 +234,7 @@ ly.l5=ly.l2+ly.l3+ly.l4;
 extra.LineStyle={'-', '-', '-', '-', '--'};
 extra.LineColor={'k', 'r', 'b', 'g', 'k'};
 extra.legend={'K', 'Fermi', '\mu dB/dt', 'qV_{||}E_{||}', 'Sum'};
-extra.ylabel='Kic';
+extra.ylabel=['K',spc];
 slj.Plot.linen(lx, ly, extra);
 % set(gca,'XTicklabel',[]);
 
@@ -227,3 +252,5 @@ title(ht,['ID=', num2str(prt.id)],'FontSize', 16);
 %% save the figure
 cd(outdir);
 print(f1, '-dpng', '-r350', [name,'_survey.png']);
+close(f1);
+end

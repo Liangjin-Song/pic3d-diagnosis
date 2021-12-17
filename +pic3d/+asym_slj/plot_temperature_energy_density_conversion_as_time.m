@@ -5,15 +5,15 @@ indir='E:\Asym\Cold1\data';
 outdir='E:\Asym\Cold1\out\Energy\Cold';
 prm=slj.Parameters(indir,outdir);
 
-tt=1:60;
+tt=1:59;
 dt=1;
 name='h';
 
 xrange=[tt(1)-1,tt(end)+1];
 
 % the box and box size
-nx=40;
-nz=20;
+nx=100;
+nz=50;
 
 if name == 'l'
     sfx='ih';

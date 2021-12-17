@@ -1,14 +1,14 @@
 % function plot_energy_converstion_line
 clear;
 %% parameters
-indir='E:\Asym\Case2\data';
-outdir='E:\Asym\Case2\out\Energy';
+indir='E:\Asym\Cold1\data';
+outdir='E:\Asym\Cold1\out\Energy\Cold';
 prm=slj.Parameters(indir,outdir);
 
-tt=20;
-name='h';
+tt=50;
+name='l';
 
-xz=27.5;
+xz=25;
 dir=1;
 
 nt=length(tt);
@@ -84,6 +84,6 @@ for t=1:nt
 
     %% save figure
     cd(outdir);
-    print('-dpng','-r300',['J',sfx,'_dot_E_t',num2str(tt(t)),'_', pstr,' = ',num2str(xz),'.png']);
+%     print('-dpng','-r300',['J',sfx,'_dot_E_t',num2str(tt(t)),'_', pstr,' = ',num2str(xz),'.png']);
 %     close(gcf);
 end

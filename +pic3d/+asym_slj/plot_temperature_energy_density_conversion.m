@@ -5,11 +5,11 @@ indir='E:\Asym\Cold1\data';
 outdir='E:\Asym\Cold1\out\Energy\Cold';
 prm=slj.Parameters(indir,outdir);
 
-tt=40;
+tt=25;
 dt=1;
 name='h';
 
-xz=2.5;
+xz=25;
 dir=1;
 
 nt=length(tt);

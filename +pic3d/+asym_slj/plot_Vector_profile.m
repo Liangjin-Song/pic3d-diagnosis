@@ -1,14 +1,14 @@
 % function plot_Vector_profiles
 %% plot the cold ions density profiles
-clear;
+% clear;
 %% parameters 
 indir='E:\Asym\Cold1\data';
 outdir='E:\Asym\Cold1\out\Global';
 prm=slj.Parameters(indir,outdir);
-name='B';
-component='x';
-norm=1; % prm.value.vA;
-tt=0;
+name='E';
+component='z';
+norm=prm.value.vA;
+tt=50;
 xz=25;
 dir=1;
 extra.xrange=[-10,10];

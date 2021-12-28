@@ -9,6 +9,6 @@ function plot_overview(fd,stream,norm,Lx,Ly)
 plot_field(fd,Lx,Ly,norm);
 color_range=caxis;
 hold on
-plot_stream(stream,Lx,Ly,40);
+plot_stream(stream,Lx,Ly,20);
 caxis(color_range);
 

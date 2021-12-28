@@ -144,7 +144,7 @@ value=[];
 value.id=slj.Parameters.read_binary_file([name,'_id.bsd'], 'uint64');
 value.id=value.id';
 prt=slj.Parameters.read_binary_file([name,'.bsd'],val.type);
-nvar=6;
+nvar=7;
 np=length(prt)/nvar;
 prt=reshape(prt,[nvar,np]);
 %% reshape the data
@@ -180,6 +180,6 @@ elseif val.dimension == 1
     value.rz=prt(6,:);
 end
 %% weight
-% value.weight=prt(7,:);
+value.weight=prt(7,:);
 fd = slj.Species(name, time, range, value);
 end

@@ -6,8 +6,8 @@
 % clear;
 %% parameters
 % directory
-indir='E:\Asym\Case2\data';
-outdir='E:\Asym\Case2\out\Global';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0:60;
@@ -40,6 +40,8 @@ for t=1:nt
     ix=ix+lrf-1;
     % ix=prm.value.nx/2+20;
     iz=inz(ix);
+    ix=prm.value.nx/2;
+    iz=prm.value.nz/2;
     iix(t)=ix;
     iiz(t)=iz;
     %% the reconnection electric field in a box

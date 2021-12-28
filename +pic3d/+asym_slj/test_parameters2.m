@@ -3,7 +3,7 @@
 clear;
 %% parameters
 % directory
-dir='E:\Asym\Cold1\out\Global';
+dir='E:\';
 % the range
 y=-15:0.1:15;
 % the current sheet position
@@ -18,7 +18,7 @@ Br=1/2;
 Tr=1/4;
 
 % density ratio between cold ions and the hot ions density at the magnetosphere side
-phi=1;
+phi=10;
 
 % the distance between cold ions and the current sheet
 s=0;
@@ -30,11 +30,8 @@ theta2=100;
 theta1=1/5;
 
 % the beta value at the magnetosheath
-<<<<<<< Updated upstream
-betas=8.3;
-=======
-betas=5;
->>>>>>> Stashed changes
+betas=10;
+
 
 % the light speed
 c=0.5;

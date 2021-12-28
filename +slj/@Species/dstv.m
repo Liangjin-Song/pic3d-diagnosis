@@ -36,7 +36,7 @@ f=zeros(nv,nv,nv);
 %% the distribution function
 for s=1:np
     [nx,ny,nz]=velocity_index(obj.value.vx(s),obj.value.vy(s),obj.value.vz(s),sv);
-    f(nx,ny,nz)=f(nx,ny,nz)+1; % obj.value.weight(s);
+    f(nx,ny,nz)=f(nx,ny,nz) + obj.value.weight(s);
 end
 %% the Distribution class
 fd=slj.Distribution(obj.time, obj.range, lv, f);

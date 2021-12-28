@@ -1,13 +1,13 @@
 % function plot_temperature_overview(name)
 % clear;
 %% 
-indir='E:\Asym\Cold2\data';
-outdir='E:\Asym\Cold2\out\Overview';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\X-line';
 prm=slj.Parameters(indir,outdir);
 
 
 
-tt=50;
+tt=39;
 name='h';
 
 nt=length(tt);
@@ -15,7 +15,7 @@ nt=length(tt);
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra.Visible=false;
+extra.Visible=true;
 
 if name == 'h'
     tm=prm.value.thm;
@@ -39,10 +39,11 @@ for t=1:nt
     T=slj.Scalar((P.xx+P.yy+P.zz)./(N.value.*3));
 
     %% figure
+    f=figure('Visible', extra.Visible);
     slj.Plot.overview(T, ss, prm.value.lx, prm.value.lz, norm, extra);
     title(['T',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
     cd(outdir);
-    print('-dpng','-r300',['T',sfx,'_t',num2str(tt(t)),'.png']);
+    print(f, '-dpng','-r300',['T',sfx,'_t',num2str(tt(t), '%06.2f'),'.png']);
     close(gcf);
 end
 

@@ -24,10 +24,11 @@ value.rz=[];
 value.vx=[];
 value.vy=[];
 value.vz=[];
+value.weight=[];
 for i=1:np
-    if obj.value.vx>=xrange(1) && obj.value.vx<=xrange(2)
-        if obj.value.vy>=yrange(1) && obj.value.vy<=yrange(2)
-            if obj.value.vz>=zrange(1) && obj.value.vz<=zrange(2)
+    if obj.value.vx(i)>=xrange(1) && obj.value.vx(i)<=xrange(2)
+        if obj.value.vy(i)>=yrange(1) && obj.value.vy(i)<=yrange(2)
+            if obj.value.vz(i)>=zrange(1) && obj.value.vz(i)<=zrange(2)
                 value.id=[value.id, obj.value.id(i)];
                 value.rx=[value.rx, obj.value.rx(i)];
                 value.ry=[value.ry, obj.value.ry(i)];
@@ -35,6 +36,7 @@ for i=1:np
                 value.vx=[value.vx, obj.value.vx(i)];
                 value.vy=[value.vy, obj.value.vy(i)];
                 value.vz=[value.vz, obj.value.vz(i)];
+                value.weight=[value.weight, obj.value.weight(i)];
             end
         end
     end

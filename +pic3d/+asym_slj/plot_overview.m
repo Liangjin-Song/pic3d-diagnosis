@@ -6,15 +6,15 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Asym\Cold1\data';
-outdir='E:\Asym\Cold1\out\Overview';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=51:59;
+tt=40;
 % the variable name
-varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
+% varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
 % varname={'B','E','J','Vl','Ve','Nl','Ne'};
-% varname={'B'};
+varname={'qfluxh'};
 % figure style
 extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
@@ -136,6 +136,31 @@ for t=1:nt
                 fig.overview(fd, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title([name,'   \Omega_{ci}t=',num2str(tt(t))]);
                 fig.png(prm, [name,'_t',num2str(tt(t),'%06.2f')]);
+                fig.close();
+            case {'qfluxl', 'qfluxh', 'qfluxe'}
+                norm=1;
+                switch name
+                    case {'qfluxl'}
+                        tname='qih';
+                    case {'qfluxe'}
+                        tname='qe';
+                    case {'qfluxh'}
+                        tname='qic';
+                end
+                fig=slj.Plot(extra);
+                fig.overview(fd.x, ss, prm.value.lx, prm.value.lz, norm, extra);
+                title([tname,'x   \Omega_{ci}t=',num2str(tt(t))]);
+                fig.png(prm, [tname,'x_t',num2str(tt(t),'%06.2f')]);
+                fig.close();
+                fig=slj.Plot(extra);
+                fig.overview(fd.y, ss, prm.value.lx, prm.value.lz, norm, extra);
+                title([tname,'y   \Omega_{ci}t=',num2str(tt(t))]);
+                fig.png(prm, [tname,'y_t',num2str(tt(t),'%06.2f')]);
+                fig.close();
+                fig=slj.Plot(extra);
+                fig.overview(fd.z, ss, prm.value.lx, prm.value.lz, norm, extra);
+                title([tname,'z   \Omega_{ci}t=',num2str(tt(t))]);
+                fig.png(prm, [tname,'z_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
         end
     end

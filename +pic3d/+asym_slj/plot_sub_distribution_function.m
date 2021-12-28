@@ -1,64 +1,76 @@
 % function plot_sub_distribution_function()
 %%
-% @info: writen by Liangjin Song on 20210607 
+% @info: writen by Liangjin Song on 20210607
 % @brief: plot the distribution function as the function of velocity and rx
 %%
 clear;
 %% parameters
 % directory
-indir='E:\Asym\Case2\data';
-outdir='E:\Asym\Case2\out\Distribution';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\Separatrix\Sphere\t=20';
 prm=slj.Parameters(indir, outdir);
 % the file name of distribution function
-name='PVh_ts11200_x400-1600_y380-620_z0-1';
-% velocity direction
-vdir=1;
-xrange=[27,29];
-% xrange=[34.48,35.48];
-zrange=[-1,0];
-yrange=[-100,100];
-precision=100;
-%% the figure style
-range=1;
-extra.colormap='moon';
-extra.xrange=[-range,range];
-extra.yrange=[-range,range];
-extra.log=true;
-% extra.caxis=[0,4000];
-
-if name(3) == 'l'
-    sfx='ih';
-elseif name(3) == 'h'
-    sfx='ic';
-elseif name(3) == 'e'
-    sfx = 'e';
-else
-    error('Parameters Error!');
+% name='PVh_ts20800_x600-1400_y418-661_z0-1';
+tt=20;
+nt=length(tt);
+for t=1:nt
+    name=['PVh_ts',num2str(tt(t)/prm.value.wci),'_x600-1400_y418-661_z0-1'];
+    % velocity direction
+    dir=1:3;
+    xrange=[14,16];
+    zrange=[-0.65,-0.55];
+    % zrange=[0.1,1];
+    
+    
+    yrange=[-100,100];
+    precision=80;
+    %% the figure style
+    range=2;
+    extra.colormap='moon';
+    extra.xrange=[-range,range];
+    extra.yrange=[-range,range];
+    extra.log=true;
+    
+    if name(3) == 'l'
+        sfx='ih';
+    elseif name(3) == 'h'
+        sfx='ic';
+    elseif name(3) == 'e'
+        sfx = 'e';
+    else
+        error('Parameters Error!');
+    end
+    
+    nv=length(dir);
+    
+    %% read data
+    spc=prm.read(name);
+    spc=spc.subposition(xrange,yrange,zrange);
+    
+    for i=1:nv
+        vdir=dir(i);
+        if vdir==1
+            extra.xlabel=['V',sfx,'_y [V_A]'];
+            extra.ylabel=['V',sfx,'_z [V_A]'];
+            suffix='_vy_vz';
+        elseif vdir == 2
+            extra.xlabel=['V',sfx,'_x [V_A]'];
+            extra.ylabel=['V',sfx,'_z [V_A]'];
+            suffix='_vx_vz';
+        else
+            extra.xlabel=['V',sfx,'_x [V_A]'];
+            extra.ylabel=['V',sfx,'_y [V_A]'];
+            suffix='_vx_vy';
+        end
+        dst=spc.dstv(prm.value.vA,precision);
+        dst=dst.intgrtv(vdir);
+        extra.title=['\Omega_{ci}t = ', num2str(dst.time)];
+        %% plot figure
+        f=slj.Plot();
+        f.field2d(dst.value, dst.ll, dst.ll,extra);
+%         f.png(prm,[name,suffix,'_sub',num2str(xrange(1)),'-',num2str(xrange(2)),...
+%             '_',num2str(yrange(1)),'-',num2str(yrange(2)),...
+%             '_',num2str(zrange(1)),'-',num2str(zrange(2))]);
+%         f.close();
+    end
 end
-
-
-if vdir==1
-    extra.xlabel=['V',sfx,'_y [V_A]'];
-    extra.ylabel=['V',sfx,'_z [V_A]'];
-    suffix='_rx_vx';
-elseif vdir == 2
-    extra.xlabel=['V',sfx,'_x [V_A]'];
-    extra.ylabel=['V',sfx,'_z [V_A]'];
-    suffix='_rx_vy';
-else
-    extra.xlabel=['V',sfx,'_x [V_A]'];
-    extra.ylabel=['V',sfx,'_y [V_A]'];
-    suffix='_rx_vz';
-end
-%% read data
-spc=prm.read(name);
-spc=spc.subposition(xrange,yrange,zrange);
-dst=spc.dstv(prm.value.vA,precision);
-dst=dst.intgrtv(vdir);
-
-%% plot figure
-f=slj.Plot();
-f.field2d(dst.value, dst.ll, dst.ll,extra);
-% f.png(prm,[name,suffix,'_sub',num2str(xrange(1)),'-',num2str(xrange(2)),...
-%     '_',num2str(yrange(1)),'-',num2str(yrange(2)),...
-%     '_',num2str(zrange(1)),'-',num2str(zrange(2))]);

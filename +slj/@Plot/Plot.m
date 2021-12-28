@@ -84,4 +84,10 @@ methods (Access = public, Static)
 end
 
 %% ======================================================================== %%
+%% the figure associated with particles
+methods (Access = public, Static)
+    id = particle_position(prm, id, dstname, time);
+end
+
+%% ======================================================================== %%
 end

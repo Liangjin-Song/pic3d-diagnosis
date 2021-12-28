@@ -1,13 +1,13 @@
 %% plot magnetic field slash
 % writen by Liangjin Song on 20190906
 clear;
-indir='/data/simulation/M25SBg00Sx_low_vte/data';
-outdir='/data/simulation/M25SBg00Sx_low_vte/out/overview/B/Bz';
+indir='E:\B1.5T06Bs6Bg00';
+outdir='E:\B1.5T06Bs6Bg00';
 tt=73;
 c=0.6;
-di=30;
-Lx=6000/di;
-Ly=3000/di;
+di=40;
+Lx=4800/di;
+Ly=2400/di;
 nt=length(tt);
 
 for t=1:nt

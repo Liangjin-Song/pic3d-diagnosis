@@ -28,8 +28,8 @@ end
 methods (Access = public, Static)
     fd = poynting_vector(E, B, mu);
     [curv, R] = curvature(prm, B);
-    R = gyroradius(q, m, V, B);
-    K = kappa(prm, q, m, V, B);
+    R = gyroradius(q, m, T, B);
+    K = kappa(prm, q, m, T, B);
 end
 
 %% ======================================================================== %%

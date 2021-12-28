@@ -1,15 +1,15 @@
 % function plot_temperature_energy_density_conversion
 clear;
 %% parameters
-indir='E:\Asym\Cold1\data';
-outdir='E:\Asym\Cold1\out\Energy\Cold';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\X-line';
 prm=slj.Parameters(indir,outdir);
 
-tt=25;
-dt=1;
+tt=20;
+dt=0.5;
 name='h';
 
-xz=25;
+xz=26;
 dir=1;
 
 nt=length(tt);

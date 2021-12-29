@@ -4,7 +4,7 @@ prm=slj.Parameters(indir,outdir);
 
 
 
-tt=20;
+tt=50;
 name='h';
 
 nt=length(tt);
@@ -26,8 +26,8 @@ elseif name == 'e'
 end
 
 % norm=tm/prm.value.coeff;
-% norm=1;
-norm=prm.value.vA;
+norm=1;
+% norm=prm.value.vA;
 
 for t=1:nt
     %% read data
@@ -41,16 +41,16 @@ for t=1:nt
     
     %% figure
     f=figure('Visible', extra.Visible);
-    slj.Plot.overview(E.z, ss, prm.value.lx, prm.value.lz, norm, extra);
+    slj.Plot.overview(B.z, ss, prm.value.lx, prm.value.lz, norm, extra);
     % title(['T',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
-    title(['Ez, \Omega_{ci}t=',num2str(tt(t))]);
+    title(['Bz, \Omega_{ci}t=',num2str(tt(t))]);
     
     
-    xlim([10,30])
+    xlim([15,35])
     ylim([-10,10])
     hold on
-    rgx=[19, 21];
-    rgz=[-0.7,-0.45];
+    rgx=[19.5, 21];
+    rgz=[0,2];
     plot([rgx(2),rgx(2)],rgz,'-r','LineWidth',2)
     plot([rgx(1),rgx(1)],rgz,'-r','LineWidth',2)
     plot(rgx,[rgz(1),rgz(1)],'-r','LineWidth',2)

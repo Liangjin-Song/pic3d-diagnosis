@@ -36,6 +36,7 @@ methods (Access = public)
     fd = subposition(obj, xrange, yrange, zrange);
     fd = subvelocity(obj, xrange, yrange, zrange);
     fd = subspecies(obj, id);
+    fd = fac(obj, prm, E, B);
 end
 
 %% ======================================================================== %%

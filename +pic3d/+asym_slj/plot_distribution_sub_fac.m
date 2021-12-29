@@ -47,19 +47,23 @@ for t=1:nt
     spc=prm.read(name);
     spc=spc.subposition(xrange,yrange,zrange);
     
+    E=prm.read('E', tt(t));
+    B=prm.read('B', tt(t));
+    spc=spc.fac(prm, E, B);
+    
     for i=1:nv
         vdir=dir(i);
         if vdir==1
-            extra.xlabel=['V',sfx,'_y [V_A]'];
-            extra.ylabel=['V',sfx,'_z [V_A]'];
+            extra.xlabel=['V',sfx,'_{BxExB} [V_A]'];
+            extra.ylabel=['V',sfx,'_B [V_A]'];
             suffix='_vy_vz';
         elseif vdir == 2
-            extra.xlabel=['V',sfx,'_x [V_A]'];
-            extra.ylabel=['V',sfx,'_z [V_A]'];
+            extra.xlabel=['V',sfx,'_{ExB} [V_A]'];
+            extra.ylabel=['V',sfx,'_B [V_A]'];
             suffix='_vx_vz';
         else
-            extra.xlabel=['V',sfx,'_x [V_A]'];
-            extra.ylabel=['V',sfx,'_y [V_A]'];
+            extra.xlabel=['V',sfx,'_{ExB} [V_A]'];
+            extra.ylabel=['V',sfx,'_{BxExB} [V_A]'];
             suffix='_vx_vy';
         end
         dst=spc.dstv(prm.value.vA,precision);

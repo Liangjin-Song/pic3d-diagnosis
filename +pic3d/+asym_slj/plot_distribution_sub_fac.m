@@ -14,7 +14,7 @@ prm=slj.Parameters(indir, outdir);
 tt=50;
 nt=length(tt);
 for t=1:nt
-    name=['PVh_ts',num2str(tt(t)/prm.value.wci),'_x600-1400_y418-661_z0-1'];
+    name=['PVe_ts',num2str(tt(t)/prm.value.wci),'_x600-1400_y418-661_z0-1'];
     % velocity direction
     dir=1:3;
     xrange=[19.5,21];
@@ -25,7 +25,7 @@ for t=1:nt
     yrange=[-100,100];
     precision=80;
     %% the figure style
-    range=2;
+    range=20;
     extra.colormap='moon';
     extra.xrange=[-range,range];
     extra.yrange=[-range,range];

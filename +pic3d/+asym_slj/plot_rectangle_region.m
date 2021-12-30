@@ -49,12 +49,12 @@ for t=1:nt
     xlim([15,35])
     ylim([-10,10])
     hold on
-    rgx=[19.5, 21];
+    rgx=[29.5, 31];
     rgz=[0,2];
-    plot([rgx(2),rgx(2)],rgz,'-r','LineWidth',2)
-    plot([rgx(1),rgx(1)],rgz,'-r','LineWidth',2)
-    plot(rgx,[rgz(1),rgz(1)],'-r','LineWidth',2)
-    plot(rgx,[rgz(2),rgz(2)],'-r','LineWidth',2)
+    plot([rgx(2),rgx(2)],rgz,'-r','LineWidth',2);
+    plot([rgx(1),rgx(1)],rgz,'-r','LineWidth',2);
+    plot(rgx,[rgz(1),rgz(1)],'-r','LineWidth',2);
+    plot(rgx,[rgz(2),rgz(2)],'-r','LineWidth',2);
     
     cd(outdir);
 %     print(f, '-dpng','-r300',['T',sfx,'_t',num2str(tt(t), '%06.2f'),'.png']);

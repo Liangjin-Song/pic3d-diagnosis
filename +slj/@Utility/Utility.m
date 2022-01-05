@@ -9,4 +9,11 @@ methods (Access = public, Static)
 end
 
 %% ======================================================================== %%
+%% file operation
+methods (Access = public, Static)
+    %% check existance of directory
+    exist_directory(dir);
+end
+
+%% ======================================================================== %%
 end

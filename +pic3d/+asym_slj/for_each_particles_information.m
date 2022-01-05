@@ -1,8 +1,8 @@
-%% the loop for particles id
+%% the loop for particles id, and plot the particles' information along the particles' trajectory
 clear;
 %% parameters
 indir = 'E:\Asym\dst1\data';
-outdir = 'E:\Asym\dst1\out\Kinetic\Trajectory\Group\Cold_Ions\Group12';
+outdir = 'E:\Asym\dst1\out\Kinetic\Trajectory\Group\Cold_Ions\Group11';
 prm=slj.Parameters(indir,outdir);
 
 %% particles' id
@@ -12,7 +12,7 @@ file = 'id.txt';
 trange=[0, 50];
 time.tt=30;
 time.t0=48001;
-time.range=40001:80001;
+time.range=1:80001;
 avirange=1:400:80001;
 
 %% read the particles' id

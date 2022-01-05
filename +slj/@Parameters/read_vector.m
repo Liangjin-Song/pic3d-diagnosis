@@ -76,9 +76,10 @@ else
     value.by=data(:,12);
     value.bz=data(:,13);
 end
-value.k=data(:,14)*m*val.c*val.c;
+value.k=data(:,14);
 value.kappa=data(:,15);
-fd=slj.Particle(id, q, m, value);
+w=data(1,16);
+fd=slj.Particle(id, q, m, w, value);
 fd=fd.calculation();
 end
 

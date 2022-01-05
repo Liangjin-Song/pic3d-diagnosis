@@ -18,9 +18,9 @@ function obj=calc_kinetic_xyz(obj)
 % @param: obj - the Particle object
 % @return: obj - the Particle object
 %%
-    obj.value.kx=0.5*obj.m*obj.value.vx.^2;
-    obj.value.ky=0.5*obj.m*obj.value.vy.^2;
-    obj.value.kz=0.5*obj.m*obj.value.vz.^2;
+    obj.value.kx=0.5*obj.m*obj.weight*obj.value.vx.^2;
+    obj.value.ky=0.5*obj.m*obj.weight*obj.value.vy.^2;
+    obj.value.kz=0.5*obj.m*obj.weight*obj.value.vz.^2;
 end
 
 %% ======================================================================== %%
@@ -54,8 +54,8 @@ function obj=calc_velocity_fac(obj)
     obj.value.v_para=para;
     obj.value.v_perp=perp;
     %% the kinetic energy at fac
-    obj.value.k_para=0.5*obj.m*para.^2;
-    obj.value.k_perp=0.5*obj.m*perp.^2;
+    obj.value.k_para=0.5*obj.weight*obj.m*para.^2;
+    obj.value.k_perp=0.5*obj.weight*obj.m*perp.^2;
 end
 
 %% ======================================================================== %%

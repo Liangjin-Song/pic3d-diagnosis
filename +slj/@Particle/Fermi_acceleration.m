@@ -18,14 +18,15 @@ ey=obj.value.ey;
 ez=obj.value.ez;
 [ex, ey, ez]=cross(ex, ey, ez, bx, by, bz);
 [ex, ey, ez]=cross(bx, by, bz, ex, ey, ez);
-ex=obj.m*v_para.*ex;
-ey=obj.m*v_para.*ey;
-ez=obj.m*v_para.*ez;
+ex=obj.m*obj.weight*v_para.*ex;
+ey=obj.m*obj.weight*v_para.*ey;
+ez=obj.m*obj.weight*v_para.*ez;
 
 %% db/dt
-dbx=(bx(2:end)-bx(1:end-1))*wci/0.02;
-dby=(by(2:end)-by(1:end-1))*wci/0.02;
-dbz=(bz(2:end)-bz(1:end-1))*wci/0.02;
+dt=1/1000;
+dbx=(bx(2:end)-bx(1:end-1))*wci/dt;
+dby=(by(2:end)-by(1:end-1))*wci/dt;
+dbz=(bz(2:end)-bz(1:end-1))*wci/dt;
 
 %% magnetic field
 Bx=(Bx(1:end-1)+Bx(2:end))/2;

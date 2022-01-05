@@ -7,15 +7,17 @@ properties (SetAccess = private)
     id;
     q;
     m;
+    weight;
     value;
 end
 %% ======================================================================== %%
 %% constructor
 methods (Access = public)
-    function obj=Particle(id, q, m, value)
+    function obj=Particle(id, q, m, w, value)
         obj.id=id;
         obj.q=q;
         obj.m=m;
+        obj.weight=w;
         obj.value=value;
     end
     function obj=command(obj, cmd)

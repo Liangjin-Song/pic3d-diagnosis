@@ -11,7 +11,8 @@ nt=length(e_para);
 en=zeros(1, nt+1);
 
 %% the energy
+dt=1/1000;
 for i=2:nt+1
-    en(i)=en(i-1)+e_para(i-1)*0.02/wci;
+    en(i)=en(i-1)+e_para(i-1)*dt/wci;
 end
 

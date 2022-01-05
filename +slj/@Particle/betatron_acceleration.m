@@ -7,7 +7,8 @@ function en = betatron_acceleration(obj, wci)
 B=sqrt(obj.value.bx.^2+obj.value.by.^2+obj.value.bz.^2);
 
 %% dB/dt
-B=(B(2:end)-B(1:end-1))*wci/0.02;
+dt=1/1000;
+B=(B(2:end)-B(1:end-1))*wci/dt;
 
 %% magnetic moment
 en=(obj.value.mu(1:end-1)+obj.value.mu(2:end))/2;

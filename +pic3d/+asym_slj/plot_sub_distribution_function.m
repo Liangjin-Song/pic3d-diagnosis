@@ -3,29 +3,29 @@
 % @info: writen by Liangjin Song on 20210607
 % @brief: plot the distribution function as the function of velocity and rx
 %%
-clear;
+% clear;
 %% parameters
 % directory
 indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\Separatrix\Sphere\t=20';
+outdir='E:\Asym\dst1\out\Kinetic\Trajectory\Cold_Ions\type1\1';
 prm=slj.Parameters(indir, outdir);
 % the file name of distribution function
 % name='PVh_ts20800_x600-1400_y418-661_z0-1';
-tt=50;
+tt=13;
 nt=length(tt);
 for t=1:nt
-    name=['PVe_ts',num2str(tt(t)/prm.value.wci),'_x600-1400_y418-661_z0-1'];
+    name=['PVh_ts',num2str(tt(t)/prm.value.wci),'_x600-1400_y418-661_z0-1'];
     % velocity direction
     dir=1:3;
-    xrange=[19.5,21];
-    zrange=[0,2];
+    xrange=[24.5,25.5];
+    zrange=[0.1,0.5];
     % zrange=[0.1,1];
     
     
     yrange=[-100,100];
     precision=80;
     %% the figure style
-    range=20;
+    range=2;
     extra.colormap='moon';
     extra.xrange=[-range,range];
     extra.yrange=[-range,range];

@@ -24,14 +24,15 @@ ez=obj.value.ez;
 [vx, vy, vz]=cross(bx, by, bz, vx, vy, vz);
 
 %% acceleration rate
-rate=obj.q*(ex.*vx+ey.*vy+ez.*vz);
+rate=obj.q*obj.weight*(ex.*vx+ey.*vy+ez.*vz);
 rate=(rate(2:end)+rate(1:end-1))/2;
 
 %% the energy
 nt=length(rate);
 en=zeros(1, nt+1);
+dt=1/1000;
 for i=2:nt+1
-    en(i)=en(i-1)+rate(i-1)*0.02/wci;
+    en(i)=en(i-1)+rate(i-1)*dt/wci;
 end
 end
 

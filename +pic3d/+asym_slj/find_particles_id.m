@@ -9,8 +9,8 @@
 % vrange.xrange=[-0.65, -0.43];
 % vrange.yrange=[-1, -0.83];
 vrange.xrange=[-100, 100];
-vrange.yrange=[0.28, 0.68];
-vrange.zrange=[0.43, 0.89];
+vrange.yrange=[-0.43, -0.28];
+vrange.zrange=[0.23, 0.38];
 id=spc.rectangle_particle_id(prm, vrange);
 
 in = find(ismember(spc.value.id, id) == 1);

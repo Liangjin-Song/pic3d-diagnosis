@@ -1,10 +1,10 @@
 indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\Separatrix\Sphere\t=20';
+outdir='E:\Asym\dst1\out\Kinetic\Trajectory\Cold_Ions\type1\1';
 prm=slj.Parameters(indir,outdir);
 
 
 
-tt=50;
+tt=13;
 name='h';
 
 nt=length(tt);
@@ -25,8 +25,8 @@ elseif name == 'e'
     sfx='e';
 end
 
-% norm=tm/prm.value.coeff;
-norm=1;
+norm=tm/prm.value.coeff;
+% norm=1;
 % norm=prm.value.vA;
 
 for t=1:nt
@@ -41,16 +41,16 @@ for t=1:nt
     
     %% figure
     f=figure('Visible', extra.Visible);
-    slj.Plot.overview(B.z, ss, prm.value.lx, prm.value.lz, norm, extra);
-    % title(['T',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
-    title(['Bz, \Omega_{ci}t=',num2str(tt(t))]);
+    slj.Plot.overview(T, ss, prm.value.lx, prm.value.lz, norm, extra);
+    title(['T',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
+    % title(['Bz, \Omega_{ci}t=',num2str(tt(t))]);
     
     
     xlim([15,35])
-    ylim([-10,10])
+    ylim([-5,5])
     hold on
-    rgx=[29.5, 31];
-    rgz=[0,2];
+    rgx=[24.5, 25.5];
+    rgz=[0.1,0.5];
     plot([rgx(2),rgx(2)],rgz,'-r','LineWidth',2);
     plot([rgx(1),rgx(1)],rgz,'-r','LineWidth',2);
     plot(rgx,[rgz(1),rgz(1)],'-r','LineWidth',2);

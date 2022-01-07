@@ -2,19 +2,19 @@
 clear;
 %% parameters
 indir = 'E:\Asym\dst1\data';
-outdir = 'E:\Asym\dst1\out\Kinetic\Trajectory\Group\Cold_Ions\Group5';
+outdir = 'E:\Asym\dst1\out\Kinetic\Trajectory\Group\Cold_Ions\Group9';
 prm=slj.Parameters(indir,outdir);
 
 %% particles' id
 file = 'id.txt';
 
 %% distribution function name
-tt=20;
+tt=30;
 name=['PVh_ts',num2str(tt/prm.value.wci),'_x600-1400_y418-661_z0-1'];
 
 %% distribution function range
-xrange=[24.5,25.5];
-zrange=[1,3.5];
+xrange=[25.3,25.5];
+zrange=[2,3];
 yrange=[-100,100];
 precision=80;
 
@@ -26,7 +26,7 @@ extra.yrange=[-range,range];
 extra.log=true;
 
 %% show figure or not
-show = true;
+show = false;
 
 %% read the particles' id
 cd(outdir);

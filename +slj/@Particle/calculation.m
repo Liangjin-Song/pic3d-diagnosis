@@ -9,6 +9,7 @@ obj=calc_kinetic_xyz(obj);
 obj=calc_velocity_fac(obj);
 obj=calc_electric_field_fac(obj);
 obj=calc_magnetic_moment(obj);
+obj=calc_pitch_angle(obj);
 end
 
 %% ======================================================================== %%
@@ -88,4 +89,33 @@ function obj=calc_magnetic_moment(obj)
     bz=obj.value.bz;
     b=sqrt(bx.^2+by.^2+bz.^2);
     obj.value.mu=obj.value.k_perp./b;
+end
+
+%% ======================================================================== %%
+function obj=calc_pitch_angle(obj)
+%% 
+% calculate the pitch angle
+% @param: obj - the Particle object
+% @return: obj - the Particle object
+%%
+    %% the unit vector of magnetic field
+    bx=obj.value.bx;
+    by=obj.value.by;
+    bz=obj.value.bz;
+    b=sqrt(bx.^2 + by.^2 + bz.^2);
+    bx=bx./b;
+    by=by./b;
+    bz=bz./b;
+    %% the unit vector of velocity
+    vx=obj.value.vx;
+    vy=obj.value.vy;
+    vz=obj.value.vz;
+    v=sqrt(vx.^2 + vy.^2 + vz.^2);
+    vx=vx./v;
+    vy=vy./v;
+    vz=vz./v;
+    %% the pitch angle
+    agl = vx.*bx + vy.*by + vz.*bz;
+    agl = acos(agl) * 180/pi;
+    obj.value.pitch = agl;
 end

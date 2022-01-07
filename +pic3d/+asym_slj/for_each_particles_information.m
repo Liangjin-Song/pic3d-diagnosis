@@ -2,28 +2,30 @@
 clear;
 %% parameters
 indir = 'E:\Asym\dst1\data';
-outdir = 'E:\Asym\dst1\out\Kinetic\Trajectory\Group\Cold_Ions\Group11';
+outdir = 'E:\Asym\dst1\out\Kinetic\Trajectory\Group\Cold_Ions\Group7';
 prm=slj.Parameters(indir,outdir);
+disp(outdir);
 
 %% particles' id
 file = 'id.txt';
 
 %% the time interval
 trange=[0, 50];
-time.tt=30;
-time.t0=48001;
-time.range=1:80001;
-avirange=1:400:80001;
+time.tt=13;
+time.t0=20801;
+time.range=1:40001;
+avirange=1:400:40001;
 
 %% read the particles' id
 cd(outdir);
 ids = uint64(load(file));
+ids = uint64(729496320);
 
 %% energy normalization
 norm=prm.value.mi*prm.value.vA*prm.value.vA;
 
 %% show figure or not
-show = false;
+show = true;
 
 %% loop
 nid = length(ids);
@@ -41,9 +43,9 @@ for i=1:nid
 
     %% plot figure
     cd(outdir);
-    plot_trajectory_information(prm, name, prt, norm, spc, trange, show, iddir);
+    % plot_trajectory_information(prm, name, prt, norm, spc, trange, show, iddir);
     plot_particle_information(prm, prt, spc, norm, time, show, iddir);
-    plot_trajectory_avi(prm, prt, name, norm, avirange, show, iddir);
+    % plot_trajectory_avi(prm, prt, name, norm, avirange, show, iddir);
 end
 
 
@@ -337,8 +339,9 @@ vy=(vy(1:end-1)+vy(2:end))/2;
 % y position
 nvy=length(vy);
 ry=zeros(nvy+1,1);
+dt=1/1000;
 for i=1:nvy
-    ry(i+1)=ry(i)+vy(i)*0.02;
+    ry(i+1)=ry(i)+vy(i)*dt;
 end
 % y-z trajectory
 f2=figure('Visible', show);

@@ -1,11 +1,18 @@
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Kinetic\Trajectory\Cold_Ions\type1\1';
+indir='E:\Asym\dst2\data';
+outdir='E:\Asym\dst2\out\Kinetic\Distribution\Cold_Ions\t=13';
 prm=slj.Parameters(indir,outdir);
 
 
 
 tt=13;
 name='h';
+
+rgx=[24.5,25.5];
+rgz=[0.1,0.5];
+
+xrange=[15,35];
+yrange=[-5,5];
+
 
 nt=length(tt);
 
@@ -44,19 +51,14 @@ for t=1:nt
     slj.Plot.overview(T, ss, prm.value.lx, prm.value.lz, norm, extra);
     title(['T',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
     % title(['Bz, \Omega_{ci}t=',num2str(tt(t))]);
-    
-    
-    xlim([15,35])
-    ylim([-5,5])
     hold on
-    rgx=[24.5, 25.5];
-    rgz=[0.1,0.5];
     plot([rgx(2),rgx(2)],rgz,'-r','LineWidth',2);
     plot([rgx(1),rgx(1)],rgz,'-r','LineWidth',2);
     plot(rgx,[rgz(1),rgz(1)],'-r','LineWidth',2);
     plot(rgx,[rgz(2),rgz(2)],'-r','LineWidth',2);
-    
+    xlim(xrange);
+    ylim(yrange);
     cd(outdir);
-%     print(f, '-dpng','-r300',['T',sfx,'_t',num2str(tt(t), '%06.2f'),'.png']);
-%     close(gcf);
+    %     print(f, '-dpng','-r300',['T',sfx,'_t',num2str(tt(t), '%06.2f'),'.png']);
+    %     close(gcf);
 end

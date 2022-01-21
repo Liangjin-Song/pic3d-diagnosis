@@ -2,7 +2,7 @@
 clear;
 %% parameters
 indir = 'E:\Asym\dst1\data';
-outdir = 'E:\Asym\dst1\out\Kinetic\Trajectory\Group\Cold_Ions\Group7';
+outdir = 'E:\Asym\dst1\out\Kinetic\Trajectory\Group\Cold_Ions\Group30';
 prm=slj.Parameters(indir,outdir);
 disp(outdir);
 
@@ -10,22 +10,32 @@ disp(outdir);
 file = 'id.txt';
 
 %% the time interval
-trange=[0, 50];
-time.tt=13;
-time.t0=20801;
-time.range=1:40001;
-avirange=1:400:40001;
+trange=[0, 100];
+time.tt=50;
+
+t1=40;
+t2=60;
+time.range=(t1/prm.value.wci+1):(t2/prm.value.wci+1);
+
+t0=50;
+time.t0=t0/prm.value.wci+1;
+
+avit1=0;
+avit2=100;
+avirange=(avit1/prm.value.wci+1):400:(avit2/prm.value.wci+1);
+avixrange=[0,50];
+aviyrange=[-10,10];
 
 %% read the particles' id
 cd(outdir);
 ids = uint64(load(file));
-ids = uint64(729496320);
+% ids = uint64(590345075);
 
 %% energy normalization
 norm=prm.value.mi*prm.value.vA*prm.value.vA;
 
 %% show figure or not
-show = true;
+show = false;
 
 %% loop
 nid = length(ids);
@@ -43,9 +53,9 @@ for i=1:nid
 
     %% plot figure
     cd(outdir);
-    % plot_trajectory_information(prm, name, prt, norm, spc, trange, show, iddir);
+    plot_trajectory_information(prm, name, prt, norm, spc, trange, show, iddir);
     plot_particle_information(prm, prt, spc, norm, time, show, iddir);
-    % plot_trajectory_avi(prm, prt, name, norm, avirange, show, iddir);
+    plot_trajectory_avi(prm, prt, name, norm, avirange, avixrange, aviyrange, show, iddir);
 end
 
 
@@ -485,12 +495,12 @@ end
 
 
 %%  ================================================================================  %%
-function plot_trajectory_avi(prm, prt, name, norm, avirange, show, outdir)
+function plot_trajectory_avi(prm, prt, name, norm, avirange, avixrange, aviyrange, show, outdir)
 aviname=[outdir,'\',name,'.avi'];
 % xrange=[prm.value.lx(1),prm.value.lx(end)];
-xrange=[20,30];
+xrange=avixrange;
 % yrange=[-Ly/2,Ly/2];
-yrange=[-5,5];
+yrange=aviyrange;
 % prt.value.k=prt.value.k/norm;
 prt=prt.norm_energy(norm);
 % trange=1:2501;
@@ -508,7 +518,7 @@ x01=x0;
 z01=z0;
 k01=k0;
 aviobj=VideoWriter(aviname);
-aviobj.FrameRate=5;
+aviobj.FrameRate=15;
 open(aviobj);
 t0=-1;
 %% plot

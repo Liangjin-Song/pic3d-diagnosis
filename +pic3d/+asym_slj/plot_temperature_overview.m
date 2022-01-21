@@ -1,21 +1,22 @@
 % function plot_temperature_overview(name)
-% clear;
+clear;
 %% 
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\X-line';
+indir='E:\Asym\dst2\data';
+outdir='E:\Asym\dst2\out\Overview';
 prm=slj.Parameters(indir,outdir);
 
 
 
-tt=39;
-name='h';
+tt=0:100;
+name='e';
+disp(name);
 
 nt=length(tt);
 
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra.Visible=true;
+extra.Visible=false;
 
 if name == 'h'
     tm=prm.value.thm;

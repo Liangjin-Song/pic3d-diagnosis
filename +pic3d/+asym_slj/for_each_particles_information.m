@@ -2,7 +2,7 @@
 clear;
 %% parameters
 indir = 'E:\Asym\dst1\data';
-outdir = 'E:\Asym\dst1\out\Kinetic\Trajectory\Group\Cold_Ions\Group30';
+outdir = 'E:\Asym\dst1\out\Kinetic\Trajectory\Hot_Ions';
 prm=slj.Parameters(indir,outdir);
 disp(outdir);
 
@@ -10,38 +10,39 @@ disp(outdir);
 file = 'id.txt';
 
 %% the time interval
-trange=[0, 100];
-time.tt=50;
+trange=[15, 25];
+time.tt=20;
 
-t1=40;
-t2=60;
+t1=15;
+t2=25;
 time.range=(t1/prm.value.wci+1):(t2/prm.value.wci+1);
 
-t0=50;
+t0=20;
 time.t0=t0/prm.value.wci+1;
 
 avit1=0;
-avit2=100;
+avit2=30;
 avirange=(avit1/prm.value.wci+1):400:(avit2/prm.value.wci+1);
 avixrange=[0,50];
 aviyrange=[-10,10];
 
 %% read the particles' id
 cd(outdir);
-ids = uint64(load(file));
-% ids = uint64(590345075);
+% ids = uint64(load(file));
+ids = uint64(1232946);
 
 %% energy normalization
 norm=prm.value.mi*prm.value.vA*prm.value.vA;
 
 %% show figure or not
-show = false;
+show = true;
 
 %% loop
 nid = length(ids);
 for i=1:nid
     %% read data
     id = ids(i);
+    cd(indir);
     [name, spc] = get_particle_name(id);
     spc = get_species(spc);
     prt = prm.read(name);

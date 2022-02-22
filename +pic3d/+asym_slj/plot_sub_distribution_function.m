@@ -11,21 +11,23 @@ outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\t=13';
 prm=slj.Parameters(indir, outdir);
 % the file name of distribution function
 % name='PVh_ts20800_x600-1400_y418-661_z0-1';
-tt=40;
+tt=20;
+isprt = 1;
+spn = 'l';
+id = '1321477';
 nt=length(tt);
 for t=1:nt
-    name=['PVh_ts',num2str(tt(t)/prm.value.wci),'_x600-1400_y418-661_z0-1'];
+    name=['PV',spn,'_ts',num2str(tt(t)/prm.value.wci),'_x600-1400_y418-661_z0-1'];
     % velocity direction
     dir=1:3;
-    xrange=[28,29];
-    zrange=[2,3];
-    % zrange=[0.1,1];
+    xrange=[24.5,25.5];
+    zrange=[1,1.5];
     
     
     yrange=[-100,100];
     precision=80;
     %% the figure style
-    range=2;
+    range=6;
     extra.colormap='moon';
     extra.xrange=[-range,range];
     extra.yrange=[-range,range];
@@ -46,6 +48,12 @@ for t=1:nt
     %% read data
     spc=prm.read(name);
     spc=spc.subposition(xrange,yrange,zrange);
+    
+    if isprt == 1
+        prt = prm.read(['traj',spn, '_id', id]);
+        prt=prt.norm_velocity(prm);
+        ttp = find(prt.value.time == tt);
+    end
     
     for i=1:nv
         vdir=dir(i);
@@ -68,6 +76,20 @@ for t=1:nt
         %% plot figure
         f=slj.Plot();
         f.field2d(dst.value, dst.ll, dst.ll,extra);
+        
+        if isprt == 1
+            hold on
+            if vdir == 1
+                plot(prt.value.vy(ttp), prt.value.vz(ttp),'b*', 'LineWidth', 5);
+            elseif vdir == 2
+                plot(prt.value.vx(ttp), prt.value.vz(ttp),'b*', 'LineWidth', 5);
+            else
+                plot(prt.value.vx(ttp), prt.value.vy(ttp),'b*', 'LineWidth', 5);
+            end
+        end
+        %% plot the particle's position
+        
+        
 %         f.png(prm,[name,suffix,'_sub',num2str(xrange(1)),'-',num2str(xrange(2)),...
 %             '_',num2str(yrange(1)),'-',num2str(yrange(2)),...
 %             '_',num2str(zrange(1)),'-',num2str(zrange(2))]);

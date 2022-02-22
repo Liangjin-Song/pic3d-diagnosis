@@ -10,6 +10,8 @@ if strcmp(name(1:4),'traj')
     fd = particle_trajectory(name, value);
 elseif strcmp(name(1:2), 'PV')
     fd = distribution_function(name, value);
+elseif strcmp(name(1:2), 'en')
+    fd = slj.Parameters.read_binary_file([name,'.bsd'], 'uint64');
 else
     error('Parameters error!');
 end

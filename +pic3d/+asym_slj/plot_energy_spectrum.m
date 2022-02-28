@@ -6,10 +6,10 @@ outdir='E:\Asym\dst1\out\Kinetic\Spectrum';
 prm=slj.Parameters(indir,outdir);
 %% the time of the energy spectrum
 tt1=0;
-tt2=5;
-tt3=10;
-tt4=15;
-tt5=19;
+tt2=20;
+tt3=50;
+tt4=80;
+tt5=100;
 
 izero=1;
 

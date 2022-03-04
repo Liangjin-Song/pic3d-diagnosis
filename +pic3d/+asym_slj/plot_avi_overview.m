@@ -28,7 +28,7 @@ aviobj=VideoWriter(aviname);
 aviobj.FrameRate=10;
 open(aviobj);
 nt=length(tt);
-figure;
+figure('Visible', false);
 for t=1:nt
     cd(indir);
     ss=prm.read('stream',tt(t));

@@ -2,7 +2,7 @@
 clear;
 %% parameters
 indir = 'E:\Asym\dst1\data';
-outdir = 'E:\Asym\dst1\out\Kinetic\Trajectory\Hot_Ions';
+outdir = 'E:\Asym\dst1\out\Kinetic\High_Energy';
 prm=slj.Parameters(indir,outdir);
 disp(outdir);
 
@@ -10,26 +10,26 @@ disp(outdir);
 file = 'id.txt';
 
 %% the time interval
-trange=[15, 25];
+trange=[0, 100];
 time.tt=20;
 
-t1=15;
-t2=25;
+t1=45;
+t2=75;
 time.range=(t1/prm.value.wci+1):(t2/prm.value.wci+1);
 
-t0=20;
+t0=75;
 time.t0=t0/prm.value.wci+1;
 
 avit1=0;
-avit2=30;
-avirange=(avit1/prm.value.wci+1):400:(avit2/prm.value.wci+1);
+avit2=100;
+avirange=(avit1/prm.value.wci+1):200:(avit2/prm.value.wci+1);
 avixrange=[0,50];
 aviyrange=[-10,10];
 
 %% read the particles' id
 cd(outdir);
 % ids = uint64(load(file));
-ids = uint64(1232946);
+ids = uint64(429334303);
 
 %% energy normalization
 norm=prm.value.mi*prm.value.vA*prm.value.vA;
@@ -51,6 +51,7 @@ for i=1:nid
     cd(outdir);
     slj.Utility.exist_directory(num2str(id));
     iddir=[outdir,'\', num2str(id)];
+    % iddir = outdir;
 
     %% plot figure
     cd(outdir);
@@ -350,7 +351,7 @@ vy=(vy(1:end-1)+vy(2:end))/2;
 % y position
 nvy=length(vy);
 ry=zeros(nvy+1,1);
-dt=1/1000;
+dt=6.2500e-04;
 for i=1:nvy
     ry(i+1)=ry(i)+vy(i)*dt;
 end
@@ -499,6 +500,7 @@ end
 function plot_trajectory_avi(prm, prt, name, norm, avirange, avixrange, aviyrange, show, outdir)
 aviname=[outdir,'\',name,'.avi'];
 % xrange=[prm.value.lx(1),prm.value.lx(end)];
+hlx=prm.value.Lx/2;
 xrange=avixrange;
 % yrange=[-Ly/2,Ly/2];
 yrange=aviyrange;
@@ -522,6 +524,8 @@ aviobj=VideoWriter(aviname);
 aviobj.FrameRate=15;
 open(aviobj);
 t0=-1;
+%% the periodic boundary
+pb=1;
 %% plot
 pause('on');
 f=figure('Visible', show);
@@ -529,14 +533,26 @@ for t=1:nt
     x1=prt.value.rx(trange(t));
     z1=prt.value.rz(trange(t));
     k1=prt.value.k(trange(t));
+    
+    %% periodic boundary position
+    if abs(x0(end)-x1)>hlx
+        pb=[pb, t];
+    end
+    
     t1=round(tt(t));
     if t0~=t1
         hold off
         ss=prm.read('stream',t1);
         ss=ss.value;
         slj.Plot.stream(ss,prm.value.lx,prm.value.lz,40); hold on
-        % plot([x0, x1],[z0, z1],'*r','LineWidth',2); hold on
-        p=patch([x0, x1],[z0, z1],[k0, NaN],'edgecolor','flat','facecolor','none'); hold on
+        
+        npb = length(pb);
+        for b = 2:npb
+            p=patch(x0(pb(b-1):(pb(b)-1)),z0(pb(b-1):(pb(b)-1)),[k0(pb(b-1):(pb(b)-2)), NaN],'edgecolor','flat','facecolor','none'); hold on
+            set(p,'LineWidth',2);
+        end
+        
+        p=patch([x0(pb(end)+1:end), x1],[z0(pb(end)+1:end), z1],[k0(pb(end)+1:end), NaN],'edgecolor','flat','facecolor','none'); hold on
         set(p,'LineWidth',2);
         % scatter([x0, x1],[z0,z1],'filled','cdata',[k0, k1]); hold on
         colormap('jet');
@@ -550,8 +566,11 @@ for t=1:nt
         % pause(5);
     else
         plot([x01, x1],[z01, z1],'*r','LineWidth',2); hold on
-        p=patch([x01, x1],[z01, z1],[k01, NaN],'edgecolor','flat','facecolor','none'); hold on
-        set(p,'LineWidth',2);
+        
+        if abs(x01-x1)<hlx
+            p=patch([x01, x1],[z01, z1],[k01, NaN],'edgecolor','flat','facecolor','none'); hold on
+            set(p,'LineWidth',2);
+        end
         % scatter([x01, x1],[z01,z1],'filled','cdata',[k01, k1]); hold on
         colormap('jet');
         caxis(cr);

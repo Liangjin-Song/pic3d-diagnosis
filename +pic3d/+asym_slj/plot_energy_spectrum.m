@@ -6,7 +6,7 @@ outdir='E:\Asym\dst1\out\Kinetic\Spectrum';
 prm=slj.Parameters(indir,outdir);
 %% the time of the energy spectrum
 tt1=0;
-tt2=20;
+tt2=30;
 tt3=50;
 tt4=80;
 tt5=100;
@@ -15,7 +15,7 @@ izero=1;
 
 xrange=[-5,1];
 %% species
-name='h';
+name='e';
 
 if name == 'h'
     sfx='ic';

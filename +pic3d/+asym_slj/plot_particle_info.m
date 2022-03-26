@@ -6,19 +6,18 @@
 clear;
 %%
 indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Kinetic\High_Energy\429334303';
+outdir='E:\Asym\dst1\out\Kinetic\RF';
 prm=slj.Parameters(indir,outdir);
 %% particle's ID
 %% id1='295320754';
-id = '429334303';
+id = '213477796';
 spc='h';
 spcs='ic';
 
 xrange=[0,100];
 
 %% figure property
-extra.xlabel='X [c/\omega_{pi}]';
-extra.ylabel='Z [c/\omega_{pi}]';
+extra.xlabel='\Omega_{ci}t';
 extra.ColorbarPosition='north';
 extra.FontSize=12;
 
@@ -35,6 +34,9 @@ den.z=den.z/norm;
 prt=prt.norm_energy(norm);
 prt=prt.norm_electric_field(prm);
 prt=prt.norm_velocity(prm);
+en=prt.acceleration_rate(prm);
+en.epara=en.epara/norm*prm.value.wci;
+en.eperp=en.eperp/norm*prm.value.wci;
 
 %% figure
 dh=-0.08;
@@ -53,7 +55,7 @@ ly.l2=prt.value.kx;
 ly.l3=prt.value.ky;
 ly.l4=prt.value.kz;
 extra.LineStyle={'-', '-', '-', '-'};
-extra.LineColor={'k', 'r', 'b', 'm'};
+extra.LineColor={'k', 'r', 'b', 'g'};
 
 extra.legend={'K', 'Kx', 'Ky', 'Kz'};
 extra.ylabel=['K',spcs];
@@ -84,25 +86,38 @@ xlim(xrange);
 set(gca,'XTicklabel',[]);
 
 axes(ha(3));
+% ly=[];
+% ly.l1=den.x;
+% ly.l2=den.y;
+% ly.l3=den.z;
+% % ly.l4=ly.l1+ly.l2+ly.l3;
+% % ly.l5=prt.value.k(trange);
+% extra.LineStyle={'-', '-', '-'};
+% extra.LineColor={'r', 'b', 'g'};
+% 
+% extra.legend={'\int_0^{ t}qVxEx dt', '\int_0^{ t}qVyEy dt', '\int_0^{ t}qVzEz dt'};
+% extra.ylabel=['\Delta K',spcs];
+% extra.Location='northwest';
+% 
+% h=slj.Plot.linen(lx, ly, extra);
+% set(h,'box','off');
+% xlim(xrange);
+% set(gca,'FontSize', extra.FontSize);
+
 ly=[];
-ly.l1=den.x;
-ly.l2=den.y;
-ly.l3=den.z;
-% ly.l4=ly.l1+ly.l2+ly.l3;
-% ly.l5=prt.value.k(trange);
-extra.LineStyle={'-', '-', '-'};
-extra.LineColor={'r', 'b', 'g'};
-
-extra.legend={'\int_0^{ t}qVxEx dt', '\int_0^{ t}qVyEy dt', '\int_0^{ t}qVzEz dt'};
+ly.l1=en.epara;
+ly.l2=en.eperp;
+extra.LineStyle={'-', '-'};
+extra.LineColor={'r', 'b'};
+extra.legend={'qV_{||}E_{||}', 'qV_{\perp}E_{\perp}'};
 extra.ylabel=['\Delta K',spcs];
-extra.Location='northwest';
-
 h=slj.Plot.linen(lx, ly, extra);
-set(h,'box','off');
 xlim(xrange);
-set(gca,'FontSize', extra.FontSize);
+set(h,'box','off');
 
 cd(outdir);
+print('-dpng','-r300','tmp.png');
+% close(gcf);
 
 
 function sfd=smooth1d(lfd)

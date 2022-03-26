@@ -1,17 +1,17 @@
-indir='E:\Asym\dst2\data';
-outdir='E:\Asym\dst2\out\Kinetic\Distribution\Cold_Ions\t=13';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\t=13';
 prm=slj.Parameters(indir,outdir);
 
 
 
-tt=13;
+tt=50;
 name='h';
 
-rgx=[24.5,25.5];
-rgz=[0.1,0.5];
+rgx=[19.5,21];
+rgz=[0,2];
 
-xrange=[15,35];
-yrange=[-5,5];
+xrange=[10,30];
+yrange=[-10,10];
 
 
 nt=length(tt);
@@ -58,7 +58,7 @@ for t=1:nt
     plot(rgx,[rgz(2),rgz(2)],'-r','LineWidth',2);
     xlim(xrange);
     ylim(yrange);
-    cd(outdir);
+    % cd(outdir);
     %     print(f, '-dpng','-r300',['T',sfx,'_t',num2str(tt(t), '%06.2f'),'.png']);
     %     close(gcf);
 end

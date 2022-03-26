@@ -11,35 +11,36 @@ file = 'id.txt';
 
 %% the time interval
 trange=[0, 100];
-time.tt=20;
 
-t1=45;
-t2=75;
+time.tt=20;
+t1=30;
+t2=60;
 time.range=(t1/prm.value.wci+1):(t2/prm.value.wci+1);
 
-t0=75;
+t0=20;
 time.t0=t0/prm.value.wci+1;
 
 avit1=0;
-avit2=100;
-avirange=(avit1/prm.value.wci+1):200:(avit2/prm.value.wci+1);
+avit2=80;
+avirange=(avit1/prm.value.wci+1):100:(avit2/prm.value.wci+1);
 avixrange=[0,50];
 aviyrange=[-10,10];
 
 %% read the particles' id
 cd(outdir);
-% ids = uint64(load(file));
-ids = uint64(429334303);
+ids = uint64(load(file));
+% ids = uint64(213477796);
 
 %% energy normalization
 norm=prm.value.mi*prm.value.vA*prm.value.vA;
 
 %% show figure or not
-show = true;
+show = false;
+save = true;
 
 %% loop
 nid = length(ids);
-for i=1:nid
+for i=14:nid
     %% read data
     id = ids(i);
     cd(indir);
@@ -55,8 +56,8 @@ for i=1:nid
 
     %% plot figure
     cd(outdir);
-    plot_trajectory_information(prm, name, prt, norm, spc, trange, show, iddir);
-    plot_particle_information(prm, prt, spc, norm, time, show, iddir);
+    plot_trajectory_information(prm, name, prt, norm, spc, trange, show, iddir, save);
+    % plot_particle_information(prm, prt, spc, norm, time, show, iddir, save);
     plot_trajectory_avi(prm, prt, name, norm, avirange, avixrange, aviyrange, show, iddir);
 end
 
@@ -90,7 +91,7 @@ end
 end
 
 %%  ================================================================================  %%
-function plot_trajectory_information(prm, name, prt, norm, spc, range, show, outdir)
+function plot_trajectory_information(prm, name, prt, norm, spc, range, show, outdir, save)
 en=prt.acceleration_rate(prm);
 en.fermi=en.fermi/norm;
 en.beta=en.beta/norm;
@@ -295,14 +296,16 @@ title(ht,['ID=', num2str(prt.id)],'FontSize', 16);
 
 
 %% save the figure
-cd(outdir);
-print(f1, '-dpng', '-r350', [name,'_survey.png']);
-close(f1);
+if save
+    cd(outdir);
+    print(f1, '-dpng', '-r350', [name,'_survey.png']);
+    close(f1);
+end
 end
 
 
 %%  ================================================================================  %%
-function plot_particle_information(prm, prt, spc, norm, time, show, outdir)
+function plot_particle_information(prm, prt, spc, norm, time, show, outdir, save)
 %% time
 tt=time.tt;
 tt0=time.t0;
@@ -336,8 +339,8 @@ caxis(cr);
 colormap('jet');
 cb=colorbar;
 cb.Label.FontSize=extra.FontSize;
-xlim([20,30]);
-ylim([-5,5]);
+xlim([0,50]);
+ylim([-10,10]);
 set(p,'LineWidth',3);
 xlabel(extra.xlabel);
 ylabel(extra.ylabel);
@@ -351,7 +354,7 @@ vy=(vy(1:end-1)+vy(2:end))/2;
 % y position
 nvy=length(vy);
 ry=zeros(nvy+1,1);
-dt=6.2500e-04;
+dt=prt.value.time(10)-prt.value.time(9);
 for i=1:nvy
     ry(i+1)=ry(i)+vy(i)*dt;
 end
@@ -455,44 +458,87 @@ xlabel(['V',spc,'_x']);
 ylabel(['V',spc,'_z']);
 set(gca,'FontSize',extra.FontSize);
 
-%% y-z trajectory
+%% v_para-v_perp1 (E cross B)
 f7=figure('Visible', show);
-rz=prt.value.rz;
-p=patch(ry(trange),rz(trange),[prt.value.k(trange(1):trange(end-1)); NaN],'edgecolor','flat','facecolor','none');
+v_para = prt.value.v_para/vA;
+v_perp1 = prt.value.v_perp1/vA;
+p=patch(v_para(trange),v_perp1(trange),[prt.value.k(trange(1):trange(end-1)); NaN],'edgecolor','flat','facecolor','none');
 colormap('jet');
 set(p,'LineWidth',3);
 cb=colorbar;
 % cb.Label.String='K_{ic}';
 cb.Label.FontSize=extra.FontSize;
 caxis([0,max(prt.value.k(trange))]);
-
-hold on;
-plot(ry(star),rz(star),'*k','LineWidth',8);
-plot(ry(tt0),rz(tt0),'*r','LineWidth',8);
-plot(ry(star(1)),rz(star(1)),'*g','LineWidth',8); % begin
-plot(ry(star(end)),rz(star(end)),'*b','LineWidth',8); % end
+hold on
+plot(v_para(star),v_perp1(star),'*k','LineWidth',8);
+plot(v_para(tt0),v_perp1(tt0),'*r','LineWidth',8); % distribution position
+plot(v_para(star(1)),v_perp1(star(1)),'*g','LineWidth',8); % begin
+plot(v_para(star(end)),v_perp1(star(end)),'*b','LineWidth',8); % end
 hold off
-xlabel('Y [c/\omega_{pi}]');
-ylabel('Z [c/\omega_{pi}]');
+xlabel(['V',spc,'_{||}']);
+ylabel(['V',spc,'_{\perp1}']);
+set(gca,'FontSize',extra.FontSize);
+
+
+%% v_para-v_perp2 (B cross E cross B)
+f8=figure('Visible', show);
+v_perp2 = prt.value.v_perp2/vA;
+p=patch(v_para(trange),v_perp2(trange),[prt.value.k(trange(1):trange(end-1)); NaN],'edgecolor','flat','facecolor','none');
+colormap('jet');
+set(p,'LineWidth',3);
+cb=colorbar;
+% cb.Label.String='K_{ic}';
+cb.Label.FontSize=extra.FontSize;
+caxis([0,max(prt.value.k(trange))]);
+hold on
+plot(v_para(star),v_perp2(star),'*k','LineWidth',8);
+plot(v_para(tt0),v_perp2(tt0),'*r','LineWidth',8); % distribution position
+plot(v_para(star(1)),v_perp2(star(1)),'*g','LineWidth',8); % begin
+plot(v_para(star(end)),v_perp2(star(end)),'*b','LineWidth',8); % end
+hold off
+xlabel(['V',spc,'_{||}']);
+ylabel(['V',spc,'_{\perp2}']);
+set(gca,'FontSize',extra.FontSize);
+
+
+%% v_perp1-v_perp2
+f9=figure('Visible', show);
+p=patch(v_perp1(trange),v_perp2(trange),[prt.value.k(trange(1):trange(end-1)); NaN],'edgecolor','flat','facecolor','none');
+colormap('jet');
+set(p,'LineWidth',3);
+cb=colorbar;
+% cb.Label.String='K_{ic}';
+cb.Label.FontSize=extra.FontSize;
+caxis([0,max(prt.value.k(trange))]);
+hold on
+plot(v_perp1(star),v_perp2(star),'*k','LineWidth',8);
+plot(v_perp1(tt0),v_perp2(tt0),'*r','LineWidth',8); % distribution position
+plot(v_perp1(star(1)),v_perp2(star(1)),'*g','LineWidth',8); % begin
+plot(v_perp1(star(end)),v_perp2(star(end)),'*b','LineWidth',8); % end
+hold off
+xlabel(['V',spc,'_{\perp1}']);
+ylabel(['V',spc,'_{\perp2}']);
 set(gca,'FontSize',extra.FontSize);
 
 
 %% save figure
-cd(outdir);
-print(f1,'-dpng','-r300','trajectory_X_Z.png');
-print(f2,'-dpng','-r300','trajectory_Y_Z.png');
-print(f3,'-dpng','-r300','trajectory_Vy_Vz.png');
-print(f4,'-dpng','-r300','trajectory_Vx_Vy.png');
-print(f5,'-dpng','-r300','trajectory_X_Y.png');
-print(f6,'-dpng','-r300','trajectory_Vx_Vz.png');
-print(f7,'-dpng','-r300','trajectory_Y_Z.png');
-close(f1);
-close(f2);
-close(f3);
-close(f4);
-close(f5);
-close(f6);
-close(f7);
+if save
+    cd(outdir);
+    print(f1,'-dpng','-r300','trajectory_X_Z.png');
+    print(f2,'-dpng','-r300','trajectory_Y_Z.png');
+    print(f3,'-dpng','-r300','trajectory_Vy_Vz.png');
+    print(f4,'-dpng','-r300','trajectory_Vx_Vy.png');
+    print(f5,'-dpng','-r300','trajectory_X_Y.png');
+    print(f6,'-dpng','-r300','trajectory_Vx_Vz.png');
+    print(f7,'-dpng','-r300','trajectory_Y_Z.png');
+    close(f1);
+    close(f2);
+    close(f3);
+    close(f4);
+    close(f5);
+    close(f6);
+    close(f7);
+end
 end
 
 

@@ -57,6 +57,37 @@ function obj=calc_velocity_fac(obj)
     %% the kinetic energy at fac
     obj.value.k_para=0.5*obj.weight*obj.m*para.^2;
     obj.value.k_perp=0.5*obj.weight*obj.m*perp.^2;
+    %% velocity in fac
+    ex=obj.value.ex;
+    ey=obj.value.ey;
+    ez=obj.value.ez;
+    %% perp 1, E cross B
+    [x, y, z] = calc_cross(0, 0, 1, bx, by, bz);
+    m = sqrt(x.^2 + y.^2 + z.^2);
+    x = x./m;
+    y = y./m;
+    z = z./m;
+    obj.value.v_perp1=vx.*x + vy.*y + vz.*z;
+
+    %% perp 2, B cross (E cross B)
+    [x, y, z] = calc_cross(bx, by, bz, x, y, z);
+    m = sqrt(x.^2 + y.^2 + z.^2);
+    x = x./m;
+    y = y./m;
+    z = z./m;
+    obj.value.v_perp2=vx.*x + vy.*y + vz.*z;
+end
+
+function [x, y, z] = calc_cross(ax, ay, az, bx, by, bz)
+%%
+% @brief: calculate a cross b
+% @param: ax, ay, az - the velor a
+% @param: bx, by, bz - the velor b
+% @return: x, y, z - the result
+%%
+x = ay.*bz - az.*by;
+y = az.*bx - ax.*bz;
+z = ax.*by - ay.*bx;
 end
 
 %% ======================================================================== %%

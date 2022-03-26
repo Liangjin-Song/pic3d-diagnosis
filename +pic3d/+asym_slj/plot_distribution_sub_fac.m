@@ -11,14 +11,17 @@ outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\Separatrix\Sphere\t=20';
 prm=slj.Parameters(indir, outdir);
 % the file name of distribution function
 % name='PVh_ts20800_x600-1400_y418-661_z0-1';
-tt=40;
+tt=50;
+isprt = 1;
+spn = 'h';
+id = uint64(74283363);
 nt=length(tt);
 for t=1:nt
-    name=['PVh_ts',num2str(tt(t)/prm.value.wci),'_x600-1400_y418-661_z0-1'];
+    name=['PV', spn, '_ts',num2str(tt(t)/prm.value.wci),'_x600-1400_y418-661_z0-1'];
     % velocity direction
     dir=1:3;
-    xrange=[28,29];
-    zrange=[2,3];
+    xrange=[19.5,21];
+    zrange=[0,2];
     % zrange=[0.1,1];
     
     
@@ -51,6 +54,11 @@ for t=1:nt
     B=prm.read('B', tt(t));
     spc=spc.fac(prm, E, B);
     
+    if isprt == 1
+        in = find(spc.value.id == id);
+    end
+    
+    
     for i=1:nv
         vdir=dir(i);
         if vdir==1
@@ -72,6 +80,18 @@ for t=1:nt
         %% plot figure
         f=slj.Plot();
         f.field2d(dst.value, dst.ll, dst.ll,extra);
+        
+        if isprt == 1
+            hold on
+            norm = prm.value.vA;
+            if vdir == 1
+                plot(spc.value.vy(in)/norm, spc.value.vz(in)/norm,'b*', 'LineWidth', 5);
+            elseif vdir == 2
+                plot(spc.value.vx(in)/norm, spc.value.vz(in)/norm,'b*', 'LineWidth', 5);
+            else
+                plot(spc.value.vx(in)/norm, spc.value.vy(in)/norm,'b*', 'LineWidth', 5);
+            end
+        end
 %         f.png(prm,[name,suffix,'_sub',num2str(xrange(1)),'-',num2str(xrange(2)),...
 %             '_',num2str(yrange(1)),'-',num2str(yrange(2)),...
 %             '_',num2str(zrange(1)),'-',num2str(zrange(2))]);

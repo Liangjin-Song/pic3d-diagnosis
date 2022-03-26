@@ -30,7 +30,7 @@ rate=(rate(2:end)+rate(1:end-1))/2;
 %% the energy
 nt=length(rate);
 en=zeros(1, nt+1);
-dt=1/1000;
+dt = obj.value.time(10) - obj.value.time(9);
 for i=2:nt+1
     en(i)=en(i-1)+rate(i-1)*dt/wci;
 end

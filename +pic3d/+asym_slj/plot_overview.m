@@ -6,15 +6,15 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Asym\dstv2\data';
-outdir='E:\Asym\dstv2\out\Overview';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Ohm';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=60;
+tt=40;
 % the variable name
-varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
+% varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
 % varname={'B','E','J','Vl','Ve','Nl','Ne'};
-% varname={'E'};
+varname={'E'};
 % figure style
 extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];

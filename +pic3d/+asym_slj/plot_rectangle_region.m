@@ -1,17 +1,18 @@
+clear;
 indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\t=13';
+outdir='E:\Asym\dst1\out\Ohm';
 prm=slj.Parameters(indir,outdir);
 
 
 
-tt=50;
+tt=40;
 name='h';
 
-rgx=[19.5,21];
-rgz=[0,2];
+rgx=[27.8,28.3];
+rgz=[1.8,2.3];
 
-xrange=[10,30];
-yrange=[-10,10];
+xrange=[15,35];
+yrange=[-5,5];
 
 
 nt=length(tt);
@@ -32,9 +33,9 @@ elseif name == 'e'
     sfx='e';
 end
 
-norm=tm/prm.value.coeff;
+% norm=tm/prm.value.coeff;
 % norm=1;
-% norm=prm.value.vA;
+norm=prm.value.vA;
 
 for t=1:nt
     %% read data
@@ -45,12 +46,13 @@ for t=1:nt
     ss=prm.read('stream',tt(t));
     %% calculation
     T=slj.Scalar((P.xx+P.yy+P.zz)./(N.value.*3));
-    
+    fd=E.x;
     %% figure
     f=figure('Visible', extra.Visible);
-    slj.Plot.overview(T, ss, prm.value.lx, prm.value.lz, norm, extra);
-    title(['T',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
-    % title(['Bz, \Omega_{ci}t=',num2str(tt(t))]);
+    slj.Plot.overview(fd, ss, prm.value.lx, prm.value.lz, norm, extra);
+    caxis([-0.8,0.8]);
+    % title(['T',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
+    title(['Ex, \Omega_{ci}t=',num2str(tt(t))]);
     hold on
     plot([rgx(2),rgx(2)],rgz,'-r','LineWidth',2);
     plot([rgx(1),rgx(1)],rgz,'-r','LineWidth',2);

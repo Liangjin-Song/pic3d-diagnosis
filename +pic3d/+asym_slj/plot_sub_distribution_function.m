@@ -11,23 +11,22 @@ outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\t=13';
 prm=slj.Parameters(indir, outdir);
 % the file name of distribution function
 % name='PVh_ts20800_x600-1400_y418-661_z0-1';
-tt=50;
-isprt = 1;
-spn = 'h';
+tt=40;
+isprt = 0;
+spn = 'l';
 id = '74283363';
 nt=length(tt);
 for t=1:nt
     name=['PV',spn,'_ts',num2str(tt(t)/prm.value.wci),'_x600-1400_y418-661_z0-1'];
     % velocity direction
     dir=1:3;
-    xrange=[19.5,21];
-    zrange=[0,2];
-    
-    
+    % position range
+    xrange=[27.8,28.3];
+    zrange=[1.8,2.3];
     yrange=[-100,100];
     precision=80;
     %% the figure style
-    range=2;
+    range=5;
     extra.colormap='moon';
     extra.xrange=[-range,range];
     extra.yrange=[-range,range];

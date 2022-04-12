@@ -1,16 +1,18 @@
 % function plot_kinetic_energy_conversion
 clear;
 %% parameters
-indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Analysis\Ion';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=100;
-dt=1;
+tt=33;
+dt=0.5;
 name='h';
 
-xz=10;
+% xz=16;
 dir=1;
+xz=1361;
+dx = 15;
 
 nt=length(tt);
 
@@ -30,39 +32,46 @@ if name == 'l'
     sfx='ih';
     q=prm.value.qi;
     m=prm.value.mi;
+    tm=prm.value.tlm;
 elseif name == 'h'
     sfx='ic';
     q=prm.value.qi;
     m=prm.value.mi;
+    tm=prm.value.thm;
 elseif name == 'e'
     sfx = 'e';
     q=prm.value.qe;
     m=prm.value.me;
+    tm=prm.value.tem;
 else
     error('Parameters Error!');
 end
 
-% norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
+% norm=1;
+norm=2*dt*prm.value.wci*prm.value.n0*tm/prm.value.coeff;
 
-norm=1;
 
 %% calculation
 [pUt, divPV, divQ, divH]= slj.Physics.thermal_energy_conversion(prm, name, tt, dt);
 
 %% get line
-lput=pUt.get_line2d(xz,dir,prm,norm);
-ldivPV=divPV.get_line2d(xz,dir,prm,norm);
-ldivQ=divQ.get_line2d(xz, dir, prm,norm);
-ldivH=divH.get_line2d(xz, dir, prm,norm);
+% lput=pUt.get_line2d(xz,dir,prm,norm);
+% ldivPV=divPV.get_line2d(xz,dir,prm,norm);
+% ldivQ=divQ.get_line2d(xz, dir, prm,norm);
+% ldivH=divH.get_line2d(xz, dir, prm,norm);
+lput = mean(pUt.value(:, xz-dx:xz+dx), 2)/norm;
+ldivPV = mean(divPV.value(:, xz-dx:xz+dx),2)/norm;
+ldivQ = mean(divQ.value(:, xz-dx:xz+dx),2)/norm;
+ldivH = mean(divH.value(:, xz-dx:xz+dx), 2)/norm;
 
-ltot = ldivPV + ldivQ + ldivH;
 
 %% smooth
-% lpkt = smoothdata(lpkt);
-% ldivKV = smoothdata(ldivKV);
-% lqVE = smoothdata(lqVE);
-% ldivPV = smoothdata(ldivPV);
+lput = smoothdata(lput, 'movmean', 10);
+ldivPV = smoothdata(ldivPV, 'movmean', 10);
+ldivQ = smoothdata(ldivQ, 'movmean', 10);
+ldivH = smoothdata(ldivH, 'movmean', 10);
 
+ltot = ldivPV + ldivQ + ldivH;
 
 %% plot figure
 figure;
@@ -75,10 +84,10 @@ plot(ll, ltot, '--k', 'LineWidth', 2);
 
 %% set figure
 xlim(xrange);
-legend('\partial K/\partial t', '-\nabla\cdot(KV)', 'qNV\cdot E', '- (\nabla\cdot P) \cdot V', 'Sum', 'Location', 'Best');
+legend('\partial U/\partial t', '(\nabla\cdot P) \cdot V', '-\nabla \cdot Q', '- \nabla \cdot (UV + P\cdot V)', 'Sum', 'Location', 'Best');
 xlabel('Z [c/\omega_{pi}]');
-set(get(gca, 'YLabel'), 'String', ['\partial K',sfx,'/\partial t']);
-title(['profiles  ', pstr,' = ',num2str(xz)]);
+set(get(gca, 'YLabel'), 'String', ['\partial U',sfx,'/\partial t']);
+% title(['profiles  ', pstr,' = ',num2str(xz)]);
 set(gca,'FontSize',14);
 
 %% save figure

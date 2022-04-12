@@ -1,20 +1,20 @@
 % function plot_momentum_equation_velocity
 clear;
 %% parameters
-indir='E:\Asym\Cold1\data';
-outdir='E:\Asym\Cold1\out\Energy\Cold';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=10;
-dt=1;
+tt=20;
+dt=0.5;
 name='h';
 
 q=prm.value.qi;
 m=prm.value.mi;
 
-norm=prm.value.vA;
-xz=1;
-dir=25;
+norm=1; % prm.value.vA;
+xz=28;
+dir=1;
 
 %% figure proterty
 xrange=[-5,5];
@@ -44,10 +44,10 @@ vgv=vdv.get_line2d(xz, dir, prm, norm);
 dvp=divP.get_line2d(xz, dir, prm, norm);
 vcb=evb.get_line2d(xz, dir, prm, norm);
 
-dpt=dpt.lz;
-vgv=vgv.lz;
-dvp=dvp.lz;
-vcb=vcb.lz;
+dpt=dpt.lx;
+vgv=vgv.lx;
+dvp=dvp.lx;
+vcb=vcb.lx;
 
 % eee=E.z(:,pxz-dxz:pxz+dxz);
 % vxb=vxB.z(:,pxz-dxz:pxz+dxz);
@@ -66,17 +66,10 @@ vgv0=vgv;
 dvp0=dvp;
 vcb0=vcb;
 
-dpt=smoothdata(dpt0,'movmean',20);
-vgv=smoothdata(vgv0,'movmean',20);
-dvp=smoothdata(dvp0,'movmean',20);
-vcb=smoothdata(vcb0,'movmean',20);
-
-% vxb=smoothdata(vxb0,'movmean');
-% vxb=smoothdata(vxb,'movmean');
-% dvp=smoothdata(dvp0,'movmean');
-% vpv=smoothdata(vpv0,'movmean');
-% vpt=smoothdata(vpt0,'movmean');
-
+dpt=smoothdata(dpt0,'movmean',40);
+vgv=smoothdata(vgv0,'movmean',40);
+dvp=smoothdata(dvp0,'movmean',40);
+vcb=smoothdata(vcb0,'movmean',40);
 
 tot=vgv+dvp+vcb;
 % tot=smoothdata(tot);

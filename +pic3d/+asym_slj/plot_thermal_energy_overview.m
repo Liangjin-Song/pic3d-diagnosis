@@ -1,19 +1,19 @@
 % function plot_thermal_energy_overview(name)
 % clear;
 %%
-indir='E:\Asym\Case2\data';
-outdir='E:\Asym\Case2\out\Overview';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Energy';
 prm=slj.Parameters(indir,outdir);
 
-tt=20;
+tt=0:100;
 name='h';
 
 nt=length(tt);
 
+show=false;
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra.Visible=false;
 
 if name == 'h'
     tm=prm.value.thm;
@@ -26,8 +26,8 @@ elseif name == 'e'
     sfx='e';
 end
 
-% norm=0.5*prm.value.n0*tm/prm.value.coeff;
-norm=1;
+norm=prm.value.n0*tm/prm.value.coeff;
+% norm=1;
 for t=1:nt
     %% read data
     P=prm.read(['P',name],tt(t));
@@ -36,6 +36,7 @@ for t=1:nt
     U=slj.Scalar((P.xx+P.yy+P.zz).*0.5);
 
     %% figure
+    figure('Visible', show);
     slj.Plot.overview(U, ss, prm.value.lx, prm.value.lz, norm, extra);
     title(['U',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
     cd(outdir);

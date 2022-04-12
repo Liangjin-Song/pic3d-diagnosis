@@ -1,20 +1,23 @@
 % function plot_kinetic_energy_conversion
 clear;
 %% parameters
-indir='E:\Asym\Cold1\data';
-outdir='E:\Asym\Cold1\out\Energy\Cold';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=5;
-dt=1;
-name='l';
+tt=20;
+dt=0.5;
+name='h';
 
-xz=10;
-dir=1;
+% xz=16;
+% dir=1;
+xz=561;
+dx = 3;
+
 
 nt=length(tt);
 
-xrange=[-10,10];
+xrange=[-5,5];
 
 if dir == 1
     ll = prm.value.lz;
@@ -42,23 +45,28 @@ else
     error('Parameters Error!');
 end
 
-% norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
-norm=1;
+norm=0.5*m*prm.value.n0*prm.value.vA*prm.value.vA*2*dt*prm.value.wci;
+% norm=1;
 
 %% calculation
 [pKt, divKV, qVE, divPV] = slj.Physics.kinetic_energy_conversion(prm, name, tt, dt, q, m);
 
 %% get line
-lpkt=pKt.get_line2d(xz,dir,prm,norm);
-ldivKV=divKV.get_line2d(xz,dir,prm,norm);
-lqVE=qVE.get_line2d(xz,dir,prm,norm);
-ldivPV=divPV.get_line2d(xz,dir,prm,norm);
+% lpkt=pKt.get_line2d(xz,dir,prm,norm);
+% ldivKV=divKV.get_line2d(xz,dir,prm,norm);
+% lqVE=qVE.get_line2d(xz,dir,prm,norm);
+% ldivPV=divPV.get_line2d(xz,dir,prm,norm);
+
+lpkt = mean(pKt.value(:, xz-dx:xz+dx), 2)/norm;
+ldivKV = mean(divKV.value(:, xz-dx:xz+dx),2)/norm;
+lqVE = mean(qVE.value(:, xz-dx:xz+dx),2)/norm;
+ldivPV = mean(divPV.value(:, xz-dx:xz+dx), 2)/norm;
 
 %% smooth
-lpkt = smoothdata(lpkt);
-ldivKV = smoothdata(ldivKV);
-lqVE = smoothdata(lqVE);
-ldivPV = smoothdata(ldivPV);
+lpkt = smoothdata(lpkt, 'movmean', 20);
+ldivKV = smoothdata(ldivKV, 'movmean', 20);
+lqVE = smoothdata(lqVE, 'movmean', 20);
+ldivPV = smoothdata(ldivPV, 'movmean', 20);
 
 ltot=ldivKV + ldivPV + lqVE;
 
@@ -75,12 +83,12 @@ xlim(xrange);
 legend('\partial K/\partial t', '-\nabla\cdot(KV)', 'qNV\cdot E', '- (\nabla\cdot P) \cdot V', 'Sum', 'Location', 'Best');
 xlabel('Z [c/\omega_{pi}]');
 set(get(gca, 'YLabel'), 'String', ['\partial K',sfx,'/\partial t']);
-title(['\Omega_{ci}t = ',num2str(tt),', profiles  ', pstr,' = ',num2str(xz)]);
+% title(['\Omega_{ci}t = ',num2str(tt),', profiles  ', pstr,' = ',num2str(xz)]);
 set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-% print('-dpng','-r300',[sfx,'_bulk_kinetic_energy_t',num2str(tt),'_line_',pstr,'=',num2str(xz),'.png']);
+print('-dpng','-r300',[sfx,'_bulk_kinetic_energy_t',num2str(tt),'_line_',pstr,'=',num2str(xz),'.png']);
 % close(gcf);
 
 

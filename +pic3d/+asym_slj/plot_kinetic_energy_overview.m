@@ -1,19 +1,19 @@
 % function plot_kinetic_energy_overview(name)
 % clear;
 %% parameters
-indir='E:\Asym\Case2\data';
-outdir='E:\Asym\Case2\out\Overview';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=20;
+tt=33;
 name='h';
+show=true;
 
 nt=length(tt);
 
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra.Visible=false;
 
 if name == 'h'
     m=prm.value.mi;
@@ -26,8 +26,8 @@ elseif name == 'e'
     sfx='e';
 end
 
-% norm=0.5*m*prm.value.n0*prm.value.vA*prm.value.vA;
-norm=1;
+norm=0.5*m*prm.value.n0*prm.value.vA*prm.value.vA;
+% norm=1;
 for t=1:nt
     %% read data
     V=prm.read(['V',name],tt(t));
@@ -38,6 +38,7 @@ for t=1:nt
     K=slj.Scalar(0.5.*m.*N.value.*K.value);
 
     %% figure
+    figure('Visible', show);
     slj.Plot.overview(K, ss, prm.value.lx, prm.value.lz, norm, extra);
     title(['K',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
     cd(outdir);

@@ -1,15 +1,16 @@
 % function plot_species_total_energy_overview
 clear;
 %% parameters
-indir='E:\Asym\Cold1\data';
-outdir='E:\Asym\Cold1\out\Energy\Cold';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
 %% time and species
-tt=0;
-name='l';
+tt=0:100;
+name='h';
 
 %% figure proterties
+show=false;
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
@@ -58,11 +59,16 @@ for t=1:nt
 
     %% plot figure
     cd(outdir);
-    f1=figure;
+    f1=figure('Visible', show);
     slj.Plot.overview(E, ss, prm.value.lx, prm.value.lz, tnorm, extra);
     title(['E',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
+    cd(outdir);
+    print('-dpng','-r300',['K',sfx,'+U',sfx,'_t',num2str(tt(t)),'.png']);
+    close(gcf);
 
-    f2=figure;
+    f2=figure('Visible', show);
     slj.Plot.overview(aE, ss, prm.value.lx, prm.value.lz, anorm, extra);
     title(['E',sfx,'/N',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
+    print('-dpng','-r300',['aver(K',sfx,'+U',sfx,')_t',num2str(tt(t)),'.png']);
+    close(gcf);
 end

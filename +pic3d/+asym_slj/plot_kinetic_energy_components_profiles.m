@@ -1,13 +1,13 @@
 % function plot_kinetic_energy_components_profiles(name)
 clear;
 %% parameters
-indir='E:\Asym\Cold1\data';
-outdir='E:\Asym\Cold1\out\Energy\Cold';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=3;
-name='l';
-xz=25;
+tt=30;
+name='h';
+xz=16;
 dir=1;
 
 xrange=[-10, 10];

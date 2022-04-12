@@ -51,6 +51,8 @@ methods (Access = public, Static)
     %% temperature
     T = temperature(P, N);
     [pTt, divQ, PddivV, pdivV, VdivT] = energy_density_conversion(prm, name, tt, dt);
+    %% total energy conversion
+    [pTt, divF, qVE] = total_energy_conversion(prm, name, tt, dt, q, m);
 end
 
 

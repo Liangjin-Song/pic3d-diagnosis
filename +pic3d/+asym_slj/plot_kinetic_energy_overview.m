@@ -2,12 +2,12 @@
 % clear;
 %% parameters
 indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Tmp';
+outdir='E:\Asym\dst1\out\Energy';
 prm=slj.Parameters(indir,outdir);
 
-tt=33;
+tt=0:100;
 name='h';
-show=true;
+show=false;
 
 nt=length(tt);
 
@@ -26,8 +26,11 @@ elseif name == 'e'
     sfx='e';
 end
 
-norm=0.5*m*prm.value.n0*prm.value.vA*prm.value.vA;
+% norm=0.5*m*prm.value.n0*prm.value.vA*prm.value.vA;
 % norm=1;
+norm=prm.value.n0*tm/prm.value.coeff;
+
+
 for t=1:nt
     %% read data
     V=prm.read(['V',name],tt(t));

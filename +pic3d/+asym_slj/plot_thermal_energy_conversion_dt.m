@@ -15,8 +15,10 @@ zindex = [420, 501];
 xrange=[tt(1)-1,tt(end)+1];
 
 % the box and box size
-nx=40;
-nz=20;
+% nx=40;
+% nz=20;
+nx = 80;
+nz = 40;
 
 if name == 'l'
     sfx='ih';
@@ -74,11 +76,11 @@ end
 
 rate0 = rate;
 
-rate(1,:)=smoothdata(rate0(1,:));
-rate(2,:)=smoothdata(rate0(2,:)); % ,'movmean',7);
-rate(3,:)=smoothdata(rate0(3,:)); % ,'movmean',7);
-rate(4,:)=smoothdata(rate0(4,:), 'movmean', 10);
-rate(5,:)=smoothdata(rate0(5,:));
+% rate(1,:)=smoothdata(rate0(1,:), 'movmean', 1);
+% rate(2,:)=smoothdata(rate0(2,:)); % ,'movmean',7);
+% rate(3,:)=smoothdata(rate0(3,:)); % ,'movmean',7);
+% rate(4,:)=smoothdata(rate0(4,:), 'movmean', 1);
+% rate(5,:)=smoothdata(rate0(5,:));
 
 rate(6,:)=rate(2,:) + rate(3,:) + rate(4,:) + rate(5,:);
 

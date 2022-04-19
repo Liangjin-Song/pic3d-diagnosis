@@ -1,14 +1,14 @@
 % function plot_temperature_overview(name)
 clear;
 %% 
-indir='E:\Asym\dst2\data';
-outdir='E:\Asym\dst2\out\Overview';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Overview';
 prm=slj.Parameters(indir,outdir);
 
 
 
-tt=0:100;
-name='e';
+tt=51:100;
+name='h';
 disp(name);
 
 nt=length(tt);

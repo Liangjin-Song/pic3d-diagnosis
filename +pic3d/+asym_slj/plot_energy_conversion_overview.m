@@ -5,8 +5,8 @@ indir='E:\Asym\dst1\data';
 outdir='E:\Asym\dst1\out\Overview';
 prm=slj.Parameters(indir,outdir);
 
-tt=30;
-name='e';
+tt=51:100;
+name='h';
 
 nt=length(tt);
 
@@ -45,7 +45,7 @@ for t=1:nt
     f=figure('Visible', extra.Visible);
     slj.Plot.overview(JE, ss, prm.value.lx, prm.value.lz, norm, extra);
     title(['J',sfx,'\cdot E,  \Omega_{ci}t = ',num2str(tt(t))]);
-%     cd(outdir);
-%     print(f,'-dpng','-r300',['J',sfx,'_dot_E_t',num2str(tt(t)),'.png']);
-%     close(gcf);
+    cd(outdir);
+    print(f,'-dpng','-r300',['J',sfx,'_dot_E_t',num2str(tt(t)),'.png']);
+    close(gcf);
 end

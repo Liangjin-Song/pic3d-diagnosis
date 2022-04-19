@@ -2,15 +2,17 @@
 clear;
 %% parameters
 indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\X-line';
+outdir='E:\Asym\dst1\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=20;
+tt=30;
 dt=0.5;
 name='h';
 
-xz=26;
+xz=3;
 dir=1;
+xz=881;
+dx = 10;
 
 nt=length(tt);
 
@@ -30,43 +32,53 @@ if name == 'l'
     sfx='ih';
     q=prm.value.qi;
     m=prm.value.mi;
+    tm=prm.value.tlm;
 elseif name == 'h'
     sfx='ic';
     q=prm.value.qi;
     m=prm.value.mi;
+    tm=prm.value.thm;
 elseif name == 'e'
     sfx = 'e';
     q=prm.value.qe;
     m=prm.value.me;
+    tm=prm.value.tem;
 else
     error('Parameters Error!');
 end
 
 % norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
-
-norm=1;
+norm=2*dt*prm.value.wci*tm/prm.value.coeff;
+% norm=1;
 
 %% calculation
 [pTt, divQ, PddivV, pdivV, VdivT] = slj.Physics.energy_density_conversion(prm, name, tt, dt);
 
 %% get line
-lptt=pTt.get_line2d(xz,dir,prm,norm);
-ldivQ=divQ.get_line2d(xz, dir, prm,norm);
-lPddivV=PddivV.get_line2d(xz,dir,prm,norm);
-lpdivV=pdivV.get_line2d(xz, dir, prm,norm);
-lVdivT=VdivT.get_line2d(xz, dir, prm,norm);
+% lptt=pTt.get_line2d(xz,dir,prm,norm);
+% ldivQ=divQ.get_line2d(xz, dir, prm,norm);
+% lPddivV=PddivV.get_line2d(xz,dir,prm,norm);
+% lpdivV=pdivV.get_line2d(xz, dir, prm,norm);
+% lVdivT=VdivT.get_line2d(xz, dir, prm,norm);
+
+lpTt = mean(pTt.value(:, xz-dx:xz+dx), 2)/norm;
+ldivQ = mean(divQ.value(:, xz-dx:xz+dx), 2)/norm;
+lPddivV = mean(PddivV.value(:, xz-dx:xz+dx), 2)/norm;
+lpdivV = mean(pdivV.value(:, xz-dx:xz+dx), 2)/norm;
+lVdivT = mean(VdivT.value(:, xz-dx:xz+dx), 2)/norm;
+
 
 %% smooth
-ldivQ = smoothdata(ldivQ);
+ldivQ = smoothdata(ldivQ, 'movmean',2);
 lPddivV = smoothdata(lPddivV,'movmean',80);
 lpdivV = smoothdata(lpdivV,'movmean',80);
-lVdivT = smoothdata(lVdivT);
-lptt = smoothdata(lptt);
+lVdivT = smoothdata(lVdivT, 'movmean',80);
+lpTt = smoothdata(lpTt, 'movmean',20);
 
 ltot = ldivQ + lPddivV + lpdivV + lVdivT;
 %% plot figure
 figure;
-plot(ll, lptt, '-k', 'LineWidth', 2); hold on
+plot(ll, lpTt, '-k', 'LineWidth', 2); hold on
 plot(ll, ldivQ, '-b', 'LineWidth', 2);
 plot(ll, lPddivV, '-r', 'LineWidth', 2);
 plot(ll, lpdivV, '-m', 'LineWidth', 2);
@@ -85,7 +97,8 @@ set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-% print('-dpng','-r300',['J',sfx,'_E_B_t',num2str(tt(t)),'_line.png']);
+print('-dpng','-r300',[sfx,'_temperature_t',num2str(tt),'_line_', pstr,' = ',num2str(xz),'.png']);
+
 % close(gcf);
 
 

@@ -1,14 +1,14 @@
 % function plot_energy_converstion_line
 clear;
 %% parameters
-indir='E:\Asym\Cold1\data';
-outdir='E:\Asym\Cold1\out\Energy\Cold';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=50;
-name='l';
+tt=53;
+name='h';
 
-xz=25;
+xz=10;
 dir=1;
 
 nt=length(tt);
@@ -67,12 +67,19 @@ for t=1:nt
     ljex=JEx.get_line2d(xz,dir,prm,norm);
     ljey=JEy.get_line2d(xz,dir,prm,norm);
     ljez=JEz.get_line2d(xz,dir,prm,norm);
+    
+    % smooth
+    lje = smoothdata(lje);
+    ljex = smoothdata(ljex);
+    ljey = smoothdata(ljey);
+    ljez = smoothdata(ljez);
+    
 
     %% plot figure
     plot(ll, lje, '-k', 'LineWidth', 2); hold on
     plot(ll, ljex, 'r', 'LineWidth', 2);
     plot(ll, ljey, 'b', 'LineWidth', 2);
-    plot(ll, ljez, 'm', 'LineWidth', 2); hold off
+    plot(ll, ljez, 'g', 'LineWidth', 2); hold off
 
     %% set figure
     xlim(xrange);
@@ -84,6 +91,6 @@ for t=1:nt
 
     %% save figure
     cd(outdir);
-%     print('-dpng','-r300',['J',sfx,'_dot_E_t',num2str(tt(t)),'_', pstr,' = ',num2str(xz),'.png']);
-%     close(gcf);
+    print('-dpng','-r300',['J',sfx,'_dot_E_t',num2str(tt(t)),'_', pstr,' = ',num2str(xz),'.png']);
+    close(gcf);
 end

@@ -53,6 +53,8 @@ methods (Access = public, Static)
     [pTt, divQ, PddivV, pdivV, VdivT] = energy_density_conversion(prm, name, tt, dt);
     %% total energy conversion
     [pTt, divF, qVE] = total_energy_conversion(prm, name, tt, dt, q, m);
+    %% average total energy conversion
+    [pAt, qVE, VdA, divF] = average_total_energy_conversion(prm, name, tt, dt, q, m);
 end
 
 

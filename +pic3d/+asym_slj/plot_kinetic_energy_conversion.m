@@ -5,14 +5,14 @@ indir='E:\Asym\dst1\data';
 outdir='E:\Asym\dst1\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=20;
+tt=33;
 dt=0.5;
 name='h';
 
 % xz=16;
-% dir=1;
-xz=561;
-dx = 3;
+dir=1;
+xz=1441;
+dx = 15;
 
 
 nt=length(tt);
@@ -33,20 +33,22 @@ if name == 'l'
     sfx='ih';
     q=prm.value.qi;
     m=prm.value.mi;
+    tm=prm.value.tlm;
 elseif name == 'h'
     sfx='ic';
     q=prm.value.qi;
     m=prm.value.mi;
+    tm=prm.value.thm;
 elseif name == 'e'
     sfx = 'e';
     q=prm.value.qe;
     m=prm.value.me;
+    tm=prm.value.tem;
 else
     error('Parameters Error!');
 end
 
-norm=0.5*m*prm.value.n0*prm.value.vA*prm.value.vA*2*dt*prm.value.wci;
-% norm=1;
+norm=2*dt*prm.value.wci*prm.value.n0*tm/prm.value.coeff;
 
 %% calculation
 [pKt, divKV, qVE, divPV] = slj.Physics.kinetic_energy_conversion(prm, name, tt, dt, q, m);

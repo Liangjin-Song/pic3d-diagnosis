@@ -1,4 +1,4 @@
-% function plot_thermal_energy_conversion_dt
+% function plot_kinetic_energy_conversion_as_time
 clear;
 %% parameters
 indir='E:\Asym\dst1\data';
@@ -15,8 +15,8 @@ zindex = [420, 501];
 xrange=[tt(1)-1,tt(end)+1];
 
 % the box and box size
-nx=40;
-nz=20;
+nx=50;
+nz=10;
 
 if name == 'l'
     sfx='ih';
@@ -43,7 +43,8 @@ rate=zeros(6,nt);
 
 for t=1:nt
     %% calculation
-    [~, divPV, divQ, divH]= slj.Physics.thermal_energy_conversion(prm, name, tt(t), dt);
+    [~, divKV, qVE, divPV] = slj.Physics.kinetic_energy_conversion(prm, name, tt(t), dt, q, m);
+
     %% The velocity
     U1 = slj.Physics.thermal_energy(prm.read(['P', name], tt(t) - dt));
     U2 = slj.Physics.thermal_energy(prm.read(['P', name], tt(t) + dt));
@@ -57,30 +58,31 @@ for t=1:nt
     iz = iz + zindex(1) - 1;
     ix = ix + xindex(1) - 1;
 
-    gU = U.gradient(prm);
-    gU = vx*gU.x;
+    K = slj.Physics.kinetic_energy(m, prm.read(['N', name], tt(t)), prm.read(['V', name], tt(t)));
+    gK = K.gradient(prm);
+    gK = vx*gK.x;
 
-    %% du/dt
-    u2 = mean(U2.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    u1 = mean(U1.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    rate(1, t) = (u2 - u1)*prm.value.wci;
+    %% dK/dt
+    k1 = slj.Physics.kinetic_energy(m, prm.read(['N', name], tt(t) - dt), prm.read(['V', name], tt(t) - dt));
+    k2 = slj.Physics.kinetic_energy(m, prm.read(['N', name], tt(t) + dt), prm.read(['V', name], tt(t) + dt));
+    k2 = mean(k2.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+    k1 = mean(k1.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+    rate(1, t) = (k2 - k1)*prm.value.wci;
 
-    %% get the average value
-    rate(2,t)=mean(divPV.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    rate(3,t)=mean(divQ.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    rate(4,t)=mean(divH.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    rate(5,t)=mean(gU(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+    rate(2,t)=mean(divKV.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+    rate(3,t)=mean(qVE.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+    rate(4,t)=mean(divPV.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+    rate(5,t)=mean(gK(iz-nz:iz+nz,ix-nx:ix+nx),'all');
 end
-
-rate0 = rate;
-
-rate(1,:)=smoothdata(rate0(1,:));
-rate(2,:)=smoothdata(rate0(2,:)); % ,'movmean',7);
-rate(3,:)=smoothdata(rate0(3,:)); % ,'movmean',7);
-rate(4,:)=smoothdata(rate0(4,:), 'movmean', 10);
-rate(5,:)=smoothdata(rate0(5,:));
-
 rate(6,:)=rate(2,:) + rate(3,:) + rate(4,:) + rate(5,:);
+rate0=rate;
+
+% rate(1,:)=smoothdata(rate0(1,:));
+% rate(2,:)=smoothdata(rate0(2,:)); % ,'movmean',7);
+% rate(3,:)=smoothdata(rate0(3,:)); % ,'movmean',7);
+% rate(4,:)=smoothdata(rate0(4,:));
+% rate(5,:)=smoothdata(rate0(5,:));
+
 
 %% plot figure
 f=figure;
@@ -94,14 +96,14 @@ plot(tt, rate(6,:), '--k', 'LineWidth', 2);
 
 %% set figure
 xlim(xrange);
-legend('dU/dt', '(\nabla\cdot P) \cdot V', '-\nabla\cdot q', '-\nabla\cdot(UV + P\cdot V)', 'v\cdot \nabla U', 'Sum', 'Location', 'Best');
+legend('dK/dt', '-\nabla\cdot(KV)', 'qNV\cdot E', '- (\nabla\cdot P) \cdot V', 'v\cdot \nabla K', 'Sum', 'Location', 'Best');
 xlabel('\Omega_{ci} t');
-set(get(gca, 'YLabel'), 'String', ['d U',sfx,'/dt']);
+set(get(gca, 'YLabel'), 'String', ['K',sfx,'/dt']);
 set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-print('-dpng','-r300',[sfx,'_thermal_energy_conversion_as_dt.png']);
+print('-dpng','-r300',[sfx,'_bulk_kinetic_conversion_dt.png']);
 % close(gcf);
 
 

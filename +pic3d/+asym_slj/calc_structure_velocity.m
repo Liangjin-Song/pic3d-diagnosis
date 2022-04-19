@@ -6,6 +6,7 @@ function [vx, vz] = calc_structure_velocity(fd2, fd1, di, dt, xrange, yrange)
 % @param: fd1 -- the field at previous time step
 % @param: dt -- the interval between the two step
 % @param: xrange, yrange -- select the range from the field
+% @return: vx, vz -- the velocity
 %%
 
 %% the subfield
@@ -23,7 +24,6 @@ dx = c2 - c1;
 dz = r2 - r1;
 
 %% the velocity
-vx = dx/(di*dt);
-vz = dz/(di*dt);
-
+vx = dt*dx/(di);
+vz = dt*dz/(di);
 end

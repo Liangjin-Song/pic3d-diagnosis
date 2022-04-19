@@ -1,12 +1,12 @@
 % function plot_thermal_energy_conversion_as_time
 clear;
 %% parameters
-indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Analysis\Cold_Ion';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=1:199;
-dt=1;
+tt=0.5:99;
+dt=0.5;
 name='h';
 
 xrange=[tt(1)-1,tt(end)+1];

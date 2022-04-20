@@ -1,12 +1,12 @@
 % function plot_temperature_energy_density_conversion_as_time
 clear;
 %% parameters
-indir='E:\Asym\Cold1\data';
-outdir='E:\Asym\Cold1\out\Energy\Cold';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=1:59;
-dt=1;
+tt=20:0.5:70;
+dt=0.5;
 name='h';
 
 xrange=[tt(1)-1,tt(end)+1];
@@ -14,6 +14,8 @@ xrange=[tt(1)-1,tt(end)+1];
 % the box and box size
 nx=100;
 nz=50;
+xindex = [1, 201];
+zindex = [420, 640];
 
 if name == 'l'
     sfx='ih';
@@ -40,34 +42,34 @@ rate=zeros(6,nt);
 
 for t=1:nt
     %% read data
-    B=prm.read('B',tt(t));
+    % B=prm.read('B',tt(t));
 
     %% calculation
     [pTt, divQ, PddivV, pdivV, VdivT] = slj.Physics.energy_density_conversion(prm, name, tt(t), dt);
 
     %% the current sheet index in z-direction
-    [~,inz]=min(abs(B.x));
+    % [~,inz]=min(abs(B.x));
     %% the bz value at the current sheet
-    lbz=zeros(1,prm.value.nz);
-    for i=1:prm.value.nx
-        lbz(i)=B.z(inz(i),i);
-    end
+    % lbz=zeros(1,prm.value.nz);
+    % for i=1:prm.value.nx
+        % lbz(i)=B.z(inz(i),i);
+    % end
     %% find the RF position
-    [~,lrf]=max(lbz);
-    [~,rrf]=min(lbz);
+    % [~,lrf]=max(lbz);
+    % [~,rrf]=min(lbz);
     %% the x-line position
-    [~,ix]=min(abs(lbz(lrf:rrf)));
-    ix=ix+lrf-1;
-    iz=inz(ix);
+    % [~,ix]=min(abs(lbz(lrf:rrf)));
+    % ix=ix+lrf-1;
+    % iz=inz(ix);
     
-    ix=prm.value.nx/2;
-    iz=prm.value.nz/2;
+    % ix=prm.value.nx/2;
+    % iz=prm.value.nz/2;
 
-    rate(1,t)=mean(pTt.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    rate(2,t)=mean(divQ.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    rate(3,t)=mean(PddivV.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    rate(4,t)=mean(pdivV.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    rate(5,t)=mean(VdivT.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+    rate(1,t)=mean(pTt.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(2,t)=mean(divQ.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(3,t)=mean(PddivV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(4,t)=mean(pdivV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(5,t)=mean(VdivT.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
 end
 rate(6,:)=rate(2,:) + rate(3,:) + rate(4,:) + rate(5,:);
 rate0=rate;
@@ -99,7 +101,7 @@ set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-% print('-dpng','-r300',[sfx,'_temperature_energy_density_conversion_as_time.png']);
+print('-dpng','-r300',[sfx,'_temperature_energy_density_conversion_as_time.png']);
 % close(gcf);
 
 

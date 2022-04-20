@@ -5,7 +5,7 @@ indir='E:\Asym\dst1\data';
 outdir='E:\Asym\dst1\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=0.5:99;
+tt=20:0.5:60;
 dt=0.5;
 name='h';
 
@@ -14,6 +14,8 @@ xrange=[tt(1)-1,tt(end)+1];
 % the box and box size
 nx=10;
 nz=10;
+xindex = [1120, prm.value.nx];
+zindex = [420, 501];
 
 if name == 'l'
     sfx='ih';
@@ -40,30 +42,34 @@ rate=zeros(5,nt);
 
 for t=1:nt
     %% read data
-    B=prm.read('B',tt(t));
+    % B=prm.read('B',tt(t));
 
     %% calculation
     [pUt, divPV, divQ, divH]= slj.Physics.thermal_energy_conversion(prm, name, tt(t), dt);
     %% the current sheet index in z-direction
-    [~,inz]=min(abs(B.x));
+    % [~,inz]=min(abs(B.x));
     %% the bz value at the current sheet
-    lbz=zeros(1,prm.value.nz);
-    for i=1:prm.value.nx
-        lbz(i)=B.z(inz(i),i);
-    end
+    % lbz=zeros(1,prm.value.nz);
+    % for i=1:prm.value.nx
+        % lbz(i)=B.z(inz(i),i);
+    % end
     %% find the RF position
-    [~,lrf]=max(lbz);
-    [~,rrf]=min(lbz);
+    % [~,lrf]=max(lbz);
+    % [~,rrf]=min(lbz);
     %% the x-line position
-    [~,ix]=min(abs(lbz(lrf:rrf)));
-    ix=ix+lrf-1;
-    iz=inz(ix);
+    % [~,ix]=min(abs(lbz(lrf:rrf)));
+    % ix=ix+lrf-1;
+    % iz=inz(ix);
 
     %% get the average value
-    rate(1,t)=mean(pUt.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    rate(2,t)=mean(divPV.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    rate(3,t)=mean(divQ.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    rate(4,t)=mean(divH.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+    % rate(1,t)=mean(pUt.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+    % rate(2,t)=mean(divPV.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+    % rate(3,t)=mean(divQ.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+    % rate(4,t)=mean(divH.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+    rate(1,t)=mean(pUt.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(2,t)=mean(divPV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(3,t)=mean(divQ.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(4,t)=mean(divH.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
 end
 rate(5,:)=rate(2,:) + rate(3,:) + rate(4,:);
 rate0=rate;

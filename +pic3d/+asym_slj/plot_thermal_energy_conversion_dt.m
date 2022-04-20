@@ -98,7 +98,7 @@ plot(tt, rate(6,:), '--k', 'LineWidth', 2);
 xlim(xrange);
 legend('dU/dt', '(\nabla\cdot P) \cdot V', '-\nabla\cdot q', '-\nabla\cdot(UV + P\cdot V)', 'v\cdot \nabla U', 'Sum', 'Location', 'Best');
 xlabel('\Omega_{ci} t');
-set(get(gca, 'YLabel'), 'String', ['d U',sfx,'/dt']);
+set(get(gca, 'YLabel'), 'String', ['dU',sfx,'/dt']);
 set(gca,'FontSize',14);
 
 %% save figure

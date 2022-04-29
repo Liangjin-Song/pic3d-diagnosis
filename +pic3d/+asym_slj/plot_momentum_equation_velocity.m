@@ -5,7 +5,7 @@ indir='E:\Asym\dst1\data';
 outdir='E:\Asym\dst1\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=20;
+tt=24;
 dt=0.5;
 name='h';
 
@@ -13,8 +13,8 @@ q=prm.value.qi;
 m=prm.value.mi;
 
 norm=1; % prm.value.vA;
-xz=28;
-dir=1;
+xz=0;
+dir=0;
 
 %% figure proterty
 xrange=[-5,5];
@@ -74,7 +74,7 @@ vcb=smoothdata(vcb0,'movmean',40);
 tot=vgv+dvp+vcb;
 % tot=smoothdata(tot);
 %% figure
-ll=prm.value.lz;
+ll=prm.value.lx;
 figure;
 plot(ll,dpt,'-k','LineWidth',2); hold on
 plot(ll,tot,'--k','LineWidth',2);

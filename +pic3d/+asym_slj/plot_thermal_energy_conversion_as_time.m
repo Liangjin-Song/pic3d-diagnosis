@@ -14,7 +14,7 @@ xrange=[tt(1)-1,tt(end)+1];
 % the box and box size
 nx=10;
 nz=10;
-xindex = [1120, prm.value.nx];
+xindex = [1201, prm.value.nx];
 zindex = [420, 501];
 
 if name == 'l'
@@ -99,7 +99,7 @@ set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-print('-dpng','-r300',[sfx,'_thermal_energy_conversion_as_time.png']);
+% print('-dpng','-r300',[sfx,'_thermal_energy_conversion_as_time.png']);
 % close(gcf);
 
 

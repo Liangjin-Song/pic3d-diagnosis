@@ -9,7 +9,7 @@ tt=20:0.5:60;
 dt=0.5;
 name='h';
 
-xindex = [1120, prm.value.nx];
+xindex = [1201, prm.value.nx];
 zindex = [420, 501];
 
 xrange=[tt(1)-1,tt(end)+1];

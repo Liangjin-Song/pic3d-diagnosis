@@ -1,11 +1,11 @@
 % function plot_kinetic_energy_overview(name)
 % clear;
 %% parameters
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Energy';
+indir='E:\Asym\dst1v2\data';
+outdir='E:\Asym\dst1v2\out\Overview';
 prm=slj.Parameters(indir,outdir);
 
-tt=0:100;
+tt=20:60;
 name='h';
 show=false;
 

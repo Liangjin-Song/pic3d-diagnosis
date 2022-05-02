@@ -41,7 +41,7 @@ for t=1:nt
     %% figure
     figure('Visible', show);
     slj.Plot.overview(T, ss, prm.value.lx, prm.value.lz, norm, extra);
-    title(['K',sfx,' + U',sfx,', ', '\Omega_{ci}t=',num2str(tt(t))]);
+    title(['K',sfx,' + U',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
     cd(outdir);
     print('-dpng','-r300',['KU',sfx,'_t',num2str(tt(t)),'.png']);
     close(gcf);

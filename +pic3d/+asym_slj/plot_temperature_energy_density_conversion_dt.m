@@ -5,7 +5,7 @@ indir='E:\Asym\dst1v2\data';
 outdir='E:\Asym\dst1v2\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-dt=0.3;
+dt=0.5;
 tt=20:dt:60;
 
 name='h';

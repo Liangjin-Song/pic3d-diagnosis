@@ -19,9 +19,9 @@ pNt=slj.Scalar((N2.value - N1.value).*2.*dt.*prm.value.wci);
 %% \nabla \cdot (NV)
 N = prm.read(['N', name], tt);
 V = prm.read(['V', name], tt);
-NV.x = V.x .* N.value;
-NV.y = V.y .* N.value;
-NV.z = V.z .* N.value;
+NV.x = - V.x .* N.value;
+NV.y = - V.y .* N.value;
+NV.z = - V.z .* N.value;
 divNV = slj.Vector(NV);
 divNV = divNV.divergence(prm);
 end

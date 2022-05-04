@@ -1,12 +1,13 @@
 % function plot_temperature_energy_density_conversion_as_time
 clear;
 %% parameters
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Tmp';
+indir='E:\Asym\dst1v2\data';
+outdir='E:\Asym\dst1v2\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=20:0.5:60;
-dt=0.5;
+dt=0.3;
+tt=20:dt:60;
+
 name='h';
 
 xindex = [1120, prm.value.nx];
@@ -106,7 +107,7 @@ set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-print('-dpng','-r300',[sfx,'_temperature_energy_density_conversion_dt.png']);
+print('-dpng','-r300',[sfx,'_temperature_energy_density_conversion_dt=',num2str(dt),'.png']);
 % close(gcf);
 
 

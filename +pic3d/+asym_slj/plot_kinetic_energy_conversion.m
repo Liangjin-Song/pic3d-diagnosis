@@ -1,18 +1,30 @@
 % function plot_kinetic_energy_conversion
 clear;
 %% parameters
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Tmp';
+indir='E:\Asym\dst1v2\data';
+outdir='E:\Asym\dst1v2\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=33;
-dt=0.5;
 name='h';
 
-% xz=16;
+%{
+tt=33;
+dt=0.5;
+
 dir=1;
 xz=1441;
 dx = 15;
+%}
+
+tt=52;
+dt=1;
+
+dir=1;
+xz=1601;
+dx = 15;
+
+
+
 
 
 nt=length(tt);
@@ -90,7 +102,7 @@ set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-print('-dpng','-r300',[sfx,'_bulk_kinetic_energy_t',num2str(tt),'_line_',pstr,'=',num2str(xz),'.png']);
+% print('-dpng','-r300',[sfx,'_bulk_kinetic_energy_t',num2str(tt),'_line_',pstr,'=',num2str(xz),'.png']);
 % close(gcf);
 
 

@@ -1,12 +1,12 @@
 % function plot_thermal_energy_conversion_dt
 clear;
 %% parameters
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Tmp';
+indir='E:\Asym\dst1v2\data';
+outdir='E:\Asym\dst1v2\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=20:0.5:60;
-dt=0.5;
+dt = 1;
+tt=20:dt:60;
 name='h';
 
 xindex = [1201, prm.value.nx];
@@ -17,26 +17,30 @@ xrange=[tt(1)-1,tt(end)+1];
 % the box and box size
 % nx=40;
 % nz=20;
-nx = 80;
-nz = 40;
+nx = 120;
+nz = 20;
 
 if name == 'l'
     sfx='ih';
     q=prm.value.qi;
     m=prm.value.mi;
+    tm=prm.value.tlm;
 elseif name == 'h'
     sfx='ic';
     q=prm.value.qi;
     m=prm.value.mi;
+    tm=prm.value.thm;
 elseif name == 'e'
     sfx = 'e';
     q=prm.value.qe;
     m=prm.value.me;
+    tm=prm.value.tem;
 else
     error('Parameters Error!');
 end
 
 % norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
+norm=2*dt*prm.value.wci*prm.value.n0*tm/prm.value.coeff;
 
 %% the loop
 nt=length(tt);
@@ -86,12 +90,12 @@ rate(6,:)=rate(2,:) + rate(3,:) + rate(4,:) + rate(5,:);
 
 %% plot figure
 f=figure;
-plot(tt, rate(1,:), '-k', 'LineWidth', 2); hold on
-plot(tt, rate(2,:), '-b', 'LineWidth', 2);
-plot(tt, rate(3,:), '-m', 'LineWidth', 2);
-plot(tt, rate(4,:), '-r', 'LineWidth', 2);
-plot(tt, rate(5,:), '-g', 'LineWidth', 2);
-plot(tt, rate(6,:), '--k', 'LineWidth', 2);
+plot(tt, rate(1,:)/norm, '-k', 'LineWidth', 2); hold on
+plot(tt, rate(2,:)/norm, '-b', 'LineWidth', 2);
+plot(tt, rate(3,:)/norm, '-m', 'LineWidth', 2);
+plot(tt, rate(4,:)/norm, '-r', 'LineWidth', 2);
+plot(tt, rate(5,:)/norm, '-g', 'LineWidth', 2);
+plot(tt, rate(6,:)/norm, '--k', 'LineWidth', 2);
 
 
 %% set figure
@@ -103,7 +107,7 @@ set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-print('-dpng','-r300',[sfx,'_thermal_energy_conversion_as_dt.png']);
+print('-dpng','-r300',[sfx,'_thermal_energy_conversion_as_dt=',num2str(dt),'.png']);
 % close(gcf);
 
 

@@ -1,12 +1,12 @@
 % function plot_kinetic_energy_conversion_as_time
 clear;
 %% parameters
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Tmp';
+indir='E:\Asym\dst1v2\data';
+outdir='E:\Asym\dst1v2\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=20:0.5:60;
-dt=0.5;
+dt=0.1;
+tt=20:dt:60;
 name='h';
 
 xindex = [1120, prm.value.nx];
@@ -22,19 +22,23 @@ if name == 'l'
     sfx='ih';
     q=prm.value.qi;
     m=prm.value.mi;
+    tm=prm.value.tlm;
 elseif name == 'h'
     sfx='ic';
     q=prm.value.qi;
     m=prm.value.mi;
+    tm=prm.value.thm;
 elseif name == 'e'
     sfx = 'e';
     q=prm.value.qe;
     m=prm.value.me;
+    tm=prm.value.tem;
 else
     error('Parameters Error!');
 end
 
 % norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
+norm=2*dt*prm.value.wci*prm.value.n0*tm/prm.value.coeff;
 
 %% the loop
 nt=length(tt);
@@ -86,12 +90,12 @@ rate0=rate;
 
 %% plot figure
 f=figure;
-plot(tt, rate(1,:), '-k', 'LineWidth', 2); hold on
-plot(tt, rate(2,:), '-b', 'LineWidth', 2);
-plot(tt, rate(3,:), '-m', 'LineWidth', 2);
-plot(tt, rate(4,:), '-r', 'LineWidth', 2);
-plot(tt, rate(5,:), '-g', 'LineWidth', 2);
-plot(tt, rate(6,:), '--k', 'LineWidth', 2);
+plot(tt, rate(1,:)/norm, '-k', 'LineWidth', 2); hold on
+plot(tt, rate(2,:)/norm, '-b', 'LineWidth', 2);
+plot(tt, rate(3,:)/norm, '-m', 'LineWidth', 2);
+plot(tt, rate(4,:)/norm, '-r', 'LineWidth', 2);
+plot(tt, rate(5,:)/norm, '-g', 'LineWidth', 2);
+plot(tt, rate(6,:)/norm, '--k', 'LineWidth', 2);
 
 
 %% set figure
@@ -103,7 +107,7 @@ set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-print('-dpng','-r300',[sfx,'_bulk_kinetic_conversion_dt.png']);
+% print('-dpng','-r300',[sfx,'_bulk_kinetic_conversion_dt.png']);
 % close(gcf);
 
 

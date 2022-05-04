@@ -1,11 +1,11 @@
 % function plot_kinetic_energy_conversion
 clear;
 %% parameters
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Tmp';
+indir='E:\Asym\dst1v2\data';
+outdir='E:\Asym\dst1v2\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=33;
+tt=32;
 dt=0.5;
 name='h';
 
@@ -69,7 +69,7 @@ ldivH = mean(divH.value(:, xz-dx:xz+dx), 2)/norm;
 lput = smoothdata(lput, 'movmean', 10);
 ldivPV = smoothdata(ldivPV, 'movmean', 10);
 ldivQ = smoothdata(ldivQ, 'movmean', 10);
-ldivH = smoothdata(ldivH, 'movmean', 10);
+ldivH = smoothdata(ldivH, 'movmean', 20);
 
 ltot = ldivPV + ldivQ + ldivH;
 

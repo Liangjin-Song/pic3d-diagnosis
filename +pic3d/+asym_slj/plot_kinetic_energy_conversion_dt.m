@@ -38,7 +38,7 @@ else
 end
 
 % norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
-norm=2*dt*prm.value.wci*prm.value.n0*tm/prm.value.coeff;
+norm=prm.value.wci*prm.value.n0*tm/(prm.value.coeff*2*dt);
 
 %% the loop
 nt=length(tt);
@@ -71,7 +71,7 @@ for t=1:nt
     k2 = slj.Physics.kinetic_energy(m, prm.read(['N', name], tt(t) + dt), prm.read(['V', name], tt(t) + dt));
     k2 = mean(k2.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
     k1 = mean(k1.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    rate(1, t) = (k2 - k1)*prm.value.wci;
+    rate(1, t) = (k2 - k1)*prm.value.wci/(2*dt);
 
     rate(2,t)=mean(divKV.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
     rate(3,t)=mean(qVE.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');

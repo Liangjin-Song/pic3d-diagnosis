@@ -5,7 +5,7 @@ indir='E:\Asym\dst1v2\data';
 outdir='E:\Asym\dst1v2\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-dt = 1;
+dt = 0.5;
 tt=20:dt:60;
 name='h';
 
@@ -106,8 +106,8 @@ set(get(gca, 'YLabel'), 'String', ['dU',sfx,'/dt']);
 set(gca,'FontSize',14);
 
 %% save figure
-cd(outdir);
-print('-dpng','-r300',[sfx,'_thermal_energy_conversion_as_dt=',num2str(dt),'.png']);
+% cd(outdir);
+% print('-dpng','-r300',[sfx,'_thermal_energy_conversion_as_dt=',num2str(dt),'.png']);
 % close(gcf);
 
 

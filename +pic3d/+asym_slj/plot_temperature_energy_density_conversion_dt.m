@@ -16,7 +16,7 @@ zindex = [420, 501];
 xrange=[tt(1)-1,tt(end)+1];
 
 % the box and box size
-nx=80;
+nx=120;
 nz=40;
 
 if name == 'l'

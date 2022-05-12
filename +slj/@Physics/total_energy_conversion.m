@@ -25,7 +25,7 @@ U1 = slj.Physics.thermal_energy(prm.read(['P',name], tt-dt));
 % total energy
 T2 = K2.value + U2.value;
 T1 = K1.value + U1.value;
-pTt=slj.Scalar((T2 - T1).*2.*dt.*prm.value.wci);
+pTt=slj.Scalar((T2 - T1).*prm.value.wci./(2.*dt));
 
 %% qN\vec{V} \cdot \vec{E}
 N=prm.read(['N',name],tt);

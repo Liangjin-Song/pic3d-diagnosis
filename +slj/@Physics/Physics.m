@@ -57,6 +57,8 @@ methods (Access = public, Static)
     [pAt, qVE, VdA, divF] = average_total_energy_conversion(prm, name, tt, dt, q, m);
     %% continuity equation
     [pNt, divNV] = continuity_equation(prm, name, tt, dt);
+    %% averate bulk kinetic energy conversion
+    [pv2t, qve, vdv, divPV] = average_kinetic_energy_conversion(prm, name, tt, dt, q, m);
 end
 
 

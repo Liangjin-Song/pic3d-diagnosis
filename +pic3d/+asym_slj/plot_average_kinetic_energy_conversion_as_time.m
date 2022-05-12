@@ -19,6 +19,7 @@ xrange=[tt(1)-1,tt(end)+1];
 xindex = [1, 321];
 zindex = [441, 621];
 
+
 if name == 'l'
     sfx='ih';
     q=prm.value.qi;
@@ -48,11 +49,12 @@ for t=1:nt
     % B=prm.read('B',tt(t));
 
     %% calculation
-    [pKt, divKV, qVE, divPV] = slj.Physics.kinetic_energy_conversion(prm, name, tt(t), dt, q, m);
+    % [pKt, divKV, qVE, divPV] = slj.Physics.kinetic_energy_conversion(prm, name, tt(t), dt, q, m);
+    [pv2t, qve, vdv, divPV] = slj.Physics.average_kinetic_energy_conversion(prm, name, tt(t), dt, q, m);
 
-    rate(1,t)=sum(pKt.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(2,t)=sum(divKV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(3,t)=sum(qVE.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(1,t)=sum(pv2t.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(2,t)=sum(qve.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(3,t)=sum(vdv.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
     rate(4,t)=sum(divPV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
 end
 rate(5,:)=rate(2,:) + rate(3,:) + rate(4,:);
@@ -76,15 +78,16 @@ plot(tt, rate(5,:), '--k', 'LineWidth', 2);
 
 
 %% set figure
-legend('\partial K/\partial t', '-\nabla\cdot(KV)', 'qNV\cdot E', '- (\nabla\cdot P) \cdot V', 'Sum', 'Location', 'Best');
+h=legend('\partial V^2/\partial t', '2qV\cdot E/m', '-V\cdot \nabla V^2', '- 2(\nabla\cdot P) \cdot V/mN', 'Sum', 'Location', 'Best');
+set(h,'box','off');
 xlim(xrange);
 xlabel('\Omega_{ci} t');
-set(get(gca, 'YLabel'), 'String', ['\partial K',sfx,'/\partial t']);
+set(get(gca, 'YLabel'), 'String', ['\partial V^2_{',sfx,'}/\partial t']);
 set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-print('-dpng','-r300',[sfx,'_bulk_kinetic_conversion_as_time_dt=',num2str(dt),'.png']);
+print('-dpng','-r300',[sfx,'_average_bulk_kinetic_conversion_as_time_dt=',num2str(dt),'.png']);
 % close(gcf);
 
 

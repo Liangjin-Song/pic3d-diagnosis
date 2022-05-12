@@ -30,7 +30,7 @@ N1 = prm.read(['N', name], tt-dt);
 A2 = (K2.value + U2.value)./N2.value;
 A1 = (K1.value + U1.value)./N1.value;
 
-pAt=slj.Scalar((A2 - A1).*2.*dt.*prm.value.wci);
+pAt=slj.Scalar((A2 - A1).*prm.value.wci./(2.*dt));
 
 %% q\vec{V}\cdot\vec{E}
 V=prm.read(['V',name],tt);

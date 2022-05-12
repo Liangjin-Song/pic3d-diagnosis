@@ -2,15 +2,15 @@
 % clear;
 %%
 indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\Overview';
+outdir='E:\Asym\dst1v2\out\partial_t\region2';
 prm=slj.Parameters(indir,outdir);
 
-tt=20:60;
+tt=40;
 name='h';
 
 nt=length(tt);
 
-show=false;
+show=true;
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
@@ -26,8 +26,8 @@ elseif name == 'e'
     sfx='e';
 end
 
-norm=prm.value.n0*tm/prm.value.coeff;
-% norm=1;
+% norm=prm.value.n0*tm/prm.value.coeff;
+norm=1;
 for t=1:nt
     %% read data
     P=prm.read(['P',name],tt(t));

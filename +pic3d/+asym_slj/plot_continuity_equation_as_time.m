@@ -2,15 +2,21 @@
 clear;
 %% parameters
 indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\partial_t\region1';
+outdir='E:\Asym\dst1v2\out\partial_t\region2';
 prm=slj.Parameters(indir,outdir);
 
 dt = 0.1;
 tt=20:dt:60;
 name='h';
 
-xindex = [1201, prm.value.nx];
-zindex = [441, 501];
+% the box and box size
+% xindex = [1201, prm.value.nx];
+% zindex = [441, 501];
+xindex = [881, 1120];
+zindex = [441, 621];
+% xindex = [1, 321];
+% zindex = [441, 621];
+
 xrange=[tt(1)-1,tt(end)+1];
 
 if name == 'l'

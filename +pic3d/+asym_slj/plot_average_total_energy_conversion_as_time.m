@@ -1,17 +1,16 @@
-% function plot_kinetic_energy_conversion_as_time
+%% plot the average total energy conversion profiles
+% written by Liangjin Song on 20220412 at Nanchang University
+%%
 clear;
 %% parameters
 indir='E:\Asym\dst1v2\data';
 outdir='E:\Asym\dst1v2\out\partial_t\region3';
 prm=slj.Parameters(indir,outdir);
 
-dt=0.1;
+dt = 0.1;
 tt=20:dt:60;
 name='h';
 
-xrange=[tt(1)-1,tt(end)+1];
-
-% the box and box size
 % xindex = [1201, prm.value.nx];
 % zindex = [441, 501];
 % xindex = [881, 1120];
@@ -19,44 +18,43 @@ xrange=[tt(1)-1,tt(end)+1];
 xindex = [1, 321];
 zindex = [441, 621];
 
+xrange=[tt(1)-1,tt(end)+1];
+
 if name == 'l'
     sfx='ih';
     q=prm.value.qi;
     m=prm.value.mi;
+    tm=prm.value.tlm;
 elseif name == 'h'
     sfx='ic';
     q=prm.value.qi;
     m=prm.value.mi;
+    tm=prm.value.thm;
 elseif name == 'e'
     sfx = 'e';
     q=prm.value.qe;
     m=prm.value.me;
+    tm=prm.value.tem;
 else
     error('Parameters Error!');
 end
 
-% norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
 norm = 1;
 
-%% the loop
 nt=length(tt);
 rate=zeros(5,nt);
 
-
 for t=1:nt
-    %% read data
-    % B=prm.read('B',tt(t));
-
     %% calculation
-    [pKt, divKV, qVE, divPV] = slj.Physics.kinetic_energy_conversion(prm, name, tt(t), dt, q, m);
-
-    rate(1,t)=sum(pKt.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(2,t)=sum(divKV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(3,t)=sum(qVE.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(4,t)=sum(divPV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    [pAt, qVE, VdA, divF] = slj.Physics.average_total_energy_conversion(prm, name, tt(t), dt, q, m);
+    rate(1,t)=sum(pAt.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(2,t)=sum(qVE.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(3,t)=sum(VdA.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(4,t)=sum(divF.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
 end
+
 rate(5,:)=rate(2,:) + rate(3,:) + rate(4,:);
-rate0=rate;
+rate0 = rate;
 rate = rate/norm;
 
 % rate(1,:)=smoothdata(rate0(1,:));
@@ -73,20 +71,13 @@ plot(tt, rate(2,:), '-b', 'LineWidth', 2);
 plot(tt, rate(3,:), '-m', 'LineWidth', 2);
 plot(tt, rate(4,:), '-r', 'LineWidth', 2);
 plot(tt, rate(5,:), '--k', 'LineWidth', 2);
-
-
-%% set figure
-legend('\partial K/\partial t', '-\nabla\cdot(KV)', 'qNV\cdot E', '- (\nabla\cdot P) \cdot V', 'Sum', 'Location', 'Best');
+%%
+legend('\partial [(K+U)/N]/\partial t', 'qV\cdot E', '-V\cdot \nabla A', '-1/N*\nabla \cdot (Q + P\cdot V)', 'Sum', 'Location', 'Best','Box','off');
 xlim(xrange);
-xlabel('\Omega_{ci} t');
-set(get(gca, 'YLabel'), 'String', ['\partial K',sfx,'/\partial t']);
+xlabel('Z [c/\omega_{pi}]');
+set(get(gca, 'YLabel'), 'String', ['\partial [(K',sfx,'+U',sfx,')/N]/\partial t']);
 set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-print('-dpng','-r300',[sfx,'_bulk_kinetic_conversion_as_time_dt=',num2str(dt),'.png']);
-% close(gcf);
-
-
-
-% end
+print('-dpng','-r300',[sfx,'_average_total_energy_as_time_dt=',num2str(dt),'.png']);

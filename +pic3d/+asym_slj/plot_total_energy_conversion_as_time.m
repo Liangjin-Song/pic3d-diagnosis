@@ -3,23 +3,23 @@
 %%
 clear;
 %% parameters
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Tmp';
+indir='E:\Asym\dst1v2\data';
+outdir='E:\Asym\dst1v2\out\partial_t\region3';
 prm=slj.Parameters(indir,outdir);
 
-tt=20:0.5:60;
-dt=0.5;
+dt=0.1;
+tt=20:dt:60;
 name='h';
 
-xindex = [1120, prm.value.nx];
-zindex = [400, 501];
+% xindex = [1201, prm.value.nx];
+% xindex = [1201, prm.value.nx];
+% zindex = [441, 501];
+% xindex = [881, 1120];
+% zindex = [441, 621];
+xindex = [1, 321];
+zindex = [441, 621];
 
 xrange=[tt(1)-1,tt(end)+1];
-
-% the box and box size
-nx=80;
-nz=40;
-
 
 if name == 'l'
     sfx='ih';
@@ -41,6 +41,7 @@ else
 end
 
 % norm=2*dt*prm.value.wci*prm.value.n0*tm/prm.value.coeff;
+norm = 1;
 %% the loop
 nt=length(tt);
 rate=zeros(4,nt);
@@ -51,9 +52,9 @@ for t=1:nt
     [pTt, divF, qVE] = slj.Physics.total_energy_conversion(prm, name, tt(t), dt, q, m);
 
 
-    rate(1,t)=mean(pTt.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(2,t)=mean(divF.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(3,t)=mean(qVE.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(1,t)=sum(pTt.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(2,t)=sum(divF.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(3,t)=sum(qVE.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
 end
 
 rate(4,:)=rate(2,:) + rate(3,:);
@@ -72,13 +73,13 @@ plot(tt, rate(3,:), '-r', 'LineWidth', 2);
 plot(tt, rate(4,:), '--k', 'LineWidth', 2);
 
 %% set figure
-xlim(xrange);
 legend('\partial (K+U)/\partial t','-\nabla \cdot (KV + Q + H)', 'qNV\cdot E', 'Sum');
+xlim(xrange);
 xlabel('Z [c/\omega_{pi}]');
 set(get(gca, 'YLabel'), 'String', ['\partial (K',sfx,'+U',sfx,')/\partial t']);
 set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-% print('-dpng','-r300',[sfx,'_total_energy_as_time.png']);
+print('-dpng','-r300',[sfx,'_total_energy_as_time_dt=',num2str(dt),'.png']);
 

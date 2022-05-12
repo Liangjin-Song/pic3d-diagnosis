@@ -2,12 +2,12 @@
 clear;
 %% 
 indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\Overview';
+outdir='E:\Asym\dst1v2\out\partial_t\region3';
 prm=slj.Parameters(indir,outdir);
 
 
 
-tt=50;
+tt=40;
 name='h';
 disp(name);
 

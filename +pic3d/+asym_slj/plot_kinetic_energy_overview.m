@@ -2,12 +2,12 @@
 % clear;
 %% parameters
 indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\Overview';
+outdir='E:\Asym\dst1v2\out\partial_t\region1';
 prm=slj.Parameters(indir,outdir);
 
-tt=20:60;
+tt=40;
 name='h';
-show=false;
+show=true;
 
 nt=length(tt);
 
@@ -27,8 +27,8 @@ elseif name == 'e'
 end
 
 % norm=0.5*m*prm.value.n0*prm.value.vA*prm.value.vA;
-% norm=1;
-norm=prm.value.n0*tm/prm.value.coeff;
+norm=1;
+% norm=prm.value.n0*tm/prm.value.coeff;
 
 
 for t=1:nt

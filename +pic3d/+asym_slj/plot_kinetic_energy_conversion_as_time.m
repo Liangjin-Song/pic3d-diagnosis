@@ -1,21 +1,19 @@
 % function plot_kinetic_energy_conversion_as_time
 clear;
 %% parameters
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Tmp';
+indir='E:\Asym\dst1v2\data';
+outdir='E:\Asym\dst1v2\out\partial_t\region1';
 prm=slj.Parameters(indir,outdir);
 
-tt=20:0.5:60;
-dt=0.5;
+dt=0.1;
+tt=20:dt:60;
 name='h';
 
 xrange=[tt(1)-1,tt(end)+1];
 
 % the box and box size
-nx=10;
-nz=10;
-xindex = [1120, prm.value.nx];
-zindex = [420, 501];
+xindex = [1201, prm.value.nx];
+zindex = [441, 501];
 
 if name == 'l'
     sfx='ih';
@@ -34,6 +32,7 @@ else
 end
 
 % norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
+norm = 1;
 
 %% the loop
 nt=length(tt);
@@ -47,35 +46,14 @@ for t=1:nt
     %% calculation
     [pKt, divKV, qVE, divPV] = slj.Physics.kinetic_energy_conversion(prm, name, tt(t), dt, q, m);
 
-    %% the current sheet index in z-direction
-%     [~,inz]=min(abs(B.x));
-    %% the bz value at the current sheet
-%     lbz=zeros(1,prm.value.nz);
-%     for i=1:prm.value.nx
-%         lbz(i)=B.z(inz(i),i);
-%     end
-    %% find the RF position
-%     [~,lrf]=max(lbz);
-%     [~,rrf]=min(lbz);
-    %% the x-line position
-%     [~,ix]=min(abs(lbz(lrf:rrf)));
-%     ix=ix+lrf-1;
-%     iz=inz(ix);
-% 
-%     rate(1,t)=mean(pKt.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-%     rate(2,t)=mean(divKV.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-%     rate(3,t)=mean(qVE.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-%     rate(4,t)=mean(divPV.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-
-    
-
-    rate(1,t)=mean(pKt.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(2,t)=mean(divKV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(3,t)=mean(qVE.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(4,t)=mean(divPV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(1,t)=sum(pKt.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(2,t)=sum(divKV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(3,t)=sum(qVE.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(4,t)=sum(divPV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
 end
 rate(5,:)=rate(2,:) + rate(3,:) + rate(4,:);
 rate0=rate;
+rate = rate/norm;
 
 % rate(1,:)=smoothdata(rate0(1,:));
 % rate(2,:)=smoothdata(rate0(2,:)); % ,'movmean',7);
@@ -102,7 +80,7 @@ set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-print('-dpng','-r300',[sfx,'_bulk_kinetic_conversion_as_time.png']);
+print('-dpng','-r300',[sfx,'_bulk_kinetic_conversion_as_time_dt=',num2str(dt),'.png']);
 % close(gcf);
 
 

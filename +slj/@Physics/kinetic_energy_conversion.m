@@ -19,7 +19,7 @@ function [pKt, divKV, qVE, divPV] = kinetic_energy_conversion(prm, name, tt, dt,
 %% \frac{\partial K}{\partial t}
 K2 = slj.Physics.kinetic_energy(m, prm.read(['N',name],tt+dt), prm.read(['V',name],tt+dt));
 K1 = slj.Physics.kinetic_energy(m, prm.read(['N',name],tt-dt), prm.read(['V',name],tt-dt));
-pKt=slj.Scalar((K2.value-K1.value).*2.*dt.*prm.value.wci);
+pKt=slj.Scalar((K2.value-K1.value).*prm.value.wci./(2.*dt));
 
 %% - \nabla \cdot (K \vec{v})
 N=prm.read(['N',name],tt);

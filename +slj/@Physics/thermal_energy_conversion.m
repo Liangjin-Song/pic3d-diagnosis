@@ -18,7 +18,7 @@ function [pUt, divPV, divQ, divH]= thermal_energy_conversion(prm, name, tt, dt)
 %% \frac{\partial U}{\partial t}
 U2 = slj.Physics.thermal_energy(prm.read(['P',name], tt+dt));
 U1 = slj.Physics.thermal_energy(prm.read(['P',name], tt-dt));
-pUt=slj.Scalar((U2.value-U1.value).*2.*dt.*prm.value.wci);
+pUt=slj.Scalar((U2.value-U1.value).*prm.value.wci./(2.*dt));
 
 %% \vec{v}\cdoot(\nabla \cdot \vec{\vec{P}})
 V=prm.read(['V',name],tt);

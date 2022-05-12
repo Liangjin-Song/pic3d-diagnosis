@@ -1,21 +1,19 @@
 % function plot_thermal_energy_conversion_as_time
 clear;
 %% parameters
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Tmp';
+indir='E:\Asym\dst1v2\data';
+outdir='E:\Asym\dst1v2\out\partial_t\region1';
 prm=slj.Parameters(indir,outdir);
 
-tt=20:0.5:60;
-dt=0.5;
+dt=0.1;
+tt=20:dt:60;
 name='h';
 
 xrange=[tt(1)-1,tt(end)+1];
 
 % the box and box size
-nx=10;
-nz=10;
 xindex = [1201, prm.value.nx];
-zindex = [420, 501];
+zindex = [441, 501];
 
 if name == 'l'
     sfx='ih';
@@ -34,6 +32,7 @@ else
 end
 
 % norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
+norm = 1;
 
 %% the loop
 nt=length(tt);
@@ -41,38 +40,17 @@ rate=zeros(5,nt);
 
 
 for t=1:nt
-    %% read data
-    % B=prm.read('B',tt(t));
-
     %% calculation
     [pUt, divPV, divQ, divH]= slj.Physics.thermal_energy_conversion(prm, name, tt(t), dt);
-    %% the current sheet index in z-direction
-    % [~,inz]=min(abs(B.x));
-    %% the bz value at the current sheet
-    % lbz=zeros(1,prm.value.nz);
-    % for i=1:prm.value.nx
-        % lbz(i)=B.z(inz(i),i);
-    % end
-    %% find the RF position
-    % [~,lrf]=max(lbz);
-    % [~,rrf]=min(lbz);
-    %% the x-line position
-    % [~,ix]=min(abs(lbz(lrf:rrf)));
-    % ix=ix+lrf-1;
-    % iz=inz(ix);
 
-    %% get the average value
-    % rate(1,t)=mean(pUt.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    % rate(2,t)=mean(divPV.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    % rate(3,t)=mean(divQ.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    % rate(4,t)=mean(divH.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    rate(1,t)=mean(pUt.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(2,t)=mean(divPV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(3,t)=mean(divQ.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(4,t)=mean(divH.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(1,t)=sum(pUt.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(2,t)=sum(divPV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(3,t)=sum(divQ.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(4,t)=sum(divH.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
 end
 rate(5,:)=rate(2,:) + rate(3,:) + rate(4,:);
 rate0=rate;
+rate = rate/norm;
 
 % rate(1,:)=smoothdata(rate0(1,:));
 % rate(2,:)=smoothdata(rate0(2,:)); % ,'movmean',7);
@@ -92,14 +70,14 @@ plot(tt, rate(5,:), '--k', 'LineWidth', 2);
 
 %% set figure
 xlim(xrange);
-legend('\partial U/\partial t', '(\nabla\cdot P) \cdot V', '-\nabla\cdot q', '-\nabla\cdot(UV + P\cdot V)', 'Sum', 'Location', 'Best');
+legend('\partial U/\partial t', '(\nabla\cdot P) \cdot V', '-\nabla\cdot Q', '-\nabla\cdot(UV + P\cdot V)', 'Sum', 'Location', 'Best');
 xlabel('\Omega_{ci} t');
 set(get(gca, 'YLabel'), 'String', ['\partial U',sfx,'/\partial t']);
 set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-% print('-dpng','-r300',[sfx,'_thermal_energy_conversion_as_time.png']);
+print('-dpng','-r300',[sfx,'_thermal_energy_conversion_as_time_dt=',num2str(dt),'.png']);
 % close(gcf);
 
 

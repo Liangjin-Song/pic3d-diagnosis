@@ -19,7 +19,7 @@ function [pTt, divQ, PddivV, pdivV, VdivT] = energy_density_conversion(prm, name
 %% \frac{\partial T}{\partial t}
 T2 = slj.Physics.temperature(prm.read(['P',name], tt+dt), prm.read(['N',name], tt+dt));
 T1 = slj.Physics.temperature(prm.read(['P',name], tt-dt), prm.read(['N',name], tt-dt));
-pTt=slj.Scalar((T2.value-T1.value).*2.*dt.*prm.value.wci);
+pTt=slj.Scalar((T2.value-T1.value).*prm.value.wci./(2.*dt));
 
 %% -\frac{2}{3}\frac{1}{n}\nabla\cdot\vec{Q}
 N = prm.read(['N',name], tt);

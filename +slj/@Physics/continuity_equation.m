@@ -14,7 +14,7 @@ function [pNt, divNV] = continuity_equation(prm, name, tt, dt)
 %% \partial N/\partial t
 N2 = prm.read(['N', name], tt+dt);
 N1 = prm.read(['N', name], tt-dt);
-pNt=slj.Scalar((N2.value - N1.value).*2.*dt.*prm.value.wci);
+pNt=slj.Scalar((N2.value - N1.value).*prm.value.wci./(2.*dt));
 
 %% \nabla \cdot (NV)
 N = prm.read(['N', name], tt);

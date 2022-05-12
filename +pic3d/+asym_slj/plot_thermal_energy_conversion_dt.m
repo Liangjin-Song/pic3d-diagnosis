@@ -5,7 +5,7 @@ indir='E:\Asym\dst1v2\data';
 outdir='E:\Asym\dst1v2\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-dt = 0.5;
+dt = 0.1;
 tt=20:dt:60;
 name='h';
 
@@ -15,10 +15,17 @@ zindex = [420, 501];
 xrange=[tt(1)-1,tt(end)+1];
 
 % the box and box size
-% nx=40;
-% nz=20;
+%% 1
+% nx = 50;
+% nz = 10;
+
+%% 2
 nx = 120;
 nz = 20;
+
+%% 3
+% nx = 80;
+% nz = 20;
 
 if name == 'l'
     sfx='ih';
@@ -40,7 +47,7 @@ else
 end
 
 % norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
-norm=2*dt*prm.value.wci*prm.value.n0*tm/prm.value.coeff;
+norm=prm.value.wci*prm.value.n0*tm/(prm.value.coeff*2*dt);
 
 %% the loop
 nt=length(tt);
@@ -69,7 +76,7 @@ for t=1:nt
     %% du/dt
     u2 = mean(U2.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
     u1 = mean(U1.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    rate(1, t) = (u2 - u1)*prm.value.wci;
+    rate(1, t) = (u2 - u1)*prm.value.wci/(2*dt);
 
     %% get the average value
     rate(2,t)=mean(divPV.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
@@ -106,7 +113,7 @@ set(get(gca, 'YLabel'), 'String', ['dU',sfx,'/dt']);
 set(gca,'FontSize',14);
 
 %% save figure
-% cd(outdir);
+cd(outdir);
 % print('-dpng','-r300',[sfx,'_thermal_energy_conversion_as_dt=',num2str(dt),'.png']);
 % close(gcf);
 

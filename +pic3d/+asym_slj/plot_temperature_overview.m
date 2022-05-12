@@ -7,7 +7,7 @@ prm=slj.Parameters(indir,outdir);
 
 
 
-tt=20:60;
+tt=50;
 name='h';
 disp(name);
 
@@ -16,7 +16,7 @@ nt=length(tt);
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra.Visible=false;
+extra.Visible=true;
 
 if name == 'h'
     tm=prm.value.thm;
@@ -29,7 +29,8 @@ elseif name == 'e'
     sfx='e';
 end
 
-norm=tm/prm.value.coeff;
+% norm=tm/prm.value.coeff;
+norm = 1;
 
 for t=1:nt
     %% read data

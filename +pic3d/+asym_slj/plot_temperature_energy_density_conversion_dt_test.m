@@ -5,7 +5,7 @@ indir='E:\Asym\dst1v2\data';
 outdir='E:\Asym\dst1v2\out\temperature';
 prm=slj.Parameters(indir,outdir);
 
-dt = 0.5;
+dt = 0.1;
 tt=20:dt:60;
 name='h';
 
@@ -39,8 +39,8 @@ else
     error('Parameters Error!');
 end
 
-% norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
-norm=2*dt*prm.value.wci*prm.value.n0*tm/prm.value.coeff;
+% norm=prm.value.wci*prm.value.n0*tm/(prm.value.coeff * 2 * dt);
+norm=prm.value.wci*tm/(prm.value.coeff * 2 * dt);
 
 %% the loop
 nt=length(tt);
@@ -48,14 +48,15 @@ rate=zeros(10,nt);
 
 
 for t=1:nt
-    rate = calc_energy_density_4(rate, prm, name, tt, t, dt, xindex, zindex, nx, nz);
+    rate = calc_energy_density_7(rate, prm, name, tt, t, dt, xindex, zindex, nx, nz);
 end
 
 rate0 = rate;
-rate=set_rate_4(rate0, norm);
+rate=set_rate_7(rate0, norm);
+itest = 7;
 
 %% plot figure
-plot_figure_4(tt, rate, xrange, sfx);
+plot_figure_7(tt, rate, xrange, sfx);
 
 %% save figure
 cd(outdir);
@@ -207,7 +208,7 @@ plot(tt, rate(6,:), '--k', 'LineWidth', 2);
 
 %% set figure
 xlim(xrange);
-legend('dU/dt', '-\nabla\cdot q', '-\nabla\cdot(UV)','(P\cdot\nabla) \cdot V',  'v\cdot \nabla U', 'Sum', 'Location', 'Best');
+legend('dU/dt', '-\nabla\cdot q', '-\nabla\cdot(UV)','-(P\cdot\nabla) \cdot V',  'v\cdot \nabla U', 'Sum', 'Location', 'Best');
 xlabel('\Omega_{ci} t');
 set(get(gca, 'YLabel'), 'String', ['dU',sfx,'/dt']);
 set(gca,'FontSize',14);
@@ -306,7 +307,7 @@ plot(tt, rate(6,:), '--k', 'LineWidth', 2);
 
 %% set figure
 xlim(xrange);
-legend('3/2N\partial T/\partial t + 3/2T\partial N/\partial t', '-\nabla\cdot q', '-\nabla\cdot(UV)','(P\cdot\nabla) \cdot V',  'v\cdot \nabla U', 'Sum', 'Location', 'Best');
+legend('3/2N\partial T/\partial t + 3/2T\partial N/\partial t', '-\nabla\cdot q', '-\nabla\cdot(UV)','-(P\cdot\nabla) \cdot V',  'v\cdot \nabla U', 'Sum', 'Location', 'Best');
 xlabel('\Omega_{ci} t');
 set(get(gca, 'YLabel'), 'String', ['dU',sfx,'/dt']);
 set(gca,'FontSize',14);
@@ -371,13 +372,13 @@ N1 = prm.read(['N', name], tt(t) - dt);
 N2 = prm.read(['N', name], tt(t) + dt);
 N = prm.read(['N', name], tt(t));
 T = slj.Physics.temperature(P, N);
-pN = (N2.value - N1.value) * prm.value.wci * (2 * dt);
+pN = (N2.value - N1.value) * prm.value.wci / (2 * dt);
 pN = pN .* T.value * 3 / 2;
 
 % 3/2 n \partial T/\partial t
 T1 = slj.Physics.temperature(prm.read(['P', name], tt(t) - dt), prm.read(['N', name], tt(t) - dt));
 T2 = slj.Physics.temperature(prm.read(['P', name], tt(t) + dt), prm.read(['N', name], tt(t) + dt));
-pT = (T2.value - T1.value) * prm.value.wci * (2 * dt);
+pT = (T2.value - T1.value) * prm.value.wci / (2 * dt);
 pT = pT .* N.value *3 / 2;
 
 rate(1, t) = mean(pN(iz-nz:iz+nz,ix-nx:ix+nx), 'all') + mean(pT(iz-nz:iz+nz,ix-nx:ix+nx), 'all');
@@ -412,7 +413,7 @@ plot(tt, rate(7,:), '--k', 'LineWidth', 2);
 
 %% set figure
 xlim(xrange);
-legend('3/2N\partial T/\partial t + 3/2T\partial N/\partial t', '-\nabla\cdot q', '-3/2 T\nabla \cdot (NV)', 'NV\cdot \nabla T','(P\cdot\nabla) \cdot V',  'v\cdot \nabla U', 'Sum', 'Location', 'Best');
+legend('3/2N dT/dt + 3/2T dN/dt', '-\nabla\cdot q', '-3/2 T\nabla \cdot (NV)', '-3/2 NV\cdot \nabla T','-(P\cdot\nabla) \cdot V',  'v\cdot \nabla U', 'Sum', 'Location', 'Best');
 xlabel('\Omega_{ci} t');
 set(get(gca, 'YLabel'), 'String', ['dU',sfx,'/dt']);
 set(gca,'FontSize',14);
@@ -467,7 +468,7 @@ gU = vx*gU.x;
 %% 3/2 n \partial T/\partial t
 T1 = slj.Physics.temperature(prm.read(['P', name], tt(t) - dt), prm.read(['N', name], tt(t) - dt));
 T2 = slj.Physics.temperature(prm.read(['P', name], tt(t) + dt), prm.read(['N', name], tt(t) + dt));
-pT = (T2.value - T1.value) * prm.value.wci * (2 * dt);
+pT = (T2.value - T1.value) * prm.value.wci / (2 * dt);
 pT = pT .* N.value *3 / 2;
 
 rate(1, t) = mean(pT(iz-nz:iz+nz,ix-nx:ix+nx), 'all');
@@ -500,7 +501,7 @@ plot(tt, rate(6,:), '--k', 'LineWidth', 2);
 
 %% set figure
 xlim(xrange);
-legend('3/2N\partial T/\partial t', '-\nabla\cdot q', 'NV\cdot \nabla T','(P\cdot\nabla) \cdot V',  'v\cdot \nabla U', 'Sum', 'Location', 'Best');
+legend('3/2N dT/dt', '-\nabla\cdot q', '-3/2NV\cdot \nabla T','-(P\cdot\nabla) \cdot V',  'v\cdot \nabla U', 'Sum', 'Location', 'Best');
 xlabel('\Omega_{ci} t');
 set(get(gca, 'YLabel'), 'String', ['dU',sfx,'/dt']);
 set(gca,'FontSize',14);
@@ -513,14 +514,14 @@ function rate = calc_energy_density_6(rate, prm, name, tt, t, dt, xindex, zindex
 N = prm.read(['N', name], tt(t));
 divQ = prm.read(['qflux',name],tt(t));
 divQ = divQ.divergence(prm); 
-divQ = slj.Scalar(-divQ.value./N.value .* 2./3 );
+divQ = slj.Scalar(-2 .* divQ.value./(N.value .* 3) );
 
 %% -3/2 nv \cdot \nabla T
 P = prm.read(['P', name], tt(t));
 V = prm.read(['V',name],tt(t));
 T = slj.Physics.temperature(P, N);
 vdt = T.gradient(prm);
-vdt = nvt.x .* V.x + nvt.y .* V.y + nvt.z .* V.z;
+vdt = vdt.x .* V.x + vdt.y .* V.y + vdt.z .* V.z;
 vdt = slj.Scalar(-vdt);
 
 %% - (P \cdot \nabla)\cdot v
@@ -533,7 +534,7 @@ py=g.x.*P.xy+g.y.*P.yy+g.z.*P.yz;
 VV=slj.Scalar(V.z);
 g=VV.gradient(prm);
 pz=g.x.*P.xz+g.y.*P.yz+g.z.*P.zz;
-PdV = slj.Scalar((-px - py - pz)./N.value.*2./3);
+PdV = slj.Scalar(2.*(-px - py - pz)./(N.value.*3));
 
 %% The velocity
 U1 = slj.Physics.thermal_energy(prm.read(['P', name], tt(t) - dt));
@@ -548,21 +549,21 @@ M = max(max(subU));
 iz = iz + zindex(1) - 1;
 ix = ix + xindex(1) - 1;
 
-gU = U.gradient(prm);
-gU = vx*gU.x;
+gT = T.gradient(prm);
+gT = vx*gT.x;
 
 %% 3/2 n \partial T/\partial t
 T1 = slj.Physics.temperature(prm.read(['P', name], tt(t) - dt), prm.read(['N', name], tt(t) - dt));
 T2 = slj.Physics.temperature(prm.read(['P', name], tt(t) + dt), prm.read(['N', name], tt(t) + dt));
-pT = (T2.value - T1.value) * prm.value.wci * (2 * dt);
+pT = (T2.value - T1.value) * prm.value.wci / (2 * dt);
 
 rate(1, t) = mean(pT(iz-nz:iz+nz,ix-nx:ix+nx), 'all');
 
 %% get the average value
 rate(2,t)=mean(divQ.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-rate(3,t)=mean(nvt.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+rate(3,t)=mean(vdt.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
 rate(4,t)=mean(PdV.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-rate(5,t)=mean(gU(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+rate(5,t)=mean(gT(iz-nz:iz+nz,ix-nx:ix+nx),'all');
 end
 
 function rate=set_rate_6(rate, norm)
@@ -586,8 +587,109 @@ plot(tt, rate(6,:), '--k', 'LineWidth', 2);
 
 %% set figure
 xlim(xrange);
-legend('3/2N\partial T/\partial t', '-\nabla\cdot q', 'NV\cdot \nabla T','(P\cdot\nabla) \cdot V',  'v\cdot \nabla U', 'Sum', 'Location', 'Best');
+legend('dT/dt', '-2*\nabla\cdot q/3N', '-V\cdot \nabla T','-2*(P\cdot\nabla) \cdot V/3N',  'v\cdot \nabla T', 'Sum', 'Location', 'Best');
 xlabel('\Omega_{ci} t');
-set(get(gca, 'YLabel'), 'String', ['dU',sfx,'/dt']);
+set(get(gca, 'YLabel'), 'String', ['dT',sfx,'/dt']);
+set(gca,'FontSize',14);
+end
+
+
+%% ==================================================================================================== %%
+function rate = calc_energy_density_7(rate, prm, name, tt, t, dt, xindex, zindex, nx, nz)
+%% -\nabla\cdot\vec{Q}
+N = prm.read(['N', name], tt(t));
+divQ = prm.read(['qflux',name],tt(t));
+divQ = divQ.divergence(prm); 
+divQ = slj.Scalar(-2 .* divQ.value./(N.value .* 3) );
+
+%%  - v \cdot \nabla T
+P = prm.read(['P', name], tt(t));
+V = prm.read(['V',name],tt(t));
+T = slj.Physics.temperature(P, N);
+vdt = T.gradient(prm);
+vdt = vdt.x .* V.x + vdt.y .* V.y + vdt.z .* V.z;
+vdt = slj.Scalar(-vdt);
+
+%% - (P' \cdot \nabla)\cdot v
+p = (P.xx + P.yy + P.zz)/3;
+Pd.xx = P.xx - p;
+Pd.xy = P.xy;
+Pd.xz = P.xz;
+Pd.yy = P.yy - p;
+Pd.yz = P.yz;
+Pd.zz = P.zz - p;
+VV=slj.Scalar(V.x);
+g=VV.gradient(prm);
+px=g.x.*Pd.xx+g.y.*Pd.xy+g.z.*Pd.xz;
+VV=slj.Scalar(V.y);
+g=VV.gradient(prm);
+py=g.x.*Pd.xy+g.y.*Pd.yy+g.z.*Pd.yz;
+VV=slj.Scalar(V.z);
+g=VV.gradient(prm);
+pz=g.x.*Pd.xz+g.y.*Pd.yz+g.z.*Pd.zz;
+PdV = slj.Scalar(2.*(-px - py - pz)./(N.value.*3));
+
+%% - p \nabla \cdot v
+pdv = V.divergence(prm);
+pdv = p .* pdv.value;
+pdv = slj.Scalar(-2 .* pdv ./ (3.*N.value));
+
+
+%% The velocity
+U1 = slj.Physics.thermal_energy(prm.read(['P', name], tt(t) - dt));
+U2 = slj.Physics.thermal_energy(prm.read(['P', name], tt(t) + dt));
+[vx, ~] = pic3d.asym_slj.calc_structure_velocity(U2.value, U1.value, prm.value.di, prm.value.wci, xindex, zindex);
+
+%% convection term
+U = slj.Physics.thermal_energy(P);
+subU = U.value(zindex(1):zindex(2), xindex(1):xindex(2));
+M = max(max(subU));
+[iz, ix] = find(subU == M);
+iz = iz + zindex(1) - 1;
+ix = ix + xindex(1) - 1;
+
+gT = T.gradient(prm);
+gT = vx*gT.x;
+
+%% 3/2 n \partial T/\partial t
+T1 = slj.Physics.temperature(prm.read(['P', name], tt(t) - dt), prm.read(['N', name], tt(t) - dt));
+T2 = slj.Physics.temperature(prm.read(['P', name], tt(t) + dt), prm.read(['N', name], tt(t) + dt));
+pT = (T2.value - T1.value) * prm.value.wci / (2 * dt);
+
+rate(1, t) = mean(pT(iz-nz:iz+nz,ix-nx:ix+nx), 'all');
+
+%% get the average value
+rate(2,t)=mean(divQ.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+rate(3,t)=mean(vdt.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+rate(4,t)=mean(PdV.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+rate(5,t)=mean(pdv.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+rate(6,t)=mean(gT(iz-nz:iz+nz,ix-nx:ix+nx),'all');
+end
+
+function rate=set_rate_7(rate, norm)
+% rate(1,:)=smoothdata(rate0(1,:), 'movmean', 1);
+% rate(2,:)=smoothdata(rate0(2,:)); % ,'movmean',7);
+% rate(3,:)=smoothdata(rate0(3,:)); % ,'movmean',7);
+% rate(4,:)=smoothdata(rate0(4,:), 'movmean', 1);
+% rate(5,:)=smoothdata(rate0(5,:));
+rate(7,:)=rate(2,:) + rate(3,:) + rate(4,:) + rate(5,:) + rate(6,:);
+rate = rate/norm;
+end
+
+function plot_figure_7(tt, rate, xrange, sfx)
+figure;
+plot(tt, rate(1,:), '-k', 'LineWidth', 2); hold on
+plot(tt, rate(2,:), '-b', 'LineWidth', 2);
+plot(tt, rate(3,:), '-m', 'LineWidth', 2);
+plot(tt, rate(4,:), '-r', 'LineWidth', 2);
+plot(tt, rate(5,:), '-g', 'LineWidth', 2);
+plot(tt, rate(6,:), '--b', 'LineWidth', 2);
+plot(tt, rate(7,:), '--k', 'LineWidth', 2);
+
+%% set figure
+xlim(xrange);
+legend('dT/dt', '-2*\nabla\cdot q/3N', '-V\cdot \nabla T','-2(P''\cdot\nabla) \cdot V/3N', '-2p\nabla\cdot V/3N', 'v\cdot \nabla T', 'Sum', 'Location', 'Best');
+xlabel('\Omega_{ci} t');
+set(get(gca, 'YLabel'), 'String', ['dT',sfx,'/dt']);
 set(gca,'FontSize',14);
 end

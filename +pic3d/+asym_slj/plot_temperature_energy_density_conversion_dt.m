@@ -5,7 +5,7 @@ indir='E:\Asym\dst1v2\data';
 outdir='E:\Asym\dst1v2\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-dt=0.5;
+dt=0.1;
 tt=20:dt:60;
 
 name='h';
@@ -17,25 +17,29 @@ xrange=[tt(1)-1,tt(end)+1];
 
 % the box and box size
 nx=120;
-nz=40;
+nz=20;
 
 if name == 'l'
     sfx='ih';
     q=prm.value.qi;
     m=prm.value.mi;
+    tm=prm.value.tlm;
 elseif name == 'h'
     sfx='ic';
     q=prm.value.qi;
     m=prm.value.mi;
+    tm=prm.value.thm;
 elseif name == 'e'
     sfx = 'e';
     q=prm.value.qe;
     m=prm.value.me;
+    tm=prm.value.tem;
 else
     error('Parameters Error!');
 end
 
 % norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
+norm=prm.value.wci*tm/(prm.value.coeff * 2 * dt);
 
 %% the loop
 nt=length(tt);
@@ -68,7 +72,7 @@ for t=1:nt
     T2 = slj.Physics.temperature(prm.read(['P', name], tt(t) + dt), prm.read(['N', name], tt(t) + dt));
     t2 = mean(T2.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
     t1 = mean(T1.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
-    rate(1, t) = (t2 - t1)*prm.value.wci;
+    rate(1, t) = (t2 - t1)*prm.value.wci/(2*dt);
 
     rate(2,t)=mean(divQ.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
     rate(3,t)=mean(PddivV.value(iz-nz:iz+nz,ix-nx:ix+nx),'all');
@@ -84,7 +88,7 @@ rate0=rate;
 % rate(3,:)=smoothdata(rate0(3,:)); % ,'movmean',7);
 % rate(4,:)=smoothdata(rate0(4,:));
 % rate(5,:)=smoothdata(rate0(5,:));
-
+rate=rate/norm;
 
 %% plot figure
 f=figure;

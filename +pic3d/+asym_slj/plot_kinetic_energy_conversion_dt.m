@@ -102,7 +102,7 @@ plot(tt, rate(6,:)/norm, '--k', 'LineWidth', 2);
 xlim(xrange);
 legend('dK/dt', '-\nabla\cdot(KV)', 'qNV\cdot E', '- (\nabla\cdot P) \cdot V', 'v\cdot \nabla K', 'Sum', 'Location', 'Best');
 xlabel('\Omega_{ci} t');
-set(get(gca, 'YLabel'), 'String', ['K',sfx,'/dt']);
+set(get(gca, 'YLabel'), 'String', ['dK',sfx,'/dt']);
 set(gca,'FontSize',14);
 
 %% save figure

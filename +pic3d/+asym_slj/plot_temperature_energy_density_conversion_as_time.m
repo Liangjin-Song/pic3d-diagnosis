@@ -75,9 +75,9 @@ plot(tt, rate(6,:), '--k', 'LineWidth', 2);
 
 
 %% set figure
-xlim(xrange);
 legend('\partial T/\partial t', '-2\nabla\cdot Q/3N', '- 2(P'' \cdot \nabla) \cdot V/3N', '-2p\nabla\cdot V/3N', ...
     '-V\cdot\nabla T', 'Sum', 'Location', 'Best');
+xlim(xrange);
 xlabel('\Omega_{ci} t');
 set(get(gca, 'YLabel'), 'String', ['\partial T',sfx,'/\partial t']);
 set(gca,'FontSize',14);

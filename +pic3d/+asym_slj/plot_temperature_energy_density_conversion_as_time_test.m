@@ -2,16 +2,19 @@
 clear;
 %% parameters
 indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\partial_t\region1';
+outdir='E:\Asym\dst1v2\out\partial_t\region4';
 prm=slj.Parameters(indir,outdir);
 
 dt = 0.1;
 tt=20:dt:60;
 name='h';
 
-xindex = [1201, prm.value.nx];
-zindex = [441, 501];
+% xindex = [1201, prm.value.nx];
+% zindex = [441, 501];
 xrange=[tt(1)-1,tt(end)+1];
+xindex = [1581, 1621];
+zindex = [461, 501];
+
 
 if name == 'l'
     sfx='ih';
@@ -383,9 +386,9 @@ PdV = slj.Scalar(-px - py - pz);
 T1 = slj.Physics.temperature(prm.read(['P', name], tt(t) - dt), prm.read(['N', name], tt(t) - dt));
 T2 = slj.Physics.temperature(prm.read(['P', name], tt(t) + dt), prm.read(['N', name], tt(t) + dt));
 pT = (T2.value - T1.value) * prm.value.wci / (2 * dt);
-pT = pT .* N.value *3 / 2;
+pT = slj.Scalar(pT .* N.value *3 / 2);
 
-rate(1, t) = sum(pT(zindex(1):zindex(2),xindex(1):xindex(2)), 'all');
+rate(1, t) = sum(pT.value(zindex(1):zindex(2),xindex(1):xindex(2)), 'all');
 
 %% get the average value
 rate(2,t)=sum(divQ.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
@@ -412,8 +415,8 @@ plot(tt, rate(4,:), '-r', 'LineWidth', 2);
 plot(tt, rate(5,:), '--k', 'LineWidth', 2);
 
 %% set figure
-xlim(xrange);
 legend('3/2N \partial T/\partial t', '-\nabla\cdot Q', '-3/2NV\cdot \nabla T','-(P\cdot\nabla) \cdot V', 'Sum', 'Location', 'Best');
+xlim(xrange);
 xlabel('\Omega_{ci} t');
 set(get(gca, 'YLabel'), 'String', ['3/2N\partial T',sfx,'/\partial t']);
 set(gca,'FontSize',14);
@@ -451,14 +454,15 @@ PdV = slj.Scalar(2.*(-px - py - pz)./(N.value.*3));
 %% \partial T/\partial t
 T1 = slj.Physics.temperature(prm.read(['P', name], tt(t) - dt), prm.read(['N', name], tt(t) - dt));
 T2 = slj.Physics.temperature(prm.read(['P', name], tt(t) + dt), prm.read(['N', name], tt(t) + dt));
-pT = (T2.value - T1.value) * prm.value.wci / (2 * dt);
+pT = slj.Scalar((T2.value - T1.value) * prm.value.wci / (2 * dt));
 
-rate(1, t) = sum(pT(zindex(1):zindex(2),xindex(1):xindex(2)), 'all');
+rate(1, t) = sum(pT.value(zindex(1):zindex(2),xindex(1):xindex(2)), 'all');
 
 %% get the average value
 rate(2,t)=sum(divQ.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
 rate(3,t)=sum(vdt.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
 rate(4,t)=sum(PdV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+rate(6,t)=sum(N.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all')*3/2;
 end
 
 function rate=set_rate_6(rate, norm)
@@ -480,8 +484,8 @@ plot(tt, rate(4,:), '-r', 'LineWidth', 2);
 plot(tt, rate(5,:), '--k', 'LineWidth', 2);
 
 %% set figure
-xlim(xrange);
 legend('\partial T/\partial t', '-2*\nabla\cdot Q/3N', '-V\cdot \nabla T','-2*(P\cdot\nabla) \cdot V/3N', 'Sum', 'Location', 'Best');
+xlim(xrange);
 xlabel('\Omega_{ci} t');
 set(get(gca, 'YLabel'), 'String', ['\partial T',sfx,'/\partial t']);
 set(gca,'FontSize',14);

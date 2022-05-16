@@ -18,6 +18,8 @@ xindex = [881, 1120];
 zindex = [441, 621];
 % xindex = [1, 321];
 % zindex = [441, 621];
+xindex = [881, 1120];
+zindex = [441, 561];
 
 if name == 'l'
     sfx='ih';

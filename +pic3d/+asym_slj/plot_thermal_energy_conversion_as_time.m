@@ -2,7 +2,7 @@
 clear;
 %% parameters
 indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\partial_t\region2';
+outdir='E:\Asym\dst1v2\out\partial_t\region4';
 prm=slj.Parameters(indir,outdir);
 
 dt=0.1;
@@ -18,6 +18,8 @@ xindex = [881, 1120];
 zindex = [441, 621];
 % xindex = [1, 321];
 % zindex = [441, 621];
+xindex = [881, 1120];
+zindex = [441, 561];
 
 if name == 'l'
     sfx='ih';

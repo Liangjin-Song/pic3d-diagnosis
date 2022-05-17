@@ -1,16 +1,16 @@
 % function plot_thermal_energy_overview(name)
 % clear;
 %%
-indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\partial_t\region2';
+indir='E:\Asym\cold2\data';
+outdir='E:\Asym\cold2\out\Overview';
 prm=slj.Parameters(indir,outdir);
 
-tt=40;
+tt=0:80;
 name='h';
 
 nt=length(tt);
 
-show=true;
+show=false;
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';

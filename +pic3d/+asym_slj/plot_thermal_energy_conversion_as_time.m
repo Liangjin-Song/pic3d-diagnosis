@@ -21,6 +21,9 @@ zindex = [441, 621];
 xindex = [881, 1120];
 zindex = [441, 561];
 
+xindex = [881, 1120];
+zindex = [421, 561];
+
 if name == 'l'
     sfx='ih';
     q=prm.value.qi;

@@ -1,13 +1,13 @@
 % function plot_kinetic_energy_overview(name)
 % clear;
 %% parameters
-indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\partial_t\region1';
+indir='E:\Asym\cold2\data';
+outdir='E:\Asym\cold2\out\Overview';
 prm=slj.Parameters(indir,outdir);
 
-tt=40;
+tt=0:80;
 name='h';
-show=true;
+show=false;
 
 nt=length(tt);
 

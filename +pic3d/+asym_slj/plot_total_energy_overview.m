@@ -1,11 +1,11 @@
 % function plot_thermal_energy_overview(name)
 % clear;
 %%
-indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\Overview';
+indir='E:\Asym\cold2\data';
+outdir='E:\Asym\cold2\out\Overview';
 prm=slj.Parameters(indir,outdir);
 
-tt=20:60;
+tt=0:80;
 name='h';
 
 nt=length(tt);
@@ -17,17 +17,21 @@ extra.ylabel='Z [c/\omega_{pi}]';
 
 if name == 'h'
     tm=prm.value.thm;
+    m=prm.value.mi;
     sfx='ic';
 elseif name == 'l'
     tm=prm.value.tlm;
+    m=prm.value.mi;
     sfx='ih';
 elseif name == 'e'
     tm=prm.value.tem;
+    m=prm.value.me;
     sfx='e';
 end
 
-norm=prm.value.n0*tm/prm.value.coeff;
-% norm=1;
+% norm=prm.value.n0*tm/prm.value.coeff;
+norm=1;
+
 for t=1:nt
     %% read data
     P=prm.read(['P',name],tt(t));

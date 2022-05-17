@@ -10,7 +10,7 @@ indir='E:\Asym\cold2\data';
 outdir='E:\Asym\cold2\out\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:100;
+tt=80:100;
 % the variable name
 varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
 % varname={'B','E','J','Vl','Ve','Nl','Ne'};

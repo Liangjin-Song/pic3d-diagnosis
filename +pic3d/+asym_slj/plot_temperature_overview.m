@@ -1,13 +1,13 @@
 % function plot_temperature_overview(name)
 clear;
 %% 
-indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\partial_t\region3';
+indir='E:\Asym\cold2\data';
+outdir='E:\Asym\cold2\out\Overview';
 prm=slj.Parameters(indir,outdir);
 
 
 
-tt=40;
+tt=0:80;
 name='h';
 disp(name);
 
@@ -16,7 +16,7 @@ nt=length(tt);
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra.Visible=true;
+extra.Visible=false;
 
 if name == 'h'
     tm=prm.value.thm;

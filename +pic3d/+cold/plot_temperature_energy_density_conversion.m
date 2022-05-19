@@ -80,11 +80,11 @@ end
 
 
 %% smooth
-% ldivQ = smoothdata(ldivQ, 'movmean',40);
-% lPddivV = smoothdata(lPddivV,'movmean',40);
-% lpdivV = smoothdata(lpdivV,'movmean',40);
-% lVdivT = smoothdata(lVdivT, 'movmean',40);
-% lpTt = smoothdata(lpTt, 'movmean',40);
+ldivQ = smoothdata(ldivQ, 'movmean',40);
+lPddivV = smoothdata(lPddivV,'movmean',40);
+lpdivV = smoothdata(lpdivV,'movmean',40);
+lVdivT = smoothdata(lVdivT, 'movmean',40);
+lpTt = smoothdata(lpTt, 'movmean',40);
 
 ltot = ldivQ + lPddivV + lpdivV + lVdivT;
 %% plot figure
@@ -100,7 +100,7 @@ plot(ll, ltot, '--k', 'LineWidth', 2);
 %% set figure
 xlim(xrange);
 legend('\partial T/\partial t', '-2\nabla\cdot Q/3N', '- 2(P'' \cdot \nabla) \cdot V/3N', '-2p\nabla\cdot V/3N', ...
-    '-V\cdot\nabla T', 'Sum', 'Location', 'Best');
+    '-V\cdot\nabla T', 'Sum', 'Location', 'Best','Box', 'off');
 xlabel('Z [c/\omega_{pi}]');
 set(get(gca, 'YLabel'), 'String', ['\partial T',sfx,'/\partial t']);
 title(['\Omega_{ci}t = ',num2str(tt),'  profiles   ', pstr2, ' = ', num2str(ll(xz))])

@@ -5,7 +5,7 @@ indir='E:\PIC\Cold-Ions\mie100\data';
 outdir='E:\PIC\Cold-Ions\mie100\out';
 prm=slj.Parameters(indir,outdir);
 
-tt=40;
+tt=30;
 name='h';
 
 nt=length(tt);

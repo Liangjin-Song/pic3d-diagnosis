@@ -13,6 +13,7 @@ xrange=[tt(1),tt(end)];
 range = [1, prm.value.nx/2];
 
 % the box and box size
+iz = prm.value.nz/2;
 nx=80;
 nz=40;
 
@@ -20,12 +21,12 @@ if name == 'l'
     sfx='ih';
     q=prm.value.qi;
     m=prm.value.mi;
-    tm=prm.value.tlm;
+    tm=prm.value.tem*prm.value.tle;
 elseif name == 'h'
     sfx='ic';
     q=prm.value.qi;
     m=prm.value.mi;
-    tm=prm.value.thm;
+    tm=prm.value.tem*prm.value.tle*prm.value.thl;
 elseif name == 'e'
     sfx = 'e';
     q=prm.value.qe;
@@ -51,7 +52,8 @@ for t=1:nt
     %% The velocity
     ix1 = pic3d.cold.RF_Position(prm, tt(t) - dt, range);
     ix2 = pic3d.cold.RF_Position(prm, tt(t) + dt, range);
-    vx = (prm.value.lx(ix2) - prm.value.lx(ix1))*prm.value.wci/(2*dt);
+    % vx = (prm.value.lx(ix2) - prm.value.lx(ix1))*prm.value.wci/(2*dt);
+    vx = (ix2 - ix1)*prm.value.wci/(2*dt);
     ix = pic3d.cold.RF_Position(prm, tt(t), range);
 
     %% convection term

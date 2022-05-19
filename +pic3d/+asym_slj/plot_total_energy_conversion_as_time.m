@@ -3,12 +3,12 @@
 %%
 clear;
 %% parameters
-indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\partial_t\region3';
+indir='E:\Asym\cold2\data';
+outdir='E:\Asym\cold2\out\Energy\Region1';
 prm=slj.Parameters(indir,outdir);
 
 dt=0.1;
-tt=20:dt:60;
+tt=1:dt:50;
 name='h';
 
 % xindex = [1201, prm.value.nx];
@@ -16,10 +16,10 @@ name='h';
 % zindex = [441, 501];
 % xindex = [881, 1120];
 % zindex = [441, 621];
-xindex = [1, 321];
-zindex = [441, 621];
+xindex = [1401, prm.value.nx];
+zindex = [421, 501];
 
-xrange=[tt(1)-1,tt(end)+1];
+xrange=[tt(1),tt(end)];
 
 if name == 'l'
     sfx='ih';

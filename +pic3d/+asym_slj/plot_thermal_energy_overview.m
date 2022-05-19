@@ -2,15 +2,15 @@
 % clear;
 %%
 indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Overview';
+outdir='E:\Asym\cold2\out\Energy\Region1';
 prm=slj.Parameters(indir,outdir);
 
-tt=0:80;
+tt=50;
 name='h';
 
 nt=length(tt);
 
-show=false;
+show=true;
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';

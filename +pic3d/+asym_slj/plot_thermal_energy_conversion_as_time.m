@@ -1,28 +1,28 @@
 % function plot_thermal_energy_conversion_as_time
 clear;
 %% parameters
-indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\partial_t\region4';
+indir='E:\Asym\cold2\data';
+outdir='E:\Asym\cold2\out\Energy\Region1';
 prm=slj.Parameters(indir,outdir);
 
 dt=0.1;
-tt=20:dt:60;
+tt=1:dt:50;
 name='h';
 
-xrange=[tt(1)-1,tt(end)+1];
+xrange=[tt(1),tt(end)];
 
 % the box and box size
 % xindex = [1201, prm.value.nx];
 % zindex = [441, 501];
-xindex = [881, 1120];
-zindex = [441, 621];
+% xindex = [881, 1120];
+% zindex = [441, 621];
 % xindex = [1, 321];
 % zindex = [441, 621];
-xindex = [881, 1120];
-zindex = [441, 561];
+% xindex = [881, 1120];
+% zindex = [441, 561];
 
-xindex = [881, 1120];
-zindex = [421, 561];
+xindex = [1401, prm.value.nx];
+zindex = [421, 501];
 
 if name == 'l'
     sfx='ih';

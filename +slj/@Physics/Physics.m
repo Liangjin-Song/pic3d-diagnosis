@@ -61,6 +61,13 @@ methods (Access = public, Static)
     [pv2t, qve, vdv, divPV] = average_kinetic_energy_conversion(prm, name, tt, dt, q, m);
 end
 
+%% ======================================================================== %%
+%% integration of flux
+methods (Access = public, Static)
+    [top, bottom, left, right] = integrate2d_flux(flx, xrange, zrange, prm);
+end
+
+
 
 %% ======================================================================== %%
 end

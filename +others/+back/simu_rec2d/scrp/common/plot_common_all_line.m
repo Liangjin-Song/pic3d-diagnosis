@@ -1,16 +1,16 @@
 %% plot overview
 % writen by Liangjin on 20190519 
 clear;
-indir='/data/simulation/M25SBg00Sx_low_vte/data/';
-outdir='/data/simulation/M25SBg00Sx_low_vte/out/line/';
-tt=0:0.5:99.5;
+indir='E:\Simulation\rec2d_M100SBg00Sx\data';
+outdir='E:\Simulation\rec2d_M100SBg00Sx\out\line\DF';
+tt=40;
 c=0.6;
-wci=0.001;
-di=30;
+wci=0.000750;
+di=40;
 vA=di*wci;
-n0=750.01184;
-x0=25;
+n0=964.28888;
+x0=15;
 dirt=0;
-Lx=6000/di;
-Ly=3000/di;
+Lx=4800/di;
+Ly=2400/di;
 plot_general_line(indir,outdir,x0,tt,c,vA,n0,Lx,Ly,dirt);

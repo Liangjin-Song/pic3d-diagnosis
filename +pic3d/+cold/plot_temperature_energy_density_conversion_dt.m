@@ -8,7 +8,7 @@ prm=slj.Parameters(indir,outdir);
 dt=1;
 tt=1:dt:48;
 
-name='h';
+name='e';
 
 xrange=[tt(1),tt(end)];
 range = [1, prm.value.nx/2];

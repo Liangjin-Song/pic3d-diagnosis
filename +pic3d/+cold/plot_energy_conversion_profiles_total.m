@@ -4,7 +4,7 @@
 %% parameters 
 indir='E:\PIC\Cold-Ions\mie100\data';
 outdir='E:\PIC\Cold-Ions\mie100\out\Line\DF';
-name='e';
+
 tt=30;
 xz=0;
 dir=0;
@@ -18,31 +18,23 @@ extra.legend={'J\cdot E', 'JxEx','JyEy','JzEz'};
 
 %% read data
 prm=slj.Parameters(indir,outdir);
-norm=prm.value.n0*prm.value.vA*prm.value.vA;
-N=prm.read(['N',name],tt);
-V=prm.read(['V',name],tt);
+norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
+J=prm.read('J',tt);
 E=prm.read('E',tt);
 
 %% calculation
-sig=1;
-if strcmp(name,'e') || strcmp(name,'he')
-    sig=-1;
-end
-
-
-JEx=slj.Scalar(sig.*V.x.*E.x.*N.value);
+JEx=slj.Scalar(J.x.*E.x);
 JEx=JEx.filter2d(3);
-JEy=slj.Scalar(sig.*V.y.*E.y.*N.value);
+JEy=slj.Scalar(J.y.*E.y);
 JEy=JEy.filter2d(3);
-JEz=slj.Scalar(sig.*V.z.*E.z.*N.value);
+JEz=slj.Scalar(J.z.*E.z);
 JEz=JEz.filter2d(3);
 
 
 
-JE=V.dot(E);
-JE=JE*N;
+JE=J.dot(E);
 JE=JE.filter2d(3);
-JE=slj.Scalar(sig.*JE.value);
+JE=slj.Scalar(JE.value);
 
 %% get the line
 lf.sum=JE.get_line2d(xz, dir, prm, norm);
@@ -54,13 +46,15 @@ if dir==1
 else
     ll=prm.value.lx;
 end
-f=slj.Plot();
-f.linen(ll, lf, extra);
+% f=slj.Plot();
+% f.linen(ll, lf, extra);
 % plot(ll,lf.x,'r'); hold on
 % plot(ll,lf.y,'g');
 % plot(ll,lf.z,'b');
 % plot(ll,lf.sum,'k');
 % legend('JxEx','JyEy','JzEz', 'J\cdot E');
-xlim(extra.xrange);
+% xlim(extra.xrange);
 % f.png(prm,'Nic_t13-16_cross_x-line');
 % f.close();
+figure;
+plot(ll, lf.sum, '-k', 'LineWidth', 2);

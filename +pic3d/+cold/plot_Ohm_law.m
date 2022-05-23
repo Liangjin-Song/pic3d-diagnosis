@@ -2,25 +2,21 @@
 % written by Liangjin Song on 20220330 at Nanchang University
 clear;
 %% parameters
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Ohm';
+indir='E:\PIC\Cold-Ions\mie100\data';
+outdir='E:\PIC\Cold-Ions\mie100\out\Line\DF';
 prm=slj.Parameters(indir,outdir);
 
-tt=40;
-dt=0.5;
-name='l';
-
-q=prm.value.qi;
-m=prm.value.mi;
+tt=30;
+dt=1;
 
 norm=prm.value.vA;
-xz=22;
+xz=50;
 dir=1;
-pxz=prm.value.nz/2;
-dxz=100;
+
 
 %% figure proterty
-xrange=[-5,5];
+% xrange=[0,prm.value.Lx];
+xrange=[-10,10];
 
 %% momentum equation
 E=prm.read('E',tt);
@@ -69,12 +65,13 @@ vlxb0=vlxb;
 vhxb0=vhxb;
 dj0=dj;
 
-eee=smoothdata(eee0,'movmean',5);
-jxb=smoothdata(jxb0,'movmean',5);
-dvp=smoothdata(dvp0,'movmean',5);
-vlxb=smoothdata(vlxb0,'movmean',5);
-vhxb=smoothdata(vhxb0,'movmean',5);
-dj=smoothdata(dj0,'movmean',5);
+n=40;
+eee=smoothdata(eee0,'movmean',n);
+jxb=smoothdata(jxb0,'movmean',n);
+dvp=smoothdata(dvp0,'movmean',n);
+vlxb=smoothdata(vlxb0,'movmean',n);
+vhxb=smoothdata(vhxb0,'movmean',n);
+dj=smoothdata(dj0,'movmean',n);
 
 
 
@@ -91,17 +88,19 @@ plot(ll,vlxb,'-b','LineWidth',2);
 plot(ll,vhxb,'-m','LineWidth',2);
 plot(ll,dj,'-y','LineWidth',2);
 xlim(xrange);
-legend('E','Sum','J\times B/eN','-\nabla \cdot P_e/eN','-(Nih/N)(Vih\times B)','-(Nic/N)(Vic\times B)','(m_e/e^2n)\partial J/\partial t','Location','Best')
+legend('E', 'Sum','J\times B/eN','-\nabla \cdot P_e/eN','-(Nih/N)(Vih\times B)','-(Nic/N)(Vic\times B)','(m_e/e^2n)\partial J/\partial t','Location','Best')
 xlabel('Z [c/\omega_{pi}]');
 ylabel('Ez');
 % title(['\Omega_{ci}t=',num2str(tt)]);
 set(gca,'FontSize',12);
 cd(outdir);
-% print('-dpng','-r300',['Ey_cold_ion_t',num2str(tt),'_x',num2str(xz),'.png']);
+% print('-dpng','-r300',['Ez_cold_ion_t',num2str(tt),'_x',num2str(xz),'.png']);
 
 
 function [JxB, divP, VlxB, VhxB, dJ] = calc_Ohm_law_with_cold_ions(prm, tt, dt)
-N=prm.read('Ne',tt);
+N1=prm.read('Ne',tt);
+N2=prm.read('Nhe',tt);
+N=slj.Scalar(N1.value + N2.value);
 %% JxB term
 J=prm.read('J',tt);
 B=prm.read('B',tt);

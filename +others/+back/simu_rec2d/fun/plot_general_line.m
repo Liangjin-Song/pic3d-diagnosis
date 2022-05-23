@@ -12,7 +12,8 @@ function plot_general_line(indir,outdir,x0,tt,c,vA,n0,Lx,Ly,dirt)
 % dirt is the direction of cutting line
 %%
 nt=length(tt);
-varname={'Bx','By','Ex','Ey','Ez','vxi','vyi','vzi','vxe','vye','vze','Densi','Dense'};
+% varname={'Bx','By','Ex','Ey','Ez','vxi','vyi','vzi','vxe','vye','vze','Densi','Dense'};
+varname={'Ex'};
 nvar=length(varname);
 norm=1;
 

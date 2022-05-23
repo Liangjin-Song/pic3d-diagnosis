@@ -20,7 +20,7 @@ xrange=[0 Lx];
 cd(indir);
 it=num2str(tt,'%3.3d');
 % ohm=load(['ohmy_t',it,'.00.txt']);
-ohm=read_data('ohmx',tt);
+ohm=read_data('ohmy',tt);
 
 ef=ohm(:,1);
 evbi=ohm(:,2);

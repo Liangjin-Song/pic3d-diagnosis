@@ -10,11 +10,11 @@ indir='E:\Asym\dst1\data';
 outdir='E:\Asym\dst1\out\Overview\avi';
 prm=slj.Parameters(indir,outdir);
 
-tt=0:100;
+tt=0:80;
 name='Vh';
-sname='Vicx';
-norm=prm.value.vA;
-extra.caxis=[-0.8,0.8];
+sname='Vicz';
+norm=prm.value.n0;
+extra.caxis=[-0.5,0.5];
 aviname=[outdir,'\',sname,'.avi'];
 
 %%
@@ -33,7 +33,7 @@ for t=1:nt
     cd(indir);
     ss=prm.read('stream',tt(t));
     fd=prm.read(name,tt(t));
-    fd=fd.x;
+    fd=fd.z;
     slj.Plot.overview(fd, ss, prm.value.lx, prm.value.lz, norm, extra);
     title([sname,'   \Omega_{ci}t=',num2str(tt(t))]);
     

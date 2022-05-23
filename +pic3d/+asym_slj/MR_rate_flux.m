@@ -6,11 +6,11 @@
 clear;
 %% parameters
 % directory
-indir='E:\Asym\dst2\data';
-outdir='E:\Asym\dst2\out\Global';
+indir='E:\Asym\cold2\data';
+outdir='E:\Asym\cold2\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:100;
+tt=0:70;
 
 %% the loop
 nt=length(tt);

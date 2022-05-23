@@ -1,5 +1,6 @@
 % function plot_continuity_equation_dt
 clear;
+%{
 %% parameters
 indir='E:\Asym\dst1v2\data';
 outdir='E:\Asym\dst1v2\out\partial_t\region3';
@@ -46,7 +47,9 @@ elseif name == 'e'
 else
     error('Parameters Error!');
 end
+%}
 
+pic3d.asym_slj.energy_equation_parameters;
 % norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
 % norm=2*dt*prm.value.wci*prm.value.n0;
 norm = 1;

@@ -2,12 +2,12 @@
 clear;
 %% 
 indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Overview';
+outdir='E:\Asym\cold2\out\Energy\Region2';
 prm=slj.Parameters(indir,outdir);
 
 
 
-tt=0:80;
+tt=30;
 name='h';
 disp(name);
 
@@ -16,7 +16,7 @@ nt=length(tt);
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra.Visible=false;
+extra.Visible=true;
 
 if name == 'h'
     tm=prm.value.thm;

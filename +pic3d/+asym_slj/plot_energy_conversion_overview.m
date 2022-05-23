@@ -1,11 +1,11 @@
 % function plot_energy_conversion_overview(name)
 % clear;
 %% parameters
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Overview';
+indir='E:\Asym\dst1v2\data';
+outdir='E:\Asym\dst1v2\out\partial_t\region1';
 prm=slj.Parameters(indir,outdir);
 
-tt=51:100;
+tt=26.5;
 name='h';
 
 nt=length(tt);
@@ -13,7 +13,7 @@ nt=length(tt);
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra.Visible=false;
+extra.Visible=true;
 
 norm=prm.value.n0*prm.value.vA*prm.value.vA;
 
@@ -43,7 +43,7 @@ for t=1:nt
         JE=slj.Scalar(-JE.value);
     end
     f=figure('Visible', extra.Visible);
-    slj.Plot.overview(JE, ss, prm.value.lx, prm.value.lz, norm, extra);
+    slj.Plot.overview(N.value.*V.z.*E.z, ss, prm.value.lx, prm.value.lz, norm, extra);
     title(['J',sfx,'\cdot E,  \Omega_{ci}t = ',num2str(tt(t))]);
     cd(outdir);
     print(f,'-dpng','-r300',['J',sfx,'_dot_E_t',num2str(tt(t)),'.png']);

@@ -45,8 +45,8 @@ for t=1:nt
     slj.Plot.overview(K, ss, prm.value.lx, prm.value.lz, norm, extra);
     title(['K',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
     hold on
-    xx = [0,6];
-    zz = [-2,2];
+    xx = [20,30];
+    zz = [-1,2];
     plot([xx(1),xx(2)],[zz(1), zz(1)], '-r', 'LineWidth', 2);
     plot([xx(1),xx(2)],[zz(2), zz(2)], '-r', 'LineWidth', 2);
     plot([xx(1),xx(1)],[zz(1), zz(2)], '-r', 'LineWidth', 2);

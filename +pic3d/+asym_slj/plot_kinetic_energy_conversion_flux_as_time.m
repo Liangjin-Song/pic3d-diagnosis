@@ -3,9 +3,10 @@
 % plot the kinetic energy flux as the function of time
 %%
 clear;
+%{
 %% parameters
 indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\partial_t\region5';
+outdir='E:\Asym\dst1v2\out\partial_t\region1';
 prm=slj.Parameters(indir,outdir);
 
 dt = 0.1;
@@ -13,14 +14,8 @@ tt=20:dt:60;
 name='h';
 
 % the box and box size
-xx = [38,48];
-zz = [-3,1];
-% xindex = [1201, prm.value.nx];
-% zindex = [441, 501];
-% xindex = [881, 1120];
-% zindex = [441, 621];
-% xindex = [1, 321];
-% zindex = [441, 621];
+xx = [30,50];
+zz = [-2,0];
 
 xrange=[tt(1),tt(end)];
 [~, a] = min(abs(prm.value.lx - xx(1)));
@@ -49,6 +44,9 @@ elseif name == 'e'
 else
     error('Parameters Error!');
 end
+%}
+
+pic3d.asym_slj.energy_equation_parameters;
 
 % norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
 % norm=2*dt*prm.value.wci*prm.value.n0;

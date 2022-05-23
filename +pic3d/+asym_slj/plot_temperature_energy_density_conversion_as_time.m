@@ -1,5 +1,7 @@
 % function plot_temperature_energy_density_conversion_as_time
 clear;
+
+%{
 %% parameters
 indir='E:\Asym\dst1v2\data';
 outdir='E:\Asym\dst1v2\out\partial_t\region3';
@@ -35,7 +37,9 @@ elseif name == 'e'
 else
     error('Parameters Error!');
 end
+%}
 
+pic3d.asym_slj.energy_equation_parameters;
 % norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
 norm = 1;
 

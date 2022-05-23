@@ -14,5 +14,5 @@ bottom = sum(flx.z(zrange(1), xrange(1):xrange(2)) .* n);
 n = -1;
 left = sum(flx.x(zrange(1):zrange(2), xrange(1)) .* n);
 n = 1;
-left = sum(flx.x(zrange(1):zrange(2), xrange(2)) .* n);
+right = sum(flx.x(zrange(1):zrange(2), xrange(2)) .* n);
 end

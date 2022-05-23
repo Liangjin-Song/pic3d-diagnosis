@@ -10,9 +10,9 @@ indir='E:\Asym\dst1\data';
 outdir='E:\Asym\dst1\out\Overview\avi';
 prm=slj.Parameters(indir,outdir);
 
-tt=0:80;
-name='Vh';
-sname='Vicz';
+tt=20:60;
+name='Nh';
+sname='Nic';
 norm=prm.value.n0;
 extra.caxis=[-0.5,0.5];
 aviname=[outdir,'\',sname,'.avi'];
@@ -33,10 +33,17 @@ for t=1:nt
     cd(indir);
     ss=prm.read('stream',tt(t));
     fd=prm.read(name,tt(t));
-    fd=fd.z;
+%     fd=fd.z;
     slj.Plot.overview(fd, ss, prm.value.lx, prm.value.lz, norm, extra);
     title([sname,'   \Omega_{ci}t=',num2str(tt(t))]);
-    
+    hold on
+    xx = [38,48];
+    zz = [-3,1];
+    plot([xx(1),xx(2)],[zz(1), zz(1)], '-r', 'LineWidth', 2);
+    plot([xx(1),xx(2)],[zz(2), zz(2)], '-r', 'LineWidth', 2);
+    plot([xx(1),xx(1)],[zz(1), zz(2)], '-r', 'LineWidth', 2);
+    plot([xx(2),xx(2)],[zz(1), zz(2)], '-r', 'LineWidth', 2);
+    hold off
     currFrame = getframe(gcf);
     writeVideo(aviobj,currFrame);
 end

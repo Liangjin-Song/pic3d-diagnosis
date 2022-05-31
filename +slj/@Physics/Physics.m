@@ -33,10 +33,11 @@ methods (Access = public, Static)
 end
 
 %% ======================================================================== %%
-%% some equation
+%% momentum equation
 methods (Access = public, Static)
     [vxB, divP, nvv, nvt] = momentum_equation(prm, name, tt, dt, q, m);
     [vxB, divP, nvv, nvt] = momentum_equation_velocity(prm, name, tt, dt, q, m);
+    [qNE, divP, pVt, NVV, qVB] = momentum_equation_electric_force_density(prm, name, tt, dt, q, m);
 end
 
 %% ======================================================================== %%

@@ -52,26 +52,28 @@ norm = 1;
 
 %% the loop
 nt=length(tt);
-rate=zeros(5,nt);
+rate=zeros(4,nt);
 
 
 for t=1:nt
+    %% read data
+    N=prm.read(['N',name],tt(t));
+    V=prm.read(['V',name],tt(t));
+    E=prm.read('E', tt(t));
     %% calculation
-    N = prm.read(['N', name], tt(t));
-    V = prm.read(['V', name], tt(t));
-    NV = [];
-    NV.x = -V.x .* N.value;
-    NV.y = -V.y .* N.value;
-    NV.z = -V.z .* N.value;
-    NV = slj.Vector(NV);
-    divNV = NV.divergence(prm);
-    [top, bottom, left, right] = slj.Physics.integrate2d_flux(NV, xindex, zindex, prm);
-    rate(1,t)=sum(divNV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(2,t)=top;
-    rate(3,t)=bottom;
-    rate(4,t)=left;
-    rate(5,t)=right;
+    qVEx= slj.Scalar(q.*N.value.*V.x.*E.x);
+    qVEy= slj.Scalar(q.*N.value.*V.y.*E.y);
+    qVEz= slj.Scalar(q.*N.value.*V.z.*E.z);
+    qVE = slj.Scalar(q.*N.value.*(V.x.*E.x + V.y.*E.y + V.z.*E.z));
+
+    %% sum
+    rate(1,t)=sum(qVE.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(2,t)=sum(qVEx.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(3,t)=sum(qVEy.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(4,t)=sum(qVEz.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
 end
+rate0=rate;
+rate = rate/norm;
 
 %% figure
 figure;
@@ -80,15 +82,11 @@ hold on
 plot(tt, rate(2,:), '-r', 'LineWidth', 2);
 plot(tt, rate(3,:), '-g', 'LineWidth', 2);
 plot(tt, rate(4,:), '-b', 'LineWidth', 2);
-plot(tt, rate(5,:), '-m', 'LineWidth', 2);
-hold off
-
-legend('-\nabla \cdot (NV)', 'top', 'bottom', 'left', 'right');
+legend('qNV\cdot E', 'qNVxEx', 'qNVyEy', 'qNVzEz', 'Location', 'Best');
 xlim(xrange);
 xlabel('\Omega_{ci} t');
-ylabel('-\int NV \cdot dl');
+ylabel(['qN_{',sfx,'}V_{',sfx,'}\cdot E']);
 set(gca,'FontSize',14);
 
-%% save
 cd(outdir);
-% print('-dpng','-r300',[sfx,'_continuity_equation_as_dt=',num2str(dt),'_flux.png']);
+print('-dpng','-r300',[sfx,'_energy_conversion_as_time_dt=',num2str(dt),'.png']);

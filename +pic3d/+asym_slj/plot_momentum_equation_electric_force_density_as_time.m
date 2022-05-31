@@ -52,26 +52,23 @@ norm = 1;
 
 %% the loop
 nt=length(tt);
-rate=zeros(5,nt);
+rate=zeros(6,nt);
 
 
 for t=1:nt
     %% calculation
-    N = prm.read(['N', name], tt(t));
-    V = prm.read(['V', name], tt(t));
-    NV = [];
-    NV.x = -V.x .* N.value;
-    NV.y = -V.y .* N.value;
-    NV.z = -V.z .* N.value;
-    NV = slj.Vector(NV);
-    divNV = NV.divergence(prm);
-    [top, bottom, left, right] = slj.Physics.integrate2d_flux(NV, xindex, zindex, prm);
-    rate(1,t)=sum(divNV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(2,t)=top;
-    rate(3,t)=bottom;
-    rate(4,t)=left;
-    rate(5,t)=right;
+    [qNE, divP, pVt, NVV, qVB] = slj.Physics.momentum_equation_electric_force_density(prm, name, tt(t), dt, q, m);
+
+    %% sum
+    rate(1,t)=sum(qNE.z(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(2,t)=sum(divP.z(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(3,t)=sum(pVt.z(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(4,t)=sum(NVV.z(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(5,t)=sum(qVB.z(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
 end
+rate(6,:) = rate(2,:)+rate(3,:)+rate(4,:)+rate(5,:);
+rate0=rate;
+rate = rate/norm;
 
 %% figure
 figure;
@@ -81,14 +78,12 @@ plot(tt, rate(2,:), '-r', 'LineWidth', 2);
 plot(tt, rate(3,:), '-g', 'LineWidth', 2);
 plot(tt, rate(4,:), '-b', 'LineWidth', 2);
 plot(tt, rate(5,:), '-m', 'LineWidth', 2);
-hold off
-
-legend('-\nabla \cdot (NV)', 'top', 'bottom', 'left', 'right');
+plot(tt, rate(6,:), '--k', 'LineWidth', 2);
+legend('qNE', '\nabla\cdot P', '\partial(mNV)/\partial t', '\nabla\cdot(mNVV)','-qNV\times B','Sum', 'Location', 'Best', 'Box', 'off');
 xlim(xrange);
-xlabel('\Omega_{ci} t');
-ylabel('-\int NV \cdot dl');
+xlabel('');
+ylabel(['qN_{',sfx,'}E']);
 set(gca,'FontSize',14);
 
-%% save
 cd(outdir);
-% print('-dpng','-r300',[sfx,'_continuity_equation_as_dt=',num2str(dt),'_flux.png']);
+print('-dpng','-r300',[sfx,'_momentum_equation_electric_force_density_as_time_dt=',num2str(dt),'.png']);

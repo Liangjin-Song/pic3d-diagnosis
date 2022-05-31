@@ -3,17 +3,17 @@
 % the parameters of energy conversion equation
 %%
 %% parameters
-indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Energy\Region1';
+indir='E:\Asym\dst1v2\data';
+outdir='E:\Asym\dst1v2\out\partial_t\region2';
 prm=slj.Parameters(indir,outdir);
 
 dt = 0.1;
-tt=0.1:dt:60;
+tt=20:dt:60;
 name='h';
 
 % the box and box size
-xx = [35,50];
-zz = [-2,0];
+xx = [22,28];
+zz = [-2,2];
 
 xrange=[tt(1),tt(end)];
 [~, a] = min(abs(prm.value.lx - xx(1)));

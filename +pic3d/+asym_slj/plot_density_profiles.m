@@ -2,15 +2,15 @@
 %% plot the cold ions density profiles
 clear;
 %% parameters 
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Ohm';
+indir='E:\Asym\dst1v2\data';
+outdir='E:\Asym\dst1v2\out\Line';
 tt=40;
-xz=22;
+xz=40;
 dir=1;
 extra.xlabel='Z [c/\omega_{pi}]';
 extra.ylabel='N';
 extra.xrange=[-10,10];
-fs=12;
+fs=14;
 
 %% read data
 prm=slj.Parameters(indir,outdir);
@@ -31,17 +31,26 @@ ls=ll+lh;
 lb=B.get_line2d(xz,dir,prm,1);
 if dir==1
     lxz=prm.value.lz;
+    ps='x';
 else
     lxz=prm.value.lx;
+    ps='z';
 end
 
 figure;
-plot(lxz, ll, '-r','LineWidth', 1);
+plot(lxz, ll, '-r','LineWidth', 1.5);
 hold on
-plot(lxz, lh, '-b','LineWidth', 1);
-plot(lxz, le, '-k','LineWidth', 1);
-plot(lxz, ls, '--k', 'LineWidth', 1);
+plot(lxz, lh, '-b','LineWidth', 1.5);
+plot(lxz, le, '-k','LineWidth', 1.5);
+% plot(lxz, ls, '--k', 'LineWidth', 1.5);
 hold off
+xlabel('Z [c/\omega_{pi}]');
+ylabel('N');
+legend('Nih', 'Nic', 'Ne', 'Location', 'Best');
+xlim(extra.xrange);
+set(gca,'FontSize', fs);
+cd(outdir);
+print('-dpng','-r300',['plasma_density_t',num2str(tt,'%06.2f'),'_',ps,num2str(xz),'.png']);
 
 
 % [ax,h1,h2]=plotyy(lxz,[ll;lh;le],lxz,lb.lz);

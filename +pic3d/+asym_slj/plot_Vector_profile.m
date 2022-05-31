@@ -1,22 +1,22 @@
 % function plot_Vector_profiles
 %% plot the cold ions density profiles
-clear;
+% clear;
 %% parameters 
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\line';
+indir='E:\Asym\dst1v2\data';
+outdir='E:\Asym\dst1v2\out\Line';
 prm=slj.Parameters(indir,outdir);
-name='J';
+name='E';
 component='z';
 norm=prm.value.vA;
 % norm=1;
 tt=40;
-xz=28;
+xz=40;
 dir=1;
 extra.xrange=[-10,10];
 extra.LineStyle='-';
 extra.LineColor='k';
 extra.title=['\Omega_{ci}t=',num2str(tt)];
-extra.Fontsize=16;
+extra.Fontsize=14;
 
 %% read data
 V=prm.read(name,tt);

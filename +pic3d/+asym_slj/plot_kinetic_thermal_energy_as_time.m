@@ -1,6 +1,6 @@
 %%
 % written by Liangjin Song on 20220520 at Nanchang University
-% plot the density flux as the function of time
+% plot the kinetic energy and thermal energy as the function of time
 %%
 clear;
 %{
@@ -52,43 +52,33 @@ norm = 1;
 
 %% the loop
 nt=length(tt);
-rate=zeros(5,nt);
+rate=zeros(3,nt);
 
 
 for t=1:nt
     %% calculation
-    N = prm.read(['N', name], tt(t));
-    V = prm.read(['V', name], tt(t));
-    NV = [];
-    NV.x = -V.x .* N.value;
-    NV.y = -V.y .* N.value;
-    NV.z = -V.z .* N.value;
-    NV = slj.Vector(NV);
-    divNV = NV.divergence(prm);
-    [top, bottom, left, right] = slj.Physics.integrate2d_flux(NV, xindex, zindex, prm);
-    rate(1,t)=sum(divNV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(2,t)=top;
-    rate(3,t)=bottom;
-    rate(4,t)=left;
-    rate(5,t)=right;
+    K = slj.Physics.kinetic_energy(m, prm.read(['N',name],tt(t)), prm.read(['V',name],tt(t)));
+    U = slj.Physics.thermal_energy(prm.read(['P',name],tt(t)));
+
+    %% sum
+    rate(1,t)=sum(K.value,'all');
+    rate(2,t)=sum(U.value,'all');
+    rate(3,t)=sum(K.value + U.value, 'all');
 end
+rate0=rate;
+rate = rate/norm;
 
 %% figure
 figure;
-plot(tt, rate(1,:), '-k', 'LineWidth', 2);
+plot(tt, rate(1,:), '-b', 'LineWidth', 2);
 hold on
 plot(tt, rate(2,:), '-r', 'LineWidth', 2);
-plot(tt, rate(3,:), '-g', 'LineWidth', 2);
-plot(tt, rate(4,:), '-b', 'LineWidth', 2);
-plot(tt, rate(5,:), '-m', 'LineWidth', 2);
-hold off
-
-legend('-\nabla \cdot (NV)', 'top', 'bottom', 'left', 'right');
+plot(tt, rate(3,:), '-k', 'LineWidth', 2);
+legend('K', 'U', 'Sum', 'Location', 'Best');
 xlim(xrange);
 xlabel('\Omega_{ci} t');
-ylabel('-\int NV \cdot dl');
+ylabel(['E_{',sfx,'}']);
 set(gca,'FontSize',14);
 
-%% save
 cd(outdir);
-% print('-dpng','-r300',[sfx,'_continuity_equation_as_dt=',num2str(dt),'_flux.png']);
+print('-dpng','-r300',[sfx,'_kinetic_thermal_energy_as_time_dt=',num2str(dt),'.png']);

@@ -1,28 +1,27 @@
-% function plot_overview
+% function plot_overview(indir, outdir)
 %%
-% @info: writen by Liangjin Song on 20210706
-% @brief: plot the overview for the harris reconnection model
+% @info: writen by Liangjin Song on 20210802
+% @brief: plot the overview for the asymmetric reconnection model with cold ions (asym_rec_slj)
 %%
 clear;
 %% parameters
 % input/output directory
-indir='E:\Simulation\Test';
-outdir='E:\Simulation\Test';
+indir='E:\Simulation\Cold\Data';
+outdir='E:\Simulation\Cold\Out\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0;
+tt=0:60;
 % the variable name
-varname={'B','E','J','Vi','Ve','Ni','Ne', 'divE', 'divB'};
-% varname={'divE'};
+% varname={'B','E','J','Vl','Vh','Vhe','Ve','Nl','Nh','Ne','Nhe', 'divB', 'divE'};
+varname={'B','E','J','Vl','Vh','Vhe','Ve','Nh','Ne','Nhe'};
+% varname={'B','E','J','Vl','Ve','Nl','Ne'};
+% varname={'E'};
 % figure style
-extra.Visible=true;
+extra.Visible=false;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
-extra.yrange=[prm.value.lz(1), prm.value.lz(end)];
-% extra.xrange=[60,90];
-% extra.yrange=[9,15];
+extra.yrange=[prm.value.lz(1)+1, prm.value.lz(end)-1];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra=[];
 %% the length of the time and the variable name
 nt=length(tt);
 nvar=length(varname);
@@ -33,14 +32,34 @@ for t=1:nt
         name=char(varname(n));
         fd=prm.read(name,tt(t));
         ss=prm.read('stream',tt(t));
-        %% select the variable
         switch name
             % scalar field
-            case {'Ni', 'Ne'}
+            case {'Ne'}
                 norm=prm.value.n0;
                 fig=slj.Plot(extra);
                 fig.overview(fd, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title([name,'   \Omega_{ci}t=',num2str(tt(t))]);
+                fig.png(prm, [name,'_t',num2str(tt(t),'%06.2f')]);
+                fig.close();
+            case {'Nl'}
+                norm=prm.value.n0;
+                fig=slj.Plot(extra);
+                fig.overview(fd, ss, prm.value.lx, prm.value.lz, norm, extra);
+                title(['Ni   \Omega_{ci}t=',num2str(tt(t))]);
+                fig.png(prm, [name,'_t',num2str(tt(t),'%06.2f')]);
+                fig.close();
+            case {'Nh'}
+                norm=prm.value.n0;
+                fig=slj.Plot(extra);
+                fig.overview(fd, ss, prm.value.lx, prm.value.lz, norm, extra);
+                title(['Nic   \Omega_{ci}t=',num2str(tt(t))]);
+                fig.png(prm, [name,'_t',num2str(tt(t),'%06.2f')]);
+                fig.close();
+            case {'Nhe'}
+                norm=prm.value.n0;
+                fig=slj.Plot(extra);
+                fig.overview(fd, ss, prm.value.lx, prm.value.lz, norm, extra);
+                title(['Nice   \Omega_{ci}t=',num2str(tt(t))]);
                 fig.png(prm, [name,'_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
             case {'B'}
@@ -94,30 +113,66 @@ for t=1:nt
                 title(['Jz   \Omega_{ci}t=',num2str(tt(t))]);
                 fig.png(prm, ['Jz_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
-            case {'Vi','Ve'}
+            case {'Vl','Vh','Ve','Vhe'}
                 norm=prm.value.vA;
                 fig=slj.Plot(extra);
                 fig.overview(fd.x, ss, prm.value.lx, prm.value.lz, norm, extra);
-                title([name,'_x   \Omega_{ci}t=',num2str(tt(t))]);
+                switch name
+                    case {'Vl'}
+                        tname='Vi';
+                    case {'Vh'}
+                        tname='Vic';
+                    case {'Ve'}
+                        tname='Ve';
+                    case {'Vhe'}
+                        tname='Vhe';
+                end
+                title([tname,'_x   \Omega_{ci}t=',num2str(tt(t))]);
                 fig.png(prm, [name,'x_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
                 fig=slj.Plot(extra);
                 fig.overview(fd.y, ss, prm.value.lx, prm.value.lz, norm, extra);
-                title([name,'_y   \Omega_{ci}t=',num2str(tt(t))]);
+                title([tname,'_y   \Omega_{ci}t=',num2str(tt(t))]);
                 fig.png(prm, [name,'y_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
                 fig=slj.Plot(extra);
                 fig.overview(fd.z, ss, prm.value.lx, prm.value.lz, norm, extra);
-                title([name,'_z   \Omega_{ci}t=',num2str(tt(t))]);
+                title([tname,'_z   \Omega_{ci}t=',num2str(tt(t))]);
                 fig.png(prm, [name,'z_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
-            case {'divB', 'divE'}
+            case {'divE', 'divB'}
                 norm=1;
                 fig=slj.Plot(extra);
                 fig.overview(fd, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title([name,'   \Omega_{ci}t=',num2str(tt(t))]);
                 fig.png(prm, [name,'_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
+            case {'qfluxl', 'qfluxh', 'qfluxe'}
+                norm=1;
+                switch name
+                    case {'qfluxl'}
+                        tname='qih';
+                    case {'qfluxe'}
+                        tname='qe';
+                    case {'qfluxh'}
+                        tname='qic';
+                end
+                fig=slj.Plot(extra);
+                fig.overview(fd.x, ss, prm.value.lx, prm.value.lz, norm, extra);
+                title([tname,'x   \Omega_{ci}t=',num2str(tt(t))]);
+                fig.png(prm, [tname,'x_t',num2str(tt(t),'%06.2f')]);
+                fig.close();
+                fig=slj.Plot(extra);
+                fig.overview(fd.y, ss, prm.value.lx, prm.value.lz, norm, extra);
+                title([tname,'y   \Omega_{ci}t=',num2str(tt(t))]);
+                fig.png(prm, [tname,'y_t',num2str(tt(t),'%06.2f')]);
+                fig.close();
+                fig=slj.Plot(extra);
+                fig.overview(fd.z, ss, prm.value.lx, prm.value.lz, norm, extra);
+                title([tname,'z   \Omega_{ci}t=',num2str(tt(t))]);
+                fig.png(prm, [tname,'z_t',num2str(tt(t),'%06.2f')]);
+                fig.close();
         end
     end
 end
+% end

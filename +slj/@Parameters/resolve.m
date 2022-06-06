@@ -60,7 +60,7 @@ elseif strcmp(value.model, 'rec-2harris')
 elseif strcmp(value.model, 'rec-1harris')
     cmd='value=resolve_rec_2harris(value, key, word);';
     value=for_parameters(cmd, value);
-    % value=reset_system_size(value);
+    value=reset_system_size(value);
     value=length_scale(value);
 elseif strcmp(value.model, 'asym_rec_3s_slj') || strcmp(value.model, 'asym_rec_3s_slj2')
     cmd='value=resolve_asym_rec_3s_slj(value, key, word);';
@@ -541,6 +541,8 @@ elseif strcmp(key,'number of particles representing unit density')
     value.coeff=str2double(word);
 elseif strcmp(key,'density ratio between background and Harris')
     value.rbh=str2double(word);
+elseif strcmp(key,'ratio of initial bulk velocity between ion and electron')
+    value.rvtie=str2double(word);
 elseif strcmp(key,'electron plasma frequency')
     value.fpe=str2double(word);
 elseif strcmp(key,'electron gyrofrequency')

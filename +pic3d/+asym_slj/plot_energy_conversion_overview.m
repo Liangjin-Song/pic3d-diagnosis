@@ -1,11 +1,11 @@
 % function plot_energy_conversion_overview(name)
 % clear;
 %% parameters
-indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\partial_t\region1';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Global';
 prm=slj.Parameters(indir,outdir);
 
-tt=26.5;
+tt=40;
 name='h';
 
 nt=length(tt);

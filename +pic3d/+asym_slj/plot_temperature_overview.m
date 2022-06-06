@@ -2,12 +2,12 @@
 clear;
 %% 
 indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Energy\Region2';
+outdir='E:\Asym\cold2\out\Overview';
 prm=slj.Parameters(indir,outdir);
 
 
 
-tt=40;
+tt=20:60;
 name='h';
 disp(name);
 
@@ -16,7 +16,7 @@ nt=length(tt);
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra.Visible=true;
+extra.Visible=false;
 
 if name == 'h'
     tm=prm.value.thm;
@@ -29,8 +29,8 @@ elseif name == 'e'
     sfx='e';
 end
 
-% norm=tm/prm.value.coeff;
-norm = 1;
+norm=tm/prm.value.coeff;
+% norm = 1;
 
 for t=1:nt
     %% read data

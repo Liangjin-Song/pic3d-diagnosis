@@ -1,7 +1,7 @@
 % function plot_species_energy()
 clear;
-indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Global';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Global';
 prm=slj.Parameters(indir,outdir);
 xrange=[0 100];
 t0=1;
@@ -45,18 +45,38 @@ print(h2, '-dpng','-r300','energy_rate.png');
 %% the energy change
 de=en(:,:)-en(t0,:);
 h3=figure;
-plot(tt,de(:,2),'k','LineWidth',2); hold on
-plot(tt,de(:,3),'b','LineWidth',2);
-plot(tt,de(:,4),'m','LineWidth',2);
-plot(tt,de(:,5),'r','LineWidth',2); hold off
+norm = en(1,2);
+plot(tt,de(:,2)/norm,'k','LineWidth',2); hold on
+plot(tt,de(:,3)/norm,'b','LineWidth',2);
+plot(tt,de(:,4)/norm,'m','LineWidth',2);
+plot(tt,de(:,5)/norm,'r','LineWidth',2); hold off
 xlim([0,tt(end)]);
 legend('B','Electron','Hot Ion','Cold Ion','Location','Best');
 xlabel('\Omega_{ci}t');
-ylabel('dE');
+ylabel('\Delta E');
 xlim(xrange);
 set(gca,'FontSize',14);
 cd(outdir)
 print(h3, '-dpng','-r300','energy_change.png');
+
+h5 = figure;
+rde = zeros(size(de,1),3);
+rde(:,1) = de(:,3)./abs(de(:,2));
+rde(:,2) = de(:,4)./abs(de(:,2));
+rde(:,3) = de(:,5)./abs(de(:,2));
+plot(tt, rde(:,1), 'r', 'LineWidth', 2); hold on
+plot(tt, rde(:,2), 'b', 'LineWidth', 2);
+plot(tt, rde(:,3), 'g', 'LineWidth', 2);
+hold off;
+legend('Electron', 'Hot Ion', 'Cold Ion', 'Location', 'Best');
+xlabel('\Omega_{ci}t');
+ylabel('\Delta E/\Delta E_B');
+xlim(xrange);
+set(gca,'FontSize',14);
+cd(outdir)
+print(h5, '-dpng','-r300','energy_change_ratio.png');
+
+
 
 %% the average energy change
 Ni=prm.read('Nl',0);

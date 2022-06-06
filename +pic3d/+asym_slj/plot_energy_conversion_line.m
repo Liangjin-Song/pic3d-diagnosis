@@ -1,15 +1,19 @@
 % function plot_energy_converstion_line
 clear;
 %% parameters
+% indir='E:\Asym\cold2\data';
+% outdir='E:\Asym\cold2\out\Global';
 indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Tmp';
+outdir='E:\Asym\dst1\out\Global';
 prm=slj.Parameters(indir,outdir);
 
-tt=53;
+tt=40;
 name='h';
 
-xz=10;
+xz=40;
 dir=1;
+
+nn = 40;
 
 nt=length(tt);
 
@@ -19,7 +23,7 @@ extra.ylabel='Z [c/\omega_{pi}]';
 
 norm=prm.value.n0*prm.value.vA*prm.value.vA;
 
-xrange=[-5,5];
+xrange=[-10,10];
 
 
 if dir == 1
@@ -63,23 +67,23 @@ for t=1:nt
     
 
     %% get line
-    lje=JE.get_line2d(xz,dir,prm,norm);
-    ljex=JEx.get_line2d(xz,dir,prm,norm);
-    ljey=JEy.get_line2d(xz,dir,prm,norm);
-    ljez=JEz.get_line2d(xz,dir,prm,norm);
+    lje=JE.get_line2d(xz,dir,prm,1);
+    ljex=JEx.get_line2d(xz,dir,prm,1);
+    ljey=JEy.get_line2d(xz,dir,prm,1);
+    ljez=JEz.get_line2d(xz,dir,prm,1);
     
     % smooth
-    lje = smoothdata(lje);
-    ljex = smoothdata(ljex);
-    ljey = smoothdata(ljey);
-    ljez = smoothdata(ljez);
+    lje = smoothdata(lje, 'movmean', nn);
+    ljex = smoothdata(ljex, 'movmean', nn);
+    ljey = smoothdata(ljey, 'movmean', nn);
+    ljez = smoothdata(ljez, 'movmean', nn);
     
 
     %% plot figure
-    plot(ll, lje, '-k', 'LineWidth', 2); hold on
-    plot(ll, ljex, 'r', 'LineWidth', 2);
-    plot(ll, ljey, 'b', 'LineWidth', 2);
-    plot(ll, ljez, 'g', 'LineWidth', 2); hold off
+    plot(ll, lje/norm, '-k', 'LineWidth', 2); hold on
+    plot(ll, ljex/norm, 'r', 'LineWidth', 2);
+    plot(ll, ljey/norm, 'b', 'LineWidth', 2);
+    plot(ll, ljez/norm, 'g', 'LineWidth', 2); hold off
 
     %% set figure
     xlim(xrange);

@@ -1,15 +1,19 @@
 %% function plot_plasma_current_line
 clear;
 %% parameters
-indir='E:\Asym\Cold\data';
-outdir='E:\Asym\Cold\out\Analysis\Electron';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Global';
+% indir='E:\Asym\cold2\data';
+% outdir='E:\Asym\cold2\out\Global';
 prm=slj.Parameters(indir,outdir);
 
-tt=100;
-name='e';
+tt=40;
+name='h';
 
-xz=51;
+xz=40;
 dir=1;
+
+nn = 1;
 
 nt=length(tt);
 
@@ -19,7 +23,7 @@ extra.ylabel='Z [c/\omega_{pi}]';
 
 norm=prm.value.n0*prm.value.vA;
 
-xrange=[-5,5];
+xrange=[-10,10];
 
 if dir == 1
     ll = prm.value.lz;
@@ -61,6 +65,10 @@ for t=1:nt
     ljx=Jx.get_line2d(xz,dir,prm,norm);
     ljy=Jy.get_line2d(xz,dir,prm,norm);
     ljz=Jz.get_line2d(xz,dir,prm,norm);
+    
+    ljx = smoothdata(ljx, 'movmean', nn);
+    ljy = smoothdata(ljy, 'movmean', nn);
+    ljz = smoothdata(ljz, 'movmean', nn);
 
     %% plot figure
     plot(ll, ljx, 'r', 'LineWidth', 2); hold on
@@ -77,7 +85,7 @@ for t=1:nt
 
     %% save figure
     cd(outdir);
-    % print('-dpng','-r300',['J',sfx,'_t',num2str(tt(t)),'_line.png']);
+    print('-dpng','-r300',['J',sfx,'_t',num2str(tt(t)),'_line.png']);
 %     close(gcf);
 end
 

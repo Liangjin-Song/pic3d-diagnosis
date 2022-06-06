@@ -3,28 +3,19 @@
 % plot the kinetic energy and thermal energy as the function of time
 %%
 clear;
-%{
 %% parameters
-indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\partial_t\region1';
+indir='E:\Asym\cold2\data';
+outdir='E:\Asym\cold2\out\Global';
 prm=slj.Parameters(indir,outdir);
 
-dt = 0.1;
-tt=20:dt:60;
+dt = 1;
+tt=0:dt:89;
 name='h';
 
-% the box and box size
-xx = [30,50];
-zz = [-2,0];
+norm=load([indir,'\energy.dat']);
+norm=norm(1,5);
 
-xrange=[tt(1),tt(end)];
-[~, a] = min(abs(prm.value.lx - xx(1)));
-[~, b] = min(abs(prm.value.lx - xx(2)));
-xindex = [a, b];
-[~, a] = min(abs(prm.value.lz - zz(1)));
-[~, b] = min(abs(prm.value.lz - zz(2)));
-zindex = [a, b];
-
+xrange = [tt(1), tt(end)];
 
 if name == 'l'
     sfx='ih';
@@ -44,11 +35,6 @@ elseif name == 'e'
 else
     error('Parameters Error!');
 end
-%}
-pic3d.asym_slj.energy_equation_parameters;
-% norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
-% norm=2*dt*prm.value.wci*prm.value.n0;
-norm = 1;
 
 %% the loop
 nt=length(tt);
@@ -66,7 +52,7 @@ for t=1:nt
     rate(3,t)=sum(K.value + U.value, 'all');
 end
 rate0=rate;
-rate = rate/norm;
+rate = rate0/norm;
 
 %% figure
 figure;

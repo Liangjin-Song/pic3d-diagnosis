@@ -6,16 +6,16 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Simulation\Test';
-outdir='E:\Simulation\Test';
+indir='E:\Simulation\Rec\Data';
+outdir='E:\Simulation\Rec\Out\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0;
+tt=0:61;
 % the variable name
 varname={'B','E','J','Vi','Ve','Ni','Ne', 'divE', 'divB'};
 % varname={'divE'};
 % figure style
-extra.Visible=true;
+extra.Visible=false;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
 extra.yrange=[prm.value.lz(1), prm.value.lz(end)];
 % extra.xrange=[60,90];

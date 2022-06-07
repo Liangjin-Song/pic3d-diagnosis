@@ -1,6 +1,6 @@
 clear;
-indir='E:\test\test1';
-outdir='E:\test\test1';
+indir='E:\Simulation\Cold\Data';
+outdir='E:\Simulation\Cold\Out\Global';
 %% plot energy
 h1=figure;
 en=load([indir,'\energy.dat']);

@@ -2,8 +2,8 @@
 %% plot the cold ions density profiles
 clear;
 %% parameters 
-indir='E:\Simulation\Cold\Data';
-outdir='E:\Simulation\Cold\Out\Line';
+indir='E:\Simulation\Rec\Data';
+outdir='E:\Simulation\Rec\Out\Line';
 prm=slj.Parameters(indir,outdir);
 name='E';
 norm=prm.value.vA;
@@ -16,9 +16,15 @@ xrange=[-10,10];
 %% read data
 V=prm.read(name,tt);
 
+% fac
+B=prm.read('B', tt);
+[Vpara, Vperp]=V.fac_vector(B);
+lpara = slj.Scalar(sqrt(Vpara.x.^2 + Vpara.y.^2 + Vpara.z.^2));
+lperp = slj.Scalar(sqrt(Vperp.x.^2 + Vperp.y.^2 + Vperp.z.^2));
 
 %% get the line
-lf=V.get_line2d(xz, dir, prm, norm);
+lpara=lpara.get_line2d(xz, dir, prm, norm);
+lperp=lperp.get_line2d(xz, dir, prm, norm);
 
 if dir==1
     ll=prm.value.lz;
@@ -39,22 +45,17 @@ else
 end
 
 nn = 10;
-lf.lx=smoothdata(lf.lx,'gaussian',nn);
-lf.ly=smoothdata(lf.ly,'gaussian',nn);
-lf.lz=smoothdata(lf.lz,'gaussian',nn);
-% lf.lx=smoothdata(lf.lx);
-% lf.ly=smoothdata(lf.ly);
-% lf.lz=smoothdata(lf.lz);
+lpara=smoothdata(lpara,'gaussian',nn);
+lperp=smoothdata(lperp,'gaussian',nn);
 
 figure;
-plot(ll, lf.lx, 'r', 'LineWidth', 2); hold on
-plot(ll, lf.ly, 'g', 'LineWidth', 2);
-plot(ll, lf.lz, 'b', 'LineWidth', 2);
+plot(ll, lpara, 'r', 'LineWidth', 2); hold on
+plot(ll, lperp, 'g', 'LineWidth', 2);
 xlabel(extra.xlabel);
 ylabel(name);
-legend([name,'x'], [name,'y'],[name,'z'],'Location','best');
+legend([name,'_{para}'], [name,'_{perp}'],'Location','best');
 set(gca,'FontSize', 14);
 xlim(xrange);
 
 cd(outdir);
-% print('-dpng', '-r300', [name, '_t', num2str(tt,'%06.2f'), '_', pstr, num2str(xz), '.png']);
+print('-dpng', '-r300', [name, '_t', num2str(tt,'%06.2f'), '_', pstr, num2str(xz), '_fac.png']);

@@ -2,15 +2,14 @@
 %% plot the cold ions density profiles
 clear;
 %% parameters 
-indir='E:\PIC\Cold-Ions\mie100\data';
-outdir='E:\PIC\Cold-Ions\mie100\out';
-tt=32;
-xz=0;
-dir=0;
-extra.xlabel='Z [c/\omega_{pi}]';
-extra.ylabel='N';
-extra.xrange=[0,45];
-fs=12;
+indir='E:\Simulation\Cold\Data';
+outdir='E:\Simulation\Cold\Out\Global';
+tt=0;
+xz=50;
+dir=1;
+ylab='N';
+xrange=[-15,15];
+fs=14;
 
 %% read data
 prm=slj.Parameters(indir,outdir);
@@ -32,10 +31,27 @@ lhe=Nhe.get_line2d(xz, dir, prm, prm.value.n0);
 le=le+lhe;
 lb=B.get_line2d(xz,dir,prm,1);
 if dir==1
+    xlab = 'Z [c/\omega_{pi}]';
     lxz=prm.value.lz;
+    sdir = 'x';
 else
     lxz=prm.value.lx;
+    xlab = 'X [c/\omega_{pi}]';
+    sdir = 'z';
 end
+plot(lxz, ll, '-r', 'LineWidth', 2); hold on
+plot(lxz, lh, '-b', 'LineWidth', 2);
+plot(lxz, le, '-k', 'LineWidth', 2);
+xlabel(xlab);
+ylabel(ylab);
+legend('Hot ion', 'Cold ion', 'Electron');
+set(gca, 'FontSize', fs);
+xlim(xrange);
+
+cd(outdir);
+print('-dpng', '-r300', ['plasma_density_t', num2str(tt, '%06.2f'), '_', sdir, num2str(xz),'.png']);
+
+%{
 [ax,h1,h2]=plotyy(lxz,[ll;lh;le],lxz,lb.lz);
 set(ax(1),'XColor','k','YColor','k','FontSize',fs);
 set(ax(2),'XColor','k','YColor','r','FontSize',fs);
@@ -53,3 +69,4 @@ set(ax(1),'xlim',extra.xrange);
 set(ax(2),'xlim',extra.xrange);
 cd(outdir);
 print('-dpng','-r300','density_profile_3s_RF.png');
+%}

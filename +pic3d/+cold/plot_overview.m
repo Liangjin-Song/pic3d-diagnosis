@@ -13,9 +13,9 @@ prm=slj.Parameters(indir,outdir);
 tt=0:60;
 % the variable name
 % varname={'B','E','J','Vl','Vh','Vhe','Ve','Nl','Nh','Ne','Nhe', 'divB', 'divE'};
-varname={'B','E','J','Vl','Vh','Vhe','Ve','Nh','Ne','Nhe'};
+% varname={'B','E','J','Vl','Vh','Vhe','Ve','Nh','Ne','Nhe'};
 % varname={'B','E','J','Vl','Ve','Nl','Ne'};
-% varname={'E'};
+varname={'E'};
 % figure style
 extra.Visible=false;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
@@ -84,16 +84,19 @@ for t=1:nt
                 fig=slj.Plot(extra);
                 fig.overview(fd.x, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title(['Ex   \Omega_{ci}t=',num2str(tt(t))]);
+                caxis([-0.5,0.5]);
                 fig.png(prm, ['Ex_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
                 fig=slj.Plot(extra);
                 fig.overview(fd.y, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title(['Ey   \Omega_{ci}t=',num2str(tt(t))]);
+                caxis([-0.5,0.5]);
                 fig.png(prm, ['Ey_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
                 fig=slj.Plot(extra);
                 fig.overview(fd.z, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title(['Ez   \Omega_{ci}t=',num2str(tt(t))]);
+                caxis([-1,1]);
                 fig.png(prm, ['Ez_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
             case {'J'}

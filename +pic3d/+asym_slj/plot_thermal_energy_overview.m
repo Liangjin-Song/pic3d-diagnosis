@@ -1,11 +1,11 @@
 % function plot_thermal_energy_overview(name)
-% clear;
+clear;
 %%
 indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Energy\Region1';
+outdir='E:\Asym\cold2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
-tt=50;
+tt=40;
 name='h';
 
 nt=length(tt);
@@ -26,8 +26,8 @@ elseif name == 'e'
     sfx='e';
 end
 
-% norm=prm.value.n0*tm/prm.value.coeff;
-norm=1;
+norm=prm.value.n0*tm/prm.value.coeff;
+% norm=1;
 for t=1:nt
     %% read data
     P=prm.read(['P',name],tt(t));
@@ -41,7 +41,7 @@ for t=1:nt
     title(['U',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
     cd(outdir);
     print('-dpng','-r300',['U',sfx,'_t',num2str(tt(t)),'.png']);
-    close(gcf);
+%     close(gcf);
 end
 
 

@@ -2,12 +2,12 @@
 clear;
 %% 
 indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Overview';
+outdir='E:\Asym\cold2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
 
 
-tt=20:60;
+tt=40;
 name='h';
 disp(name);
 
@@ -16,7 +16,7 @@ nt=length(tt);
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra.Visible=false;
+extra.Visible=true;
 
 if name == 'h'
     tm=prm.value.thm;
@@ -46,7 +46,7 @@ for t=1:nt
     title(['T',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
     cd(outdir);
     print(f, '-dpng','-r300',['T',sfx,'_t',num2str(tt(t), '%06.2f'),'.png']);
-    close(gcf);
+%     close(gcf);
 end
 
 

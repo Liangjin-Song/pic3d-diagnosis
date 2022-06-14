@@ -6,18 +6,18 @@
 % indir='E:\Asym\cold2\data';
 % outdir='E:\Asym\cold2\out\Energy\Region2';
 indir = 'E:\Asym\dst1v2\data';
-outdir = 'E:\Asym\dst1v2\out\partial_t\region2';
+outdir = 'E:\Asym\dst1v2\out\partial_t\region1';
 prm=slj.Parameters(indir,outdir);
 
 dt = 0.1;
 tt=20:dt:60;
-name='h';
+name='l';
 
 % the box and box size
 % xx = [20,30];
 % zz = [-1,2];
-xx = [22,28];
-zz = [-2,2];
+xx = [30,50];
+zz = [-2,0];
 
 xrange=[tt(1),tt(end)];
 [~, a] = min(abs(prm.value.lx - xx(1)));

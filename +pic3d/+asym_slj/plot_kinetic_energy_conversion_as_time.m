@@ -80,7 +80,7 @@ plot(tt, rate(5,:), '--k', 'LineWidth', 2);
 
 
 %% set figure
-legend('\partial K/\partial t', '-\nabla\cdot(KV)', 'qNV\cdot E', '- (\nabla\cdot P) \cdot V', 'Sum', 'Location', 'Best');
+legend('\partial K/\partial t', '-\nabla\cdot(KV)', 'qNV\cdot E', '- (\nabla\cdot P) \cdot V', 'Sum', 'Location', 'Best','Box','off');
 xlim(xrange);
 xlabel('\Omega_{ci} t');
 set(get(gca, 'YLabel'), 'String', ['\partial K',sfx,'/\partial t']);

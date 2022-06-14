@@ -5,22 +5,22 @@
 clear;
 %% parameters
 indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Line';
+outdir='E:\Asym\cold2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
-tt=40;
+tt=28;
 dt=0.1;
 name='h';
 
-xz=25;
+xz=40;
 dd = 10;
 dir=1;
-cmpt = 'z';
+cmpt = 'y';
 
-nm = 40;
+nm = 30;
 
 %% figure proterty
-xrange=[-5,5];
+xrange=[-5,3];
 
 if name == 'l'
     sfx='ih';
@@ -68,6 +68,14 @@ else
     error('Parameters error!');
 end
 
+N = prm.read(['N',name], tt);
+N = q.*N.value;
+qNE = qNE./N;
+divP = divP./N;
+pVt = pVt./N;
+NVV = NVV./N;
+qVB = qVB./N;
+
 if dir == 0
     sdir = 'x';
     xlab = 'X [c/\omega_{pi}]';
@@ -109,11 +117,11 @@ plot(ll, lpVt, '-g', 'LineWidth', 2);
 plot(ll, lNVV, '-b', 'LineWidth', 2);
 plot(ll, lqVB, '-m', 'LineWidth', 2);
 plot(ll, ltot, '--k', 'LineWidth', 2);
-legend('qNE', '\nabla\cdot P', '\partial(mNV)/\partial t', '\nabla\cdot(mNVV)','-qNV\times B','Sum', 'Location', 'Best', 'Box', 'off');
+legend('E', '\nabla\cdot P/qN', '(m/q)\partial V/\partial t', '(m/q)(V\cdot\nabla)V','-V\times B','Sum', 'Location', 'Best', 'Box', 'off');
 xlim(xrange);
-ylabel(['qN_{',sfx,'}E_', cmpt]);
+ylabel(['E_', cmpt]);
 xlabel(xlab);
 set(gca,'FontSize',14);
 
 cd(outdir);
-print('-dpng','-r300',[sfx,'_momentum_equation_electric_force_density_',cmpt,'_t=',num2str(tt, '%06.2f'),'_',sdir,'=',num2str(round(ll(xz))),'.png']);
+% print('-dpng','-r300',[sfx,'_momentum_equation_electric_force_density_',cmpt,'_t=',num2str(tt, '%06.2f'),'_',sdir,'=',num2str(round(ll(xz))),'.png']);

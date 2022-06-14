@@ -47,9 +47,9 @@ lf.lz=smoothdata(lf.lz,'gaussian',nn);
 % lf.lz=smoothdata(lf.lz);
 
 figure;
-plot(ll, lf.lx, 'r', 'LineWidth', 2); hold on
-plot(ll, lf.ly, 'g', 'LineWidth', 2);
-plot(ll, lf.lz, 'b', 'LineWidth', 2);
+plot(ll, lf.lx, 'r', 'LineWidth', 1.1); hold on
+plot(ll, lf.ly, 'b', 'LineWidth', 1.1);
+plot(ll, lf.lz, 'k', 'LineWidth', 1.1);
 xlabel(extra.xlabel);
 ylabel(name);
 legend([name,'x'], [name,'y'],[name,'z'],'Location','best');

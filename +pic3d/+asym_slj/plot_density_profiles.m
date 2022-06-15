@@ -2,10 +2,10 @@
 %% plot the cold ions density profiles
 clear;
 %% parameters 
-indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\Line';
+indir='E:\Asym\dst1\data';
+outdir='E:\Asym\dst1\out\Global';
 tt=40;
-xz=40;
+xz=25;
 dir=1;
 extra.xlabel='Z [c/\omega_{pi}]';
 extra.ylabel='N';

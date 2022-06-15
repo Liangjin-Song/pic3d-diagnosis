@@ -1,6 +1,6 @@
 % function plot_Vector_profiles
 %% plot the cold ions density profiles
-% clear;
+clear;
 %% parameters 
 indir='E:\Asym\dst1\data';
 outdir='E:\Asym\dst1\out\Global';
@@ -12,7 +12,7 @@ name='E';
 nn = 40;
 % norm=1;
 tt=40;
-xz=40;
+xz=25;
 dir=1;
 xrange=[-10,10];
 extra.title=['\Omega_{ci}t=',num2str(tt)];

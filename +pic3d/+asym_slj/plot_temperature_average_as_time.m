@@ -29,42 +29,46 @@ end
 
 %% figure
 f1 = figure;
-plot(tt, rate(1, :), '-k', 'LineWidth', 1.5);
+plot(tt, rate(1, :), '-k', 'LineWidth', 2);
 hold on
-plot(tt, rate(2, :), '-g', 'LineWidth', 1.5);
-plot(tt, rate(3, :), '-r', 'LineWidth', 1.5);
-plot(tt, rate(4, :), '-m', 'LineWidth', 1.5);
-plot(tt, rate(5, :) + rate(6, :), '-b', 'LineWidth', 1.5);
-plot(tt, rate(7, :), '--k', 'LineWidth', 1.5);
+plot(tt, rate(2, :), '-g', 'LineWidth', 2);
+plot(tt, rate(3, :), '-r', 'LineWidth', 2);
+plot(tt, rate(4, :), '-m', 'LineWidth', 2);
+plot(tt, rate(5, :) + rate(6, :), '-b', 'LineWidth', 2);
+plot(tt, rate(7, :), '--k', 'LineWidth', 2);
 legend('\partial T/\partial t', '\nabla \cdot Q term', '(P\cdot\nabla)\cdot V term', 'nv\cdot\nabla T'' term', ...
     '\nabla \cdot (nv) terms', 'Sum', 'Box', 'off', 'Location', 'Best');
 xlabel('\Omega_{ci}t');
 ylabel(['\partial T', sfx, '/\partial t']);
+set(gca,'FontSize', 14);
 
 f2 = figure;
-plot(tt, rate(1, :), '-k', 'LineWidth', 1.5);
+plot(tt, rate(1, :), '-k', 'LineWidth', 2);
 hold on
-plot(tt, rate(7, :), '--r', 'LineWidth', 1.5);
+plot(tt, rate(7, :), '-r', 'LineWidth', 2);
 legend('\partial T/\partial t', 'Sum', 'Box', 'off', 'Location', 'Best');
 xlabel('\Omega_{ci}t');
 ylabel(['\partial T', sfx, '/\partial t']);
+set(gca,'FontSize', 14);
 
 f3 = figure;
-plot(tt, rate(5, :), '-r', 'LineWidth', 1.5);
+plot(tt, rate(5, :), '-r', 'LineWidth', 2);
 hold on
-plot(tt, rate(6, :), '-b', 'LineWidth', 1.5);
-plot(tt, rate(5, :) + rate(6, :), '-k', 'LineWidth', 1.5);
+plot(tt, rate(6, :), '-b', 'LineWidth', 2);
+plot(tt, rate(5, :) + rate(6, :), '-k', 'LineWidth', 2);
 legend('T\nabla\cdot(nv) term', 'T''\nabla\cdot(nv) term', 'Sum', 'Box', 'off', 'Location', 'Best');
 xlabel('\Omega_{ci}t');
+set(gca,'FontSize', 14);
 
 f4 = figure;
-plot(tt, work(1, :), '-k', 'LineWidth', 1.5);
+plot(tt, work(1, :), '-k', 'LineWidth', 2);
 hold on
-plot(tt, work(2, :), '-r', 'LineWidth', 1.5);
-plot(tt, work(3, :), '-b', 'LineWidth', 1.5);
-plot(tt, work(4, :), '--k', 'LineWidth', 1.5);
+plot(tt, work(2, :), '-r', 'LineWidth', 2);
+plot(tt, work(3, :), '-b', 'LineWidth', 2);
+plot(tt, work(4, :), '--k', 'LineWidth', 2);
 xlabel('\Omega_{ci}t');
 legend('(P\cdot\nabla)\cdot v', '(P''\cdot\nabla)\cdot v', 'p\nabla\cdot v', 'Sum', 'Box', 'off', 'Location', 'Best');
+set(gca,'FontSize', 14);
 
 cd(outdir)
 print(f1, '-dpng','-r300',[sfx,'_average_temperature_evolution_as_time_dt=',num2str(dt),'.png']);

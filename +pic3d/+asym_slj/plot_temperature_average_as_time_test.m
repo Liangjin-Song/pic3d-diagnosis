@@ -22,7 +22,7 @@ for t = 1:nt
     %%
 
     %%
-    [aTt, TNV, divQ, DUV, cTNV, cNVT, PdV] = average_temperature_evolution3(prm, name, tt(t), dt, xindex, zindex);
+    [aTt, TNV, divQ, DUV, cTNV, cNVT, PdV] = average_temperature_evolution4(prm, name, tt(t), dt, xindex, zindex);
     rate(1, t) = aTt;
     rate(2, t) = TNV;
     rate(3, t) = divQ;
@@ -50,6 +50,12 @@ aTt = average_temperature_change(prm, name, t, dt, xindex, zindex);
 divQ = divergence_heat_flux(prm, name, t, xindex, zindex);
 DUV = thermal_convection(prm, name, t, xindex, zindex);
 PdV = pressure_work(prm, name, t, xindex, zindex);
+end
+
+function plot_temperature_evolution1(tt, rate)
+f1 = figure;
+plot(tt, rate(6, :), '-k', 'LineWidth', 2); hold on
+plot(tt, rate(7, :), '-r', 'LineWidth', 2);
 end
 
 %% ======================================================================================= %%
@@ -93,6 +99,16 @@ end
 
 
 %% ======================================================================================= %%
+function [aTt, TNV, divQ, DUV, cTNV, cNVT, PdV] = average_temperature_evolution4(prm, name, t, dt, xindex, zindex)
+aTt = average_temperature_change4(prm, name, t, dt, xindex, zindex);
+[~, TNV] = temperature_continuity4(prm, name, t, dt, xindex, zindex);
+divQ = divergence_heat_flux4(prm, name, t, xindex, zindex);
+[DUV, cTNV, cNVT] = temperature_convection4(prm, name, t, xindex, zindex);
+PdV = pressure_work4(prm, name, t, xindex, zindex);
+end
+
+
+%% ======================================================================================= %%
 function N = particles_number(prm, name, t, xindex, zindex)
 N = prm.read(['N', name], t);
 N = sum(N.value(zindex(1):zindex(2),xindex(1):xindex(2)), 'all');
@@ -114,12 +130,28 @@ aTt = (T2 - T1).*prm.value.wci./(2.*dt);
 aTt = aTt .* N;
 end
 
+function aTt = average_temperature_change4(prm, name, t, dt, xindex, zindex)
+T2 = average_temperature(prm, name, t + dt, xindex, zindex);
+T1 = average_temperature(prm, name, t - dt, xindex, zindex);
+N = particles_number(prm, name, t, xindex, zindex);
+aTt = (T2 - T1).*prm.value.wci./(2.*dt);
+end
+
 %% ======================================================================================= %%
 function divQ = divergence_heat_flux(prm, name, t, xindex, zindex)
 % -\nabla\cdot\vec{Q}
 divQ = prm.read(['qflux',name],t);
 divQ = divQ.divergence(prm); 
 divQ = -sum(divQ.value(zindex(1):zindex(2),xindex(1):xindex(2)), 'all');
+end
+
+function divQ = divergence_heat_flux4(prm, name, t, xindex, zindex)
+% -\nabla\cdot\vec{Q}/N
+divQ = prm.read(['qflux',name],t);
+divQ = divQ.divergence(prm); 
+divQ = -sum(divQ.value(zindex(1):zindex(2),xindex(1):xindex(2)), 'all');
+N = particles_number(prm, name, t, xindex, zindex);
+divQ = divQ ./ N;
 end
 
 %% ======================================================================================= %%
@@ -184,6 +216,26 @@ pdv=-pdv.value.*p;
 pdv = sum(pdv(zindex(1):zindex(2),xindex(1):xindex(2)), 'all');
 end
 
+
+function PdV = pressure_work4(prm, name, t, xindex, zindex)
+V = prm.read(['V', name], t);
+P = prm.read(['P', name], t);
+% - (P \cdot \nabla)\cdot v
+VV=slj.Scalar(V.x);
+g=VV.gradient(prm);
+px=g.x.*P.xx+g.y.*P.xy+g.z.*P.xz;
+VV=slj.Scalar(V.y);
+g=VV.gradient(prm);
+py=g.x.*P.xy+g.y.*P.yy+g.z.*P.yz;
+VV=slj.Scalar(V.z);
+g=VV.gradient(prm);
+pz=g.x.*P.xz+g.y.*P.yz+g.z.*P.zz;
+PdV = px + py + pz;
+PdV = -sum(PdV(zindex(1):zindex(2),xindex(1):xindex(2)), 'all');
+N = particles_number(prm, name, t, xindex, zindex);
+PdV = PdV ./ N;
+end
+
 %% ======================================================================================= %%
 function NVT1 = temperature_gradient(prm, name, t, xindex, zindex)
 U = slj.Physics.thermal_energy(prm.read(['P', name], t));
@@ -220,6 +272,33 @@ NVT = NV.x .* gT.x + NV.y .* gT.y + NV.z .* gT.z;
 NVT = -sum(NVT(zindex(1):zindex(2),xindex(1):xindex(2)), 'all');
 end
 
+
+function [DUV, TNV, NVT] = temperature_convection4(prm, name, t, xindex, zindex)
+DUV = thermal_convection(prm, name, t, xindex, zindex);
+NN = particles_number(prm, name, t, xindex, zindex);
+DUV = DUV./NN;
+
+
+U = slj.Physics.thermal_energy(prm.read(['P', name], t));
+N = prm.read(['N', name], t);
+V = prm.read(['V', name], t);
+T = slj.Scalar(U.value./N.value);
+
+NV.x = N.value.*V.x;
+NV.y = N.value.*V.y;
+NV.z = N.value.*V.z;
+TNV = slj.Vector(NV);
+TNV = TNV.divergence(prm);
+TNV = TNV.value .* T.value;
+TNV = -sum(TNV(zindex(1):zindex(2),xindex(1):xindex(2)), 'all');
+TNV = TNV./NN;
+
+gT = T.gradient(prm);
+NVT = NV.x .* gT.x + NV.y .* gT.y + NV.z .* gT.z;
+NVT = -sum(NVT(zindex(1):zindex(2),xindex(1):xindex(2)), 'all');
+NVT = NVT./NN;
+end
+
 %% ======================================================================================= %%
 function DUV = thermal_convection(prm, name, t, xindex, zindex)
 U = slj.Physics.thermal_energy(prm.read(['P', name], t));
@@ -238,4 +317,11 @@ function [TNt, TNV] = temperature_continuity(prm, name, t, dt, xindex, zindex)
 [T, ~] = average_temperature(prm, name, t, xindex, zindex);
 TNt = sum(TNt.value(zindex(1):zindex(2),xindex(1):xindex(2)), 'all').*T;
 TNV = sum(TNV.value(zindex(1):zindex(2),xindex(1):xindex(2)), 'all').*T;
+end
+
+function [TNt, TNV] = temperature_continuity4(prm, name, t, dt, xindex, zindex)
+[TNt, TNV] = slj.Physics.continuity_equation(prm, name, t, dt);
+[T, N] = average_temperature(prm, name, t, xindex, zindex);
+TNt = sum(TNt.value(zindex(1):zindex(2),xindex(1):xindex(2)), 'all').*T./N;
+TNV = sum(TNV.value(zindex(1):zindex(2),xindex(1):xindex(2)), 'all').*T./N;
 end

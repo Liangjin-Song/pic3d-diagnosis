@@ -5,13 +5,13 @@
 %%
 clear;
 %% parameters
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Article';
+indir='E:\Asym\cold2\data';
+outdir='E:\Asym\cold2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
 %% variable information
 name='E';
-tt=30;
+tt=28;
 norm=prm.value.vA;
 % norm = 1;
 
@@ -33,4 +33,4 @@ ss=prm.read('stream',tt);
 f=slj.Plot();
 f.overview(fd,ss,prm.value.lx,prm.value.lz,norm,extra);
 cd(outdir);
-f.png(prm,[name,'z_t',num2str(tt),]);
+% f.png(prm,[name,'z_t',num2str(tt),]);

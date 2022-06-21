@@ -26,10 +26,11 @@ extra.ylabel='Z [c/\omega_{pi}]';
 %% read data
 N=prm.read(name,tt);
 ss=prm.read('stream',tt);
-
+Ns = N.value./N.value;
+N = N.value + Ns - 1;
 %% figure
 f=slj.Plot();
 f.overview(N,ss,prm.value.lx,prm.value.lz,norm,extra);
 % f.png(prm,[name,'_t',num2str(tt),'_range'])
 cd(outdir);
-print('-dpng','-r300',[name,'_t',num2str(tt),'.png']);
+% print('-dpng','-r300',[name,'_t',num2str(tt),'.png']);

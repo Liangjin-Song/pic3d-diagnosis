@@ -1,19 +1,19 @@
 % function plot_energy_converstion_line
 clear;
 %% parameters
-% indir='E:\Asym\cold2\data';
-% outdir='E:\Asym\cold2\out\Global';
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Global';
+indir='E:\Asym\cold2\data';
+outdir='E:\Asym\cold2\out\Global';
+% indir='E:\Asym\dst1\data';
+% outdir='E:\Asym\dst1\out\Global';
 prm=slj.Parameters(indir,outdir);
 
-tt=40;
+tt=28;
 name='h';
 
 xz=40;
 dir=1;
 
-nn = 40;
+nn = 15;
 
 nt=length(tt);
 

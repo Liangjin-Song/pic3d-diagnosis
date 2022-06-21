@@ -80,7 +80,8 @@ plot(tt, rate(5,:), '--k', 'LineWidth', 2);
 
 
 %% set figure
-legend('\partial U/\partial t', '(\nabla\cdot P) \cdot V', '-\nabla\cdot Q', '-\nabla\cdot(UV + P\cdot V)', 'Sum', 'Location', 'Best','Box','off');
+legend('\partial U/\partial t', '(\nabla\cdot P) \cdot V', '-\nabla\cdot Q', '-\nabla\cdot(UV + P\cdot V)', 'Sum', ...
+    'Location', 'Best','Box','off', 'FontSize', 12);
 xlim(xrange);
 xlabel('\Omega_{ci} t');
 set(get(gca, 'YLabel'), 'String', ['\partial U',sfx,'/\partial t']);

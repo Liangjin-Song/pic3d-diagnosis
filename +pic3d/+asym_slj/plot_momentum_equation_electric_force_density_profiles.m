@@ -5,14 +5,14 @@
 clear;
 %% parameters
 indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\Article';
+outdir='E:\Asym\dst1\out\Article';
 prm=slj.Parameters(indir,outdir);
 
-tt=40;
+tt=30;
 dt=0.1;
 name='h';
 
-xz=25;
+xz=40;
 dd = 10;
 dir=1;
 cmpt = 'z';
@@ -20,7 +20,7 @@ cmpt = 'z';
 nm = 30;
 
 %% figure proterty
-xrange=[-5,3];
+xrange=[-4,3];
 
 if name == 'l'
     sfx='ih';
@@ -80,7 +80,8 @@ if dir == 0
     sdir = 'x';
     xlab = 'X [c/\omega_{pi}]';
     ll = prm.value.lx;
-    [~, xz] = min(abs(prm.value.lx - xz));
+    lp = prm.value.lz;
+    [~, xz] = min(abs(prm.value.lz - xz));
     lqNE = mean(qNE(xz-dd:xz+dd, :), 1);
     ldivP = mean(divP(xz-dd:xz+dd, :), 1);
     lpVt = mean(pVt(xz-dd:xz+dd, :), 1);
@@ -90,7 +91,8 @@ elseif dir == 1
     sdir = 'z';
     xlab = 'Z [c/\omega_{pi}]';
     ll = prm.value.lz;
-    [~, xz] = min(abs(prm.value.lz - xz));
+    lp = prm.value.lx;
+    [~, xz] = min(abs(prm.value.lx - xz));
     lqNE = mean(qNE(:, xz-dd:xz+dd), 2);
     ldivP = mean(divP(:, xz-dd:xz+dd), 2);
     lpVt = mean(pVt(:, xz-dd:xz+dd), 2);
@@ -124,4 +126,4 @@ xlabel(xlab);
 set(gca,'FontSize',14);
 
 cd(outdir);
-% print('-dpng','-r300',[sfx,'_momentum_equation_electric_force_density_',cmpt,'_t=',num2str(tt, '%06.2f'),'_',sdir,'=',num2str(round(ll(xz))),'.png']);
+print('-dpng','-r300',[sfx,'_momentum_equation_electric_force_density_',cmpt,'_t=',num2str(tt, '%06.2f'),'_',sdir,'=',num2str(round(lp(xz))),'.png']);

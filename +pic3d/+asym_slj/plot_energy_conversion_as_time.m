@@ -67,10 +67,14 @@ for t=1:nt
     qVE = slj.Scalar(q.*N.value.*(V.x.*E.x + V.y.*E.y + V.z.*E.z));
 
     %% sum
-    rate(1,t)=sum(qVE.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(2,t)=sum(qVEx.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(3,t)=sum(qVEy.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(4,t)=sum(qVEz.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+%     rate(1,t)=sum(qVE.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+%     rate(2,t)=sum(qVEx.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+%     rate(3,t)=sum(qVEy.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+%     rate(4,t)=sum(qVEz.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(1,t)=sum(qVE.value,'all');
+    rate(2,t)=sum(qVEx.value,'all');
+    rate(3,t)=sum(qVEy.value,'all');
+    rate(4,t)=sum(qVEz.value,'all');
 end
 rate0=rate;
 rate = rate/norm;
@@ -82,7 +86,7 @@ hold on
 plot(tt, rate(2,:), '-r', 'LineWidth', 2);
 plot(tt, rate(3,:), '-g', 'LineWidth', 2);
 plot(tt, rate(4,:), '-b', 'LineWidth', 2);
-legend('qNV\cdot E', 'qNVxEx', 'qNVyEy', 'qNVzEz', 'Location', 'Best');
+legend('qNV\cdot E', 'qNVxEx', 'qNVyEy', 'qNVzEz', 'Location', 'Best', 'Box','off');
 xlim(xrange);
 xlabel('\Omega_{ci} t');
 ylabel(['qN_{',sfx,'}V_{',sfx,'}\cdot E']);

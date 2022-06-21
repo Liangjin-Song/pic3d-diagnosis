@@ -67,10 +67,14 @@ for t=1:nt
     divPV = slj.Scalar(-(divPV.x.*V.x + divPV.y.*V.y + divPV.z.*V.z));
 
     %% sum
-    rate(1,t)=sum(divPV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(2,t)=sum(divPVx.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(3,t)=sum(divPVy.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
-    rate(4,t)=sum(divPVz.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    % rate(1,t)=sum(divPV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    % rate(2,t)=sum(divPVx.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    % rate(3,t)=sum(divPVy.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    % rate(4,t)=sum(divPVz.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
+    rate(1,t)=sum(divPV.value,'all');
+    rate(2,t)=sum(divPVx.value,'all');
+    rate(3,t)=sum(divPVy.value,'all');
+    rate(4,t)=sum(divPVz.value,'all');
 end
 rate0=rate;
 rate = rate/norm;
@@ -82,7 +86,7 @@ hold on
 plot(tt, rate(2,:), '-r', 'LineWidth', 2);
 plot(tt, rate(3,:), '-g', 'LineWidth', 2);
 plot(tt, rate(4,:), '-b', 'LineWidth', 2);
-legend('-(\nabla\cdot P)\cdot V', '-(\nabla\cdot P)_xV_x', '-(\nabla\cdot P)_yV_y', '-(\nabla\cdot P)_zV_z', 'Location', 'Best');
+legend('-(\nabla\cdot P)\cdot V', '-(\nabla\cdot P)_xV_x', '-(\nabla\cdot P)_yV_y', '-(\nabla\cdot P)_zV_z', 'Location', 'Best', 'Box', 'off');
 xlim(xrange);
 xlabel('\Omega_{ci} t');
 ylabel(['-(\nabla\cdot P_{',sfx,'})\cdot V_{',sfx,'}']);

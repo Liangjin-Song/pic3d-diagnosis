@@ -84,7 +84,7 @@ plot(tt, rate(2, :), '-g', 'LineWidth', 2);
 plot(tt, rate(3, :), '-r', 'LineWidth', 2);
 plot(tt, rate(4, :), '-m', 'LineWidth', 2);
 plot(tt, rate(5, :), '-b', 'LineWidth', 2);
-plot(tt, rate(6, :), '--k', 'LineWidth', 2);
+plot(tt, rate(6, :), '--r', 'LineWidth', 2);
 
 f2 = figure;
 plot(tt, rate(7, :), '-k', 'LineWidth', 2); hold on

@@ -99,7 +99,7 @@ plot(tt, rate(4,:), '-b', 'LineWidth', 2);
 plot(tt, rate(5,:), '-m', 'LineWidth', 2);
 hold off
 
-legend('-\nabla \cdot (UV + P\cdot V)', 'top', 'bottom', 'left', 'right');
+legend('-\nabla \cdot (UV + P\cdot V)', 'top', 'bottom', 'left', 'right','Box','off');
 xlim(xrange);
 xlabel('\Omega_{ci} t');
 ylabel('-\int (UV + P\cdot V) \cdot dl');

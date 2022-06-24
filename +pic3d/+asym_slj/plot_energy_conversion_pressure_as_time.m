@@ -61,10 +61,10 @@ for t=1:nt
     V=prm.read(['V',name],tt(t));
     %% calculation
     divPV=P.divergence(prm);
-    divPVx= slj.Scalar(-divPV.x.*V.x);
-    divPVy= slj.Scalar(-divPV.y.*V.y);
-    divPVz= slj.Scalar(-divPV.z.*V.z);
-    divPV = slj.Scalar(-(divPV.x.*V.x + divPV.y.*V.y + divPV.z.*V.z));
+    divPVx= slj.Scalar(divPV.x.*V.x);
+    divPVy= slj.Scalar(divPV.y.*V.y);
+    divPVz= slj.Scalar(divPV.z.*V.z);
+    divPV = slj.Scalar(divPV.x.*V.x + divPV.y.*V.y + divPV.z.*V.z);
 
     %% sum
     % rate(1,t)=sum(divPV.value(zindex(1):zindex(2),xindex(1):xindex(2)),'all');
@@ -86,10 +86,10 @@ hold on
 plot(tt, rate(2,:), '-r', 'LineWidth', 2);
 plot(tt, rate(3,:), '-g', 'LineWidth', 2);
 plot(tt, rate(4,:), '-b', 'LineWidth', 2);
-legend('-(\nabla\cdot P)\cdot V', '-(\nabla\cdot P)_xV_x', '-(\nabla\cdot P)_yV_y', '-(\nabla\cdot P)_zV_z', 'Location', 'Best', 'Box', 'off');
+legend('(\nabla\cdot P)\cdot V', '(\nabla\cdot P)_xV_x', '(\nabla\cdot P)_yV_y', '(\nabla\cdot P)_zV_z', 'Location', 'Best', 'Box', 'off');
 xlim(xrange);
 xlabel('\Omega_{ci} t');
-ylabel(['-(\nabla\cdot P_{',sfx,'})\cdot V_{',sfx,'}']);
+ylabel(['(\nabla\cdot P_{',sfx,'})\cdot V_{',sfx,'}']);
 set(gca,'FontSize',14);
 
 cd(outdir);

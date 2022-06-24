@@ -8,7 +8,7 @@ outdir = 'E:\Asym\cold2\out\Energy\Region0';
 prm=slj.Parameters(indir,outdir);
 
 dt = 0.1;
-tt=0.1:dt:60;
+tt=20:dt:60;
 name='h';
 
 % the box and box size

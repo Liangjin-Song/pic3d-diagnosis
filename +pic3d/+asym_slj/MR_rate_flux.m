@@ -10,7 +10,8 @@ indir='E:\Asym\cold2\data';
 outdir='E:\Asym\cold2\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:70;
+dt=0.5;
+tt=0:dt:70;
 
 %% the loop
 nt=length(tt);
@@ -48,13 +49,13 @@ cd(outdir);
 print(f1,'-dpng','-r300','magnetic_flux.png');
 
 rate=flux(2:end)-flux(1:end-1);
-nrate=rate/(prm.value.vA*1/prm.value.wci);
+nrate=rate/(prm.value.vA*dt/prm.value.wci);
 f2=figure;
-plot(tt(1:end-1),nrate,'-k','LineWidth',2);
+plot(tt(1:end-1),nrate,'-r','LineWidth',2);
 xlabel('\Omega_{ci}t');
 ylabel('E_R');
 xlim([tt(1) tt(end)-1]);
-set(gca,'FontSize',16);
+set(gca,'FontSize',14);
 cd(outdir);
 print(f2,'-dpng','-r300','MR_rate_by_flux.png');
 % end

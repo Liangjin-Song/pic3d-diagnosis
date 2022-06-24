@@ -2,22 +2,24 @@
 % written by Liangjin Song on 20220330 at Nanchang University
 clear;
 %% parameters
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Ohm';
+indir='E:\Asym\cold2\data';
+outdir='E:\Asym\cold2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
-tt=40;
-dt=0.5;
-name='l';
+tt=34;
+dt=0.1;
 
 q=prm.value.qi;
 m=prm.value.mi;
 
 norm=prm.value.vA;
-xz=22;
+xz=30;
 dir=1;
 pxz=prm.value.nz/2;
-dxz=100;
+dd=40;
+nn=10;
+
+cmpt = 'z';
 
 %% figure proterty
 xrange=[-5,5];
@@ -26,78 +28,91 @@ xrange=[-5,5];
 E=prm.read('E',tt);
 [JxB, divP, VlxB, VhxB, dJ] = calc_Ohm_law_with_cold_ions(prm, tt, dt);
 
-%% filter
-% n=3;
-% E=E.filter2d(n);
-% vxB=vxB.filter2d(n);
-% divP=divP.filter2d(n);
-% nvv=nvv.filter2d(n);
-% nvt=nvt.filter2d(n);
 
 
-%% get the line
-eee=E.get_line2d(xz, dir, prm, norm);
-jxb=JxB.get_line2d(xz, dir, prm, norm);
-dvp=divP.get_line2d(xz, dir, prm, norm);
-vlxb=VlxB.get_line2d(xz, dir, prm, norm);
-vhxb=VhxB.get_line2d(xz, dir, prm, norm);
-dj=dJ.get_line2d(xz, dir, prm, norm);
+if cmpt == 'x'
+    E = E.x;
+    JxB = JxB.x;
+    divP = divP.x;
+    VlxB = VlxB.x;
+    VhxB = VhxB.x;
+    dJ = dJ.x;
+elseif cmpt == 'y'
+    E = E.y;
+    JxB = JxB.y;
+    divP = divP.y;
+    VlxB = VlxB.y;
+    VhxB = VhxB.y;
+    dJ = dJ.y;
+elseif cmpt == 'z'
+    E = E.z;
+    JxB = JxB.z;
+    divP = divP.z;
+    VlxB = VlxB.z;
+    VhxB = VhxB.z;
+    dJ = dJ.z;
+else
+    error('Parameters error!');
+end
 
-eee=eee.lz;
-jxb=jxb.lz;
-dvp=dvp.lz;
-vlxb=vlxb.lz;
-vhxb=vhxb.lz;
-dj=dj.lz;
 
-% eee=E.z(:,pxz-dxz:pxz+dxz);
-% vxb=vxB.z(:,pxz-dxz:pxz+dxz);
-% dvp=divP.z(:,pxz-dxz:pxz+dxz);
-% vpv=nvv.z(:,pxz-dxz:pxz+dxz);
-% vpt=nvt.z(:,pxz-dxz:pxz+dxz);
-% eee=sum(eee,2);
-% vxb=sum(vxb,2);
-% dvp=sum(dvp,2);
-% vpv=sum(vpv,2);
-% vpt=sum(vpt,2);
+if dir == 0
+    sdir = 'z';
+    xlab = 'X [c/\omega_{pi}]';
+    ll = prm.value.lx;
+    lp = prm.value.lz;
+    [~, xz] = min(abs(prm.value.lz - xz));
+    eee = mean(E(xz-dd:xz+dd, :), 1);
+    jxb = mean(JxB(xz-dd:xz+dd, :), 1);
+    dvp = mean(divP(xz-dd:xz+dd, :), 1);
+    vlxb = mean(VlxB(xz-dd:xz+dd, :), 1);
+    vhxb = mean(VhxB(xz-dd:xz+dd, :), 1);
+    dj = mean(dJ(xz-dd:xz+dd, :), 1);
+elseif dir == 1
+    sdir = 'x';
+    xlab = 'Z [c/\omega_{pi}]';
+    ll = prm.value.lz;
+    lp = prm.value.lx;
+    [~, xz] = min(abs(prm.value.lx - xz));
+    eee = mean(E(:, xz-dd:xz+dd), 2);
+    jxb = mean(JxB(:, xz-dd:xz+dd), 2);
+    dvp = mean(divP(:, xz-dd:xz+dd), 2);
+    vlxb = mean(VlxB(:, xz-dd:xz+dd), 2);
+    vhxb = mean(VhxB(:, xz-dd:xz+dd), 2);
+    dj = mean(dJ(:, xz-dd:xz+dd), 2);
+else
+    error('Parameters error!');
+end
 
 %% smooth data
-eee0=eee;
-jxb0=jxb;
-dvp0=dvp;
-vlxb0=vlxb;
-vhxb0=vhxb;
-dj0=dj;
-
-eee=smoothdata(eee0,'movmean',5);
-jxb=smoothdata(jxb0,'movmean',5);
-dvp=smoothdata(dvp0,'movmean',5);
-vlxb=smoothdata(vlxb0,'movmean',5);
-vhxb=smoothdata(vhxb0,'movmean',5);
-dj=smoothdata(dj0,'movmean',5);
-
-
-
+eee=smoothdata(eee,'movmean',nn);
+jxb=smoothdata(jxb,'movmean',nn);
+dvp=smoothdata(dvp,'movmean',nn);
+vlxb=smoothdata(vlxb,'movmean',nn);
+vhxb=smoothdata(vhxb,'movmean',nn);
+dj=smoothdata(dj,'movmean',nn);
 tot=jxb+dvp+vlxb+vhxb+dj;
 % tot=smoothdata(tot);
+
+
 %% figure
-ll=prm.value.lz;
 figure;
-plot(ll,eee,'-k','LineWidth',2); hold on
-plot(ll,tot,'--k','LineWidth',2);
-plot(ll,jxb,'-r','LineWidth',2);
-plot(ll,dvp,'-g','LineWidth',2);
-plot(ll,vlxb,'-b','LineWidth',2);
-plot(ll,vhxb,'-m','LineWidth',2);
-plot(ll,dj,'-y','LineWidth',2);
+plot(ll,eee/norm,'-k','LineWidth',2); hold on
+plot(ll,tot/norm,'--k','LineWidth',2);
+plot(ll,jxb/norm,'-r','LineWidth',2);
+plot(ll,dvp/norm,'-g','LineWidth',2);
+plot(ll,vlxb/norm,'-b','LineWidth',2);
+plot(ll,vhxb/norm,'-m','LineWidth',2);
+plot(ll,dj/norm,'-y','LineWidth',2);
 xlim(xrange);
-legend('E','Sum','J\times B/eN','-\nabla \cdot P_e/eN','-(Nih/N)(Vih\times B)','-(Nic/N)(Vic\times B)','(m_e/e^2n)\partial J/\partial t','Location','Best')
-xlabel('Z [c/\omega_{pi}]');
-ylabel('Ez');
-% title(['\Omega_{ci}t=',num2str(tt)]);
+legend('E','Sum','J\times B/eN','-\nabla \cdot P_e/eN','-(Nih/N)(Vih\times B)','-(Nic/N)(Vic\times B)','(m_e/e^2n)\partial J/\partial t',...
+    'Location','Best','Box','off');
+xlabel(xlab);
+ylabel(['E_',cmpt]);
+title(['\Omega_{ci}t=',num2str(tt),', profiles  ', sdir,' = ',num2str(round(lp(xz)))]);
 set(gca,'FontSize',12);
 cd(outdir);
-% print('-dpng','-r300',['Ey_cold_ion_t',num2str(tt),'_x',num2str(xz),'.png']);
+% print('-dpng','-r300',['E',cmpt,'_Ohm_t',num2str(tt),'_x=',num2str(round(lp(xz))),'.png']);
 
 
 function [JxB, divP, VlxB, VhxB, dJ] = calc_Ohm_law_with_cold_ions(prm, tt, dt)
@@ -113,7 +128,6 @@ JxB=slj.Vector(jb);
 
 %% nabla dot Pe term
 P=prm.read('Pe',tt);
-q=prm.value.qe;
 dP=P.divergence(prm);
 divP.x=-dP.x./(q*N.value);
 divP.y=-dP.y./(q*N.value);
@@ -141,13 +155,12 @@ vb.z=(-B.x.*V.y+B.y.*V.x).*Nh;
 VhxB=slj.Vector(vb);
 
 %% electron inertial term
-q=prm.value.qi;
 m=prm.value.me;
 Jp=prm.read('J', tt-dt);
 Jn=prm.read('J', tt+dt);
-dJ.x=(Jn.x-Jp.x)*dt*2*prm.value.wci;
-dJ.y=(Jn.y-Jp.y)*dt*2*prm.value.wci;
-dJ.z=(Jn.z-Jp.z)*dt*2*prm.value.wci;
+dJ.x=(Jn.x-Jp.x)*prm.value.wci/(2*dt);
+dJ.y=(Jn.y-Jp.y)*prm.value.wci/(2*dt);
+dJ.z=(Jn.z-Jp.z)*prm.value.wci/(2*dt);
 dJ.x=(dJ.x*m)./(q*q*N.value);
 dJ.y=(dJ.y*m)./(q*q*N.value);
 dJ.z=(dJ.z*m)./(q*q*N.value);

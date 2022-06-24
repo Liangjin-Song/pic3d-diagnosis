@@ -8,7 +8,7 @@ outdir='E:\Asym\cold2\out\Energy\Region0';
 prm=slj.Parameters(indir,outdir);
 
 dt=0.1;
-tt=0.1:dt:60;
+tt=30:dt:40;
 name='h';
 
 xrange=[tt(1)-dt,tt(end)];
@@ -76,5 +76,5 @@ set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-print('-dpng','-r300',[sfx,'_total_energy_as_time_dt=',num2str(dt),'_whole_space.png']);
+% print('-dpng','-r300',[sfx,'_total_energy_as_time_dt=',num2str(dt),'_whole_space.png']);
 

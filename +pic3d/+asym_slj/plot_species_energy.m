@@ -1,9 +1,9 @@
 % function plot_species_energy()
 clear;
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Global';
+indir='E:\Asym\cold2\data';
+outdir='E:\Asym\cold2\out\Global';
 prm=slj.Parameters(indir,outdir);
-xrange=[0 100];
+xrange=[0 60];
 t0=1;
 %% plot energy
 h1=figure;
@@ -16,7 +16,7 @@ plot(tt,en(:,4),'m','LineWidth',2);
 plot(tt,en(:,5),'r','LineWidth',2);
 plot(tt,en(:,6),'k','LineWidth',2); hold off
 xlim(xrange);
-legend('E','B','Electron','Hot Ion','Cold Ion','Total Energy');
+legend('E','B','Electron','Hot Ion','Cold Ion','Total Energy', 'Box', 'off');
 xlabel('\Omega_{ci}t');
 ylabel('Energy');
 set(gca,'FontSize',14);
@@ -51,7 +51,7 @@ plot(tt,de(:,3)/norm,'b','LineWidth',2);
 plot(tt,de(:,4)/norm,'m','LineWidth',2);
 plot(tt,de(:,5)/norm,'r','LineWidth',2); hold off
 xlim([0,tt(end)]);
-legend('B','Electron','Hot Ion','Cold Ion','Location','Best');
+legend('B','Electron','Hot Ion','Cold Ion','Location','Best', 'Box', 'off');
 xlabel('\Omega_{ci}t');
 ylabel('\Delta E');
 xlim(xrange);
@@ -64,11 +64,11 @@ rde = zeros(size(de,1),3);
 rde(:,1) = de(:,3)./abs(de(:,2));
 rde(:,2) = de(:,4)./abs(de(:,2));
 rde(:,3) = de(:,5)./abs(de(:,2));
-plot(tt, rde(:,1), 'r', 'LineWidth', 2); hold on
-plot(tt, rde(:,2), 'b', 'LineWidth', 2);
-plot(tt, rde(:,3), 'g', 'LineWidth', 2);
+plot(tt, rde(:,1), 'b', 'LineWidth', 2); hold on
+plot(tt, rde(:,2), 'm', 'LineWidth', 2);
+plot(tt, rde(:,3), 'r', 'LineWidth', 2);
 hold off;
-legend('Electron', 'Hot Ion', 'Cold Ion', 'Location', 'Best');
+legend('Electron', 'Hot Ion', 'Cold Ion', 'Location', 'Best', 'Box', 'off');
 xlabel('\Omega_{ci}t');
 ylabel('\Delta E/\Delta E_B');
 xlim(xrange);
@@ -94,7 +94,7 @@ plot(tt,aEe,'b','LineWidth',2); hold on
 plot(tt,aEi,'m','LineWidth',2);
 plot(tt,aEh,'r','LineWidth',2);hold off
 xlim([0,tt(end)]);
-legend('Electron','Hot Ion','Cold Ion','Location','Best');
+legend('Electron','Hot Ion','Cold Ion','Location','Best', 'Box', 'off');
 xlabel('\Omega_{ci}t');
 ylabel('dE_{aver}');
 xlim(xrange);

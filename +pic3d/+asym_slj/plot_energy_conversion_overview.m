@@ -1,11 +1,11 @@
 % function plot_energy_conversion_overview(name)
-% clear;
+clear;
 %% parameters
 indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Global';
+outdir='E:\Asym\cold2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
-tt=28;
+tt=39;
 name='h';
 
 nt=length(tt);
@@ -37,15 +37,15 @@ for t=1:nt
     ss=prm.read('stream',tt(t));
     %% calculation
 %     JE=E.dot(V);
-    JE=slj.Scalar(V.z.*E.z);
+    JE=slj.Scalar(V.y.*E.y);
     JE=JE*N;
     if name == 'e'
         JE=slj.Scalar(-JE.value);
     end
     f=figure('Visible', extra.Visible);
-    slj.Plot.overview(N.value.*V.z.*E.z, ss, prm.value.lx, prm.value.lz, norm, extra);
-    title(['J',sfx,'z\cdot Ez,  \Omega_{ci}t = ',num2str(tt(t))]);
+    slj.Plot.overview(JE, ss, prm.value.lx, prm.value.lz, norm, extra);
+    title(['J',sfx,'y\cdot Ey,  \Omega_{ci}t = ',num2str(tt(t))]);
     cd(outdir);
-    print(f,'-dpng','-r300',['J',sfx,'z_dot_Ez_t',num2str(tt(t)),'.png']);
-    close(gcf);
+%     print(f,'-dpng','-r300',['J',sfx,'y_dot_Ey_t',num2str(tt(t)),'.png']);
+%     close(gcf);
 end

@@ -1,20 +1,20 @@
 % function plot_momentum_equation_velocity
 clear;
 %% parameters
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Tmp';
+indir='E:\Asym\cold2\data';
+outdir='E:\Asym\cold2\out\Tmp';
 prm=slj.Parameters(indir,outdir);
 
-tt=24;
-dt=0.5;
+tt=34;
+dt=0.1;
 name='h';
 
 q=prm.value.qi;
 m=prm.value.mi;
 
-norm=1; % prm.value.vA;
-xz=0;
-dir=0;
+norm=prm.value.vA;
+xz=40;
+dir=1;
 
 %% figure proterty
 xrange=[-5,5];
@@ -44,10 +44,10 @@ vgv=vdv.get_line2d(xz, dir, prm, norm);
 dvp=divP.get_line2d(xz, dir, prm, norm);
 vcb=evb.get_line2d(xz, dir, prm, norm);
 
-dpt=dpt.lx;
-vgv=vgv.lx;
-dvp=dvp.lx;
-vcb=vcb.lx;
+dpt=dpt.ly;
+vgv=vgv.ly;
+dvp=dvp.ly;
+vcb=vcb.ly;
 
 % eee=E.z(:,pxz-dxz:pxz+dxz);
 % vxb=vxB.z(:,pxz-dxz:pxz+dxz);
@@ -74,7 +74,7 @@ vcb=smoothdata(vcb0,'movmean',40);
 tot=vgv+dvp+vcb;
 % tot=smoothdata(tot);
 %% figure
-ll=prm.value.lx;
+ll=prm.value.lz;
 figure;
 plot(ll,dpt,'-k','LineWidth',2); hold on
 plot(ll,tot,'--k','LineWidth',2);
@@ -82,10 +82,11 @@ plot(ll,vgv,'-r','LineWidth',2);
 plot(ll,dvp,'-g','LineWidth',2);
 plot(ll,vcb,'-b','LineWidth',2);
 xlim(xrange);
-legend('\partial V/\partial t','Sum','-V\cdot\nabla V',' -\nabla \cdot P/mn','q/m (E + V \times B)','Location','Best')
+legend('\partial V/\partial t','Sum','-V\cdot\nabla V',' -\nabla \cdot P/mn','q/m (E + V \times B)',...
+    'Location','Best','Box','off');
 xlabel('X [c/\omega_{pi}]');
-ylabel('\partial Vz/\partial t');
+ylabel('\partial Vicy/\partial t');
 title(['\Omega_{ci}t=',num2str(tt), ', profiles x = ',num2str(xz)]);
 set(gca,'FontSize',16);
 cd(outdir);
-print('-dpng','-r300',['Vz_cold_ion_t',num2str(tt),'_x',num2str(xz),'_momentum.png']);
+% print('-dpng','-r300',['Vz_cold_ion_t',num2str(tt),'_x',num2str(xz),'_momentum.png']);

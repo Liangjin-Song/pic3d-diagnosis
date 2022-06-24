@@ -1,16 +1,16 @@
 % function plot_thermal_energy_overview(name)
 % clear;
 %%
-indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1v2\out\Overview';
+indir='E:\Asym\cold2\data';
+outdir='E:\Asym\cold2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
-tt=20:60;
+tt=40;
 name='h';
 
 nt=length(tt);
 
-show=false;
+show=true;
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
@@ -29,7 +29,7 @@ elseif name == 'e'
     sfx='e';
 end
 
-norm=prm.value.n0*tm/prm.value.coeff;
+norm=prm.value.nhm*tm/prm.value.coeff;
 % norm=1;
 
 for t=1:nt
@@ -40,7 +40,9 @@ for t=1:nt
     ss=prm.read('stream',tt(t));
     %% calculation
     K=V.sqre();
-    T=slj.Scalar((P.xx+P.yy+P.zz).*0.5 + 0.5.*m.*N.value.*K.value);
+    T=(P.xx+P.yy+P.zz).*0.5 + 0.5.*m.*N.value.*K.value;
+    Ts = T./T;
+    T = T + Ts - 1;
 
     %% figure
     figure('Visible', show);
@@ -48,7 +50,7 @@ for t=1:nt
     title(['K',sfx,' + U',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
     cd(outdir);
     print('-dpng','-r300',['KU',sfx,'_t',num2str(tt(t)),'.png']);
-    close(gcf);
+%     close(gcf);
 end
 
 

@@ -5,7 +5,7 @@ outdir='E:\Asym\cold2\out\Energy\Region0';
 prm=slj.Parameters(indir,outdir);
 
 dt=0.1;
-tt=20:dt:60;
+tt=0:dt:60;
 name='h';
 
 if name == 'l'
@@ -25,7 +25,9 @@ else
 end
 
 % norm=prm.value.qi*prm.value.n0*prm.value.vA*prm.value.vA;
-norm = 1;
+% norm = 1;
+norm=load([indir,'\energy.dat']);
+norm=norm(1,5);
 
 %% the loop
 nt=length(tt);
@@ -79,21 +81,44 @@ for t=1:nt
     P1odiagV = pressure_work(odiag, V, prm);
 
     %% the sum
-    rate(1,t)=sum(PV,'all');
-    rate(2,t)=sum(P1V,'all');
-    rate(3,t)=sum(pV,'all');
-    rate(4,t)=sum(P1diagV,'all');
-    rate(5,t)=sum(P1odiagV,'all');
+    ddt = dt./prm.value.wci;
+    PV=sum(PV,'all')*ddt;
+    P1V=sum(P1V,'all')*ddt;
+    pV=sum(pV,'all')*ddt;
+    P1diagV=sum(P1diagV,'all')*ddt;
+    P1odiagV=sum(P1odiagV,'all')*ddt;
+
+    if t == 1
+        r1=0;
+        r2=0;
+        r3=0;
+        r4=0;
+        r5=0;
+    else
+        r1=rate(1, t-1);
+        r2=rate(2, t-1);
+        r3=rate(3, t-1);
+        r4=rate(4, t-1);
+        r5=rate(5, t-1);
+    end
+
+    rate(1,t)=r1 + PV;
+    rate(2,t)=r2 + P1V;
+    rate(3,t)=r3 + pV;
+    rate(4,t)=r4 + P1diagV;
+    rate(5,t)=r5 + P1odiagV;
 end
+
 rate0=rate;
 rate = rate0/norm;
+
 %% figure
 f1=figure;
 plot(tt, rate(1, :), '-k', 'LineWidth', 2); hold on
 plot(tt, rate(2, :), '-b', 'LineWidth', 2);
 plot(tt, rate(3, :), '-r', 'LineWidth', 2);
 % plot(tt, rate(2, :) + rate(3,:), '--g', 'LineWidth', 2);
-legend('(P\cdot\nabla)\cdot V', '(P''\cdot\nabla)\cdot V', 'p\nabla\cdot V', 'Location', 'Best','Box','off');
+legend('\int_0^t(P\cdot\nabla)\cdot V dt', '\int_0^t(P''\cdot\nabla)\cdot V dt', '\int_0^t p\nabla\cdot V dt', 'Location', 'Best','Box','off');
 % xlim(xrange);
 xlabel('\Omega_{ci} t');
 set(gca,'FontSize',14);
@@ -103,7 +128,7 @@ plot(tt, rate(2, :), '-k', 'LineWidth', 2); hold on
 plot(tt, rate(4, :), '-b', 'LineWidth', 2);
 plot(tt, rate(5, :), '-r', 'LineWidth', 2);
 % plot(tt, rate(4, :) + rate(5,:), '--g', 'LineWidth', 2);
-legend('(P''\cdot\nabla)\cdot V', '(P''_{diag}\cdot\nabla)\cdot V', '(P''_{offdiag}\cdot\nabla)\cdot V', 'Location', 'Best','Box','off');
+legend('\int_0^t (P''\cdot\nabla)\cdot V dt', '\int_0^t (P''_{diag}\cdot\nabla)\cdot V dt', '\int_0^t (P''_{offdiag}\cdot\nabla)\cdot V dt', 'Location', 'Best','Box','off');
 % xlim(xrange);
 xlabel('\Omega_{ci} t');
 set(gca,'FontSize',14);
@@ -114,15 +139,16 @@ plot(tt, -rate(3, :), '-b', 'LineWidth', 2);
 plot(tt, -rate(4, :), '-m', 'LineWidth', 2);
 plot(tt, -rate(5, :), '-r', 'LineWidth', 2);
 % plot(tt, rate(3, :) + rate(4,:) + rate(5,:), '--g', 'LineWidth', 2);
-legend('-(P\cdot\nabla)\cdot V', '-p\nabla\cdot V', '-(P''_{diag}\cdot\nabla)\cdot V', '-(P''_{offdiag}\cdot\nabla)\cdot V', 'Location', 'Best','Box','off');
+legend('-\int_0^t (P\cdot\nabla)\cdot V dt', '-\int_0^t p\nabla\cdot V dt', '-\int_0^t (P''_{diag}\cdot\nabla)\cdot V dt', '-\int_0^t (P''_{offdiag}\cdot\nabla)\cdot V dt', 'Location', 'Best','Box','off');
 % xlim(xrange);
 xlabel('\Omega_{ci} t');
+ylabel('\DeltaU_{ic}');
 set(gca,'FontSize',14);
 
 cd(outdir);
-print(f1,'-dpng','-r300',[sfx,'_pressure_work1_as_time_dt=',num2str(dt),'_whole_space.png']);
-print(f2,'-dpng','-r300',[sfx,'_pressure_work2_as_time_dt=',num2str(dt),'_whole_space.png']);
-print(f3,'-dpng','-r300',[sfx,'_pressure_work3_as_time_dt=',num2str(dt),'_whole_space.png']);
+print(f1,'-dpng','-r300',[sfx,'_pressure_work1_integral_as_time_dt=',num2str(dt),'_whole_space.png']);
+print(f2,'-dpng','-r300',[sfx,'_pressure_work2_integral_as_time_dt=',num2str(dt),'_whole_space.png']);
+print(f3,'-dpng','-r300',[sfx,'_pressure_work3_integral_as_time_dt=',num2str(dt),'_whole_space.png']);
 
 
 

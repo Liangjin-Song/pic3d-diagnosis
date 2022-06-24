@@ -12,7 +12,7 @@ prm=slj.Parameters(indir,outdir);
 %% variable information
 name='Nh';
 tt=40;
-norm=prm.value.n0;
+norm=prm.value.nhm;
 
 %% figure properties
 extra=[];
@@ -33,4 +33,4 @@ f=slj.Plot();
 f.overview(N,ss,prm.value.lx,prm.value.lz,norm,extra);
 % f.png(prm,[name,'_t',num2str(tt),'_range'])
 cd(outdir);
-% print('-dpng','-r300',[name,'_t',num2str(tt),'.png']);
+print('-dpng','-r300',[name,'_t',num2str(tt),'.png']);

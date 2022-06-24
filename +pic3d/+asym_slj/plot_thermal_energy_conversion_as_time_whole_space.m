@@ -7,6 +7,7 @@ prm=slj.Parameters(indir,outdir);
 
 dt=0.1;
 tt=20:dt:60;
+tt=29;
 name='h';
 
 if name == 'l'
@@ -73,12 +74,12 @@ rate = rate/norm;
 f=figure;
 plot(tt, rate(1,:), '-k', 'LineWidth', 2); hold on
 plot(tt, rate(2,:), '-b', 'LineWidth', 2);
-plot(tt, rate(3,:), '-r', 'LineWidth', 2);
+plot(tt, -rate(3,:), '-r', 'LineWidth', 2);
 
 
 %% set figure
-legend('\partial U/\partial t', '(\nabla\cdot P) \cdot V', '(P\cdot\nabla)\cdot V', 'Location', 'Best','Box','off');
-xlim(xrange);
+legend('\partial U/\partial t', '(\nabla\cdot P) \cdot V', '-(P\cdot\nabla)\cdot V', 'Location', 'Best','Box','off');
+% xlim(xrange);
 xlabel('\Omega_{ci} t');
 set(get(gca, 'YLabel'), 'String', ['\partial U',sfx,'/\partial t']);
 set(gca,'FontSize',14);

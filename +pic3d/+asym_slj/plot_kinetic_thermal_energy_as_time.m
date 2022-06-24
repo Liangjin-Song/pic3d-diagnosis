@@ -5,11 +5,11 @@
 clear;
 %% parameters
 indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Global';
+outdir='E:\Asym\cold2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
 dt = 1;
-tt=0:dt:89;
+tt=0:dt:60;
 name='h';
 
 norm=load([indir,'\energy.dat']);
@@ -60,7 +60,7 @@ plot(tt, rate(1,:), '-b', 'LineWidth', 2);
 hold on
 plot(tt, rate(2,:), '-r', 'LineWidth', 2);
 plot(tt, rate(3,:), '-k', 'LineWidth', 2);
-legend('K', 'U', 'Sum', 'Location', 'Best');
+legend('K', 'U', 'Sum', 'Location', 'Best','Box','off');
 xlim(xrange);
 xlabel('\Omega_{ci} t');
 ylabel(['E_{',sfx,'}']);

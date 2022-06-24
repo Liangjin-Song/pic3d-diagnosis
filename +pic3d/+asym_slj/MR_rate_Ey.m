@@ -10,10 +10,11 @@ indir='E:\Asym\cold2\data';
 outdir='E:\Asym\cold2\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:70;
+dt=0.5;
+tt=0:dt:70;
 % the box size
-nx=5;
-nz=5;
+nx=10;
+nz=10;
 
 %% the loop
 nt=length(tt);
@@ -28,22 +29,22 @@ for t=1:nt
     %% the current sheet index in z-direction
     [~,inz]=min(abs(B.x));
     %% the bz value at the current sheet
-    lbz=zeros(1,prm.value.nz);
-    for i=1:prm.value.nx
-        lbz(i)=B.z(inz(i),i);
-    end
+%     lbz=zeros(1,prm.value.nz);
+%     for i=1:prm.value.nx
+%         lbz(i)=B.z(inz(i),i);
+%     end
     %% find the RF position
-    [~,lrf]=max(lbz);
-    [~,rrf]=min(lbz);
+%     [~,lrf]=max(lbz);
+%     [~,rrf]=min(lbz);
     %% the x-line position
-    [~,ix]=min(abs(lbz(lrf:rrf)));
-    ix=ix+lrf-1;
+%     [~,ix]=min(abs(lbz(lrf:rrf)));
+%     ix=ix+lrf-1;
     % ix=prm.value.nx/2+20;
-    iz=inz(ix);
-%     ix=prm.value.nx/2;
+%     iz=inz(ix);
+    ix=prm.value.nx/2;
 %     iz=prm.value.nz/2;
-    iix(t)=ix;
-    iiz(t)=iz;
+    lbx = B.x(:,ix);
+    [~,iz]=min(abs(lbx));
     %% the reconnection electric field in a box
     Ey=Ey(iz-nz:iz+nz,ix-nx:ix+nx);
     rate(t)=mean(Ey(:));

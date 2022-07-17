@@ -1,13 +1,12 @@
 % function plot_thermal_energy_conversion_as_time
 clear;
 %% parameters
-indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Energy\Region0';
+indir='E:\Asym\cold2v2\data';
+outdir='E:\Asym\cold2v2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
 dt=0.1;
 tt=20:dt:60;
-tt=29;
 name='h';
 
 if name == 'l'

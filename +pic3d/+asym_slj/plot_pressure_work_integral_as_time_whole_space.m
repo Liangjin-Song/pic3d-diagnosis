@@ -1,12 +1,13 @@
 clear;
 %% parameters
-indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Energy\Region0';
+indir='E:\Asym\cold2v2\data';
+outdir='E:\Asym\cold2v2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
 dt=0.1;
 tt=0:dt:60;
 name='h';
+xrange=[20,60];
 
 if name == 'l'
     sfx='ih';
@@ -129,7 +130,7 @@ plot(tt, rate(4, :), '-b', 'LineWidth', 2);
 plot(tt, rate(5, :), '-r', 'LineWidth', 2);
 % plot(tt, rate(4, :) + rate(5,:), '--g', 'LineWidth', 2);
 legend('\int_0^t (P''\cdot\nabla)\cdot V dt', '\int_0^t (P''_{diag}\cdot\nabla)\cdot V dt', '\int_0^t (P''_{offdiag}\cdot\nabla)\cdot V dt', 'Location', 'Best','Box','off');
-% xlim(xrange);
+xlim(xrange);
 xlabel('\Omega_{ci} t');
 set(gca,'FontSize',14);
 

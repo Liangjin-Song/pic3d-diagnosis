@@ -2,18 +2,18 @@
 % written by Liangjin Song on 20220330 at Nanchang University
 clear;
 %% parameters
-indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Article';
+indir='E:\Asym\cold2v2\data';
+outdir='E:\Asym\cold2v2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
-tt=34;
+tt=39;
 dt=0.1;
 
 q=prm.value.qi;
 m=prm.value.mi;
 
 norm=prm.value.vA;
-xz=30;
+xz=40;
 dir=1;
 pxz=prm.value.nz/2;
 dd=40;

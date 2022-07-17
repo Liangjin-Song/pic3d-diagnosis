@@ -1,8 +1,8 @@
 % function plot_temperature_overview(name)
 clear;
 %% 
-indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Article';
+indir='E:\Asym\cold2v2\data';
+outdir='E:\Asym\cold2v2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
 

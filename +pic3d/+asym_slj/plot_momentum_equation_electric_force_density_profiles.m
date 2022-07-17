@@ -4,11 +4,11 @@
 %%
 clear;
 %% parameters
-indir='E:\Asym\dst1v2\data';
-outdir='E:\Asym\dst1\out\Article';
+indir='E:\Asym\cold2v2\data';
+outdir='E:\Asym\cold2v2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
-tt=30;
+tt=39;
 dt=0.1;
 name='h';
 

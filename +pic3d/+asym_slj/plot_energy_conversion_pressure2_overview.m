@@ -44,26 +44,32 @@ for t=1:nt
     V=prm.read(['V',name],tt(t));
     ss=prm.read('stream',tt(t));
     %% calculation
-    divPV=P.divergence(prm);
-    divPVx= slj.Scalar(divPV.x.*V.x);
-    divPVy= slj.Scalar(divPV.y.*V.y);
-    divPVz= slj.Scalar(divPV.z.*V.z);
-    divPV = slj.Scalar(divPV.x.*V.x + divPV.y.*V.y + divPV.z.*V.z);
+    gV = slj.Scalar(V.x);
+    gV = gV.gradient(prm);
+    PV1 = P.xx .* gV.x + P.xy .* gV.y + P.xz .* gV.z;
+    gV = slj.Scalar(V.y);
+    gV = gV.gradient(prm);
+    PV2 = P.xy .* gV.x + P.yy .* gV.y + P.yz .* gV.z;
+    gV = slj.Scalar(V.z);
+    gV = gV.gradient(prm);
+    PV3 = P.xz .* gV.x + P.yz .* gV.y + P.zz .* gV.z;
+    PV = PV1 + PV2 + PV3;
+    
     
     if cmpt == 'x'
-        fd = divPVx;
+        fd = -PV1;
     elseif cmpt == 'y'
-        fd = divPVy;
+        fd = -PV2;
     elseif cmpt == 'z'
-        fd = divPVz;
+        fd = -PV3;
     else
-        fd = divPV;
+        fd = -PV;
         cmpt = '';
     end
     
     f=figure;
-    slj.Plot.overview(fd.value/norm, ss, prm.value.lx, prm.value.lz, norm, extra);
-    title(['[(\nabla\cdot P)\cdot V]_', cmpt, ',  \Omega_{ci}t = ',num2str(tt(t))]);
+    slj.Plot.overview(fd/norm, ss, prm.value.lx, prm.value.lz, norm, extra);
+    title(['[(P\cdot\nabla)\cdot V]_', cmpt, ',  \Omega_{ci}t = ',num2str(tt(t))]);
     cd(outdir);
     
 end

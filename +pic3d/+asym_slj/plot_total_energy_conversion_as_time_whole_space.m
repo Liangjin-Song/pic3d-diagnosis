@@ -3,15 +3,15 @@
 %%
 clear;
 %% parameters
-indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Energy\Region0';
+indir='E:\Asym\cold2v2\data';
+outdir='E:\Asym\cold2v2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
 dt=0.1;
-tt=30:dt:40;
+tt=20:dt:60;
 name='h';
 
-xrange=[tt(1)-dt,tt(end)];
+xrange=[tt(1),tt(end)];
 
 if name == 'l'
     sfx='ih';
@@ -76,5 +76,5 @@ set(gca,'FontSize',14);
 
 %% save figure
 cd(outdir);
-% print('-dpng','-r300',[sfx,'_total_energy_as_time_dt=',num2str(dt),'_whole_space.png']);
+print('-dpng','-r300',[sfx,'_total_energy_as_time_dt=',num2str(dt),'_whole_space.png']);
 

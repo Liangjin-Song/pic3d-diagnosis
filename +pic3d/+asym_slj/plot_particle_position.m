@@ -4,8 +4,13 @@
 % sradius = 0;
 % id=spc.ring_particle_id(prm, 1, center, bradius, sradius);
 
-outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\Separatrix\Sphere\t=20';
-tt=0:50;
+outdir='E:\Asym\cold2v2\out\Kinetic';
+tt=0:60;
+
+prefix = 'PVh_';
+postfix = '_x800-1200_y418-661_z0-1';
+
+id = cid;
 
 aviname=[outdir,'\','particle_position.avi'];
 aviobj=VideoWriter(aviname);
@@ -16,7 +21,7 @@ figure;
 nt=length(tt);
 for t=1:nt
     time=tt(t);
-    name=['PVh_ts',num2str(time/prm.value.wci),'_x600-1400_y418-661_z0-1'];
+    name = [prefix, 'ts', num2str(time/prm.value.wci), postfix];
     
 %     f=figure;
     idd = slj.Plot.particle_position(prm, id, name, time);

@@ -11,7 +11,7 @@ outdir='E:\Asym\cold2v2\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
 dt=0.5;
-tt=0:dt:70;
+tt=0:dt:60;
 % the box size
 nx=10;
 nz=10;

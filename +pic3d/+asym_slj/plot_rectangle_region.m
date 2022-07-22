@@ -1,6 +1,6 @@
 clear;
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Ohm';
+indir='E:\Asym\cold2v2\data';
+outdir='E:\Asym\cold2v2\out\Kinetic';
 prm=slj.Parameters(indir,outdir);
 
 

@@ -13,11 +13,11 @@ dt=0.1;
 name='h';
 
 xz=40;
-dd = 10;
+dd = 30;
 dir=1;
-cmpt = 'z';
+cmpt = 'y';
 
-nm = 30;
+nm = 10;
 
 %% figure proterty
 xrange=[-4,3];

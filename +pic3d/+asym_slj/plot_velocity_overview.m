@@ -11,7 +11,7 @@ prm=slj.Parameters(indir,outdir);
 
 %% variable information
 name='Vh';
-tt=40;
+tt=34;
 % norm=prm.value.vA;
 % norm = 1;
 norm = prm.value.bm*prm.value.c./sqrt(prm.value.mi*prm.value.nhm);

@@ -2,12 +2,12 @@
 clear;
 %% 
 indir='E:\Asym\cold2v2\data';
-outdir='E:\Asym\cold2v2\out\Article';
+outdir='E:\Asym\cold2v2\out\Kinetic\Distribution\X-line';
 prm=slj.Parameters(indir,outdir);
 
 
 
-tt=40;
+tt=30;
 name='h';
 disp(name);
 

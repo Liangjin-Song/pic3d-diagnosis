@@ -1,8 +1,8 @@
 %% the loop for particles id, and plot the particles' information along the particles' trajectory
 clear;
 %% parameters
-indir = 'E:\Asym\dst1\data';
-outdir = 'E:\Asym\dst1\out\Kinetic\High_Energy';
+indir = 'E:\Asym\cold2v2\data';
+outdir = 'E:\Asym\cold2v2\out\Kinetic\trajectory';
 prm=slj.Parameters(indir,outdir);
 disp(outdir);
 
@@ -10,7 +10,7 @@ disp(outdir);
 file = 'id.txt';
 
 %% the time interval
-trange=[0, 100];
+trange=[0, 55];
 
 time.tt=20;
 t1=30;
@@ -21,8 +21,8 @@ t0=20;
 time.t0=t0/prm.value.wci+1;
 
 avit1=0;
-avit2=80;
-avirange=(avit1/prm.value.wci+1):100:(avit2/prm.value.wci+1);
+avit2=50;
+avirange=(avit1*100+1):10:(avit2*100+1);
 avixrange=[0,50];
 aviyrange=[-10,10];
 
@@ -35,12 +35,12 @@ ids = uint64(load(file));
 norm=prm.value.mi*prm.value.vA*prm.value.vA;
 
 %% show figure or not
-show = false;
+show = true;
 save = true;
 
 %% loop
 nid = length(ids);
-for i=14:nid
+for i=1:nid
     %% read data
     id = ids(i);
     cd(indir);
@@ -50,15 +50,15 @@ for i=14:nid
 
     %% set the directory
     cd(outdir);
-    slj.Utility.exist_directory(num2str(id));
-    iddir=[outdir,'\', num2str(id)];
-    % iddir = outdir;
+    % slj.Utility.exist_directory(num2str(id));
+    % iddir=[outdir,'\', num2str(id)];
+    iddir = outdir;
 
     %% plot figure
     cd(outdir);
     plot_trajectory_information(prm, name, prt, norm, spc, trange, show, iddir, save);
     % plot_particle_information(prm, prt, spc, norm, time, show, iddir, save);
-    plot_trajectory_avi(prm, prt, name, norm, avirange, avixrange, aviyrange, show, iddir);
+    % plot_trajectory_avi(prm, prt, name, norm, avirange, avixrange, aviyrange, show, iddir);
 end
 
 

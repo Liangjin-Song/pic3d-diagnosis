@@ -5,12 +5,12 @@
 %%
 clear;
 %%
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Kinetic\RF';
+indir='E:\Asym\cold2v2\data';
+outdir='E:\Asym\cold2v2\out\Kinetic\Particles\1963555171';
 prm=slj.Parameters(indir,outdir);
 %% particle's ID
 %% id1='295320754';
-id = '213477796';
+id = '1963555171';
 spc='h';
 spcs='ic';
 

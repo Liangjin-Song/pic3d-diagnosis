@@ -6,27 +6,29 @@
 clear;
 %% parameters
 % directory
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\t=13';
+indir='E:\Asym\cold2v2\data';
+outdir='E:\Asym\cold2v2\out\Kinetic\Distribution\X-line';
 prm=slj.Parameters(indir, outdir);
 % the file name of distribution function
 % name='PVh_ts20800_x600-1400_y418-661_z0-1';
-tt=40;
+tt=30;
+is_save = 1;
 isprt = 0;
-spn = 'l';
+spn = 'h';
 id = '74283363';
 nt=length(tt);
 for t=1:nt
-    name=['PV',spn,'_ts',num2str(tt(t)/prm.value.wci),'_x600-1400_y418-661_z0-1'];
+    name=['PV',spn,'_ts',num2str(tt(t)/prm.value.wci),'_x800-1200_y418-661_z0-1'];
+    % name=['PV',spn,'_ts',num2str(tt(t)/prm.value.wci),'_x1600-2000_y418-661_z0-1'];
     % velocity direction
     dir=1:3;
     % position range
-    xrange=[27.8,28.3];
-    zrange=[1.8,2.3];
+    xrange=[24.5,25.5];
+    zrange=[0.5,4.5];
     yrange=[-100,100];
     precision=80;
     %% the figure style
-    range=5;
+    range=3;
     extra.colormap='moon';
     extra.xrange=[-range,range];
     extra.yrange=[-range,range];
@@ -88,10 +90,11 @@ for t=1:nt
         end
         %% plot the particle's position
         
-        
-%         f.png(prm,[name,suffix,'_sub',num2str(xrange(1)),'-',num2str(xrange(2)),...
-%             '_',num2str(yrange(1)),'-',num2str(yrange(2)),...
-%             '_',num2str(zrange(1)),'-',num2str(zrange(2))]);
-%         f.close();
+        if is_save == 1
+            f.png(prm,[name,suffix,'_sub',num2str(xrange(1)),'-',num2str(xrange(2)),...
+                '_',num2str(yrange(1)),'-',num2str(yrange(2)),...
+                '_',num2str(zrange(1)),'-',num2str(zrange(2))]);
+        end
+        %         f.close();
     end
 end

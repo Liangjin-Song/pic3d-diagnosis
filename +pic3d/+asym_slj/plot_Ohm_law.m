@@ -6,20 +6,20 @@ indir='E:\Asym\cold2v2\data';
 outdir='E:\Asym\cold2v2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
-tt=39;
+tt=34;
 dt=0.1;
 
 q=prm.value.qi;
 m=prm.value.mi;
 
 norm=prm.value.vA;
-xz=40;
+xz=45;
 dir=1;
 pxz=prm.value.nz/2;
 dd=40;
 nn=10;
 
-cmpt = 'z';
+cmpt = 'y';
 
 %% figure proterty
 xrange=[-5,5];

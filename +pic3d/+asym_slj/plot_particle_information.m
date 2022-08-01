@@ -2,10 +2,10 @@
 %% writen by Liangjin Song on 20210412
 %% 
 clear;
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Kinetic\Trajectory\Cold_Ions\type2\1';
+indir='E:\Asym\cold2v2\data';
+outdir='E:\Asym\cold2v2\out\Kinetic\Particles\2075330111';
 prm=slj.Parameters(indir,outdir);
-id='570987588';
+id='2075330111';
 name=['trajh_id',id];
 
 %% energy normalization

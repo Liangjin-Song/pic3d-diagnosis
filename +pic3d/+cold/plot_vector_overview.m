@@ -5,12 +5,12 @@
 %%
 clear;
 %% parameters
-indir='E:\PIC\Cold-Ions\mie100\data';
-outdir='E:\PIC\Cold-Ions\mie100\out\Overview\range';
+indir='E:\Asym\cold2v2\data';
+outdir='E:\Asym\cold2v2\out';
 prm=slj.Parameters(indir,outdir);
 
 %% variable information
-name='E';
+name='Vh';
 tt=30;
 norm=prm.value.vA;
 % norm = 1;

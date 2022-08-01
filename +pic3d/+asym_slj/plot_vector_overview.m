@@ -5,12 +5,12 @@
 %%
 clear;
 %% parameters
-indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Article';
+indir='E:\Asym\cold2v2\data';
+outdir='E:\Asym\cold2v2\out\';
 prm=slj.Parameters(indir,outdir);
 
 %% variable information
-name='Vh';
+name='E';
 tt=34;
 norm=prm.value.vA;
 % norm = 1;
@@ -19,14 +19,14 @@ norm=prm.value.vA;
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra.title=['Vicy, \Omega_{ci}t=',num2str(tt)];
+extra.title=['Ez, \Omega_{ci}t=',num2str(tt)];
 % extra.xrange=[10,50];
 % extra.yrange=[-5,5];
 % extra.caxis=[-1.5,1.5];
 
 %% read data
 fd=prm.read(name,tt);
-fd=slj.Scalar(fd.y);
+fd=slj.Scalar(fd.z);
 ss=prm.read('stream',tt);
 
 %% figure

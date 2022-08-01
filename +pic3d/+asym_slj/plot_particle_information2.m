@@ -4,18 +4,18 @@
 % the particle's information which is at the DF
 %%
 clear;
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Kinetic\Trajectory\Cold_Ions\type2\1';
+indir='E:\Asym\cold2v2\data';
+outdir='E:\Asym\cold2v2\out\Kinetic\Particles\2071265643';
 prm=slj.Parameters(indir,outdir);
 
 %% particle
-id=uint64(570987588);
+id=uint64(2071265643);
 spcs='h';
 
 %% time
-tt=13;
-tt0=20801;
-trange=1:40001;
+tt=20;
+tt0=2001;
+trange=1:2301;
 %% figure
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
@@ -31,7 +31,7 @@ prt=prt.norm_electric_field(prm);
 
 %% 
 % trange=1:2501;
-star=trange(1):1600:trange(end);
+star=trange(1):100:trange(end);
 
 %% figure
 % f=figure('Position',[500,10,800,600]);

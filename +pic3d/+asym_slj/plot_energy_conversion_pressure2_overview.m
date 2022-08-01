@@ -8,7 +8,7 @@ indir='E:\Asym\cold2v2\data';
 outdir='E:\Asym\cold2v2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
-tt = 32;
+tt = 29;
 name='h';
 cmpt = 'o';
 
@@ -69,7 +69,7 @@ for t=1:nt
     
     f=figure;
     slj.Plot.overview(fd/norm, ss, prm.value.lx, prm.value.lz, norm, extra);
-    title(['[(P\cdot\nabla)\cdot V]_', cmpt, ',  \Omega_{ci}t = ',num2str(tt(t))]);
+    title(['-[(P\cdot\nabla)\cdot V]_', cmpt, ',  \Omega_{ci}t = ',num2str(tt(t))]);
     cd(outdir);
     
 end

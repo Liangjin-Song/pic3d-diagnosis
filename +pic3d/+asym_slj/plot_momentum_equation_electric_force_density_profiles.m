@@ -10,14 +10,14 @@ prm=slj.Parameters(indir,outdir);
 
 tt=39;
 dt=0.1;
-name='h';
+name='e';
 
-xz=40;
-dd = 30;
+xz=45;
+dd = 20;
 dir=1;
 cmpt = 'y';
 
-nm = 10;
+nm = 5;
 
 %% figure proterty
 xrange=[-4,3];
@@ -126,4 +126,4 @@ xlabel(xlab);
 set(gca,'FontSize',14);
 
 cd(outdir);
-print('-dpng','-r300',[sfx,'_momentum_equation_electric_force_density_',cmpt,'_t=',num2str(tt, '%06.2f'),'_',sdir,'=',num2str(round(lp(xz))),'.png']);
+% print('-dpng','-r300',[sfx,'_momentum_equation_electric_force_density_',cmpt,'_t=',num2str(tt, '%06.2f'),'_',sdir,'=',num2str(round(lp(xz))),'.png']);

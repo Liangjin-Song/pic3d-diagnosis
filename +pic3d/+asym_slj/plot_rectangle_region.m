@@ -1,6 +1,6 @@
 clear;
 indir='E:\Asym\cold2v2\data';
-outdir='E:\Asym\cold2v2\out\Kinetic';
+outdir='E:\Asym\cold2v2\out\Kinetic\Distribution\X-line';
 prm=slj.Parameters(indir,outdir);
 
 

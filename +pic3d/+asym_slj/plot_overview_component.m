@@ -6,13 +6,13 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Ohm';
+indir='E:\Asym\cold2v2\data';
+outdir='E:\Asym\cold2v2\out\Article';
 prm=slj.Parameters(indir,outdir);
 
-tt=40;
-name='Pe';
-norm=1;
+tt=30;
+name='E';
+norm=prm.value.vA;
 
 %%
 extra.xlabel='X [c/\omega_{pi}]';
@@ -24,7 +24,7 @@ cd(indir);
 f=figure;
 ss=prm.read('stream',tt);
 fd=prm.read(name,tt);
-fd=fd.xx;
+fd=fd.z;
 slj.Plot.overview(fd, ss, prm.value.lx, prm.value.lz, norm, extra);
-xlim([15,35]);
-ylim([-5,5]);
+xlim([0,50]);
+ylim([-10,10]);

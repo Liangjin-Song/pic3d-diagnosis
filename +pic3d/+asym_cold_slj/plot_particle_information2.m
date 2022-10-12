@@ -5,17 +5,17 @@
 %%
 clear;
 indir='E:\Asym\cold2_ds1\data';
-outdir='E:\Asym\cold2_ds1\out\Kinetic\Trajectory\Outflow';
+outdir='E:\Asym\cold2_ds1\out\Kinetic\Trajectory\X-line';
 prm=slj.Parameters(indir,outdir);
 
 %% particle
-id=uint64(1835795250);
+id=uint64(971785639);
 spcs='h';
 
 %% time
-tt=45;
-tt0=4001;
-trange=3001:5001;
+tt=55;
+tt0=5501;
+trange=3501:6001;
 %% figure
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';

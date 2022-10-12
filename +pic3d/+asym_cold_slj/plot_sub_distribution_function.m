@@ -13,15 +13,15 @@ prm=slj.Parameters(indir, outdir);
 % name='PVh_ts20800_x600-1400_y418-661_z0-1';
 tt=55;
 is_save = 1;
-isprt = 0;
+isprt = 1;
 spn = 'h';
-id = '1539564654';
+id = '1015395203';
 
 % position range
-xrange=[41,42];
-zrange=[-2.17, -0.31];
+xrange=[24.5,25.5];
+zrange=[1, 4];
 yrange=[-100,100];
-s = 5;
+s = 3;
 
 range=3;
 

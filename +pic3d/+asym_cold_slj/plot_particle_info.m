@@ -6,15 +6,15 @@
 clear;
 %%
 indir='E:\Asym\cold2_ds1\data';
-outdir='E:\Asym\cold2_ds1\out\Kinetic\Trajectory\Outflow';
+outdir='E:\Asym\cold2_ds1\out\Kinetic\Trajectory\X-line';
 prm=slj.Parameters(indir,outdir);
 %% particle's ID
 %% id1='295320754';
-id = '611577730';
+id = '1015395203';
 spc='h';
 spcs='ic';
 
-xrange=[0,50];
+xrange=[30,70];
 
 %% figure property
 extra.ColorbarPosition='north';

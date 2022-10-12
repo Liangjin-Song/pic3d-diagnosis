@@ -16,10 +16,10 @@ spn = 'h';
 dir=1;
 
 % position range
-xrange=[3.5,5];
-zrange=[0.42,1];
+xrange=[24.5,25.5];
+zrange=[1,4];
 yrange=[-100,100];
-s = 1;
+s = 3;
 
 aviname = [outdir,'\PV',spn,'_',num2str(dir),'_sub',num2str(xrange(1)),'-',num2str(xrange(2)),...
                 '_',num2str(yrange(1)),'-',num2str(yrange(2)),...

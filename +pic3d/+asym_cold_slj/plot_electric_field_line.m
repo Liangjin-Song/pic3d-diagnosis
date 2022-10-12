@@ -1,13 +1,13 @@
 %% function plot_electric_field_line
-clear;
+% clear;
 %% parameters
 indir='E:\Asym\cold2_ds1\data';
-outdir='E:\Asym\cold2_ds1\out\';
+outdir='E:\Asym\cold2_ds1\out\Kinetic\Trajectory\X-line';
 prm=slj.Parameters(indir,outdir);
 
-tt=20;
+tt=55;
 
-xz=41;
+xz=25;
 dir=1;
 
 nt=length(tt);

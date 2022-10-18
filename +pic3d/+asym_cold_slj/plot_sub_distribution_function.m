@@ -11,17 +11,17 @@ outdir='E:\Asym\cold2_ds1\out\Kinetic\Distribution';
 prm=slj.Parameters(indir, outdir);
 % the file name of distribution function
 % name='PVh_ts20800_x600-1400_y418-661_z0-1';
-tt=55;
+tt=20;
 is_save = 1;
-isprt = 1;
+isprt = 0;
 spn = 'h';
 id = '1015395203';
 
 % position range
-xrange=[24.5,25.5];
-zrange=[1, 4];
+xrange=[41,42];
+zrange=[-0.36, 0.28];
 yrange=[-100,100];
-s = 3;
+s = 5;
 
 range=3;
 

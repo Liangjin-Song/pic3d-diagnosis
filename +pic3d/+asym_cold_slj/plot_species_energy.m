@@ -1,9 +1,9 @@
 % function plot_species_energy()
 clear;
-indir='E:\Asym\cold2_ds1\data';
-outdir='E:\Asym\cold2_ds1\out\';
+indir='E:\Simulation\Cold2_ds1_large\data';
+outdir='E:\Simulation\Cold2_ds1_large\out\Global';
 prm=slj.Parameters(indir,outdir);
-xrange=[0 60];
+xrange=[0 90];
 t0=1;
 %% plot energy
 h1=figure;

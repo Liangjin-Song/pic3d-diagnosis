@@ -5,8 +5,8 @@
 % id=spc.ring_particle_id(prm, 1, center, bradius, sradius);
 % 
 vrange.xrange=[-100,100];
-vrange.yrange=[-0.56, 0.26];
-vrange.zrange=[0.42, 1.33];
+vrange.yrange=[0.84, 1.49];
+vrange.zrange=[-0.89, 1.04];
 idf=spc.rectangle_particle_id(prm, vrange);
 
 in = find(ismember(spc.value.id, idf) == 1);

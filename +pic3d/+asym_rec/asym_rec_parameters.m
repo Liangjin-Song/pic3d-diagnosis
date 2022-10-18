@@ -17,23 +17,23 @@ ppc = 100;
 mie = 100;
 
 % the half width of the current sheet
-L=0.5;
+L=1;
 
 % the magnetic ratio between Bsh and Bsh
-Br = 0.125;
+Br = 0.4;
 
 % the beta value at the magnetosheath side
-betas = 165;
+betas = 8;
 
 % the temperature between Tsh and Tsp
-Tr = 1/15;
+Tr = 1/3;
 
 % the temperature between ions and electrons, Ti/Te
-Tie = 10;
+Tie = 2;
 
 % the ratio between electron plasma frequency and gryofrequency
 % at the magnetosheath
-fr = 2;
+fr = 4;
 
 % the current ratio between ion and electron, rate = Ji/Je
 jrate = Tie;

@@ -93,5 +93,6 @@ ylabel(['(\nabla\cdot P_{',sfx,'})\cdot V_{',sfx,'}']);
 set(gca,'FontSize',14);
 
 cd(outdir);
+
 print('-dpng','-r300',[sfx,'_energy_conversion_pressure_as_time_dt=',num2str(dt),'.png']);
-close(f);
+close(gcf);

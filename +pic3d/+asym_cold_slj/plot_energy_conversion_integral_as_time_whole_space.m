@@ -89,4 +89,4 @@ set(gca,'FontSize',14);
 cd(outdir);
 save('electric_work_integral.mat', 'tt', 'rate', 'dt','sfx');
 print('-dpng','-r300',[sfx,'_energy_conversion_integral_as_time_dt=',num2str(dt),'_whole_space.png']);
-close(f);
+close(gcf);

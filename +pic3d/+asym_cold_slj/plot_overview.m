@@ -6,14 +6,14 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Asym\cold2_ds1\data';
-outdir='E:\Asym\cold2_ds1\out\Overview';
+indir='E:\Simulation\Cold2_ds1_large\data';
+outdir='E:\Simulation\Cold2_ds1_large\out\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:60;
+tt=10:10:90;
 % the variable name
-varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
-% varname={'B','E','Vh','Nh'};
+% varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
+varname={'B','Vh','Nh'};
 % varname={'Ne', 'Nl'};
 % varname={'E'};
 % figure style

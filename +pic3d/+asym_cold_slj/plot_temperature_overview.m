@@ -7,7 +7,7 @@ prm=slj.Parameters(indir,outdir);
 
 
 
-tt=28;
+tt=40;
 name='h';
 disp(name);
 

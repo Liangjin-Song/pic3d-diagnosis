@@ -7,7 +7,7 @@ prm=slj.Parameters(indir,outdir);
 
 %% time and position
 tt=0:60;
-xz=25;
+xz=42;
 dir=1;
 ll = prm.value.lz;
 
@@ -15,8 +15,8 @@ ll = prm.value.lz;
 norm = 0.5 * prm.value.mi * prm.value.vA*prm.value.vA;
 
 %% upper and lower limitation of the integral
-lo = -1;
-up = 4;
+lo = -0.3;
+up = 2.5;
 
 nt = length(tt);
 rate = zeros(nt, 1);
@@ -42,6 +42,6 @@ rate = rate * prm.value.qi / norm;
 figure;
 plot(tt, rate, '-k', 'LineWidth', 2);
 xlabel('\Omega_{ci}t');
-ylabel('\int_{-1}^{4} Ez dz')
+ylabel(['q\int_{',num2str(lo),'}^{',num2str(up),'} Ez dz'])
 set(gca, 'FontSize', 14);
 cd(outdir);

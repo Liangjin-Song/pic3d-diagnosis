@@ -19,18 +19,18 @@ norm=prm.value.vA;
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra.title=['Ez, \Omega_{ci}t=',num2str(tt)];
+extra.title=['Ex, \Omega_{ci}t=',num2str(tt)];
 % extra.xrange=[10,50];
 % extra.yrange=[-5,5];
 % extra.caxis=[-1.5,1.5];
 
 %% read data
 fd=prm.read(name,tt);
-fd=slj.Scalar(fd.z);
+fd=slj.Scalar(fd.x);
 ss=prm.read('stream',tt);
 
 %% figure
 f=slj.Plot();
 f.overview(fd,ss,prm.value.lx,prm.value.lz,norm,extra);
 cd(outdir);
-% f.png(prm,[name,'z_t',num2str(tt),]);
+% f.png(prm,[name,'x_t',num2str(tt),]);

@@ -9,7 +9,7 @@ id='971785639';
 name=['trajh_id',id];
 
 %% energy normalization
-norm=prm.value.mi*prm.value.vA.^2;
+norm=0.5*prm.value.mi*prm.value.vA.^2;
 
 %% read data
 prt=prm.read(char(name));

@@ -6,8 +6,8 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\PIC\test2';
-outdir='E:\PIC\test2';
+indir='E:\Simulation\Test';
+outdir='E:\Simulation\Test';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0;

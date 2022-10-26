@@ -2,8 +2,8 @@
 %%
 clear;
 %%
-indir='E:\PIC\Turbulence\test';
-outdir='E:\PIC\Turbulence\test';
+indir='E:\Simulation\Test';
+outdir='E:\Simulation\Test';
 prm=slj.Parameters(indir,outdir);
 
 tt=0;

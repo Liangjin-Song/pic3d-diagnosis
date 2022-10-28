@@ -17,16 +17,16 @@ ppc = 100;
 mie = 100;
 
 % the half width of the current sheet
-L=1;
+L=0.5;
 
 % the magnetic ratio between Bsh and Bsh
-Br = 0.125;
+Br = 1/2;
 
 % the beta value at the magnetosheath side
-betas = 165;
+betas = 5;
 
 % the temperature between Tsh and Tsp
-Tr = 1/15;
+Tr = 1/3;
 
 % the temperature between ions and electrons, Ti/Te
 Tie = 10;
@@ -169,6 +169,7 @@ plot(y, N, '-k', 'LineWidth', 1);
 xlabel('Z');
 ylabel('N');
 set(gca, 'FontSize', 14);
+disp(['Nsh/Nsp = ', num2str(N(end)/N(1))]);
 
 
 % pressure

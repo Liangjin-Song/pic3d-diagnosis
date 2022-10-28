@@ -10,7 +10,7 @@ outdir='E:\Asym\cold2_ds1\out\Kinetic\Trajectory\X-line';
 prm=slj.Parameters(indir,outdir);
 %% particle's ID
 %% id1='295320754';
-id = '811378968';
+id = '1595262401';
 spc='h';
 spcs='ic';
 

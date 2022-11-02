@@ -2,15 +2,15 @@
 clear;
 %% parameters
 indir='E:\Asym\cold2_ds1\data';
-outdir='E:\Asym\cold2_ds1\out\Kinetic\Distribution\All_Ions';
+outdir='E:\Asym\cold2_ds1\out\Kinetic\Distribution';
 prm=slj.Parameters(indir, outdir);
 
 %% the particles' distribution function name
-tt=35;
-s=4;
+tt=30;
+s=5;
 %% position
-xrange=[30,31];
-zrange=[1,4];
+xrange=[41,42];
+zrange=[-0.81, 0.04];
 yrange=[-100,100];
 
  if s == 1

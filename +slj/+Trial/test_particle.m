@@ -22,7 +22,7 @@ prm.np = 1;
 % the initial magnetic field
 prm.b = 1;
 % the number of waves, controlling the wave vector
-prm.nk = 0;
+prm.nk = 10;
 % amplitude of the wave
 prm.aw = 0.1;
 % the frequency of the wave, the unit is the gyro-frequency

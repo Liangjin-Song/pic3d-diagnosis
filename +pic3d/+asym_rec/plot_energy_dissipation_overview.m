@@ -38,6 +38,7 @@ slj.Plot.overview(JE, ss, prm.value.lx, prm.value.lz, norm, extra);
 xlabel('X [c/\omega_{pi}]');
 ylabel('Z [c/\omega_{pi}]');
 ylim([-25, 25]);
+caxis([-2,2]);
 title(['J\cdot (E + Ve \times B),  \Omega_{ci}t = ', num2str(tt(t))]);
 cd(outdir);
 print(f,'-dpng', '-r300', ['J.(E+VexB)_t', num2str(tt(t), '%06.2f'), '.png']);

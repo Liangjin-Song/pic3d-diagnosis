@@ -33,7 +33,7 @@ fshift = (-n/2:n/2-1)*(fs/n);
 powershift = abs(Y).^2/n;
 figure;
 % plot(log10(fshift),log10(abs(powershift).^2));
-loglog(fshift, abs(powershift).^2);
+loglog(fshift, powershift);
 xlabel('k [de^{-1}]');
 ylabel('PSD');
 

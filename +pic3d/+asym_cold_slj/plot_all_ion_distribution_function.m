@@ -10,7 +10,7 @@ tt=30;
 s=5;
 %% position
 xrange=[41,42];
-zrange=[-0.81, 0.04];
+zrange=[-1, 0];
 yrange=[-100,100];
 
  if s == 1

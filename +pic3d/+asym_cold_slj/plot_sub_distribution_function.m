@@ -18,10 +18,10 @@ spn = 'h';
 id = '1015395203';
 
 % position range
-xrange=[31,32];
-zrange=[3, 4];
+xrange=[41,42];
+zrange=[-1, 0];
 yrange=[-100,100];
-s = 4;
+s = 5;
 
 range=3;
 

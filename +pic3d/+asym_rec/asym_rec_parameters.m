@@ -169,7 +169,7 @@ plot(y, N, '-k', 'LineWidth', 1);
 xlabel('Z');
 ylabel('N');
 set(gca, 'FontSize', 14);
-disp(['Nsh/Nsp = ', num2str(N(end)/N(1))]);
+disp(['Nsh/Nsp = ', num2str(Nsh/Nsp)]);
 
 
 % pressure
@@ -207,3 +207,8 @@ plot(y,lambda, '-k','LineWidth',1);
 xlabel('Z');
 ylabel('\lambda_D');
 set(gca, 'FontSize', 14);
+
+Bsh = abs(Bsh);
+Bsp = abs(Bsp);
+vA_asym = sqrt(Bsh * Bsp * (Bsh + Bsp)/(mu0 * mi * (Nsh * Bsp + Nsp * Bsh)));
+disp(['v_{A,asym} = ', num2str(vA_asym)]);

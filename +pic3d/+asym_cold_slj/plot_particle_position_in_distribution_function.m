@@ -1,6 +1,6 @@
 %% plot particle position in distribution function
 % particle's ID
-id = uint64(571903935);
+id = uint64(991752745);
 norm = prm.value.vA;
 
 %% find the particle in the distribution function
@@ -14,12 +14,12 @@ f1=figure(1);
 hold on
 plot(spc.value.vy(in)/norm, spc.value.vz(in)/norm,'*b', 'LineWidth', 5);
 
-f2=figure(2);
+f2=figure(3);
 hold on
 plot(spc.value.vx(in)/norm, spc.value.vz(in)/norm,'*b', 'LineWidth', 5);
 
 
-f3=figure(3);
+f3=figure(4);
 hold on
 plot(spc.value.vx(in)/norm, spc.value.vy(in)/norm,'*b', 'LineWidth', 5);
 

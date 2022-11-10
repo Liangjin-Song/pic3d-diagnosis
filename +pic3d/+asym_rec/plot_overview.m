@@ -6,8 +6,8 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Asym\zhong\case1\data';
-outdir='E:\Asym\zhong\case1\out\Overview';
+indir='E:\Asym\zhong\case2\data';
+outdir='E:\Asym\zhong\case2\out\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0:100;

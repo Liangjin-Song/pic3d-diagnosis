@@ -1,20 +1,18 @@
 % function plot_energy_converstion_line
 clear;
 %% parameters
-indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Article';
-% indir='E:\Asym\dst1\data';
-% outdir='E:\Asym\dst1\out\Global';
+indir='E:\Asym\cold2_ds1\data';
+outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
 
-tt=39;
-name='h';
+tt=30;
+name='e';
 
-xz=30;
-dd=10;
-dir=1;
+xz=-0.96;
+dd=0;
+dir=0;
 
-nn = 5;
+nn = 1;
 
 nt=length(tt);
 
@@ -24,7 +22,7 @@ extra.ylabel='Z [c/\omega_{pi}]';
 
 norm=prm.value.n0*prm.value.vA*prm.value.vA;
 
-xrange=[-10,10];
+xrange=[0,50];
 
 
 if dir == 1
@@ -60,10 +58,10 @@ for t=1:nt
     JEy=N.value.*V.y.*E.y;
     JEz=N.value.*V.z.*E.z;
     if strcmp(name, 'e')
-        JE=-JE.value;
-        JEx=-JEx.value;
-        JEy=-JEy.value;
-        JEz=-JEz.value;
+        JE=-JE;
+        JEx=-JEx;
+        JEy=-JEy;
+        JEz=-JEz;
     end
     
     
@@ -96,10 +94,10 @@ for t=1:nt
         error('Parameters error!');
     end
     % smooth
-    lje = smoothdata(lje, 'movmean', nn);
-    ljex = smoothdata(ljex, 'movmean', nn);
-    ljey = smoothdata(ljey, 'movmean', nn);
-    ljez = smoothdata(ljez, 'movmean', nn);
+%     lje = smoothdata(lje, 'movmean', nn);
+%     ljex = smoothdata(ljex, 'movmean', nn);
+%     ljey = smoothdata(ljey, 'movmean', nn);
+%     ljez = smoothdata(ljez, 'movmean', nn);
     
     
     %% plot figure
@@ -111,7 +109,7 @@ for t=1:nt
     %% set figure
     xlim(xrange);
     legend(['J',sfx,' \cdot E'], ['J',sfx,'xEx'], ['J',sfx,'yEy'], ['J',sfx,'zEz'], 'Location', 'Best');
-    xlabel('Z [c/\omega_{pi}]');
+    xlabel('X [c/\omega_{pi}]');
     ylabel(['J',sfx,'\cdot E']);
     title(['\Omega_{ci}t = ',num2str(tt(t)),', profiles  ', pstr,' = ',num2str(round(lp(xz)))]);
     set(gca,'FontSize',14);

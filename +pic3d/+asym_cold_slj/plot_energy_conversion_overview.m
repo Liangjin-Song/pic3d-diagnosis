@@ -5,9 +5,9 @@ indir='E:\Asym\cold2_ds1\data';
 outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
 
-tt=26;
-name='h';
-cmpt = 'x';
+tt=13;
+name='e';
+cmpt = 't';
 
 nt=length(tt);
 
@@ -65,6 +65,6 @@ for t=1:nt
     ylim([-10,10]);
     title([tit,',  \Omega_{ci}t = ',num2str(tt(t))]);
     cd(outdir);
-    print(f,'-dpng','-r300',[stit,'_t',num2str(tt(t)),'.png']);
+%     print(f,'-dpng','-r300',[stit,'_t',num2str(tt(t)),'.png']);
 %     close(gcf);
 end

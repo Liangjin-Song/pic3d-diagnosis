@@ -12,16 +12,16 @@ prm=slj.Parameters(indir, outdir);
 % the file name of distribution function
 % name='PVh_ts20800_x600-1400_y418-661_z0-1';
 tt=50;
-is_save = 1;
+is_save = 0;
 isprt = 0;
 spn = 'h';
 id = '1015395203';
 
 % position range
-xrange=[41,42];
-zrange=[-1, 0];
+xrange=[30,31];
+zrange=[1, 2.5];
 yrange=[-100,100];
-s = 5;
+s = 4;
 
 range=3;
 
@@ -108,7 +108,7 @@ for t=1:nt
             end
         end
         %% plot the particle's position
-        
+        cd(outdir);
         if is_save == 1
             f.png(prm,[name,suffix,'_sub',num2str(xrange(1)),'-',num2str(xrange(2)),...
                 '_',num2str(yrange(1)),'-',num2str(yrange(2)),...

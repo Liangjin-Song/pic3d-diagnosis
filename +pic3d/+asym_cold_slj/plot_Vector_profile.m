@@ -5,16 +5,15 @@ clear;
 % indir='E:\Asym\dst1\data';
 % outdir='E:\Asym\dst1\out\Global';
 indir='E:\Asym\cold2_ds1\data';
-outdir='E:\Asym\cold2_ds1\out\Kinetic\Distribution';
+outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
 norm=prm.value.vA;
-name='E';
-nn = 1;
 norm=1;
-tt=40;
-xz=25;
-dir=1;
-xrange=[-5,5];
+name='B';
+tt=30;
+xz=-0.96;
+dir=0;
+xrange=[30,40];
 extra.title=['\Omega_{ci}t=',num2str(tt)];
 FontSize=14;
 
@@ -56,10 +55,10 @@ plot(ll, lf.lx, 'r', 'LineWidth', 2);
 hold on
 plot(ll, lf.ly, 'b', 'LineWidth', 2);
 plot(ll, lf.lz, 'm', 'LineWidth', 2);
-legend('Ex', 'Ey', 'Ez');
+legend([name,'x'], [name,'y'], [name,'z']);
 xlim(xrange);
 xlabel(extra.xlabel);
-ylabel('E');
+ylabel(name);
 set(gca,'FontSize', FontSize);
 
 cd(outdir);

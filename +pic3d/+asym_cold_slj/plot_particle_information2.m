@@ -9,13 +9,13 @@ outdir='E:\Asym\cold2_ds1\out\Kinetic\Trajectory\X-line';
 prm=slj.Parameters(indir,outdir);
 
 %% particle
-id=uint64(983841419);
+id=uint64(1307401572);
 spcs='h';
 
 %% time
-tt=30;
-tt0=3001;
-trange=2601:4001;
+tt=50;
+tt0=5001;
+trange=2701:5501;
 %% figure
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';

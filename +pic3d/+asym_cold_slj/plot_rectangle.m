@@ -1,6 +1,6 @@
 % colormap(slj.Plot.mycolormap(0))
 % caxis([-3,3])
-xx = [28,29];
+xx = [41,42];
 
 zz = [-1,0];
 hold on

@@ -4,7 +4,7 @@ clear;
 %% parameters 
 indir='E:\Asym\cold2_ds1\data';
 outdir='E:\Asym\cold2_ds1\out\Test';
-tt=40;
+tt=50;
 xz=41;
 dir=1;
 extra.xlabel='Z [c/\omega_{pi}]';

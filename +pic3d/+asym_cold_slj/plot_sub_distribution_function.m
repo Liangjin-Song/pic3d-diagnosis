@@ -12,16 +12,16 @@ prm=slj.Parameters(indir, outdir);
 % the file name of distribution function
 % name='PVh_ts20800_x600-1400_y418-661_z0-1';
 tt=50;
-is_save = 0;
+is_save = 1;
 isprt = 0;
 spn = 'h';
 id = '1015395203';
 
 % position range
-xrange=[30,31];
-zrange=[1, 2.5];
+xrange=[24.5,25.5];
+zrange=[2.5, 4];
 yrange=[-100,100];
-s = 4;
+s = 3;
 
 range=3;
 

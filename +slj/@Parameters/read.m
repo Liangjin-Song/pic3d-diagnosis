@@ -11,6 +11,8 @@ if nargin == 2
     fd = obj.read_vector(obj.value, varargin{1});
 elseif nargin == 3
     fd = obj.read_field(obj.value, varargin{1}, varargin{2});
+elseif nargin == 7
+    fd = obj.read_subfield(obj.value, varargin{1}, varargin{2}, varargin{3}, varargin{4}, varargin{5}, varargin{6});
 else
     error('Parameters error!');
 end

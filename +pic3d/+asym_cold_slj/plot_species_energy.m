@@ -3,7 +3,7 @@ clear;
 indir='E:\Asym\cold2_ds1\data';
 outdir='E:\Asym\cold2_ds1\out';
 prm=slj.Parameters(indir,outdir);
-xrange=[0 90];
+xrange=[0 60];
 t0=1;
 %% plot energy
 h1=figure;

@@ -5,7 +5,7 @@ outdir='E:\Asym\cold2_ds1\out\Wave';
 prm=slj.Parameters(indir,outdir);
 
 dt = 0.1;
-tt=15:dt:45;
+tt=20:dt:40;
 name='e';
 cmpt = 't';
 
@@ -18,7 +18,7 @@ nt=length(tt);
 
 extra=[];
 
-normJE=prm.value.nts*prm.value.vA*prm.value.vA;
+normJE=prm.value.nhm*prm.value.vA*prm.value.vA;
 normE = prm.value.vA;
 
 if name == 'l'
@@ -71,7 +71,7 @@ for t=1:nt
     rje = abs(JE.value(yrange, xrange));
     %% obtain the maximum value position
     [sje, pos] = sort(rje(:));
-    [mz, mx] = ind2sub(size(rje), pos(end-2:end));
+    [mz, mx] = ind2sub(size(rje), pos(end-5:end));
     %% the average position
     pz(t) = round(mean(mz(:)) + yrange(1) - 1);
     %% obtain the field
@@ -97,13 +97,14 @@ ylabel('\Omega_{ci}t');
 caxis([-1, 1]);
 title('Ex');
 set(gca,'FontSize', 14);
-print(f2, '-dpng','-r300','Je_dot_E_x_t.png');
+print(f2, '-dpng','-r300','E_x_t.png');
 
 %% Fourier transform
 fJE = fftshift(fft2(tJE));
 fE = fftshift(fft2(tE));
 dx = 1/40;
 k = 2*pi/dx;
+% k = 2*pi/prm.value.debye;
 k = linspace(-k*0.5, k*0.5, nx);
 % pdt = prm.value.fpi/prm.value.wci;
 f = 1/dt;
@@ -118,7 +119,11 @@ p.FaceColor = 'interp';
 colorbar;
 xlabel('k [2\pi/di]');
 ylabel('\omega [\omega_{ci}]');
+% xlabel('k [2\pi/\lambda_D]');
+% ylabel('\omega [\omega_{pi}]');
+title('PSD, J_e\cdot E');
 set(gca,'FontSize',14);
+print(f3, '-dpng','-r300','PSD_Je_dot_E_k_w.png');
 
 %% E
 f4 = figure;
@@ -128,4 +133,8 @@ p.FaceColor = 'interp';
 colorbar;
 xlabel('k [2\pi/di]');
 ylabel('\omega [\omega_{ci}]');
+% xlabel('k [2\pi/\lambda_D]');
+% ylabel('\omega [\omega_{pi}]');
+title('PSD, Ex');
 set(gca,'FontSize',14);
+print(f4, '-dpng','-r300','PSD_E_k_w.png');

@@ -9,7 +9,7 @@ outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
 
 %% particle's id
-id = '1023750328';
+id = '835629679';
 name=['trajh_id',id];
 
 %% time

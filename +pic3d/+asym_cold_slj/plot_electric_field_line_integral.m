@@ -7,7 +7,7 @@ prm=slj.Parameters(indir,outdir);
 
 %% time and position
 tt=0:60;
-xz=42;
+xz=24.5;
 dir=1;
 ll = prm.value.lz;
 
@@ -15,8 +15,8 @@ ll = prm.value.lz;
 norm = 0.5 * prm.value.mi * prm.value.vA*prm.value.vA;
 
 %% upper and lower limitation of the integral
-lo = -0.3;
-up = 2.5;
+lo = -1;
+up = 4;
 
 nt = length(tt);
 rate = zeros(nt, 1);

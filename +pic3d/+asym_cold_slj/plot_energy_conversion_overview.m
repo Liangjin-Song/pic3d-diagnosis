@@ -2,10 +2,10 @@
 clear;
 %% parameters
 indir='E:\Asym\cold2_ds1\data';
-outdir='E:\Asym\cold2_ds1\out\Test';
+outdir='E:\Asym\cold2_ds1\out\Wave';
 prm=slj.Parameters(indir,outdir);
 
-tt=13;
+tt=30;
 name='e';
 cmpt = 't';
 

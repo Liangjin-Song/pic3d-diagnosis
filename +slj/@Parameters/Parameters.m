@@ -35,6 +35,7 @@ methods (Access = private, Static)
     fd = read_binary_file(filename, datatype);
     fd = read_field(value, name, time);
     fd = read_vector(value, name);
+    fd = read_subfield(value, name, time, suffix, nx, ny, nz);
 end
 
 %% ======================================================================== %%

@@ -5,7 +5,7 @@
 clear;
 %% parameters
 % size in y direction
-ny = 1200;
+ny = 2100;
 
 % the inertial length of ion
 di = 40;
@@ -23,13 +23,13 @@ L=0.5;
 Br = 1/2;
 
 % the beta value at the magnetosheath side
-betas = 5;
+betas = 4;
 
 % the temperature between Tsh and Tsp
-Tr = 1/3;
+Tr = 1/5;
 
 % the temperature between ions and electrons, Ti/Te
-Tie = 10;
+Tie = 2;
 
 % the ratio between electron plasma frequency and gryofrequency
 % at the magnetosheath

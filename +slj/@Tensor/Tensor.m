@@ -45,5 +45,13 @@ methods (Access = public)
     fd = reshape_old(obj, prm);
 end
 
+
+%% ======================================================================== %%
+%% operation +
+methods (Access = public)
+    fd = plus(obj, rhs);
+end
+
+
 %% ======================================================================== %%
 end

@@ -42,8 +42,8 @@ if is
     end
 end
 axis on
-set(gca,'fontsize',16,'DataAspectRatio',[1 1 1],'PlotBoxAspectRatio',[1 1 1],...
-    'Xminortick','on','Yminortick','on','tickdir','out')
+% set(gca,'fontsize',14,'DataAspectRatio',[1 1 1],'PlotBoxAspectRatio',[1 1 1],...
+    % 'Xminortick','on','Yminortick','on','tickdir','out')
 % set the figure
 if nargin == 4
     slj.Plot.set_field_figure(extra);

@@ -52,7 +52,7 @@ elseif s == 4
     %% x = [30, 40] di
     name=['PV',spn,'_ts',num2str(tt/prm.value.wci),'_x1200-1600_y418-661_z0-1'];
 else
-    %% x = [30, 40] di
+    %% x = [40, 50] di
     name=['PV',spn,'_ts',num2str(tt/prm.value.wci),'_x1600-2000_y418-661_z0-1'];
 end
 
@@ -64,4 +64,4 @@ dst=spc.dstrv(3,vdir,prm.value.vA,6*40);
 f=slj.Plot();
 f.field2d(dst.value, dst.ll.lr, dst.ll.lv,extra);
 cd(outdir);
-f.png(prm,[name,suffix]);
+% f.png(prm,[name,suffix]);

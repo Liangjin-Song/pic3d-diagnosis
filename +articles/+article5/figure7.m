@@ -6,7 +6,7 @@ outdir = 'E:\Asym\cold2_ds1\out\Article\Paper5';
 prm = slj.Parameters(indir, outdir);
 
 %% the distribution function
-name = 'PVh_ts48000_x1600-2000_y418-661_z0-1';
+name = 'PVh_ts48000_x800-1200_y418-661_z0-1';
 precision=80;
 range = 2;
 extra.colormap='moon';
@@ -16,7 +16,7 @@ extra.log=true;
 extra.FontSize = 14;
 
 %% the data
-xrange=[41,42];
+xrange=[24.5, 25.5];
 yrange=[-100,100];
 spcs = prm.read(name);
 
@@ -26,44 +26,32 @@ ha=slj.Plot.subplot(4,3,[0.02,0.005],[0.07,0.03],[0.1,0.02]);
 
 %% R1
 zrange=[-1, 0];
-caxs = [0, 3];
+caxs = [0, 3.7];
 plot_VDFs(ha, 1, prm, spcs, xrange, yrange, zrange, caxs, precision, extra);
 
 %% R2
 zrange=[0, 1];
-caxs = [0, 2.5];
+caxs = [0, 2.8];
 plot_VDFs(ha, 4, prm, spcs, xrange, yrange, zrange, caxs, precision, extra);
 
 %% R3
 zrange=[1, 2.5];
-caxs = [0, 2];
+caxs = [0, 2.8];
 plot_VDFs(ha, 7, prm, spcs, xrange, yrange, zrange, caxs, precision, extra);
 
 %% R4
 zrange=[2.5, 4];
-caxs=[0, 2];
+caxs=[0, 2.9];
 plot_VDFs(ha, 10, prm, spcs, xrange, yrange, zrange, caxs, precision, extra);
 
 %% Particles' Position
-id1 = '1595262401';
-id2 = '1543344803';
-id3 = '1615483884';
-plot_particle_position(id1, prm, ha, '*w');
-plot_particle_position(id2, prm, ha, '*b');
-plot_particle_position(id3, prm, ha, '*r');
+id6 = '1327536648';
+id7 = '887512149';
+id8 = '991656158';
 
-%% circle
-x = -sqrt(1.16) : 0.01: sqrt(1.16);
-y = sqrt(1.16 - x.^2);
-ha(3)
-hold on
-plot(x, y, '-b', 'LineWidth', 2);
-plot(x, -y, '-b', 'LineWidth', 2);
-
-y = -0.1:0.01:0.1;
-x = sqrt(1.16 - y.^2);
-plot(x, y, '-b', 'LineWidth', 2);
-
+plot_particle_position(id6, prm, ha, 10, '*b');
+plot_particle_position(id7, prm, ha, 10, '*w');
+plot_particle_position(id8, prm, ha, 10, '*k');
 
 %% label
 annotation(f,'textbox',...
@@ -169,7 +157,7 @@ annotation(f,'textbox',...
 
 %% save
 cd(outdir);
-% print('-dpng', '-r300', 'figure2.png');
+% print('-dpng', '-r300', 'figure7.png');
 
 
 function h = plot_VDF(prm, spcs, xrange, yrange, zrange, vdir, precision, extra)
@@ -232,21 +220,21 @@ if i == 10
 end
 end
 
-function plot_particle_position(id, prm, ha, log)
+function plot_particle_position(id, prm, ha, i, log)
 tt = 30;
 prt = prm.read(['trajh_id', id]);
 prt=prt.norm_velocity(prm);
 ttp = find(prt.value.time == tt);
 
-axes(ha(1));
+axes(ha(i));
 hold on
 plot(prt.value.vx(ttp), prt.value.vy(ttp), log, 'LineWidth', 5);
 
-axes(ha(2));
+axes(ha(i+1));
 hold on
 plot(prt.value.vx(ttp), prt.value.vz(ttp), log, 'LineWidth', 5);
 
-axes(ha(3));
+axes(ha(i+2));
 hold on
 plot(prt.value.vy(ttp), prt.value.vz(ttp), log, 'LineWidth', 5);
 end

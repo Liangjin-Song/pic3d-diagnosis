@@ -13,6 +13,7 @@ function [vx, vz] = calc_structure_velocity(fd2, fd1, di, dt, xrange, yrange)
 fd1 = fd1(yrange(1):yrange(2), xrange(1):xrange(2));
 fd2 = fd2(yrange(1):yrange(2), xrange(1):xrange(2));
 
+
 %% the position
 M = max(max(fd1));
 [r1, c1] = find(fd1 == M);

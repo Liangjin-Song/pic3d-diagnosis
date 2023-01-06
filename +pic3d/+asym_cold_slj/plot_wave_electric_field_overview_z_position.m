@@ -69,7 +69,7 @@ print(f1, '-dpng','-r300','E_x_t.png');
 %% Fourier transform
 fE = fftshift(fft2(tE));
 fB = fftshift(fft2(tB));
-dx = 1/40;
+% dx = 1/40;
 % k = 2*pi/dx;
 k = 2*pi/prm.value.debye;
 k = linspace(-k*0.5, k*0.5, nx);

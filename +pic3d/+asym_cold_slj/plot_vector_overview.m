@@ -11,7 +11,7 @@ prm=slj.Parameters(indir,outdir);
 
 %% variable information
 name='E';
-tt=20;
+tt=30;
 norm=prm.value.vA;
 % norm = 1;
 

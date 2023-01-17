@@ -157,6 +157,7 @@ annotation(f,'textbox',...
 %% save
 cd(outdir);
 % print('-dpng', '-r300', 'figure5.png');
+% print(f,'-depsc','-painters','figure5.eps');
 
 
 function h = plot_VDF(prm, spcs, xrange, yrange, zrange, vdir, precision, extra)

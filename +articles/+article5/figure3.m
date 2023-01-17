@@ -131,6 +131,7 @@ annotation(f,'textbox',...
 %% save
 cd(outdir);
 % print('-dpng', '-r300', 'figure3.png');
+% print(f,'-depsc','-painters','figure3.eps');
 
 
 %% particle information

@@ -75,6 +75,7 @@ annotation(f,'textbox',...
 %% save
 cd(outdir);
 % print('-dpng', '-r300', 'figure10.png');
+% print(f,'-depsc','-painters','figure10.eps');
 
 
 function sfd=smooth1d(lfd)

@@ -170,6 +170,7 @@ annotation(f,'textbox',...
 %% save
 cd(outdir);
 % print('-dpng', '-r300', 'figure2.png');
+% print(f,'-depsc','-painters','figure2.eps');
 
 
 function h = plot_VDF(prm, spcs, xrange, yrange, zrange, vdir, precision, extra)
@@ -194,7 +195,11 @@ caxis(caxs);
 pos0 = get(hi, 'Position');
 pos = pos0;
 pos(3) = pos(3) - dx;
-set(hi, 'Position', pos);
+set(hi, 'Position', pos, 'Xminortick','on','Yminortick','on','tickdir','out');
+hold on
+box on;
+axis on;
+
 
 dx = 0.025;
 hi = ha(i);
@@ -206,7 +211,10 @@ caxis(caxs);
 delete(h);
 pos = get(hi, 'Position');
 pos(3) = pos0(3) - dx;
-set(hi, 'Position', pos);
+set(hi, 'Position', pos, 'Xminortick','on','Yminortick','on','tickdir','out');
+hold on
+box on;
+axis on;
 
 
 hi = ha(i+1);
@@ -218,7 +226,11 @@ caxis(caxs);
 delete(h);
 pos = get(hi, 'Position');
 pos(3) = pos0(3) - dx;
-set(hi, 'Position', pos);
+set(hi, 'Position', pos, 'Xminortick','on','Yminortick','on','tickdir','out');
+hold on
+box on;
+axis on;
+
 
 if i ~= 10
     set(ha(i),'XTicklabel',[]);

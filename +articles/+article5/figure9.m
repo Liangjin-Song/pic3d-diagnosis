@@ -119,6 +119,7 @@ annotation(f,'textbox',...
 %% save
 cd(outdir);
 % print('-dpng', '-r300', 'figure9.png');
+% print(f,'-depsc','-painters','figure9.eps');
 
 
 function particle_trajectory(ha, i, prm, id)

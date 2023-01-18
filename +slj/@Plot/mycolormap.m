@@ -6,6 +6,7 @@ function map=mycolormap(type)
 % @return: map - the colormap
 %%
 
+%{
 map0=[
 0       0       143
 0       0       159
@@ -73,6 +74,20 @@ map0=[
 128     0       0
 ];
 map0=map0/255;
+%}
+
+mycolorpoint=[[0 0 255];...
+    [0 255 255];...
+    [255 255 255];...
+    [255 255 0];...
+    [255 0 0]];
+mycolorposition=[1 64 128 192 256];
+mycolormap_r=interp1(mycolorposition,mycolorpoint(:,1),1:256,'linear','extrap');
+mycolormap_g=interp1(mycolorposition,mycolorpoint(:,2),1:256,'linear','extrap');
+mycolormap_b=interp1(mycolorposition,mycolorpoint(:,3),1:256,'linear','extrap');
+mycolor=[mycolormap_r',mycolormap_g',mycolormap_b']/255;
+map0=round(mycolor*10^4)/10^4;
+
 
 mycolorpoint=[[255 255 255];...
     [255 255 255];...

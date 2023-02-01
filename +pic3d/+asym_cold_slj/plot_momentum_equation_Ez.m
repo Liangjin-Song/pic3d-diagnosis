@@ -5,12 +5,12 @@
 clear;
 %% parameters
 indir = 'E:\Asym\cold2_ds1\data';
-outdir = 'E:\Asym\cold2_ds1\out\Article\Paper4';
+outdir = 'E:\Asym\cold2_ds1\out\Article';
 prm=slj.Parameters(indir,outdir);
-datdir = 'E:\Asym\cold2_ds1\out\Article\Paper4\data';
+datdir = 'E:\Asym\cold2_ds1\out\Article\data';
 
 %% time
-tt1 = 26;
+tt1 = 48;
 tt2 = 48;
 dt = 0.1;
 
@@ -19,7 +19,8 @@ q=prm.value.qi;
 m=prm.value.mi;
 
 norm=prm.value.vA;
-xz=35;
+xz1=25;
+xz2=30;
 dir=1;
 
 dd = 40;
@@ -33,10 +34,10 @@ xrange=[-5,5];
 %% calculation
 ll = prm.value.lz;
 [E, JxB, divP, VlxB, VhxB, dJ] = calc_Ohm_law_with_cold_ions_z_direction(prm, tt1, dt);
-[tot1, eee1, jxb1, dvp1, vlxb1, vhxb1, dj1] = smooth_Ohm_components(prm, xz, dd, nn, E, JxB, divP, VlxB, VhxB, dJ);
+[tot1, eee1, jxb1, dvp1, vlxb1, vhxb1, dj1] = smooth_Ohm_components(prm, xz1, dd, nn, E, JxB, divP, VlxB, VhxB, dJ);
 
 [E, JxB, divP, VlxB, VhxB, dJ] = calc_Ohm_law_with_cold_ions_z_direction(prm, tt2, dt);
-[tot2, eee2, jxb2, dvp2, vlxb2, vhxb2, dj2] = smooth_Ohm_components(prm, xz, dd, nn, E, JxB, divP, VlxB, VhxB, dJ);
+[tot2, eee2, jxb2, dvp2, vlxb2, vhxb2, dj2] = smooth_Ohm_components(prm, xz2, dd, nn, E, JxB, divP, VlxB, VhxB, dJ);
 
 %% figure size
 f=figure('Position',[500,500,900,400]);
@@ -92,7 +93,7 @@ annotation(f,'textbox',...
 %% save figure
 cd(outdir);
 % print(f,'-dpng','-r300','figure5.png');
-print(f,'-depsc','-painters','figure5.eps');
+% print(f,'-depsc','-painters','figure5.eps');
 
 
 

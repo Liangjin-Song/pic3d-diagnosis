@@ -5,9 +5,9 @@
 clear;
 %% parameters
 indir = 'E:\Asym\cold2_ds1\data';
-outdir = 'E:\Asym\cold2_ds1\out\Article';
+outdir = 'E:\Asym\cold2_ds1\out\Article\Paper4';
 prm=slj.Parameters(indir,outdir);
-datdir = 'E:\Asym\cold2_ds1\out\Article\data';
+datdir = 'E:\Asym\cold2_ds1\out\Article\Paper4\data';
 
 %% figure proterties
 xrange = [0, 60];
@@ -84,5 +84,5 @@ annotation(f,'textbox',...
 
 %% save figure
 cd(outdir);
-print(f,'-dpng','-r300','figure7.png');
+% print(f,'-dpng','-r300','figure7.png');
 print(f,'-depsc','-painters','figure7.eps');

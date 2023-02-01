@@ -10,23 +10,23 @@ outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
 
 %% variable information
-name='E';
-tt=30;
-norm=prm.value.vA;
-% norm = 1;
+name='B';
+tt=40;
+% norm=prm.value.vA;
+norm = 1;
 
 %% figure properties
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra.title=['Ex, \Omega_{ci}t=',num2str(tt)];
+extra.title=['Bz, \Omega_{ci}t=',num2str(tt)];
 % extra.xrange=[10,50];
 % extra.yrange=[-5,5];
 % extra.caxis=[-1.5,1.5];
 
 %% read data
 fd=prm.read(name,tt);
-fd=slj.Scalar(fd.x);
+fd=slj.Scalar(fd.z);
 ss=prm.read('stream',tt);
 
 %% figure

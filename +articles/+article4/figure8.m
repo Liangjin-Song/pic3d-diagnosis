@@ -5,9 +5,9 @@
 clear;
 %% parameters
 indir = 'E:\Asym\cold2_ds1\data';
-outdir = 'E:\Asym\cold2_ds1\out\Article';
+outdir = 'E:\Asym\cold2_ds1\out\Article\Paper4';
 prm=slj.Parameters(indir,outdir);
-datdir = 'E:\Asym\cold2_ds1\out\Article\data';
+datdir = 'E:\Asym\cold2_ds1\out\Article\Paper4\data';
 
 %% time
 tt1 = 18;

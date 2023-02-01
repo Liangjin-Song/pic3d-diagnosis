@@ -5,9 +5,9 @@
 clear;
 %% parameters
 indir = 'E:\Asym\cold2_ds1\data';
-outdir = 'E:\Asym\cold2_ds1\out\Article';
+outdir = 'E:\Asym\cold2_ds1\out\Article\Paper4';
 prm=slj.Parameters(indir,outdir);
-datdir = 'E:\Asym\cold2_ds1\out\Article\data';
+datdir = 'E:\Asym\cold2_ds1\out\Article\Paper4\data';
 
 %% time
 tt1 = 26;
@@ -67,7 +67,7 @@ set(gca, 'FontSize', fontsize);
 
 %% JyEy at tt1
 axes(ha(3));
-slj.Plot.overview(JEy1, ss1, prm.value.lx, prm.value.lz, norm, extra);
+h3=slj.Plot.overview(JEy1, ss1, prm.value.lx, prm.value.lz, norm, extra);
 caxis([-0.025, 0.025]);
 colormap(slj.Plot.mycolormap(0));
 ylim(yrange);
@@ -78,7 +78,7 @@ set(gca, 'FontSize', fontsize);
 
 %% JyEy at tt2
 axes(ha(4));
-slj.Plot.overview(JEy2, ss2, prm.value.lx, prm.value.lz, norm, extra);
+h4=slj.Plot.overview(JEy2, ss2, prm.value.lx, prm.value.lz, norm, extra);
 caxis([-0.05, 0.05]);
 colormap(slj.Plot.mycolormap(0));
 ylim(yrange);
@@ -88,7 +88,7 @@ set(gca, 'FontSize', fontsize);
 
 %% JzEz at tt1
 axes(ha(5));
-slj.Plot.overview(JEz1, ss1, prm.value.lx, prm.value.lz, norm, extra);
+h=slj.Plot.overview(JEz1, ss1, prm.value.lx, prm.value.lz, norm, extra);
 caxis([-0.05, 0.05]);
 colormap(slj.Plot.mycolormap(0));
 ylim(yrange);
@@ -99,11 +99,15 @@ p1 = get(ha(3), 'Position');
 p2 = get(ha(5), 'Position');
 p2(3) = p1(3);
 set(ha(5), 'Position', p2);
+p1 = get(h3, 'Position');
+p2 = get(h, 'Position');
+p2(1) = p1(1);
+set(h,'Position', p2);
 set(gca, 'FontSize', fontsize);
 
 %% JzEz at tt2
 axes(ha(6));
-slj.Plot.overview(JEz2, ss2, prm.value.lx, prm.value.lz, norm, extra);
+h=slj.Plot.overview(JEz2, ss2, prm.value.lx, prm.value.lz, norm, extra);
 caxis([-0.08, 0.08]);
 colormap(slj.Plot.mycolormap(0));
 ylim(yrange);
@@ -114,6 +118,10 @@ p1 = get(ha(4), 'Position');
 p2 = get(ha(6), 'Position');
 p2(3) = p1(3);
 set(ha(6), 'Position', p2);
+p1 = get(h4, 'Position');
+p2 = get(h, 'Position');
+p2(1) = p1(1);
+set(h,'Position', p2);
 set(gca, 'FontSize', fontsize);
 
 

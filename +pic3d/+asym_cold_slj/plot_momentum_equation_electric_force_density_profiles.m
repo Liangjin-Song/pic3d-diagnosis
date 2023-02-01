@@ -4,20 +4,20 @@
 %%
 clear;
 %% parameters
-indir='E:\Asym\cold2v2\data';
-outdir='E:\Asym\cold2v2\out\Article';
+indir='E:\Asym\cold2_ds1\data';
+outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
 
-tt=30;
+tt=26;
 dt=0.1;
 name='h';
 
-xz=25;
-dd = 20;
+xz=20;
+dd = 40;
 dir=1;
-cmpt = 'y';
+cmpt = 'z';
 
-nm = 5;
+nm = 10;
 
 %% figure proterty
 xrange=[-4,3];

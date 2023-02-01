@@ -1,8 +1,8 @@
 % function plot_thermal_energy_overview(name)
 clear;
 %%
-indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Article';
+indir='E:\Asym\cold2_ds1\data';
+outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
 
 tt=40;
@@ -40,7 +40,7 @@ for t=1:nt
     slj.Plot.overview(U, ss, prm.value.lx, prm.value.lz, norm, extra);
     title(['U',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
     cd(outdir);
-    print('-dpng','-r300',['U',sfx,'_t',num2str(tt(t)),'.png']);
+%     print('-dpng','-r300',['U',sfx,'_t',num2str(tt(t)),'.png']);
 %     close(gcf);
 end
 

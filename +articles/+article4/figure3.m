@@ -5,9 +5,9 @@
 clear;
 %% parameters
 indir = 'E:\Asym\cold2_ds1\data';
-outdir = 'E:\Asym\cold2_ds1\out\Article';
+outdir = 'E:\Asym\cold2_ds1\out\Article\Paper4';
 prm=slj.Parameters(indir,outdir);
-datdir = 'E:\Asym\cold2_ds1\out\Article\data';
+datdir = 'E:\Asym\cold2_ds1\out\Article\Paper4\data';
 
 %% figure proterties
 xrange = [0, 60];
@@ -29,12 +29,13 @@ ha=slj.Plot.subplot(1,3,[0.0001,0.085],[0.2,0.07],[0.07,0.02]);
 
 %% total energy conversion
 axes(ha(1));
-plot(tec.tt, tec.rate(1,:), '-k', 'LineWidth', 2); hold on
-plot(tec.tt, tec.rate(2,:), '-r', 'LineWidth', 2);
-legend('\partial (K+U)/\partial t', 'J_{ic}\cdot E', 'Location', 'Best', 'Box', 'off');
+plot(tec.tt, tec.rate(2,:), '-r', 'LineWidth', 2); hold on
+plot(tec.tt, tec.rate(1,:), '--k', 'LineWidth', 2);
+legend('J_{ic}\cdot E', '\partial (K+U)/\partial t', 'Location', 'Best', 'Box', 'off');
 xlim(xrange);
 xlabel('\Omega_{ci}t');
 set(get(gca, 'YLabel'), 'String', ['\partial (K_{ic}+U_{ic})/\partial t']);
+set(gca, 'xtick', 0:10:60);
 set(gca,'FontSize', fontsize);
 
 %% components of energy conversion
@@ -48,6 +49,7 @@ legend('qNV\cdot E', 'qNVxEx', 'qNVyEy', 'qNVzEz', 'Location', 'Best', 'Box','of
 xlim(xrange);
 xlabel('\Omega_{ci} t');
 ylabel('J_{ic}\cdot E');
+set(gca, 'xtick', 0:10:60);
 set(gca,'FontSize',fontsize);
 
 %% integral of components of energy conversion
@@ -61,6 +63,7 @@ legend('\int_0^t qNVxEx dt', '\int_0^t qNVyEy dt', '\int_0^t qNVzEz dt', '\int_0
 xlim(xrange);
 xlabel('\Omega_{ci} t');
 ylabel('\Delta E_{ic}');
+set(gca, 'xtick', 0:10:60);
 set(gca,'FontSize',fontsize);
 
 %% panel label
@@ -83,5 +86,5 @@ annotation(f,'textbox',...
 
 %% save figure
 cd(outdir);
-print(f,'-dpng','-r300','figure3.png');
-print(f,'-depsc','-painters','figure3.eps');
+% print(f,'-dpng','-r300','figure3.png');
+% print(f,'-depsc','-painters','figure3.eps');

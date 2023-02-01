@@ -9,7 +9,7 @@ function stream(ss, lx, ly, number, color)
 % @param: color - the line color and line style
 %%
 if nargin < 4
-    number = 20;
+    number = 14;
 end
 if nargin < 5
     color = '-k';

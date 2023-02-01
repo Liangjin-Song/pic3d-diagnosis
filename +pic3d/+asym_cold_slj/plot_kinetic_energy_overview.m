@@ -1,8 +1,8 @@
 % function plot_kinetic_energy_overview(name)
 clear;
 %% parameters
-indir='E:\Asym\cold2\data';
-outdir='E:\Asym\cold2\out\Article';
+indir='E:\Asym\cold2_ds1\data';
+outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
 
 tt=40;
@@ -53,7 +53,7 @@ for t=1:nt
     slj.Plot.overview(K, ss, prm.value.lx, prm.value.lz, norm, extra);
     title(['K',sfx,', \Omega_{ci}t=',num2str(tt(t))]);
     cd(outdir);
-    print('-dpng','-r300',['K',sfx,'_t',num2str(tt(t)),'.png']);
+%     print('-dpng','-r300',['K',sfx,'_t',num2str(tt(t)),'.png']);
 %     close(gcf);
 end
 

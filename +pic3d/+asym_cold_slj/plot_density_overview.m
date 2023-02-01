@@ -11,7 +11,7 @@ prm=slj.Parameters(indir,outdir);
 
 %% variable information
 name='Nh';
-tt=20;
+tt=40;
 norm=prm.value.nhm;
 
 %% figure properties

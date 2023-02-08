@@ -10,7 +10,7 @@ prm=slj.Parameters(indir,outdir);
 datdir = 'E:\Asym\cold2_ds1\out\Article\Paper4\data';
 
 %% time
-tt = 40;
+tt = 48;
 
 %% figure proterties
 fontsize = 14;
@@ -93,6 +93,7 @@ set(gca, 'FontSize', fontsize);
 %% plot the density
 axes(ha(4));
 h4=slj.Plot.overview(N,ss,prm.value.lx,prm.value.lz,prm.value.nhm,extra);
+caxis([0,1.5]);
 ylabel('Z [c/\omega_{pi}]');
 ylim(yrange);
 set(gca,'XTicklabel',[]);
@@ -108,7 +109,7 @@ set(gca, 'FontSize', fontsize);
 %% electric field Ez
 axes(ha(6));
 h6=slj.Plot.overview(Ez, ss, prm.value.lx, prm.value.lz, prm.value.vA, extra);
-caxis([-3,3]);
+caxis([-2,2]);
 colormap(gca, slj.Plot.mycolormap(0));
 ylim(yrange);
 set(gca,'XTicklabel',[], 'YTicklabel',[]);
@@ -152,7 +153,8 @@ set(h, 'Position', pos0);
 
 %% plot Vz
 axes(ha(9));
-h=slj.Plot.overview(Vz,ss,prm.value.lx,prm.value.lz,prm.value.bm*prm.value.c./sqrt(prm.value.mi*prm.value.nhm),extra);
+h=slj.Plot.overview(Vz.*N,ss,prm.value.lx,prm.value.lz,prm.value.nhm*prm.value.bm*prm.value.c./sqrt(prm.value.mi*prm.value.nhm),extra);
+% caxis([-0.5,0.5]);
 xlabel('X [c/\omega_{pi}]');
 ylim(yrange);
 set(gca, 'XTick', 0:10:50);
@@ -308,7 +310,7 @@ annotation(f,'textbox',...
     'BackgroundColor',[1 1 1]);
 annotation(f,'textbox',...
     [0.792142857142857 0.136931035613191 0.0307142857142856 0.0551724126626707],...
-    'String','V_{icz}',...
+    'String','J_{icz}',...
     'LineStyle','none',...
     'FontSize',14,...
     'FontName','Times New Roman',...

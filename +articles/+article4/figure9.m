@@ -13,12 +13,12 @@ datdir = 'E:\Asym\cold2_ds1\out\Article\Paper4\data';
 fontsize = 14;
 
 %% particle's id
-id = uint64(1103913861);
+id = uint64(1611735179);
 
 %% time
 tt=18;
 tt0=1801;
-trange=1301:3701;
+trange=1:6001;
 star=trange(1):100:trange(end);
 
 %% read the particle
@@ -36,14 +36,14 @@ ha=slj.Plot.subplot(2,2,[0.11,0.11],[0.1,0.03],[0.1,0.05]);
 
 %% plot distribution function
 axes(ha(4));
-name=['PVh_ts',num2str(tt/prm.value.wci),'_x800-1200_y418-661_z0-1'];
+name=['PVh_ts',num2str(tt/prm.value.wci),'_x1600-2000_y418-661_z0-1'];
 precision=80;
 extra.colormap='moon';
 range = 2;
 extra.xrange=[-range,range];
 extra.yrange=[-range,range];
 extra.log=true;
-xrange=[24.5,25.5];
+xrange=[41,42];
 zrange=[1, 4];
 yrange=[-100,100];
 spc=prm.read(name);
@@ -71,12 +71,12 @@ caxis(cr);
 colormap('jet');
 cb=colorbar;
 cb.Label.FontSize=fontsize;
-xlim([15,35]);
-ylim([-8,8]);
+xlim([25,50]);
+ylim([-10,10]);
 xlabel('X [c/\omega_{pi}]');
 ylabel('Z [c/\omega_{pi}]');
 set(p,'LineWidth',3);
-xx = [24.5,25.5];
+xx = [41,42];
 zz = [1,4];
 hold on
 plot([xx(1),xx(2)],[zz(1), zz(1)], '-k', 'LineWidth', 2);
@@ -143,7 +143,7 @@ colormap(ha(4), slj.Plot.mycolormap(1));
 %% panel label
 fontsize=fontsize + 2;
 annotation(f,'textbox',...
-    [0.0433333333333333 0.903285715307507 0.0549999986920092 0.0485714275496347],...
+    [0.0233333333333333 0.903285715307507 0.0549999986920092 0.0485714275496347],...
     'String',{'(a)'},...
     'LineStyle','none',...
     'FontSize',fontsize);
@@ -168,4 +168,4 @@ annotation(f,'textbox',...
 %% save figure
 cd(outdir);
 % print(f,'-dpng','-r300','figure9.png');
-print(f,'-depsc','-painters','figure9.eps');
+% print(f,'-depsc','-painters','figure9.eps');

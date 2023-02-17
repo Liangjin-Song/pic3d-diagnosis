@@ -52,17 +52,31 @@ plot_particle_position(id1, prm, ha, '*w');
 plot_particle_position(id2, prm, ha, '*b');
 plot_particle_position(id3, prm, ha, '*r');
 
-%% circle
-x = -sqrt(1.16) : 0.01: sqrt(1.16);
-y = sqrt(1.16 - x.^2);
-ha(3)
-hold on
-plot(x, y, '-b', 'LineWidth', 2);
-plot(x, -y, '-b', 'LineWidth', 2);
+%% theoratical
+fp=figure;
+polaraxes;
+varphi = -pi/2:0.01:pi/4;
+vp = 0.67./(1 - sin(varphi));
+polarplot(varphi, vp, '-b', 'LineWidth', 2);
+ax=gca;
+ax.ThetaDir = 'clockwise';
+ax.ThetaZeroLocation = 'top';
+[y, x] = pol2cart(varphi, vp);
 
-y = -0.1:0.01:0.1;
-x = sqrt(1.16 - y.^2);
-plot(x, y, '-b', 'LineWidth', 2);
+figure(f);
+axes(ha(3));
+hold on
+plot(x, y, '-m', 'LineWidth', 2);
+
+
+% x = -sqrt(1.16) : 0.01: sqrt(1.16);
+% y = sqrt(1.16 - x.^2);
+% plot(x, y, '-b', 'LineWidth', 2);
+% plot(x, -y, '-b', 'LineWidth', 2);
+% y = -0.1:0.01:0.1;
+% x = sqrt(1.16 - y.^2);
+% plot(x, y, '-b', 'LineWidth', 2);
+
 
 
 %% label

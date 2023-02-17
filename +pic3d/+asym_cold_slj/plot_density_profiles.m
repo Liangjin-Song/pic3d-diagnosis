@@ -4,12 +4,12 @@ clear;
 %% parameters 
 indir='E:\Asym\cold2_ds1\data';
 outdir='E:\Asym\cold2_ds1\out\Test';
-tt=40;
-xz=40;
-dir=1;
-extra.xlabel='Z [c/\omega_{pi}]';
+tt=30;
+xz=-0.96;
+dir=0;
+extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='N';
-extra.xrange=[-10,10];
+extra.xrange=[30,40];
 fs=14;
 
 %% read data
@@ -24,9 +24,10 @@ B=prm.read('B',tt);
 % N4=N4.filter2d(3);
 
 %% get the line
-ll=Nl.get_line2d(xz, dir, prm, prm.value.n0);
-lh=Nh.get_line2d(xz, dir, prm, prm.value.n0);
-le=Ne.get_line2d(xz, dir, prm, prm.value.n0);
+norm = 1;
+ll=Nl.get_line2d(xz, dir, prm, norm);
+lh=Nh.get_line2d(xz, dir, prm, norm);
+le=Ne.get_line2d(xz, dir, prm, norm);
 ls=ll+lh;
 lb=B.get_line2d(xz,dir,prm,1);
 if dir==1
@@ -42,11 +43,11 @@ plot(lxz, ll, '-r','LineWidth', 1.5);
 hold on
 plot(lxz, lh, '-b','LineWidth', 1.5);
 plot(lxz, le, '-k','LineWidth', 1.5);
-% plot(lxz, ls, '--k', 'LineWidth', 1.5);
+plot(lxz, ls, '--k', 'LineWidth', 1.5);
 hold off
-xlabel('Z [c/\omega_{pi}]');
-ylabel('N');
-legend('Nih', 'Nic', 'Ne', 'Location', 'Best');
+xlabel(extra.xlabel);
+ylabel(extra.ylabel);
+legend('Nih', 'Nic', 'Ne', 'Nih + Nic', 'Location', 'Best');
 xlim(extra.xrange);
 set(gca,'FontSize', fs);
 cd(outdir);

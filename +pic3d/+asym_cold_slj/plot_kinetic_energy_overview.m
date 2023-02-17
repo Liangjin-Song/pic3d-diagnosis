@@ -5,7 +5,7 @@ indir='E:\Asym\cold2_ds1\data';
 outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
 
-tt=40;
+tt=48;
 name='h';
 show=true;
 

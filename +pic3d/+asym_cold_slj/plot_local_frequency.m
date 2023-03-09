@@ -5,10 +5,10 @@ clear;
 indir='E:\Asym\cold2_ds1\data';
 outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
-tt=30;
-xz=-0.96;
+tt=28;
+xz=-0.76;
 dir=0;
-xrange=[30,40];
+xrange=[35,45];
 FontSize=14;
 
 %% read data

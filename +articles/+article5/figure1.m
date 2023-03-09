@@ -18,6 +18,11 @@ normT = prm.value.thm/prm.value.coeff;
 %% the figure proterties
 extra.yrange=[-10, 10];
 
+%% the current position
+cd(outdir);
+pz1 = importdata('inz_Bx=0_t=30.mat');
+pz2 = importdata('inz_Bx=0_t=50.mat');
+
 %% the size of the figure
 f=figure('Position',[500,100,1000,500]);
 ha=slj.Plot.subplot(2,2,[0.01,0.13],[0.13,0.07],[0.1,0.02]);
@@ -29,6 +34,8 @@ axes(ha(1));
 E = prm.read('E', tt1);
 ss = prm.read('stream', tt1);
 h = slj.Plot.overview(E.z,ss,prm.value.lx,prm.value.lz,normE,extra);
+hold on
+plot(prm.value.lx, prm.value.lz(pz1(:)), '-r', 'LineWidth', 1.5);
 colormap(ha(1), slj.Plot.mycolormap(0));
 caxis([-3,3]);
 set(ha(1),'XTicklabel',[]);
@@ -46,6 +53,8 @@ axes(ha(2));
 E = prm.read('E', tt2);
 ss = prm.read('stream', tt2);
 slj.Plot.overview(E.z,ss,prm.value.lx,prm.value.lz,normE,extra);
+hold on
+plot(prm.value.lx, prm.value.lz(pz2(:)), '-r', 'LineWidth', 1.5);
 colormap(ha(2), slj.Plot.mycolormap(0));
 caxis([-3,3]);
 set(ha(2),'XTicklabel',[]);

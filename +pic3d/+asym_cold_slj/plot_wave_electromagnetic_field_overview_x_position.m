@@ -52,11 +52,11 @@ fE = fftshift(fft2(E));
 fB = fftshift(fft2(B));
 % dx = 1/40;
 % k = 2*pi/dx;
-k = 2*pi/prm.value.debye;
+k = 2*pi/60;
 k = linspace(-k*0.5, k*0.5, nx);
 dt = prm.value.wci;
 pdt = dt * prm.value.fpi/prm.value.wci;
-f = 1/pdt;
+f = 0.1;
 wE = linspace(-f*0.5, f*0.5, nE);
 wB = linspace(-f*0.5, f*0.5, nB);
 

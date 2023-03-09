@@ -4,12 +4,12 @@ clear;
 %% parameters 
 indir='E:\Asym\cold2_ds1\data';
 outdir='E:\Asym\cold2_ds1\out\Test';
-tt=30;
-xz=-0.96;
+tt=28;
+xz=-0.76;
 dir=0;
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='N';
-extra.xrange=[30,40];
+extra.xrange=[35,45];
 fs=14;
 
 %% read data
@@ -50,6 +50,7 @@ ylabel(extra.ylabel);
 legend('Nih', 'Nic', 'Ne', 'Nih + Nic', 'Location', 'Best');
 xlim(extra.xrange);
 set(gca,'FontSize', fs);
+title(['profiles ',ps,' = ',num2str(xz),',  \Omega_{ci}t=',num2str(tt)]);
 cd(outdir);
 % print('-dpng','-r300',['plasma_density_t',num2str(tt,'%06.2f'),'_',ps,num2str(xz),'.png']);
 

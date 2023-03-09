@@ -11,7 +11,7 @@ cmpt = 't';
 
 
 %% the subrange
-xrange = 1401:prm.value.nx;
+xrange = 1:prm.value.nx;
 yrange = 1:200;
 
 nt=length(tt);
@@ -30,42 +30,33 @@ else
     error('Parameters Error!');
 end
 
-pz = zeros(nt, 1);
-% nx = prm.value.nx;
-nx = length(xrange);
-tE = zeros(nt, nx);
-tB = zeros(nt, nx);
+nz = length(yrange);
+tE = zeros(nt, nz);
+tB = zeros(nt, nz);
 
 for t=1:nt
     %% read data
     fd = prm.read('E', tt(t), 'yrange', prm.value.nx, 200, 1);
-    fd = imfilter(fd.z, fspecial('average', [5,5]));
+    fd = imfilter(fd.x, fspecial('average', [5,5]));
     E = fd(yrange, xrange);
     fd = prm.read('B', tt(t), 'yrange', prm.value.nx, 200, 1);
-    B = fd.z(yrange, xrange);
-   %% obtain the range
-    re = abs(E);
-    %% obtain the maximum value position
-    [~, pos] = sort(re(:));
-    [mz, mx] = ind2sub(size(re), pos(end-1:end));
-    %% the average position
-    pz(t) = round(mean(mz(:)) + yrange(1) - 1);
-    pz(:) = 71;
+    B = fd.x(yrange, xrange);
+   
     %% obtain the field
-    tE(t, :) = E(pz(t), :);
-    tB(t, :) = B(pz(t), :);
+    tE(t, :) = E(:, 1601);
+    tB(t, :) = B(:, 1601);
 end
 
 cd(outdir);
 %% plot the field
 f1 = figure;
-slj.Plot.field2d(tE/normE, prm.value.lx(xrange), tt, extra);
+slj.Plot.field2d(tE/normE, prm.value.lz(yrange), tt, extra);
 xlabel('X [c/\omega_{pi}]');
 ylabel('\Omega_{ci}t');
 caxis([-1, 1]);
-title('Ez');
+title('Ex');
 set(gca,'FontSize', 14);
-print(f1, '-dpng','-r300','E_x_t.png');
+print(f1, '-dpng','-r300','E_z_t.png');
 
 %% Fourier transform
 fE = fftshift(fft2(tE));
@@ -73,7 +64,7 @@ fB = fftshift(fft2(tB));
 % dx = 1/40;
 % k = 2*pi/dx;
 k = 2*pi/60;
-k = linspace(-k*0.5, k*0.5, nx);
+k = linspace(-k*0.5, k*0.5, nz);
 pdt = dt * prm.value.fpi/prm.value.wci;
 f = 0.1;
 f = linspace(-f*0.5, f*0.5, nt);
@@ -85,20 +76,20 @@ p = pcolor(X, Y, abs(fE));
 shading flat;
 p.FaceColor = 'interp';
 colorbar;
-xlabel('kx [2\pi/di]');
+xlabel('kz [2\pi/di]');
 ylabel('\omega [\omega_{pe}]');
-title('Ez');
+title('Ex');
 set(gca,'FontSize',14);
 print(f2, '-dpng','-r300','PSD_E_k_w.png');
 
 %% magnetic field
 f3 = figure;
-slj.Plot.field2d(tB, prm.value.lx(xrange), tt, extra);
+slj.Plot.field2d(tB, prm.value.lz(yrange), tt, extra);
 xlabel('X [c/\omega_{pi}]');
 ylabel('\Omega_{ci}t');
-title('Bz');
+title('Bx');
 set(gca,'FontSize', 14);
-print(f3, '-dpng','-r300','Bz_x_t.png');
+print(f3, '-dpng','-r300','Bz_z_t.png');
 
 %%
 f4 = figure;
@@ -108,8 +99,8 @@ p.FaceColor = 'interp';
 colorbar;
 % xlabel('k [2\pi/di]');
 % ylabel('\omega [\omega_{ci}]');
-xlabel('kx [2\pi/\lambda_D]');
-ylabel('\omega [\omega_{pi}]');
-title('Bz');
+xlabel('kz [2\pi/di]');
+ylabel('\omega [\omega_{pe}]');
+title('Bx');
 set(gca,'FontSize',14);
 print(f4, '-dpng','-r300','PSD_B_k_w.png');

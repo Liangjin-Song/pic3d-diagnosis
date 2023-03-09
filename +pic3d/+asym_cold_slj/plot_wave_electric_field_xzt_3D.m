@@ -5,10 +5,10 @@ outdir='E:\Asym\cold2_ds1\out\Wave';
 prm=slj.Parameters(indir,outdir);
 
 dt = 0.005;
-tt=30:dt:30;
+tt=28:dt:28;
 name='e';
-cmptE = 'x';
-cmptB = 'z';
+cmptE = 'z';
+cmptB = 'x';
 
 %% the subrange
 xrange = 1401:prm.value.nx;
@@ -60,12 +60,12 @@ for t=1:nt
 end
 
 cd(outdir);
-wE = fftn(tE);
+wE = fftn(tB);
 wE = sum(wE, 3);
 wE = fftshift(wE);
 
 
-k = 2*pi/prm.value.debye;
+k = 2*pi/60;
 kx = linspace(-k*0.5, k*0.5, nx);
 kz = linspace(-k*0.5, k*0.5, nz);
 [X, Y] = meshgrid(kx, kz);
@@ -76,9 +76,9 @@ p = pcolor(X, Y, abs(wE));
 shading flat;
 p.FaceColor = 'interp';
 colorbar;
-xlabel('kx [2\pi/\lambda_D]');
-ylabel('kz [2\pi/\lambda_D]');
-title('PSD, Ex');
+xlabel('kx [2\pi/di]');
+ylabel('kz [2\pi/di]');
+title('Bx');
 xlim([0, kx(end)]);
 ylim([0, kz(end)]);
 set(gca,'FontSize',14);

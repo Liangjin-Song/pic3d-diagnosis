@@ -99,6 +99,12 @@ methods (Access = public, Static)
     wc = local_gyro_frequency(B, q, m, prm);
 end
 
+%% ======================================================================== %%
+%% effective diffusivity
+methods (Access = public, Static)
+    [eff, nmt, dnt] = effective_diffusivity(prm, B, E, V, J);
+end
+
 
 %% ======================================================================== %%
 end

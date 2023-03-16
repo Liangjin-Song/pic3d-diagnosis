@@ -9,11 +9,11 @@ outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
 % norm=prm.value.vA;
 norm=1;
-name='E';
-tt=28;
-xz=-0.76;
-dir=0;
-xrange=[35,45];
+name='B';
+tt=0;
+xz=25;
+dir=1;
+xrange=[-10,10];
 extra.title=['\Omega_{ci}t=',num2str(tt)];
 FontSize=14;
 

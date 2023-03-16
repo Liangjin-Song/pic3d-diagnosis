@@ -1,19 +1,19 @@
 % function plot_temperature_component_profiles(name)
 clear;
 %% 
-indir='E:\Asym\dst1\data';
-outdir='E:\Asym\dst1\out\Kinetic\Distribution\Cold_Ions\line';
+indir='E:\Asym\cold2_ds1\data';
+outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
 
-tt=20;
-name='h';
+tt=0;
+name='l';
 
 dir=1;
 xz=25;
 
 nt=length(tt);
 
-xrange=[-2,4];
+xrange=[-10,10];
 extra.Visible=true;
 
 if dir == 1

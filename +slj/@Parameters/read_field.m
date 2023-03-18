@@ -7,6 +7,10 @@ function fd = read_field(value, name, time)
 % @param: time - the time step of the field
 %%
 filename=[name,'_t',num2str(time,'%06.2f'),'.bsd'];
+if strcmp(name, 'Ehest0.1')
+    fd = slj.Parameters.read_binary_file(filename, 'uint64');
+    return;
+end
 if isfield(value,'reset')
     if value.reset
         nx=value.nx;

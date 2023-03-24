@@ -14,8 +14,8 @@ tt = 50;
 spn = 'h';
 
 %% position
-s=3;
-xrange=[24.5,25.5];
+s=4;
+xrange=[30,31];
 zrange=[-2, 4];
 yrange=[-100,100];
 % velocity direction

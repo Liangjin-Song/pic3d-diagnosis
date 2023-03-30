@@ -142,6 +142,10 @@ Ee = Ke + Ue;
 %% debye length
 lambda = sqrt(Te./(N*qi*qi));
 
+%% the ration between light speed and Alfven speed
+vA = Bx ./ (sqrt(mu0*N*mi));
+rcvA = c./vA;
+
 
 %% plot figure
 Ly = ny/di;
@@ -212,3 +216,9 @@ Bsh = abs(Bsh);
 Bsp = abs(Bsp);
 vA_asym = sqrt(Bsh * Bsp * (Bsh + Bsp)/(mu0 * mi * (Nsh * Bsp + Nsp * Bsh)));
 disp(['v_{A,asym} = ', num2str(vA_asym)]);
+
+f8 = figure;
+plot(y,rcvA, '-k','LineWidth',1);
+xlabel('Z');
+ylabel('c/v_{A}');
+set(gca, 'FontSize', 14);

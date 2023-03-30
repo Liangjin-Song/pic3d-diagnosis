@@ -143,7 +143,7 @@ Ee = Ke + Ue;
 lambda = sqrt(Te./(N*qi*qi));
 
 %% the ration between light speed and Alfven speed
-vA = Bx ./ (sqrt(mu0*N*mi));
+vA = abs(Bx) ./ (sqrt(mu0*N*mi));
 rcvA = c./vA;
 
 

@@ -16,7 +16,7 @@ extra.log=true;
 extra.FontSize = 14;
 
 %% the data
-xrange=[24.5, 25.5];
+xrange=[28, 29];
 yrange=[-100,100];
 spcs = prm.read(name);
 
@@ -26,32 +26,31 @@ ha=slj.Plot.subplot(4,3,[0.02,0.005],[0.07,0.03],[0.1,0.02]);
 
 %% R1
 zrange=[-1, 0];
-caxs = [0, 3.7];
+caxs = [0, 3.5];
 plot_VDFs(ha, 1, prm, spcs, xrange, yrange, zrange, caxs, precision, extra);
 
 %% R2
 zrange=[0, 1];
-caxs = [0, 2.8];
+caxs = [0, 3];
 plot_VDFs(ha, 4, prm, spcs, xrange, yrange, zrange, caxs, precision, extra);
 
 %% R3
 zrange=[1, 2.5];
-caxs = [0, 2.8];
+caxs = [0, 2];
 plot_VDFs(ha, 7, prm, spcs, xrange, yrange, zrange, caxs, precision, extra);
 
 %% R4
 zrange=[2.5, 4];
-caxs=[0, 2.9];
+caxs=[0, 2];
 plot_VDFs(ha, 10, prm, spcs, xrange, yrange, zrange, caxs, precision, extra);
 
 %% Particles' Position
-id6 = '1327536648';
-id7 = '887512149';
-id8 = '991656158';
+id4 = '835629679';
+id5 = '983841419';
 
-plot_particle_position(id6, prm, ha, 10, '*b');
-plot_particle_position(id7, prm, ha, 10, '*w');
-plot_particle_position(id8, prm, ha, 10, '*k');
+plot_particle_position(id4, prm, ha, 4, '*b');
+plot_particle_position(id5, prm, ha, 7, '*b');
+% plot_particle_position(id6, prm, ha, 7, '*k');
 
 %% label
 annotation(f,'textbox',...
@@ -157,8 +156,8 @@ annotation(f,'textbox',...
 
 %% save
 cd(outdir);
-% print('-dpng', '-r300', 'figure7.png');
-% print(f,'-depsc','-painters','figure7.eps');
+% print('-dpng', '-r300', 'figure5.png');
+% print(f,'-depsc','-painters','figure5.eps');
 
 
 function h = plot_VDF(prm, spcs, xrange, yrange, zrange, vdir, precision, extra)

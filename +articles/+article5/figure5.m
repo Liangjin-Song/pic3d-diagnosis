@@ -1,240 +1,236 @@
-%% the distribution function at the outflow region
+%% the particles' trajectories in Figure 2
 clear;
 %% parameters
 indir = 'E:\Asym\cold2_ds1\data';
 outdir = 'E:\Asym\cold2_ds1\out\Article\Paper5';
 prm = slj.Parameters(indir, outdir);
 
-%% the distribution function
-name = 'PVh_ts48000_x800-1200_y418-661_z0-1';
-precision=80;
-range = 2;
-extra.colormap='moon';
-extra.xrange=[-range,range];
-extra.yrange=[-range,range];
-extra.log=true;
-extra.FontSize = 14;
-
-%% the data
-xrange=[28, 29];
-yrange=[-100,100];
-spcs = prm.read(name);
-
-%% figure
-f=figure('Position',[500,10,1200,1200]);
-ha=slj.Plot.subplot(4,3,[0.02,0.005],[0.07,0.03],[0.1,0.02]);
-
-%% R1
-zrange=[-1, 0];
-caxs = [0, 3.5];
-plot_VDFs(ha, 1, prm, spcs, xrange, yrange, zrange, caxs, precision, extra);
-
-%% R2
-zrange=[0, 1];
-caxs = [0, 3];
-plot_VDFs(ha, 4, prm, spcs, xrange, yrange, zrange, caxs, precision, extra);
-
-%% R3
-zrange=[1, 2.5];
-caxs = [0, 2];
-plot_VDFs(ha, 7, prm, spcs, xrange, yrange, zrange, caxs, precision, extra);
-
-%% R4
-zrange=[2.5, 4];
-caxs=[0, 2];
-plot_VDFs(ha, 10, prm, spcs, xrange, yrange, zrange, caxs, precision, extra);
-
-%% Particles' Position
+%% particles' id
 id4 = '835629679';
 id5 = '983841419';
 
-plot_particle_position(id4, prm, ha, 4, '*b');
-plot_particle_position(id5, prm, ha, 7, '*b');
-% plot_particle_position(id6, prm, ha, 7, '*k');
+%% time
+tt=30;
+tt0=3001;
+trange=2701:4001;
+
+%% figures
+f=figure('Position',[500,10,600,1000]);
+ha=slj.Plot.subplot(4,2,[0.05,0.1],[0.1,0.04],[0.12,0.02]);
+
+%%
+vxy.xtick = -0.4:0.2:0.6;
+vxy.xtkble = {'-0.4', '-0.2', '0', '0.2', '0.4', '0.6'};
+vxy.ytick = -1:0.5:1;
+vxy.ytkble = {'-1', '-0.5', '0', '0.5', '1'};
+vxz.xtick = -0.4:0.2:0.6;
+vxz.xtkble = {'-0.4', '-0.2', '0', '0.2', '0.4', '0.6'};
+vxz.ytick = -1:0.5:1;
+vxz.ytkble = {'-1', '-0.5', '0', '0.5', '1'};
+vyz.xtick = 0:0.5:1.5;
+vyz.xtkble = {'0', '0.5', '1', '1.5'};
+vyz.ytick = -1:0.5:1;
+vyz.ytkble = {'-1', '-0.5', '0', '0.5', '1'};
+particle_information(ha, 1, prm, id4, trange, tt, tt0, vxy, vxz, vyz);
+
+%% 
+vxy.xtick = 0.2:0.4:1;
+vxy.xtkble = {'0.2', '0.6', '1'};
+vxy.ytick = -1:0.5:1;
+vxy.ytkble = {'-1', '-0.5', '0', '0.5', '1'};
+vxz.xtick = 0.2:0.4:1;
+vxz.xtkble = {'0.2', '0.6', '1'};
+vxz.ytick = -1:0.5:1;
+vxz.ytkble = {'-1', '-0.5', '0', '0.5', '1'};
+vyz.xtick = -1:0.5:0.5;
+vyz.xtkble = {'-1', '-0.5', '0', '0.5'};
+vyz.ytick = -1:0.5:1;
+vyz.ytkble = {'-1', '-0.5', '0', '0.5', '1'};
+particle_information(ha, 2, prm, id5, trange, tt, tt0, vxy, vxz, vyz);
 
 %% label
 annotation(f,'textbox',...
-    [0.0975000000000001 0.938363817838028 0.042916665636003 0.0347912517444751],...
+    [0.225000000000001 0.925000000745056 0.182499995057782 0.0349999992549419],...
+    'String',{'Particle 4'},...
+    'LineStyle','none',...
+    'FontSize',16,...
+    'FontName','Times New Roman');
+annotation(f,'textbox',...
+    [0.710000000000003 0.925000000745056 0.182499995057782 0.0349999992549419],...
+    'String',{'Particle 5'},...
+    'LineStyle','none',...
+    'FontSize',16,...
+    'FontName','Times New Roman');
+
+annotation(f,'textbox',...
+    [0.05 0.889000000655651 0.0774999981870254 0.0319999993443489],...
     'String',{'(a)'},...
     'LineStyle','none',...
-    'FontSize',16,...
+    'FontSize',14,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.392500000000001 0.939357853623314 0.0437499989445011 0.0347912517444751],...
+    [0.526666666666667 0.888000000655651 0.0791666648040216 0.0319999993443489],...
     'String',{'(b)'},...
     'LineStyle','none',...
-    'FontSize',16,...
+    'FontSize',14,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.686666666666667 0.938363817838025 0.042916665636003 0.0347912517444751],...
+    [0.116666666666668 0.703000000655652 0.0774999981870254 0.0319999993443489],...
     'String',{'(c)'},...
     'LineStyle','none',...
-    'FontSize',16,...
+    'FontSize',14,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.0975000000000002 0.708741551436435 0.0437499989445011 0.0347912517444751],...
+    [0.595000000000003 0.702000000655652 0.0791666648040216 0.0319999993443489],...
     'String',{'(d)'},...
     'LineStyle','none',...
-    'FontSize',16,...
+    'FontSize',14,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.391666666666667 0.708741551436436 0.042916665636003 0.0347912517444751],...
+    [0.115000000000003 0.476000000655652 0.0774999981870254 0.0319999993443489],...
     'String',{'(e)'},...
     'LineStyle','none',...
-    'FontSize',16,...
+    'FontSize',14,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.686666666666667 0.708741551436436 0.0412499990190069 0.0347912517444751],...
+    [0.595000000000004 0.476000000655652 0.0741666649530331 0.0319999993443489],...
     'String',{'(f)'},...
     'LineStyle','none',...
-    'FontSize',16,...
+    'FontSize',14,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.0983333333333335 0.479119285034846 0.0437499989445011 0.0347912517444751],...
+    [0.115000000000003 0.248000000655652 0.0791666648040216 0.0319999993443489],...
     'String',{'(g)'},...
     'LineStyle','none',...
-    'FontSize',16,...
+    'FontSize',14,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.392500000000001 0.478125249249558 0.0437499989445011 0.0347912517444751],...
+    [0.595000000000004 0.248000000655652 0.0791666648040216 0.0319999993443489],...
     'String',{'(h)'},...
     'LineStyle','none',...
-    'FontSize',16,...
-    'FontName','Times New Roman');
-annotation(f,'textbox',...
-    [0.686666666666668 0.478125249249557 0.0404166657105088 0.0347912517444751],...
-    'String',{'(i)'},...
-    'LineStyle','none',...
-    'FontSize',16,...
-    'FontName','Times New Roman');
-annotation(f,'textbox',...
-    [0.0975000000000002 0.248502982847967 0.0404166657105089 0.0347912517444751],...
-    'String',{'(j)'},...
-    'LineStyle','none',...
-    'FontSize',16,...
-    'FontName','Times New Roman');
-annotation(f,'textbox',...
-    [0.392500000000001 0.248502982847967 0.0437499989445011 0.0347912517444751],...
-    'String',{'(k)'},...
-    'LineStyle','none',...
-    'FontSize',16,...
-    'FontName','Times New Roman');
-annotation(f,'textbox',...
-    [0.686666666666668 0.248502982847968 0.0404166657105088 0.0347912517444751],...
-    'String',{'(l)'},...
-    'LineStyle','none',...
-    'FontSize',16,...
+    'FontSize',14,...
     'FontName','Times New Roman');
 
 
-
-%%
-annotation(f,'textbox',...
-    [0.0125 0.84293638268735 0.0570833318804702 0.0427435377897847],...
-    'String',{'R1'},...
-    'LineStyle','none',...
-    'FontSize',22,...
-    'FontName','Times New Roman');
-annotation(f,'textbox',...
-    [0.0116666666666667 0.612320080500469 0.0570833318804702 0.0427435377897847],...
-    'String',{'R2'},...
-    'LineStyle','none',...
-    'FontSize',22,...
-    'FontName','Times New Roman');
-annotation(f,'textbox',...
-    [0.0125 0.38269781409888 0.0570833318804702 0.0427435377897847],...
-    'String',{'R3'},...
-    'LineStyle','none',...
-    'FontSize',22,...
-    'FontName','Times New Roman');
-annotation(f,'textbox',...
-    [0.0125 0.152081511912002 0.0570833318804702 0.0427435377897847],...
-    'String',{'R4'},...
-    'LineStyle','none',...
-    'FontSize',22,...
-    'FontName','Times New Roman');
 
 %% save
 cd(outdir);
-% print('-dpng', '-r300', 'figure5.png');
-% print(f,'-depsc','-painters','figure5.eps');
+% print('-dpng', '-r300', 'figure6.png');
 
 
-function h = plot_VDF(prm, spcs, xrange, yrange, zrange, vdir, precision, extra)
-spc=spcs.subposition(xrange,yrange,zrange);
-dst=spc.dstv(prm.value.vA,precision);
-dst=dst.intgrtv(vdir);
-h = slj.Plot.field2d(dst.value, dst.ll, dst.ll,extra);
-set(gca, 'FontSize', 12);
-end
+%% particle information
+function particle_information(ha, ip, prm, id, trange, tt, tt0, vxy, vxz, vyz)
+norm=0.5*prm.value.mi*prm.value.vA.^2;
+prt=prm.read(['trajh_id',id]);
+prt=prt.norm_energy(norm);
+prt=prt.norm_electric_field(prm);
 
 
-function plot_VDFs(ha, i, prm, spcs, xrange, yrange, zrange, caxs, precision, extra)
-sfx = 'ic';
-dx = 0.05;
+fs = 10;
+star=trange(1):100:trange(end);
 
-hi = ha(i+2);
+pw = 5;
+
+%%
+hi = ha(ip);
 axes(hi);
-vdir = 1;
-extra.ylabel=['V',sfx,'_z [V_A]'];
-h = plot_VDF(prm, spcs, xrange, yrange, zrange, vdir, precision, extra);
-caxis(caxs);
+trange0=trange;
+ss=prm.read('stream',tt);
+cr=[0, max(prt.value.k(trange0))];
+slj.Plot.stream(ss,prm.value.lx,prm.value.lz,20);
+hold on
+p=patch(prt.value.rx(trange0),prt.value.rz(trange0),[prt.value.k(trange0(1:end-1));NaN],'edgecolor','flat','facecolor','none');
+caxis(cr);
+colormap('jet');
+cb=colorbar('AxisLocation','out', 'Location', 'northoutside');
+pos = get(cb, 'Position');
+pos(2) = pos(2) - 0.018;
+set(cb,'FontSize', fs, 'Position', pos);
+
 pos0 = get(hi, 'Position');
-pos = pos0;
-pos(3) = pos(3) - dx;
-set(hi, 'Position', pos);
+pos0(2) = pos0(2) - 0.005;
+set(hi, 'Position', pos0);
 
-dx = 0.025;
-hi = ha(i);
+xlim([0,50]);
+ylim([-10,10]);
+set(p,'LineWidth',2);
+xlabel('X [c/\omega_{pi}]');
+if ip == 1
+    ylabel('Z [c/\omega_{pi}]');
+end
+set(gca,'FontSize', fs);
+
+%%
+hi = ha(ip + 2);
+vA=prm.value.vA;
+vx=prt.value.vx/vA;
+vy=prt.value.vy/vA;
+vz=prt.value.vz/vA;
+vy=(vy(1:end-1)+vy(2:end))/2;
 axes(hi);
-vdir = 3;
-extra.ylabel=['V',sfx,'_y [V_A]'];
-h = plot_VDF(prm, spcs, xrange, yrange, zrange, vdir, precision, extra);
-caxis(caxs);
-delete(h);
-pos = get(hi, 'Position');
-pos(3) = pos0(3) - dx;
-set(hi, 'Position', pos);
+p=patch(vx(trange),vy(trange),[prt.value.k(trange(1):trange(end-1)); NaN],'edgecolor','flat','facecolor','none');
+colormap('jet');
+set(p,'LineWidth',2);
+caxis([0,max(prt.value.k(trange))]);
+hold on
+plot(vx(star),vy(star),'*k','LineWidth',pw);
+plot(vx(tt0),vy(tt0),'*r','LineWidth',pw); % distribution position
+plot(vx(star(1)),vy(star(1)),'*g','LineWidth',pw); % begin
+plot(vx(star(end)),vy(star(end)),'*b','LineWidth',pw); % end
+hold off
+xlabel('Vic_x [V_A]');
+if ip == 1
+    ylabel('Vic_y [V_A]');
+else
+    set(hi,'YTicklabel',[]);
+end
+set(gca,'XTick',vxy.xtick,'Xticklabel',vxy.xtkble);
+set(gca,'YTick',vxy.ytick,'Yticklabel',vxy.ytkble);
+set(gca,'FontSize', fs);
 
-
-hi = ha(i+1);
+%%
+hi = ha(ip + 4);
 axes(hi);
-vdir = 2;
-extra.ylabel=['V',sfx,'_z [V_A]'];
-h = plot_VDF(prm, spcs, xrange, yrange, zrange, vdir, precision, extra);
-caxis(caxs);
-delete(h);
-pos = get(hi, 'Position');
-pos(3) = pos0(3) - dx;
-set(hi, 'Position', pos);
-
-if i ~= 10
-    set(ha(i),'XTicklabel',[]);
-    set(ha(i+1),'XTicklabel',[]);
-    set(ha(i+2),'XTicklabel',[]);
-end
-if i == 10
-    xlabel(ha(i), ['V',sfx,'_x [V_A]']);
-    xlabel(ha(i+1), ['V',sfx,'_x [V_A]']);
-    xlabel(ha(i+2), ['V',sfx,'_y [V_A]']);
-end
-end
-
-function plot_particle_position(id, prm, ha, i, log)
-tt = 30;
-prt = prm.read(['trajh_id', id]);
-prt=prt.norm_velocity(prm);
-ttp = find(prt.value.time == tt);
-
-axes(ha(i));
+p=patch(vx(trange),vz(trange),[prt.value.k(trange(1):trange(end-1)); NaN],'edgecolor','flat','facecolor','none');
+colormap('jet');
+set(p,'LineWidth',2);
+caxis([0,max(prt.value.k(trange))]);
 hold on
-plot(prt.value.vx(ttp), prt.value.vy(ttp), log, 'LineWidth', 5);
+plot(vx(star),vz(star),'*k','LineWidth',pw);
+plot(vx(tt0),vz(tt0),'*r','LineWidth',pw); % distribution position
+plot(vx(star(1)),vz(star(1)),'*g','LineWidth',pw); % begin
+plot(vx(star(end)),vz(star(end)),'*b','LineWidth',pw); % end
+hold off
+xlabel('Vic_x [V_A]');
+if ip == 1
+    ylabel('Vic_z [V_A]');
+else
+    set(hi,'YTicklabel',[]);
+end
+set(gca,'XTick',vxz.xtick,'Xticklabel',vxz.xtkble);
+set(gca,'YTick',vxz.ytick,'Yticklabel',vxz.ytkble);
+set(gca,'FontSize', fs);
 
-axes(ha(i+1));
+%%
+hi = ha(ip + 6);
+axes(hi);
+p=patch(vy(trange),vz(trange),[prt.value.k(trange(1):trange(end-1)); NaN],'edgecolor','flat','facecolor','none');
+colormap('jet');
+set(p,'LineWidth',2);
+caxis([0,max(prt.value.k(trange))]);
 hold on
-plot(prt.value.vx(ttp), prt.value.vz(ttp), log, 'LineWidth', 5);
-
-axes(ha(i+2));
-hold on
-plot(prt.value.vy(ttp), prt.value.vz(ttp), log, 'LineWidth', 5);
+plot(vy(star),vz(star),'*k','LineWidth',pw);
+plot(vy(tt0),vz(tt0),'*r','LineWidth',pw); % distribution position
+plot(vy(star(1)),vz(star(1)),'*g','LineWidth',pw); % begin
+plot(vy(star(end)),vz(star(end)),'*b','LineWidth',pw); % end
+hold off
+xlabel('Vic_y [V_A]');
+if ip == 1
+    ylabel('Vic_z [V_A]');
+else
+    set(hi,'YTicklabel',[]);
+end
+set(gca,'XTick',vyz.xtick,'Xticklabel',vyz.xtkble);
+set(gca,'YTick',vyz.ytick,'Yticklabel',vyz.ytkble);
+set(gca,'FontSize', fs);
 end

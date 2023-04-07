@@ -1,6 +1,6 @@
-%% the particles' trajectories in Figure 2
+%% the trajectory of Particles 6 7 8
 clear;
-%% parameters
+%% Parameters
 indir = 'E:\Asym\cold2_ds1\data';
 outdir = 'E:\Asym\cold2_ds1\out\Article\Paper5';
 prm = slj.Parameters(indir, outdir);
@@ -10,64 +10,33 @@ id6 = '1327536648';
 id7 = '887512149';
 id8 = '991656158';
 
-%% time
-tt=30;
-tt0=3001;
-trange=1:4001;
 
 %% figures
-f=figure('Position',[500,10,1000,800]);
-ha=slj.Plot.subplot(3,3,[0.08,0.07],[0.1,0.04],[0.1,0.02]);
+f=figure('Position',[500,10,1200,800]);
+ha=slj.Plot.subplot(4,3,[0.018,0.05],[0.1,0.08],[0.08,0.02]);
 
 %%
-YZ.xtick = 0:5:10;
-YZ.xtkble = {'0', '5', '10'};
-YZ.ytick = -2:2:4;
-YZ.ytkble = {'-2', '0', '2', '4'};
-vyz.xtick = -1:0.5:1;
-vyz.xtkble = {'-1', '-0.5', '0', '0.5', '1'};
-vyz.ytick = -1:0.5:1;
-vyz.ytkble = {'-1', '-0.5', '0', '0.5', '1'};
-particle_information(ha, 1, prm, id6, trange, tt, tt0, YZ, vyz);
+particle_trajectory(ha, 1, prm, id6);
 
-%% 
-YZ.xtick = -15:5:5;
-YZ.xtkble = {'-15', '-10', '-5', '0', '5'};
-YZ.ytick = -2:2:4;
-YZ.ytkble = {'-2', '0', '2', '4'};
-vyz.xtick = -1.5:0.5:0.5;
-vyz.xtkble = {'-1.5', '-1', '-0.5', '0', '0.5'};
-vyz.ytick = -1:0.5:1;
-vyz.ytkble = {'-1', '-0.5', '0', '0.5', '1'};
-particle_information(ha, 2, prm, id7, trange, tt, tt0, YZ, vyz);
+particle_trajectory(ha, 2, prm, id7);
 
-%% 
-YZ.xtick = -50:10:10;
-YZ.xtkble = {'-50', '-40', '-30', '-20', '-10', '0', '10'};
-YZ.ytick = -2:2:4;
-YZ.ytkble = {'-2', '-1', '0', '1', '2'};
-vyz.xtick = -2:1:1;
-vyz.xtkble = {'-2', '-1', '0', '1'};
-vyz.ytick = -1.5:1:1.5;
-vyz.ytkble = {'-1.5', '-0.5', '0.5', '1.5'};
-particle_information(ha, 3, prm, id8, trange, tt, tt0, YZ, vyz);
-
+particle_trajectory(ha, 3, prm, id8);
 
 %% label
 annotation(f,'textbox',...
-    [0.172 0.934000001005828 0.121499996677041 0.0462499989941716],...
+    [0.1625 0.924000001005828 0.101249997230868 0.0462499989941716],...
     'String',{'Particle 6'},...
     'LineStyle','none',...
     'FontSize',18,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.486000000000001 0.932750001005828 0.121499996677041 0.0462499989941716],...
+    [0.479166666666667 0.924000001005828 0.101249997230868 0.0462499989941716],...
     'String',{'Particle 7'},...
     'LineStyle','none',...
     'FontSize',18,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.805 0.930250001005828 0.121499996677041 0.0462499989941716],...
+    [0.795833333333336 0.924000001005828 0.101249997230868 0.0462499989941716],...
     'String',{'Particle 8'},...
     'LineStyle','none',...
     'FontSize',18,...
@@ -75,160 +44,215 @@ annotation(f,'textbox',...
 
 
 annotation(f,'textbox',...
-    [0.04 0.870250001005828 0.0564999986141921 0.0462499989941716],...
+    [0.0241666666666672 0.897750000931323 0.042916665636003 0.0437499990686775],...
     'String',{'(a)'},...
     'LineStyle','none',...
-    'FontSize',18,...
+    'FontSize',16,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.363 0.869000001005828 0.0574999985843897 0.0462499989941716],...
+    [0.394166666666668 0.879000000931323 0.0437499989445011 0.0437499990686775],...
     'String',{'(b)'},...
     'LineStyle','none',...
-    'FontSize',18,...
+    'FontSize',16,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.68 0.867750001005828 0.0564999986141921 0.0462499989941716],...
+    [0.712500000000002 0.879000000931323 0.042916665636003 0.0437499990686775],...
     'String',{'(c)'},...
     'LineStyle','none',...
-    'FontSize',18,...
+    'FontSize',16,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.046 0.626500001005827 0.0574999985843897 0.0462499989941716],...
+    [0.0241666666666677 0.679000000931323 0.0437499989445011 0.0437499990686775],...
     'String',{'(d)'},...
     'LineStyle','none',...
-    'FontSize',18,...
+    'FontSize',16,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.363 0.626500001005828 0.056499998614192 0.0462499989941716],...
+    [0.394166666666668 0.655250000931323 0.042916665636003 0.0437499990686775],...
     'String',{'(e)'},...
     'LineStyle','none',...
-    'FontSize',18,...
+    'FontSize',16,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.68 0.624000001005828 0.053499998703599 0.0462499989941716],...
+    [0.730000000000002 0.667750000931323 0.0412499990190069 0.0437499990686775],...
     'String',{'(f)'},...
     'LineStyle','none',...
-    'FontSize',18,...
+    'FontSize',16,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.047 0.311500001005827 0.0574999985843897 0.0462499989941716],...
+    [0.024166666666668 0.471500000931323 0.0437499989445011 0.0437499990686774],...
     'String',{'(g)'},...
     'LineStyle','none',...
-    'FontSize',18,...
+    'FontSize',16,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.364 0.309000001005828 0.0574999985843897 0.0462499989941716],...
+    [0.395000000000001 0.460250000931322 0.0437499989445011 0.0437499990686774],...
     'String',{'(h)'},...
     'LineStyle','none',...
-    'FontSize',18,...
+    'FontSize',16,...
     'FontName','Times New Roman');
 annotation(f,'textbox',...
-    [0.67 0.310250001005828 0.0524999987334014 0.0462499989941716],...
+    [0.711666666666669 0.461500000931322 0.0404166657105088 0.0437499990686774],...
     'String',{'(i)'},...
     'LineStyle','none',...
-    'FontSize',18,...
+    'FontSize',16,...
     'FontName','Times New Roman');
-
+annotation(f,'textbox',...
+    [0.0233333333333347 0.266500000931323 0.0404166657105089 0.0437499990686774],...
+    'String',{'(j)'},...
+    'LineStyle','none',...
+    'FontSize',16,...
+    'FontName','Times New Roman');
+annotation(f,'textbox',...
+    [0.394166666666668 0.250250000931323 0.0437499989445011 0.0437499990686774],...
+    'String',{'(k)'},...
+    'LineStyle','none',...
+    'FontSize',16,...
+    'FontName','Times New Roman');
+annotation(f,'textbox',...
+    [0.711666666666669 0.250250000931323 0.0404166657105088 0.0437499990686774],...
+    'String',{'(l)'},...
+    'LineStyle','none',...
+    'FontSize',16,...
+    'FontName','Times New Roman');
 
 %% save
 cd(outdir);
-% print('-dpng', '-r300', 'figure8.png');
+% print('-dpng', '-r300', 'figure9.png');
+% print(f,'-depsc','-painters','figure9.eps');
 
 
-%% particle information
-function particle_information(ha, ip, prm, id, trange, tt, tt0, YZ, vyz)
-norm=0.5*prm.value.mi*prm.value.vA.^2;
+function particle_trajectory(ha, i, prm, id)
+%%
+xrange = [0, 60];
+norm=0.5*prm.value.mi*prm.value.vA*prm.value.vA;
+spcs = 'ic';
+FontSize = 12;
+%% 
 prt=prm.read(['trajh_id',id]);
+den=prt.acceleration_direction(prm);
+den.x=den.x/norm;
+den.y=den.y/norm;
+den.z=den.z/norm;
 prt=prt.norm_energy(norm);
 prt=prt.norm_electric_field(prm);
+prt=prt.norm_velocity(prm);
+en=prt.acceleration_rate(prm);
+en.epara=en.epara/norm*prm.value.wci;
+en.eperp=en.eperp/norm*prm.value.wci;
 
-
-fs = 12;
-star=trange(1):100:trange(end);
-
-%%
-hi = ha(ip);
+lx=prt.value.time;
+% extra.xrange=[lx(1),lx(end)];
+hi = ha(i);
 axes(hi);
-trange0=trange;
-ss=prm.read('stream',tt);
-cr=[0, max(prt.value.k(trange0))];
-slj.Plot.stream(ss,prm.value.lx,prm.value.lz,20);
-hold on
-p=patch(prt.value.rx(trange0),prt.value.rz(trange0),[prt.value.k(trange0(1:end-1));NaN],'edgecolor','flat','facecolor','none');
-caxis(cr);
-colormap('jet');
-cb=colorbar('AxisLocation','out', 'Location', 'northoutside');
-pos = get(cb, 'Position');
-pos(2) = pos(2) - 0.022;
-set(cb,'FontSize', fs, 'Position', pos);
-pos0 = get(hi, 'Position');
-pos0(2) = pos0(2) - 0.005;
-set(hi, 'Position', pos0);
-xlim([0,50]);
-ylim([-10,10]);
-set(p,'LineWidth',3);
-xlabel('X [c/\omega_{pi}]');
-if ip == 1
-    ylabel('Z [c/\omega_{pi}]');
-end
-set(gca,'FontSize', fs);
+ly.l1=prt.value.k;
+ly.l2=prt.value.kx;
+ly.l3=prt.value.ky;
+ly.l4=prt.value.kz;
+extra.LineStyle={'-', '-', '-', '-'};
+extra.LineColor={'k', 'r', 'b', 'g'};
 
-pw = 5;
-%%
-hi = ha(ip + 3);
-axes(hi);
-vA=prm.value.vA;
-vy=prt.value.vy/vA;
-vz=prt.value.vz/vA;
-vy=(vy(1:end-1)+vy(2:end))/2;
-% y position
-nvy=length(vy);
-ry=zeros(nvy+1,1);
-for i=1:nvy
-    ry(i+1)=ry(i)+vy(i)*0.02;
+if i == 1
+extra.legend={'K', 'Kx', 'Ky', 'Kz'};
+extra.Location='west';
+extra.ylabel=['K',spcs];
 end
-% y-z trajectory
-p=patch(ry(trange),prt.value.rz(trange),[prt.value.k(trange(1):trange(end-1)); NaN],'edgecolor','flat','facecolor','none');
-colormap('jet');
-set(p,'LineWidth',3);
-caxis([0,max(prt.value.k(trange))]);
-hold on;
-plot(ry(star),prt.value.rz(star),'*k','LineWidth',pw);
-plot(ry(tt0),prt.value.rz(tt0),'*r','LineWidth',pw);
-plot(ry(star(1)),prt.value.rz(star(1)),'*g','LineWidth',pw); % begin
-plot(ry(star(end)),prt.value.rz(star(end)),'*b','LineWidth',pw); % end
-hold off
-xlabel('Y [c/\omega_{pi}]');
-if ip == 1
-    ylabel('Z [c/\omega_{pi}]');
-end
-set(gca,'XTick',YZ.xtick,'Xticklabel',YZ.xtkble);
-set(gca,'YTick',YZ.ytick,'Yticklabel',YZ.ytkble);
-set(gca,'FontSize', fs);
 
-%%
-hi = ha(ip + 6);
-axes(hi);
-p=patch(vy(trange),vz(trange),[prt.value.k(trange(1):trange(end-1)); NaN],'edgecolor','flat','facecolor','none');
-colormap('jet');
-set(p,'LineWidth',3);
-caxis([0,max(prt.value.k(trange))]);
-hold on
-plot(vy(star),vz(star),'*k','LineWidth',pw);
-plot(vy(tt0),vz(tt0),'*r','LineWidth',pw); % distribution position
-plot(vy(star(1)),vz(star(1)),'*g','LineWidth',pw); % begin
-plot(vy(star(end)),vz(star(end)),'*b','LineWidth',pw); % end
-hold off
-xlabel('Vic_y [V_A]');
-if ip == 1
-    ylabel('Vic_z [V_A]');
+h=slj.Plot.linen(lx, ly, extra);
+
+if i == 1
+set(h,'box','off');
+set(h,'Location','west');
 else
-    set(hi,'YTicklabel',[]);
+    delete(h);
 end
-if ip == 3
-    ylim(hi, [-1.5, 1.5]);
+xlim(xrange);
+set(gca,'XTicklabel',[]);
+set(gca,'FontSize', FontSize);
+
+axes(ha(i+3));
+ly=[];
+ly.l1=prt.value.bx;
+ly.l2=prt.value.by;
+ly.l3=prt.value.bz;
+ly.l4=sqrt(ly.l1.^2+ly.l2.^2+ly.l3.^2);
+extra.LineStyle={'-', '-', '-', '--'};
+extra.LineColor={'r', 'b', 'g', 'k'};
+
+if i == 1
+    extra.ylabel='B';
+    extra.legend={'Bx', 'By', 'Bz', '|B|'};
+    extra.Location='west';
 end
-set(gca,'XTick',vyz.xtick,'Xticklabel',vyz.xtkble);
-set(gca,'YTick',vyz.ytick,'Yticklabel',vyz.ytkble);
-set(gca,'FontSize', fs);
+
+h=slj.Plot.linen(lx, ly, extra);
+
+if i == 1
+extra=rmfield(extra,'Location');
+set(h,'box','off');
+set(h,...
+    'Position',[0.0880555555555553 0.525178570908878 0.0574999995529651 0.116428568192891]);
+else
+    delete(h);
+end
+xlim(xrange);
+set(gca,'XTicklabel',[]);
+set(gca,'FontSize', FontSize);
+
+axes(ha(i+6));
+ly=[];
+ly.l1=prt.value.vx;
+ly.l2=prt.value.vy;
+ly.l3=prt.value.vz;
+extra.LineStyle={'-', '-', '-'};
+extra.LineColor={'r', 'b', 'g'};
+
+if i == 1
+extra.ylabel='Vic';
+extra.legend={'Vx', 'Vy', 'Vz'};
+extra.Location='west';
+end
+
+h=slj.Plot.linen(lx, ly, extra);
+
+if i == 1
+extra=rmfield(extra,'Location');
+set(h,'box','off');
+set(h,...
+    'Position',[0.0888888888888893 0.419821427624815 0.056666666244467 0.0885714261446679]);
+else
+    delete(h);
+end
+xlim(xrange);
+set(gca,'XTicklabel',[]);
+set(gca,'FontSize', FontSize);
+
+axes(ha(i+9));
+ly=[];
+ly.l1=den.x;
+ly.l2=den.y;
+ly.l3=den.z;
+% ly.l4=ly.l1+ly.l2+ly.l3;
+% ly.l5=prt.value.k(trange);
+extra.LineStyle={'-', '-', '-'};
+extra.LineColor={'r', 'b', 'g'};
+
+if i == 1
+extra.ylabel=['\Delta K',spcs];
+extra.legend={'\int_0^{ t}qVxEx dt', '\int_0^{ t}qVyEy dt', '\int_0^{ t}qVzEz dt'};
+extra.Location='northwest';
+end
+
+extra.xlabel='\Omega_{ci}t';
+
+h=slj.Plot.linen(lx, ly, extra);
+if i == 1
+set(h,'box','off');
+set(h,...
+      'Position',[0.0897222222222227 0.164320274722209 0.101666664903363 0.131428567724569]);
+else
+    delete(h);
+end
+xlim(xrange);
+set(gca,'FontSize', FontSize);
 end

@@ -25,7 +25,7 @@ prt=prt.norm_electric_field(prm);
 
 %% figure
 f1=figure;
-colordef black;
+colordef white;
 ax1 = axes;
 h = slj.Plot.field2d(Ez, prm.value.lx, prm.value.lz, []);
 set(h,'Location','North');
@@ -33,13 +33,13 @@ caxis(ax1, [-5,5]);
 colormap(ax1, slj.Plot.mycolormap(0));
 ylim(yrange);
 set(gca,'XTicklabel',[], 'YTicklabel',[]);
-box off
-hidden off
+% box off
+% hidden off
 
 
 pos = get(ax1, 'Position');
 ax2 = axes('Position', pos');
-slj.Plot.stream(ss,prm.value.lx,prm.value.lz,10,'-w');
+slj.Plot.stream(ss,prm.value.lx,prm.value.lz,10,'-k');
 hold on
 trange0=1:6001;
 cr=[0, max(prt.value.k(trange0))];
@@ -50,10 +50,10 @@ colormap(ax2, 'jet');
 ylim(yrange);
 xlim([0,50]);
 set(gca,'XTicklabel',[], 'YTicklabel',[]);
-box off
-axis off
-hidden off
-set(gcf, 'color','black');
+% box off
+% axis off
+% hidden off
+% set(gcf, 'color','white');
 
 
 
@@ -73,7 +73,7 @@ caxis([0,max(prt.value.k(trange))]);
 xlabel('V_{\perp1}');
 ylabel('V_{\perp2}');
 set(gca,'FontSize', 12);
-set(gcf,'color','black');
+% set(gcf,'color','black');
 
 f3=figure;
 name=['PVh_ts',num2str(tt/prm.value.wci),'_x1600-2000_y418-661_z0-1'];
@@ -93,6 +93,26 @@ extra.ylabel='V_{\perp2}';
 dst=spc.dstv(prm.value.vA,precision);
 dst=dst.intgrtv(1);
 slj.Plot.field2d(dst.value, dst.ll, dst.ll,extra);
-set(gcf,'color','black');
+% set(gcf,'color','black');
+
+f4 = figure;
+vA=prm.value.vA;
+vy=prt.value.vy/vA;
+vz=prt.value.vz/vA;
+vy=(vy(1:end-1)+vy(2:end))/2;
+% y position
+nvy=length(vy);
+ry=zeros(nvy+1,1);
+for i=1:nvy
+    ry(i+1)=ry(i)+vy(i)*0.02;
+end
+p=patch(ry(trange),prt.value.rz(trange),[prt.value.k(trange(1):trange(end-1)); NaN],'edgecolor','flat','facecolor','none');
+colormap('jet');
+set(p,'LineWidth',3);
+cb=colorbar;
+caxis([0,max(prt.value.k(trange))]);
+xlabel('Y');
+ylabel('X');
+set(gca,'FontSize', 12);
 
 cd(outdir);

@@ -6,13 +6,13 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Asym\zhong\case2\data';
-outdir='E:\Asym\zhong\case2\out\Overview';
+indir='E:\Asym\case1\data';
+outdir='C:\Users\Liangjin\Pictures\Asym\case1\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0:100;
 % the variable name
-varname={'B','E','J','Vi','Ve','Ni','Ne'};
+varname={'B','E','Vi','Ve','Ni','Ne'};
 % varname={'divE'};
 % figure style
 extra.Visible=false;

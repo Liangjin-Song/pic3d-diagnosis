@@ -5,13 +5,13 @@
 clear;
 %% parameters
 % size in y direction
-ny = 2100;
+ny = 1000;
 
 % the inertial length of ion
 di = 40;
 
 % the number particles per cell
-ppc = 100;
+ppc = 500;
 
 % the mass ratio between ion and electron
 mie = 100;
@@ -23,7 +23,7 @@ L=0.5;
 Br = 1/2;
 
 % the beta value at the magnetosheath side
-betas = 8;
+betas = 6;
 
 % the temperature between Tsh and Tsp
 Tr = 1/4;
@@ -33,7 +33,7 @@ Tie = 4;
 
 % the ratio between electron plasma frequency and gryofrequency
 % at the magnetosheath
-fr = 4;
+fr = 2;
 
 % the current ratio between ion and electron, rate = Ji/Je
 jrate = Tie;
@@ -41,6 +41,7 @@ jrate = Tie;
 %% the light speed
 c = 0.5;
 mu0 = 1/(c*c);
+
 
 %% calculate
 % the array in y-direction
@@ -150,12 +151,14 @@ rcvA = c./vA;
 %% plot figure
 Ly = ny/di;
 y = linspace(-Ly/2, Ly/2, ny);
+xrange=[y(1), y(end)];
 % magnetic field
 f1 = figure;
 plot(y, Bx, '-k', 'LineWidth', 1);
 xlabel('Z');
 ylabel('Bx');
 set(gca, 'FontSize', 14);
+xlim(xrange);
 
 % temperature
 f2 = figure;
@@ -166,6 +169,7 @@ legend('Ti', 'Te');
 xlabel('Z');
 ylabel('T');
 set(gca, 'FontSize', 14);
+xlim(xrange);
 
 % density
 f3 = figure;
@@ -174,6 +178,7 @@ xlabel('Z');
 ylabel('N');
 set(gca, 'FontSize', 14);
 disp(['Nsh/Nsp = ', num2str(Nsh/Nsp)]);
+xlim(xrange);
 
 
 % pressure
@@ -187,6 +192,7 @@ legend('Pi', 'Pe', 'Pb', 'P');
 xlabel('Z');
 ylabel('P');
 set(gca, 'FontSize', 14);
+xlim(xrange);
 
 % thermal energy
 E = [sum(Pb), sum(Ui), sum(Ue)];
@@ -211,6 +217,7 @@ plot(y,lambda, '-k','LineWidth',1);
 xlabel('Z');
 ylabel('\lambda_D');
 set(gca, 'FontSize', 14);
+xlim(xrange);
 
 Bsh = abs(Bsh);
 Bsp = abs(Bsp);
@@ -222,3 +229,5 @@ plot(y,rcvA, '-k','LineWidth',1);
 xlabel('Z');
 ylabel('c/v_{A}');
 set(gca, 'FontSize', 14);
+ylim([0,100]);
+xlim(xrange);

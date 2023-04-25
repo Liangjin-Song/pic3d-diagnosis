@@ -1,22 +1,23 @@
+clear;
 %% parameters
-indir='D:\xiao_PIC\asy20220913\ion_lost_energy1';
-outdir='D:\xiao_PIC\asy20220913\ion_lost_energy1\out';
+indir='E:\Asym\case1\data';
+outdir='C:\Users\Liangjin\Pictures\Asym\case1\Test';
 prm=slj.Parameters(indir,outdir);
 
-tt=35;
-dt=5;
+tt=28;
+dt=0.1;
 
 q=prm.value.qi;
 m=prm.value.mi;
 
 norm=prm.value.vA;
-xz=20;
+xz=30;
 dir=1;
 pxz=prm.value.nz/2;
 dd=40;
 nn=10;
 
-cmpt = 'z';
+cmpt = 'y';
 
 %% figure proterty
 xrange=[-10,10];

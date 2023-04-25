@@ -6,12 +6,12 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Asym\case1\data';
-outdir='C:\Users\Liangjin\Pictures\Asym\case1\Overview';
+indir='Z:\ion_deceleration\case2';
+outdir='C:\Users\Liangjin\Pictures\Asym\case2\out\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0:100;
-% the variable name
+% the variable nameq
 varname={'B','E','Vi','Ve','Ni','Ne'};
 % varname={'divE'};
 % figure style

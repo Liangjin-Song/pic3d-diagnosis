@@ -23,7 +23,7 @@ L=0.5;
 Br = 1/2;
 
 % the beta value at the magnetosheath side
-betas = 6;
+betas = 12;
 
 % the temperature between Tsh and Tsp
 Tr = 1/4;

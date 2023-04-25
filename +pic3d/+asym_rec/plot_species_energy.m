@@ -1,10 +1,13 @@
 clear;
-indir='E:\Asym\case1\data';
-outdir='E:\Asym\case1\out\Global';
+indir='C:\Users\Liangjin\Pictures\Asym\case2\data';
+outdir='C:\Users\Liangjin\Pictures\Asym\case2\out\Global';
+
+xrange = [0, 85];
 %% plot energy
 h1=figure;
 en=load([indir,'\energy.dat']);
 tt=0.1*(0:size(en,1)-1);
+
 
 plot(tt,en(:,1),'y','LineWidth',2); hold on
 plot(tt,en(:,2),'g','LineWidth',2);
@@ -14,7 +17,7 @@ plot(tt,en(:,5),'m','LineWidth',2);
 hold off
 % plot([9333,9333],[0,5e4],'--r','LineWidth',1); hold off
 % xlim([0,tt(end)]);
-xlim([0,100]);
+xlim(xrange);
 % legend('Electric Field Energy','Magnetic Field Energy','Electron Energy','Ions Energy','Electrons Energy(c)','Cold Ions Energy','Total Energy');
 legend('Electric Field Energy','Magnetic Field Energy','Electron Energy','Ion Energy','Total Energy','Box', 'off');
 xlabel('\Omega_{ci}t');
@@ -36,6 +39,7 @@ plot(tt,de(:,4), 'r','LineWidth',2);
 legend('Magnetic  Energy','Electron Energy','Ion Energy', 'Box', 'off');
 xlabel('\Omega_{ci}t');
 ylabel('\Delta E');
+xlim(xrange);
 set(gca,'FontSize',14);
 print(h4, '-dpng','-r300','delta_E.png');
 
@@ -76,6 +80,7 @@ xlim([0,tt(end)]);
 legend('Electron Energy','Ion Energy');
 xlabel('\Omega_{ci}t');
 ylabel('Average Energy');
+xlim(xrange);
 set(gca,'FontSize',14);
 cd(outdir);
 

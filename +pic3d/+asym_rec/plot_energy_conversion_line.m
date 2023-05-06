@@ -1,11 +1,11 @@
 % function plot_energy_converstion_line
 clear;
 %% parameters
-indir='E:\Asym\case1\data';
-outdir='C:\Users\Liangjin\Pictures\Asym\case1\Test';
+indir='Z:\ion_deceleration\case2';
+outdir='C:\Users\Liangjin\Pictures\Asym\case2\out\Test';
 prm=slj.Parameters(indir,outdir);
 
-tt=28;
+tt=41;
 name='e';
 
 xz=25;

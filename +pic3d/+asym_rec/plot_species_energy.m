@@ -1,8 +1,8 @@
 clear;
-indir='C:\Users\Liangjin\Pictures\Asym\case2\data';
+indir='Z:\ion_deceleration\case2';
 outdir='C:\Users\Liangjin\Pictures\Asym\case2\out\Global';
 
-xrange = [0, 85];
+xrange = [0, 100];
 %% plot energy
 h1=figure;
 en=load([indir,'\energy.dat']);

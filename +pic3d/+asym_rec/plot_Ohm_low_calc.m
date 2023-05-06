@@ -1,20 +1,20 @@
 clear;
 %% parameters
-indir='E:\Asym\case1\data';
-outdir='C:\Users\Liangjin\Pictures\Asym\case1\Test';
+indir='Z:\ion_deceleration\case2';
+outdir='C:\Users\Liangjin\Pictures\Asym\case2\out\Test';
 prm=slj.Parameters(indir,outdir);
 
-tt=28;
+tt=47;
 dt=0.1;
 
 q=prm.value.qi;
 m=prm.value.mi;
-
 norm=prm.value.vA;
-xz=30;
+
+xz=40;
 dir=1;
 pxz=prm.value.nz/2;
-dd=40;
+dd=20;
 nn=10;
 
 cmpt = 'y';

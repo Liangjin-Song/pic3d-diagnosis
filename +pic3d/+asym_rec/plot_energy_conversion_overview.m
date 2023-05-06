@@ -1,11 +1,11 @@
 % function plot_energy_conversion_overview(name)
 clear;
 %% parameters
-indir='E:\Asym\case1\data';
-outdir='C:\Users\Liangjin\Pictures\Asym\case1\Overview';
+indir='Z:\ion_deceleration\case2';
+outdir='C:\Users\Liangjin\Pictures\Asym\case2\out\Overview';
 prm=slj.Parameters(indir,outdir);
 
-tt=0:100;
+tt=41;
 name='e';
 cmpt = 't';
 
@@ -14,7 +14,7 @@ nt=length(tt);
 extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-extra.Visible=false;
+extra.Visible=true;
 
 norm=prm.value.nis*prm.value.vA*prm.value.vA;
 

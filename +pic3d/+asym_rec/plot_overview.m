@@ -10,9 +10,10 @@ indir='Z:\ion_deceleration\case2';
 outdir='C:\Users\Liangjin\Pictures\Asym\case2\out\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=92:100;
+tt=41;
 % the variable nameq
-varname={'B','E','Vi','Ve','Ni','Ne'};
+% varname={'B','E','Vi','Ve','Ni','Ne'};
+varname = {'Ve'};
 % varname={'divE'};
 % figure style
 extra.Visible=false;

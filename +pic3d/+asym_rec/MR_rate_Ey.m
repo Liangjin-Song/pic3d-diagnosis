@@ -6,12 +6,12 @@
 clear;
 %% parameters
 % directory
-indir='C:\Users\Liangjin\Pictures\Asym\case2\data';
+indir='Z:\ion_deceleration\case2';
 outdir='C:\Users\Liangjin\Pictures\Asym\case2\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
 dt=1;
-tt=0:dt:84;
+tt=0:dt:100;
 % the box size
 nx=20;
 nz=20;

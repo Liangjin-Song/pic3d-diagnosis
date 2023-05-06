@@ -1,13 +1,13 @@
 clear;
 %% parameters
-indir='E:\Asym\case1\data';
-outdir='C:\Users\Liangjin\Pictures\Asym\case1\Test';
+indir='Z:\ion_deceleration\case2';
+outdir='C:\Users\Liangjin\Pictures\Asym\case2\out\Test';
 prm=slj.Parameters(indir,outdir);
 
-dt=1;
-tt=0:dt:60;
-name='i';
-xrange=[0,60];
+dt=0.1;
+tt=0:dt:100;
+name='e';
+xrange=[0,100];
 
 if name == 'i'
     sfx='i';
@@ -83,6 +83,6 @@ ylabel('\Delta E_{ic}');
 set(gca,'FontSize',14);
 
 cd(outdir);
-save('electric_work_integral.mat', 'tt', 'rate', 'dt','sfx');
+save('electric_work_integral.mat', 'tt', 'rate', 'rate0', 'dt','sfx');
 print('-dpng','-r300',[sfx,'_energy_conversion_integral_as_time_dt=',num2str(dt),'_whole_space.png']);
 close(gcf);

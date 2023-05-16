@@ -1,14 +1,12 @@
 clear;
-indir='Z:\ion_deceleration\case2';
-outdir='C:\Users\Liangjin\Pictures\Asym\case2\out\Global';
+indir='Z:\ion_deceleration\case7';
+outdir='C:\Users\Liangjin\Pictures\Asym\case7\Global';
 
 xrange = [0, 100];
-%% plot energy
-h1=figure;
 en=load([indir,'\energy.dat']);
 tt=0.1*(0:size(en,1)-1);
-
-
+%% plot energy
+h1=figure;
 plot(tt,en(:,1),'y','LineWidth',2); hold on
 plot(tt,en(:,2),'g','LineWidth',2);
 plot(tt,en(:,3),'b','LineWidth',2);

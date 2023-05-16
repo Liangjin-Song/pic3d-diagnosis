@@ -4,7 +4,7 @@ indir='Z:\ion_deceleration\case2';
 outdir='C:\Users\Liangjin\Pictures\Asym\case2\out\Test';
 prm=slj.Parameters(indir,outdir);
 
-dt=0.1;
+dt=0.5;
 tt=0:dt:100;
 name='e';
 xrange=[0,100];

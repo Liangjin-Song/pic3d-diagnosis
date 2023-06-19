@@ -83,6 +83,11 @@ elseif strcmp(value.model, 'rec-electron-current')
     value=for_parameters(cmd, value);
     value=reset_system_size(value);
     value=length_scale(value);
+elseif strcmp(value.model, 'shock')
+    cmd='value=resolve_shock(value, key, word);';
+    value=for_parameters(cmd, value);
+    value=reset_system_size(value);
+    value=length_scale(value);
 else
     error(['Unrecognized model: ',value.model]);
 end
@@ -938,6 +943,77 @@ elseif strcmp(key,'ion lamor radius')
 elseif strcmp(key,'electron lamor radius')
     value.rle=str2double(word);
 elseif strcmp(key,'magnetosheath ion alfven speed')
+    value.vA=str2double(word);
+else
+    error(['Unrecognized key: ',char(key)]);
+end
+end
+
+
+%% ======================================================================== %%
+function value=resolve_shock(value, key, word)
+%%
+% @brief: read the parameters of rec_2harris model
+% @param: value - the structure containing the parameters
+% @param: key - a string indicating the term
+% @param: word - a string indicating the value
+%%
+if strcmp(key, 'simulation model') || strcmp(key, 'boundary condition') || strcmp(key,'length in the x direction') || strcmp(key,'length in the y direction') || strcmp(key,'length in the z direction') || strcmp(key,'speed of light')
+elseif strcmp(key, 'mass ratio between ion and electron')
+    value.mie=str2double(word);
+elseif strcmp(key,'temperature ratio between ion and electron')
+    value.tie=str2double(word);
+elseif strcmp(key,'ratio between electron plasma frequency and electron gyrofrequency')
+    value.rpg=str2double(word);
+elseif strcmp(key,'beta value')
+    value.beta=str2double(word);
+elseif strcmp(key,'magnetic field')
+    value.b0=str2double(word);
+elseif strcmp(key,'shock angle')
+    value.theta=str2double(word);
+elseif strcmp(key,'drift velocity')
+    value.vdf=str2double(word);
+elseif strcmp(key,'electron temperature')
+    value.te=str2double(word);
+elseif strcmp(key,'ion inertial length')
+    value.di=str2double(word);
+elseif strcmp(key,'electron inertial length')
+    value.de=str2double(word);
+elseif strcmp(key,'number density of plasma')
+    value.n0=str2double(word);
+elseif strcmp(key,'number of particles per cell')
+    value.ppc=str2double(word);
+elseif strcmp(key,'number of particles representing unit density')
+    value.coeff=str2double(word);
+elseif strcmp(key,'electron plasma frequency')
+    value.fpe=str2double(word);
+elseif strcmp(key,'electron gyrofrequency')
+    value.fce=str2double(word);
+elseif strcmp(key,'ion plasma frequency')
+    value.fpi=str2double(word);
+elseif strcmp(key,'ion gyrofrequency')
+    value.fci=str2double(word);
+    value.wci=value.fci;
+    value.w=value.wci;
+elseif strcmp(key,'mass of electron')
+    value.me=str2double(word);
+elseif strcmp(key,'charge of electron')
+    value.qe=str2double(word);
+elseif strcmp(key,'mass of ion')
+    value.mi=str2double(word);
+elseif strcmp(key,'charge of ion')
+    value.qi=str2double(word);
+elseif strcmp(key,'electron thermal velocity')
+    value.veth=str2double(word);
+elseif strcmp(key,'ion thermal velocity')
+    value.vith=str2double(word);
+elseif strcmp(key,'debye length')
+    value.debye=str2double(word);
+elseif strcmp(key,'ion lamor radius')
+    value.rli=str2double(word);
+elseif strcmp(key,'electron lamor radius')
+    value.rle=str2double(word);
+elseif strcmp(key,'ion alfven speed')
     value.vA=str2double(word);
 else
     error(['Unrecognized key: ',char(key)]);

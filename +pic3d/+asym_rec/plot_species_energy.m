@@ -1,4 +1,4 @@
-clear;
+% clear;
 indir='Z:\ion_deceleration\case2_2harris';
 outdir='C:\Users\Liangjin\Pictures\Asym\case2_2harris\Global';
 

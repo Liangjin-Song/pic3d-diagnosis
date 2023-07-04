@@ -1,10 +1,10 @@
-clear;
+% clear;
 %% parameters
-indir='Z:\ion_deceleration\case2';
-outdir='C:\Users\Liangjin\Pictures\Asym\case2\out\Test';
+indir='Z:\ion_deceleration\case2_2harris';
+outdir='C:\Users\Liangjin\Pictures\Asym\case2_2harris\Energy';
 prm=slj.Parameters(indir,outdir);
 
-dt=0.5;
+dt=1;
 tt=0:dt:100;
 name='e';
 xrange=[0,100];
@@ -79,7 +79,7 @@ plot(tt, rate(4, :), '-k', 'LineWidth', 2);
 legend('\int_0^t qNVxEx dt', '\int_0^t qNVyEy dt', '\int_0^t qNVzEz dt', '\int_0^t qNV\cdot E dt', 'Location', 'Best','Box','off');
 xlim(xrange);
 xlabel('\Omega_{ci} t');
-ylabel('\Delta E_{ic}');
+ylabel('\Delta E_{i}');
 set(gca,'FontSize',14);
 
 cd(outdir);

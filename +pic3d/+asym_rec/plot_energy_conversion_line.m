@@ -1,12 +1,12 @@
 % function plot_energy_converstion_line
 clear;
 %% parameters
-indir='Z:\ion_deceleration\case2';
-outdir='C:\Users\Liangjin\Pictures\Asym\case2\out\Test';
+indir='Z:\ion_deceleration\case2_2harris';
+outdir='C:\Users\Liangjin\Pictures\Asym\case2_2harris\Test';
 prm=slj.Parameters(indir,outdir);
 
-tt=41;
-name='e';
+tt=5;
+name='i';
 
 xz=25;
 dd=0;
@@ -20,9 +20,9 @@ extra=[];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
 
-norm=prm.value.nis*prm.value.vA*prm.value.vA;
+norm=prm.value.n0*prm.value.vA*prm.value.vA;
 
-xrange=[-10,10];
+xrange=[-20,-5];
 
 
 if dir == 1
@@ -99,6 +99,7 @@ for t=1:nt
     
     
     %% plot figure
+    figure;
     plot(ll, lje/norm, '-k', 'LineWidth', 2); hold on
     plot(ll, ljex/norm, 'r', 'LineWidth', 2);
     plot(ll, ljey/norm, 'g', 'LineWidth', 2);

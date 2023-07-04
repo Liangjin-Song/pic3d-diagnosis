@@ -6,8 +6,8 @@
 clear;
 %% parameters
 % input/output directory
-indir='Z:\ion_deceleration\case2_2harris';
-outdir='C:\Users\Liangjin\Pictures\Asym\case2_2harris\Overview';
+indir='Z:\ion_deceleration\case6';
+outdir='C:\Users\Liangjin\Pictures\Asym\case6\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0:100;

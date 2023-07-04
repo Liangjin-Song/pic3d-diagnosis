@@ -1,13 +1,13 @@
 %% function plot_electric_field_line
 clear;
 %% parameters
-indir='E:\Asym\case1\data';
-outdir='C:\Users\Liangjin\Pictures\Asym\case1\Test';
+indir='Z:\ion_deceleration\case2';
+outdir='C:\Users\Liangjin\Pictures\Asym\case2\out\Test';
 prm=slj.Parameters(indir,outdir);
 
-tt=28;
+tt=45;
 
-xz=40;
+xz=25;
 dir=1;
 
 nt=length(tt);
@@ -18,7 +18,7 @@ extra.ylabel='Z [c/\omega_{pi}]';
 
 norm=prm.value.vA;
 
-xrange=[-5,5];
+xrange=[-10,10];
 
 
 if dir == 1

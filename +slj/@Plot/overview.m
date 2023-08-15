@@ -17,6 +17,9 @@ if isa(ss,'slj.Scalar')
     ss=ss.value;
 end
 fd=fd/norm;
+if norm == 0
+    error('Parameters error!');
+end
 h=slj.Plot.field2d(fd, lx, ly, extra);
 range=caxis;
 hold on;

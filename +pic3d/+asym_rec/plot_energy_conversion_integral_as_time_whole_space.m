@@ -6,7 +6,7 @@ prm=slj.Parameters(indir,outdir);
 
 dt=1;
 tt=0:dt:100;
-name='e';
+name='i';
 xrange=[0,100];
 
 if name == 'i'

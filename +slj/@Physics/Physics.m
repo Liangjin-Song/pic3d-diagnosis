@@ -107,4 +107,8 @@ end
 
 
 %% ======================================================================== %%
+%% calculate the stream line in 2D case
+methods (Access = public, Static)
+    ss = stream2d(bx,bz);
+end
 end

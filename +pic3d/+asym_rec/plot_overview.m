@@ -6,24 +6,24 @@
 clear;
 %% parameters
 % input/output directory
-indir='Z:\ion_deceleration\case6';
-outdir='C:\Users\Liangjin\Pictures\Asym\case6\Overview';
+indir='Z:\Zhong';
+outdir='C:\Users\Liangjin\Pictures\Zhong\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:100;
+tt=19.5;
 % the variable nameq
 varname={'B','E','Vi','Ve','Ni','Ne', 'J'};
-% varname = {'Ve'};
+% varname = {'J'};
 % varname={'divE'};
 % figure style
-extra.Visible=false;
+extra=[];
+extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
 extra.yrange=[prm.value.lz(1), prm.value.lz(end)];
 % extra.xrange=[60,90];
 % extra.yrange=[9,15];
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
-% extra=[];
 %% the length of the time and the variable name
 nt=length(tt);
 nvar=length(varname);
@@ -38,7 +38,7 @@ for t=1:nt
         switch name
             % scalar field
             case {'Ni', 'Ne'}
-                norm=prm.value.nis;
+                norm=prm.value.n0;
                 fig=slj.Plot(extra);
                 fig.overview(fd, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title([name,'   \Omega_{ci}t=',num2str(tt(t))]);
@@ -79,7 +79,7 @@ for t=1:nt
                 fig.png(prm, ['Ez_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
             case {'J'}
-                norm=prm.value.qi*prm.value.nis*prm.value.vA;
+                norm=prm.value.qi*prm.value.n0*prm.value.vA;
                 fig=slj.Plot(extra);
                 fig.overview(fd.x, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title(['Jx   \Omega_{ci}t=',num2str(tt(t))]);

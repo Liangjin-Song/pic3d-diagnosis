@@ -1,16 +1,20 @@
 %% function plot_electric_field_line
 clear;
 %% parameters
-indir='E:\Asym\case1\data';
-outdir='C:\Users\Liangjin\Pictures\Asym\case1\Test';
+indir='Z:\asym\cold5_ds1';
+outdir='C:\Users\Liangjin\Pictures\Test';
 prm=slj.Parameters(indir,outdir);
 
-tt = [6, 19, 32, 44, 57, 70];
-ct = {'6', '19', '32', '44', '57', '70'};
-st = {'-k', '-r', '-g', '-b', '--r', '--b'};
+tt = [6, 20, 30, 35, 40, 45, 50, 60];
+ct = {'6', '20', '30', '35', '40', '45', '50', '60'};
+st = {'--k', '--r', '--g', '--b', '-k', '-r', '-b', '-g'};
 
+% case 2
+% tt = [70, 75, 80, 85, 90];
+% ct = {'70', '75', '80', '85', '90'};
+% st = {'--k', '--r', '--g', '--b', '-k'};
 
-xz=30;
+xz=40;
 dir=1;
 name = 'E';
 cmpt='z';

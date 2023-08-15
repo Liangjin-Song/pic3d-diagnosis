@@ -2,16 +2,17 @@
 %% plot the cold ions density profiles
 clear;
 %% parameters 
-indir='E:\Asym\case1\data';
-outdir='C:\Users\Liangjin\Pictures\Asym\case1\Test';
+indir='Z:\Zhong';
+outdir='C:\Users\Liangjin\Pictures\Zhong\Lines';
 prm=slj.Parameters(indir,outdir);
-norm=prm.value.vA;
+% norm=prm.value.vA;
 % norm=1;
-name='Vi';
-tt=28;
-xz=40;
-dir=1;
-xrange=[-10,10];
+norm = prm.value.qi*prm.value.n0*prm.value.vA;
+name='J';
+tt=19.5;
+xz=0;
+dir=0;
+xrange=[0,100];
 extra.title=['\Omega_{ci}t=',num2str(tt)];
 FontSize=14;
 
@@ -53,8 +54,9 @@ plot(ll, lf.lx, '-r', 'LineWidth', 2);
 hold on
 plot(ll, lf.ly, '-b', 'LineWidth', 2);
 plot(ll, lf.lz, '-m', 'LineWidth', 2);
-plot(ll, sqrt(lf.lx.^2 + lf.ly.^2 + lf.lz.^2), '--k', 'LineWidth', 2);
-legend([name,'x'], [name,'y'], [name,'z'], ['|', name, '|']);
+% plot(ll, sqrt(lf.lx.^2 + lf.ly.^2 + lf.lz.^2), '--k', 'LineWidth', 2);
+% legend([name,'x'], [name,'y'], [name,'z'], ['|', name, '|']);
+legend([name,'x'], [name,'y'], [name,'z']);
 xlim(xrange);
 xlabel(extra.xlabel);
 ylabel(name);

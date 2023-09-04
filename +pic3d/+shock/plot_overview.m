@@ -6,14 +6,14 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Test';
-outdir='E:\Test';
+indir='X:\PIC\shock\test';
+outdir='C:\Users\Liangjin\Pictures\Shock';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=3;
+tt=0;
 % the variable name
-% varname={'B','E','J','Vi','Ve','Ni','Ne', 'divE', 'divB'};
-varname={'J'};
+varname={'B','E','J','Vi','Ve','Ni','Ne', 'divE', 'divB'};
+% varname={'J'};
 % varname={'B'};
 % figure style
 extra.Visible=true;
@@ -45,7 +45,7 @@ for t=1:nt
                 fig.png(prm, [name,'_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
             case {'B'}
-                norm=1;
+                norm=prm.value.b0;
                 fig=slj.Plot(extra);
                 fig.overview(fd.x, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title(['Bx   \Omega_{ci}t=',num2str(tt(t))]);
@@ -62,7 +62,7 @@ for t=1:nt
                 fig.png(prm, ['Bz_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
             case {'E'}
-                norm=prm.value.vA;
+                norm=prm.value.vA*prm.value.b0;
                 fig=slj.Plot(extra);
                 fig.overview(fd.x, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title(['Ex   \Omega_{ci}t=',num2str(tt(t))]);
@@ -79,8 +79,7 @@ for t=1:nt
                 fig.png(prm, ['Ez_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
             case {'J'}
-%                 norm=prm.value.qi*prm.value.n0*prm.value.vA;
-                norm=1;
+                norm=prm.value.qi*prm.value.n0*prm.value.vA;
                 fig=slj.Plot(extra);
                 fig.overview(fd.x, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title(['Jx   \Omega_{ci}t=',num2str(tt(t))]);

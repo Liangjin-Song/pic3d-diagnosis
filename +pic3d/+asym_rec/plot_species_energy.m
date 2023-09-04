@@ -1,6 +1,6 @@
 clear;
-indir='Z:\ion_deceleration\case2';
-outdir='C:\Users\Liangjin\Pictures\Asym\case2\out\Global';
+indir='Z:\ion_deceleration\symm';
+outdir='C:\Users\Liangjin\Pictures\Test';
 
 xrange = [0, 100];
 en=load([indir,'\energy.dat']);

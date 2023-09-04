@@ -67,6 +67,12 @@ Pb = Bx.^2 / (2 * mu0);
 Pth = P - Pb;
 N = Pth ./ (Te + Ti);
 
+%% the coefficient
+coeff = ny*ppc/sum(N, 'all');
+
+%% the magnetosheath plasma density
+n0 = betas / (2 * mu0) / (1 + tie);
+
 
 %% plot figure, magnetic field profile
 xrange = [y(1), y(end)];

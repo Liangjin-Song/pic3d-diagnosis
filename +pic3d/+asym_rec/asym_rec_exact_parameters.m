@@ -32,12 +32,9 @@ tie = 2;
 %% the plasma beta at the magnetosheath
 betas = 5;
 
-
-%% the constant value of a0s, a1s, a2s, and b
-a0s = 0.5;
-a1s = 0.5;
-a2s = 0.5;
-b = 0.5;
+%% the ratio between electron plasma frequency and gryofrequency
+% at the magnetosheath
+fr = 2;
 
 %% the light speed
 c = 0.5;
@@ -47,6 +44,7 @@ mu0 = 1/(c*c);
 C1 = (Br - 1)/2;
 C2 = (Br + 1)/2;
 Bx = C1 + C2 * tanh(y);
+C3 = Bg;
 
 %% the current density
 Jy =  - C2 * sech(y).^2 / mu0;
@@ -70,9 +68,82 @@ N = Pth ./ (Te + Ti);
 %% the coefficient
 coeff = ny*ppc/sum(N, 'all');
 
-%% the magnetosheath plasma density
-n0 = betas / (2 * mu0) / (1 + tie);
+N = N * coeff;
+Te = Te / coeff;
+Ti = Ti / coeff;
 
+%% pressuer
+Pi = N .* Ti;
+Pe = N .* Te;
+PP = Pi + Pe + Pb;
+
+%% the frequency
+de = di / sqrt(mie);
+wpe = c / de;
+wce = wpe / fr;
+wpi = c / di;
+wci = wce / mie;
+
+
+%% the magnetosheath plasma density
+n0 = coeff * betas / (2 * mu0) / (1 + tie);
+
+%% mass and charge, Bsh = -1
+me = fr*abs(-1);
+me = me*me;
+me = me / n0;
+mi = me * mie;
+qi = wci * mi / abs(-1);
+qe = -qi;
+
+%% the thermal velocity
+vti = sqrt(Ti ./ mi);
+vte = sqrt(Te ./ me);
+betai = 1./ Ti;
+betae = 1./ Te;
+
+%% the constant value of a0, a1, a2, and b
+B0 = 1;
+pb0 = B0 .* B0 ./ (2 .* mu0);
+rbeta = (betai .* betae) ./ (betai + betae);
+b = (C1 + C2).^2 + C3.^2;
+b = b .* pb0;
+b = P - b;
+b = b .* rbeta;
+
+a0 = 4 .* C1 .* C2 .* pb0;
+a0 = a0 .* rbeta;
+
+a1 = -1 .* C1 .* C2 .* pb0;
+a1 = a1 .* rbeta;
+
+a2 = C2 .* (C2 - C1) .* pb0;
+a2 = a2 .* rbeta;
+
+%% the constant value of u and v
+L = 1;
+e = qi;
+tmp = (C1 - C2) ./ (C2 .* C3 .* B0 .* L);
+uxi = tmp ./ (e .* betai);
+uxe = tmp ./ (-e .* betae);
+
+tmp = 1 ./ (C2 .* B0 .* L);
+uyi = tmp ./ (e .* betai);
+uye = tmp ./ (-e .* betae);
+
+tmp = (2 .* C1) ./ (C2 .* C3 .* B0 .* L);
+vxi = tmp ./ (e .* betai);
+vxe = tmp ./ (-e .* betae);
+
+tmp = 2./ (C2 .* B0 .* L);
+vyi = tmp ./ (e .* betai);
+vye = tmp ./ (-e .* betae);
+
+%% the density profile of each population
+N0 = a0 .* exp(-y) .* sech(y);
+N1 = a1 .* exp(-2 * y) .* sech(y).^2;
+N2 = a2 .* sech(y).^2;
+Ns = N0 + N1 + N2 + b;
 
 %% plot figure, magnetic field profile
 xrange = [y(1), y(end)];
@@ -105,6 +176,22 @@ set(gca, 'fontsize', 14);
 %% plot figure, plasma density
 figure;
 plot(y, N, '-k', 'linewidth', 2);
+hold on;
+plot(y, Ns, '--r', 'linewidth', 2);
+legend('N', 'Ns');
+xlabel('Y');
+ylabel('N');
+xlim(xrange);
+set(gca, 'fontsize', 14);
+
+figure;
+plot(y, N0, '-m', 'linewidth', 2);
+hold on;
+plot(y, N1, '-r', 'linewidth', 2);
+plot(y, N2, '-b', 'linewidth', 2);
+plot(y, b, '-g', 'linewidth', 2);
+plot(y, Ns, '--k', 'linewidth', 2);
+legend('N0', 'N1', 'N2', 'b', 'Ns');
 xlabel('Y');
 ylabel('N');
 xlim(xrange);
@@ -112,12 +199,13 @@ set(gca, 'fontsize', 14);
 
 %% plot figure, pressure
 figure;
-plot(y, Pb + Pth, '-k', 'linewidth', 2);
+plot(y, PP, '-k', 'linewidth', 2);
 hold on;
 plot(y, Pb, '-r', 'linewidth', 2);
-plot(y, Pth, '-b', 'linewidth', 2);
+plot(y, Pi, '-b', 'linewidth', 2);
+plot(y, Pe, '-g', 'linewidth', 2);
 hold off;
-legend('P', 'Pb', 'Pth');
+legend('P', 'Pb', 'Pi', 'Pe');
 xlabel('Y');
 ylabel('P');
 xlim(xrange);

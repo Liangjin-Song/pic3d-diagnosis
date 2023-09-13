@@ -5,11 +5,11 @@ clear;
 indir='E:\Asym\cold2_ds1\data';
 outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
-norm=prm.value.vA;
-tt=30;
-xz=-0.96;
+norm=1; % prm.value.vA;
+tt=28;
+xz=-0.66;
 dir=0;
-xrange=[30,40];
+xrange=[35,45];
 FontSize=14;
 
 %% read data
@@ -49,7 +49,7 @@ plot(ll, lvi, '-k', 'LineWidth', 2);
 legend('hot ion', 'cold ion', 'electron', 'ion');
 xlim(xrange);
 xlabel(extra.xlabel);
-ylabel('v_A [v_{A0}]');
+ylabel('v_A');
 set(gca,'FontSize', FontSize);
 
 cd(outdir);

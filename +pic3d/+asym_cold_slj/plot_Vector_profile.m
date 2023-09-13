@@ -2,18 +2,16 @@
 %% plot the cold ions density profiles
 clear;
 %% parameters 
-% indir='E:\Asym\dst1\data';
-% outdir='E:\Asym\dst1\out\Global';
 indir='E:\Asym\cold2_ds1\data';
-outdir='E:\Asym\cold2_ds1\out\Test';
+outdir='E:\Asym\cold2_ds1\out\Wave';
 prm=slj.Parameters(indir,outdir);
-% norm=prm.value.vA;
-norm=1;
-name='B';
-tt=0;
-xz=25;
-dir=1;
-xrange=[-10,10];
+norm=prm.value.vA;
+% norm=1;
+name='E';
+tt=28;
+xz=-0.6;
+dir=0;
+xrange=[0,50];
 extra.title=['\Omega_{ci}t=',num2str(tt)];
 FontSize=14;
 
@@ -64,5 +62,5 @@ title(extra.title);
 set(gca,'FontSize', FontSize);
 
 cd(outdir);
-print('-dpng','-r300',[name, '_t',num2str(tt,'%06.2f'),'_',pstr,'=',num2str(xz),'.png']);
+% print('-dpng','-r300',[name, '_t',num2str(tt,'%06.2f'),'_',pstr,'=',num2str(xz),'.png']);
 % f.png(prm,['Bx_t',num2str(tt),'_',pstr,num2str(xz)]);

@@ -6,18 +6,18 @@
 clear;
 %% parameters
 % input/output directory
-indir='Z:\Zhong';
-outdir='C:\Users\Liangjin\Pictures\Zhong\Overview';
+indir='Z:\Zhong\run2';
+outdir='C:\Users\Liangjin\Pictures\Zhong\run2\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=19.5;
+tt=0:0.5:25;
 % the variable nameq
 varname={'B','E','Vi','Ve','Ni','Ne', 'J'};
 % varname = {'J'};
 % varname={'divE'};
 % figure style
 extra=[];
-extra.Visible=true;
+extra.Visible=false;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
 extra.yrange=[prm.value.lz(1), prm.value.lz(end)];
 % extra.xrange=[60,90];

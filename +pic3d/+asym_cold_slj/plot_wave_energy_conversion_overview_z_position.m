@@ -88,7 +88,7 @@ ylabel('\Omega_{ci}t');
 caxis([-1, 1]);
 title('J_e\cdot E');
 set(gca,'FontSize', 14);
-print(f1, '-dpng','-r300','Je_dot_E_x_t.png');
+% print(f1, '-dpng','-r300','Je_dot_E_x_t.png');
 
 f2 = figure;
 slj.Plot.field2d(tE/normE, prm.value.lx, tt, extra);
@@ -97,7 +97,7 @@ ylabel('\Omega_{ci}t');
 caxis([-1, 1]);
 title('Ex');
 set(gca,'FontSize', 14);
-print(f2, '-dpng','-r300','E_x_t.png');
+% print(f2, '-dpng','-r300','E_x_t.png');
 
 %% Fourier transform
 fJE = fftshift(fft2(tJE));
@@ -123,7 +123,7 @@ ylabel('\omega [\omega_{ci}]');
 % ylabel('\omega [\omega_{pi}]');
 title('PSD, J_e\cdot E');
 set(gca,'FontSize',14);
-print(f3, '-dpng','-r300','PSD_Je_dot_E_k_w.png');
+% print(f3, '-dpng','-r300','PSD_Je_dot_E_k_w.png');
 
 %% E
 f4 = figure;
@@ -137,4 +137,4 @@ ylabel('\omega [\omega_{ci}]');
 % ylabel('\omega [\omega_{pi}]');
 title('PSD, Ex');
 set(gca,'FontSize',14);
-print(f4, '-dpng','-r300','PSD_E_k_w.png');
+% print(f4, '-dpng','-r300','PSD_E_k_w.png');

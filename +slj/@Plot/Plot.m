@@ -75,6 +75,8 @@ end
 %% the color map
 methods (Access = public, Static)
     map = mycolormap(type);
+    c = othercolor(n,m);
+    colorList=slanCM(type,num);
 end
 
 %% ======================================================================== %%

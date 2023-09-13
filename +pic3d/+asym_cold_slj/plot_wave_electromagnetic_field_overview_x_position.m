@@ -35,7 +35,7 @@ xlabel('Z [c/\omega_{pi}]');
 ylabel('\Omega_{ci}t');
 title(['E', cE]);
 set(gca,'FontSize', 14);
-print(f1, '-dpng','-r300','E_z_t.png');
+% print(f1, '-dpng','-r300','E_z_t.png');
 
 %% plot figure
 f2 = figure;
@@ -44,7 +44,7 @@ xlabel('Z [c/\omega_{pi}]');
 ylabel('\Omega_{ci}t');
 title(['B', cB]);
 set(gca,'FontSize', 14);
-print(f2, '-dpng','-r300','B_z_t.png');
+% print(f2, '-dpng','-r300','B_z_t.png');
 
 
 %% Fourier transform
@@ -74,7 +74,7 @@ xlabel('k [2\pi/\lambda_D]');
 ylabel('\omega [\omega_{pi}]');
 title(['PSD, E', cE]);
 set(gca,'FontSize',14);
-print(f3, '-dpng','-r300','PSD_E_k_w.png');
+% print(f3, '-dpng','-r300','PSD_E_k_w.png');
 
 
 %%
@@ -90,4 +90,4 @@ xlabel('k [2\pi/\lambda_D]');
 ylabel('\omega [\omega_{pi}]');
 title(['PSD, B', cB]);
 set(gca,'FontSize',14);
-print(f4, '-dpng','-r300','PSD_B_k_w.png');
+% print(f4, '-dpng','-r300','PSD_B_k_w.png');

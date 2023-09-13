@@ -26,7 +26,7 @@ Br = 1/2;
 betas = 12;
 
 % the temperature between Tsh and Tsp
-Tr = 1/4;
+Tr = 1;
 
 % the temperature between ions and electrons, Ti/Te
 Tie = 4;

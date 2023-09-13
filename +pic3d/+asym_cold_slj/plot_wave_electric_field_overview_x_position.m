@@ -56,7 +56,7 @@ ylabel('\Omega_{ci}t');
 caxis([-1, 1]);
 title('Ex');
 set(gca,'FontSize', 14);
-print(f1, '-dpng','-r300','E_z_t.png');
+% print(f1, '-dpng','-r300','E_z_t.png');
 
 %% Fourier transform
 fE = fftshift(fft2(tE));
@@ -80,7 +80,7 @@ xlabel('kz [2\pi/di]');
 ylabel('\omega [\omega_{pe}]');
 title('Ex');
 set(gca,'FontSize',14);
-print(f2, '-dpng','-r300','PSD_E_k_w.png');
+% print(f2, '-dpng','-r300','PSD_E_k_w.png');
 
 %% magnetic field
 f3 = figure;
@@ -89,7 +89,7 @@ xlabel('X [c/\omega_{pi}]');
 ylabel('\Omega_{ci}t');
 title('Bx');
 set(gca,'FontSize', 14);
-print(f3, '-dpng','-r300','Bz_z_t.png');
+% print(f3, '-dpng','-r300','Bz_z_t.png');
 
 %%
 f4 = figure;
@@ -103,4 +103,4 @@ xlabel('kz [2\pi/di]');
 ylabel('\omega [\omega_{pe}]');
 title('Bx');
 set(gca,'FontSize',14);
-print(f4, '-dpng','-r300','PSD_B_k_w.png');
+% print(f4, '-dpng','-r300','PSD_B_k_w.png');

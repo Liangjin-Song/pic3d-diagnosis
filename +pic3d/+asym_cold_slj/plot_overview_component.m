@@ -6,11 +6,11 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Asym\cold2v2\data';
-outdir='E:\Asym\cold2v2\out\Article';
+indir='E:\Asym\cold2_ds1\data';
+outdir='E:\Asym\cold2_ds1\out\Wave';
 prm=slj.Parameters(indir,outdir);
 
-tt=30;
+tt=28;
 name='E';
 norm=prm.value.vA;
 
@@ -24,7 +24,8 @@ cd(indir);
 f=figure;
 ss=prm.read('stream',tt);
 fd=prm.read(name,tt);
-fd=fd.z;
+fd=fd.x;
 slj.Plot.overview(fd, ss, prm.value.lx, prm.value.lz, norm, extra);
 xlim([0,50]);
 ylim([-10,10]);
+cd(outdir);

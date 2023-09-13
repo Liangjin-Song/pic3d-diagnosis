@@ -10,14 +10,14 @@ indir='E:\Asym\cold2_ds1\data';
 outdir='E:\Asym\cold2_ds1\out\Wave';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=20;
+tt=28;
 % the variable name
 % varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
-varname={'B','Vh','Nh'};
+% varname={'B','Vh','Nh'};
 % varname={'Ne', 'Nl'};
-% varname={'E'};
+varname={'E'};
 % figure style
-extra.Visible=false;
+extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
 extra.yrange=[prm.value.lz(1)+1, prm.value.lz(end)-1];
 extra.xlabel='X [c/\omega_{pi}]';

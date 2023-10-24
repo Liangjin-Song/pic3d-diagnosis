@@ -6,11 +6,11 @@
 clear;
 %% parameters
 % input/output directory
-indir='Z:\Zhong\run2';
-outdir='C:\Users\Liangjin\Pictures\Zhong\run2\Overview';
+indir='X:\Simulation\ion_deceleration\case9';
+outdir='C:\Users\Liangjin\Pictures\Asym\case9\Overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:0.5:25;
+tt=0:0.5:52;
 % the variable nameq
 varname={'B','E','Vi','Ve','Ni','Ne', 'J'};
 % varname = {'J'};
@@ -38,7 +38,7 @@ for t=1:nt
         switch name
             % scalar field
             case {'Ni', 'Ne'}
-                norm=prm.value.n0;
+                norm=prm.value.nis;
                 fig=slj.Plot(extra);
                 fig.overview(fd, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title([name,'   \Omega_{ci}t=',num2str(tt(t))]);
@@ -79,7 +79,7 @@ for t=1:nt
                 fig.png(prm, ['Ez_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
             case {'J'}
-                norm=prm.value.qi*prm.value.n0*prm.value.vA;
+                norm=prm.value.qi*prm.value.nis*prm.value.vA;
                 fig=slj.Plot(extra);
                 fig.overview(fd.x, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title(['Jx   \Omega_{ci}t=',num2str(tt(t))]);

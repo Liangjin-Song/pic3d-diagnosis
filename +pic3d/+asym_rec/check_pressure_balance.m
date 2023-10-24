@@ -6,8 +6,8 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Simulation\Test';
-outdir='E:\Simulation\Test';
+indir='X:\Simulation\ion_deceleration\case9';
+outdir='C:\Users\Liangjin\Pictures\Asym\case9';
 prm=slj.Parameters(indir,outdir);
 % time
 tt=0;

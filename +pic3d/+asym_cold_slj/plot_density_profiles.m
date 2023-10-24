@@ -5,7 +5,7 @@ clear;
 indir='E:\Asym\cold2_ds1\data';
 outdir='E:\Asym\cold2_ds1\out\Test';
 tt=28;
-xz=-0.76;
+xz=-0.66;
 dir=0;
 extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='N';

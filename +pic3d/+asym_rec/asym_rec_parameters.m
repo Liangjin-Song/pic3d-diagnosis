@@ -20,7 +20,7 @@ mie = 100;
 L=0.5;
 
 % the magnetic ratio between Bsh and Bsh
-Br = 1/2;
+Br = 1/1.5;
 
 % the beta value at the magnetosheath side
 betas = 12;
@@ -29,11 +29,11 @@ betas = 12;
 Tr = 1;
 
 % the temperature between ions and electrons, Ti/Te
-Tie = 4;
+Tie = 2;
 
 % the ratio between electron plasma frequency and gryofrequency
 % at the magnetosheath
-fr = 2;
+fr = 4;
 
 % the current ratio between ion and electron, rate = Ji/Je
 jrate = Tie;

@@ -95,6 +95,7 @@ methods (Access = public, Static)
     vA = local_Alfven_speed(B, rho, prm);
     di = local_inertial_length(N, m, q, prm);
     debye = local_debye_length(P, N, q, prm);
+    r = local_gyro_radius(P,N, B, m, q);
     wp = local_plasma_frequency(N, m, q, prm);
     wc = local_gyro_frequency(B, q, m, prm);
 end

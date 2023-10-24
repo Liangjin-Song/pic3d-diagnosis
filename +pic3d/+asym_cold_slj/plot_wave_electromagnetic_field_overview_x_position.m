@@ -6,7 +6,7 @@ outdir='E:\Asym\cold2_ds1\out\Wave';
 prm=slj.Parameters(indir,outdir);
 
 %% the position
-xx = 40;
+xx = 25;
 
 %% componetn
 cE = 'z';
@@ -34,6 +34,7 @@ slj.Plot.field2d(E, prm.value.lz(range), tE, []);
 xlabel('Z [c/\omega_{pi}]');
 ylabel('\Omega_{ci}t');
 title(['E', cE]);
+ylim([0,5]);
 set(gca,'FontSize', 14);
 % print(f1, '-dpng','-r300','E_z_t.png');
 
@@ -43,6 +44,7 @@ slj.Plot.field2d(B, prm.value.lz(range), tB, []);
 xlabel('Z [c/\omega_{pi}]');
 ylabel('\Omega_{ci}t');
 title(['B', cB]);
+ylim([0,5]);
 set(gca,'FontSize', 14);
 % print(f2, '-dpng','-r300','B_z_t.png');
 

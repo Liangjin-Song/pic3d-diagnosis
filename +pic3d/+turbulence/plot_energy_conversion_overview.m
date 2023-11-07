@@ -16,12 +16,10 @@ extra.xlabel='X [c/\omega_{pi}]';
 extra.ylabel='Z [c/\omega_{pi}]';
 extra.Visible=true;
 
-norm=prm.value.nhm*prm.value.vA*prm.value.vA;
+norm=prm.value.n0*prm.value.vA*prm.value.vA;
 
-if name == 'l'
-    sfx='ih';
-elseif name == 'h'
-    sfx='ic';
+if name == 'i'
+    sfx='i';
 elseif name == 'e'
     sfx = 'e';
 else
@@ -35,7 +33,8 @@ for t=1:nt
     E=prm.read('E',tt(t));
     V=prm.read(['V',name],tt(t));
     N=prm.read(['N',name],tt(t));
-    ss=prm.read('stream',tt(t));
+    B=prm.read('B', tt(t));
+    ss=slj.Physics.stream2d(B.x, B.z);
     %% calculation
     if cmpt == 't'
         JE=E.dot(V);
@@ -62,7 +61,6 @@ for t=1:nt
     end
     f=figure('Visible', extra.Visible);
     slj.Plot.overview(JE, ss, prm.value.lx, prm.value.lz, norm, extra);
-    ylim([-10,10]);
     title([tit,',  \Omega_{ci}t = ',num2str(tt(t))]);
     cd(outdir);
 %     print(f,'-dpng','-r300',[stit,'_t',num2str(tt(t)),'.png']);

@@ -1,7 +1,7 @@
 % function plot_species_energy()
 clear;
-indir='E:\Asym\cold2_ds1\data';
-outdir='E:\Asym\cold2_ds1\out';
+indir='Z:\asym\cold4_ds1\data';
+outdir='Z:\asym\cold4_ds1\out\Global';
 prm=slj.Parameters(indir,outdir);
 xrange=[0 60];
 t0=1;

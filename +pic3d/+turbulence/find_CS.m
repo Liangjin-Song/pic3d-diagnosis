@@ -4,7 +4,7 @@ clear;
 indir='Y:\turbulence5.55';
 outdir='C:\Users\Liangjin\Pictures\Turbulence';
 prm=slj.Parameters(indir,outdir);
-tt=93;
+tt=50;
 extra = [];
 extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];

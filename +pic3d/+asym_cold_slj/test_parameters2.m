@@ -18,7 +18,7 @@ Br=1/2;
 Tr=1/3;
 
 % density ratio between cold ions and the hot ions density at the magnetosphere side
-phi=10;
+phi=6;
 
 % the distance between cold ions and the current sheet
 s=1;

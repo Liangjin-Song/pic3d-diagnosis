@@ -2,7 +2,7 @@
 clear;
 %% parameters
 indir='E:\Asym\cold2_ds1\wave';
-outdir='E:\Asym\cold2_ds1\out\Wave';
+outdir='E:\Asym\cold2_ds1\out\wave_yrange\X-line';
 prm=slj.Parameters(indir,outdir);
 
 %% the position

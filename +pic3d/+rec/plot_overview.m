@@ -6,16 +6,16 @@
 clear;
 %% parameters
 % input/output directory
-indir='C:\Users\Liangjin\Pictures\Test';
-outdir='C:\Users\Liangjin\Pictures\Test';
+indir='Z:\Zhong\moon\run1';
+outdir='Z:\Zhong\moon\run1';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0;
+tt=2;
 % the variable name
-% varname={'B','E','J','Vi','Ve','Ni','Ne', 'divE', 'divB'};
-varname={'B'};
+varname={'B','E','J','Vi','Ve','Ni','Ne', 'divE', 'divB'};
+% varname={'B'};
 % figure style
-extra.Visible=false;
+extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
 extra.yrange=[prm.value.lz(1), prm.value.lz(end)];
 % extra.xrange=[60,90];
@@ -37,7 +37,7 @@ for t=1:nt
         switch name
             % scalar field
             case {'Ni', 'Ne'}
-                norm=prm.value.nis;
+                norm=prm.value.n0;
                 fig=slj.Plot(extra);
                 fig.overview(fd, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title([name,'   \Omega_{ci}t=',num2str(tt(t))]);
@@ -78,7 +78,7 @@ for t=1:nt
                 fig.png(prm, ['Ez_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
             case {'J'}
-                norm=prm.value.qi*prm.value.nis*prm.value.vA;
+                norm=prm.value.qi*prm.value.n0*prm.value.vA;
                 fig=slj.Plot(extra);
                 fig.overview(fd.x, ss, prm.value.lx, prm.value.lz, norm, extra);
                 title(['Jx   \Omega_{ci}t=',num2str(tt(t))]);

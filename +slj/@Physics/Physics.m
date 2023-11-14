@@ -112,4 +112,16 @@ end
 methods (Access = public, Static)
     ss = stream2d(bx,bz);
 end
+
+%% ======================================================================== %%
+%% turbulence
+methods (Access = public, Static)
+    [im, pdf, mu, sigma] = intermittence(fd, df);
+    function pdf = gauss(sz, mu, sigma) 
+        pdf = randn(sz);
+        pdf = pdf .* sigma + mu;
+    end
+end
+
+
 end

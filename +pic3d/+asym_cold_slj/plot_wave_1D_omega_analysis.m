@@ -5,15 +5,15 @@ indir='E:\Asym\cold2_ds1\wave';
 outdir='E:\Asym\cold2_ds1\out\wave_yrange';
 prm=slj.Parameters(indir,outdir);
 
-name = 'Bz';
-filter = true;
+name = 'Ez';
+filter = false;
 
 %% normalization
 vA = 0.036;
 B0 = 1.72;
-norm = B0;
+norm = vA;
 
-px = 40;
+px = 25;
 
 %% the index where z = -0.66
 % iz = 74
@@ -67,10 +67,12 @@ xlabel('\omega [\omega_{pe}]');
 ylabel([name, '(\omega)']);
 set(gca, 'FontSize', 16);
 
-if filter
-    print(f1, '-dpng', '-r300', [name, '_t_x=40_highpass.png']);
-    print(f2, '-dpng', '-r300', [name, '_w_x=40_highpass.png']);
-else
-    print(f1, '-dpng', '-r300', [name, '_t_x=40.png']);
-    print(f2, '-dpng', '-r300', [name, '_w_x=40.png']);
-end
+f3=figure;
+cwt(lt/norm, fs);
+% if filter
+%     print(f1, '-dpng', '-r300', [name, '_t_x=40_highpass.png']);
+%     print(f2, '-dpng', '-r300', [name, '_w_x=40_highpass.png']);
+% else
+%     print(f1, '-dpng', '-r300', [name, '_t_x=40.png']);
+%     print(f2, '-dpng', '-r300', [name, '_w_x=40.png']);
+% end

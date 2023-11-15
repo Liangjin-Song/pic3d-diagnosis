@@ -116,7 +116,7 @@ end
 %% ======================================================================== %%
 %% turbulence
 methods (Access = public, Static)
-    [im, pdf, mu, sigma] = intermittence(fd, df);
+    [im, pdf, mu, sigma] = pdf(fd, df);
     function pdf = gauss(sz, mu, sigma) 
         pdf = randn(sz);
         pdf = pdf .* sigma + mu;

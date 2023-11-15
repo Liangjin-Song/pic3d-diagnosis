@@ -23,15 +23,30 @@ for t=1:nt
     Pb(t, 3) = sum(B.z.^2 * prm.value.c.^2 * 0.5, 'all');
 end
 
+Pt = sum(Pb, 2);
+
 %% figure
-figure;
+f1=figure;
 plot(tt, Pb(:, 1), '-r', 'LineWidth', 2);
 hold on
 plot(tt, Pb(:, 2), '-g', 'LineWidth', 2);
 plot(tt, Pb(:, 3), '-b', 'LineWidth', 2);
-plot(tt, Pb(:,1) + Pb(:, 2) + Pb(:, 3), '-k', 'LineWidth', 2);
+plot(tt, Pt, '-k', 'LineWidth', 2);
 xlabel('\Omega_{ci}t');
 ylabel('magnetic energy');
+legend('x', 'y', 'z', 'sum');
+set(gca, 'FontSize', 14);
+
+%%
+f2=figure;
+dPb = (Pb(:,:) - Pb(1, :))/Pt(1);
+plot(tt, dPb(:, 1), '-r', 'LineWidth', 2);
+hold on
+plot(tt, dPb(:, 2), '-g', 'LineWidth', 2);
+plot(tt, dPb(:, 3), '-b', 'LineWidth', 2);
+plot(tt, sum(dPb, 2), '-k', 'LineWidth', 2);
+xlabel('\Omega_{ci}t');
+ylabel('\Delta E_B');
 legend('x', 'y', 'z', 'sum');
 set(gca, 'FontSize', 14);
 

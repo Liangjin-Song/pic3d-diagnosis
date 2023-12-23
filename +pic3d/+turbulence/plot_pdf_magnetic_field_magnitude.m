@@ -21,7 +21,6 @@ lf = fd.get_line2d(xz, 1, prm, norm);
 tf = [lf; lf];
 nv = length(lf);
 df = tf(r+1:(nv+r)) - lf;
-df = lowpass(df, 0.000000001);
 %% spectrum
 [l1, pdf1, mu1, sigma1] = slj.Physics.pdf(df, 200);
 
@@ -33,9 +32,8 @@ figure;
 plot(l1, pdf1, '-k', 'LineWidth', 2);
 hold on 
 plot(l2, pdf2, '-r', 'LineWidth', 2);
-name = '\delta B(r)';
-legend(name, 'Gaussian', 'Box', 'off');
-xlabel(name);
+legend('\deltaB(r = 1 de)', 'Gaussian', 'Box', 'off');
+xlabel('\delta B(r)');
 ylabel('PDF');
 ylim([1e-6, 0.1])
 title(['t = ', num2str(tt)]);
@@ -44,4 +42,4 @@ set(gca, 'FontSize', 14);
 
 %% 
 cd(outdir);
-% print('-dpng','-r300',[name,'_PDF_t', num2str(tt),'.png']);
+% print('-dpng','-r300',['delta_B_PDF_t', num2str(tt),'.png']);

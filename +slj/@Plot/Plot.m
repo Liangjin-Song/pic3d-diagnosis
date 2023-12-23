@@ -48,6 +48,7 @@ end
 %% plot the 2-D figures
 methods (Access = public, Static)
     h=field2d(fd, lx, ly, extra);
+    h=field2d_suitable(fd, lx, ly, extra);
     stream(fd, lx, ly, number, color);
     h=overview(fd, ss, lx, ly, norm, extra);
     set_field_figure(extra);

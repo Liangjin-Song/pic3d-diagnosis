@@ -4,14 +4,14 @@ indir='E:\Asym\cold2_ds1\wave';
 outdir='E:\Asym\cold2_ds1\out\Wave';
 prm=slj.Parameters(indir,outdir);
 
-dt = 0.005;
-tt=27:dt:29;
+dt = 0.1;
+tt=20:dt:40;
 name='e';
 cmpt = 't';
 
 
 %% the subrange
-xrange = 1401:prm.value.nx;
+xrange = 1:prm.value.nx;
 yrange = 1:200;
 
 nt=length(tt);
@@ -33,43 +33,55 @@ end
 pz = zeros(nt, 1);
 % nx = prm.value.nx;
 nx = length(xrange);
-tE = zeros(nt, nx);
-tB = zeros(nt, nx);
+tEx = zeros(nt, nx);
+tEy = zeros(nt, nx);
+tEz = zeros(nt, nx);
+tBx = zeros(nt, nx);
+tBy = zeros(nt, nx);
+tBz = zeros(nt, nx);
 
 for t=1:nt
     %% read data
     fd = prm.read('E', tt(t), 'yrange', prm.value.nx, 200, 1);
-    fd = imfilter(fd.z, fspecial('average', [5,5]));
-    E = fd(yrange, xrange);
+    % fd = imfilter(fd.x, fspecial('average', [5,5]));
+    E.x = imfilter(fd.x(yrange, xrange), fspecial('average', [5, 5]));
+    E.y = fd.y(yrange, xrange);
+    E.z = fd.z(yrange, xrange);
     fd = prm.read('B', tt(t), 'yrange', prm.value.nx, 200, 1);
-    B = fd.z(yrange, xrange);
+    B.x = fd.x(yrange, xrange);
+    B.y = fd.y(yrange, xrange);
+    B.z = fd.z(yrange, xrange);
    %% obtain the range
-    re = abs(E);
+    % re = abs(E);
     %% obtain the maximum value position
-    [~, pos] = sort(re(:));
-    [mz, mx] = ind2sub(size(re), pos(end-1:end));
+    % [~, pos] = sort(re(:));
+    % [mz, mx] = ind2sub(size(re), pos(end-1:end));
     %% the average position
-    pz(t) = round(mean(mz(:)) + yrange(1) - 1);
+    % pz(t) = round(mean(mz(:)) + yrange(1) - 1);
     pz(:) = 71;
     %% obtain the field
-    tE(t, :) = E(pz(t), :);
-    tB(t, :) = B(pz(t), :);
+    tEx(t, :) = E.x(pz(t), :);
+    tEy(t, :) = E.y(pz(t), :);
+    tEz(t, :) = E.z(pz(t), :);
+    tBx(t, :) = B.x(pz(t), :);
+    tBy(t, :) = B.y(pz(t), :);
+    tBz(t, :) = B.z(pz(t), :);
 end
 
 cd(outdir);
 %% plot the field
 f1 = figure;
-slj.Plot.field2d(tE/normE, prm.value.lx(xrange), tt, extra);
+slj.Plot.field2d(tEx/normE, prm.value.lx(xrange), tt, extra);
 xlabel('X [c/\omega_{pi}]');
 ylabel('\Omega_{ci}t');
 caxis([-1, 1]);
-title('Ez');
+title('Ex');
 set(gca,'FontSize', 14);
-print(f1, '-dpng','-r300','E_x_t.png');
+% print(f1, '-dpng','-r300','E_x_t.png');
 
 %% Fourier transform
-fE = fftshift(fft2(tE));
-fB = fftshift(fft2(tB));
+fE = fftshift(fft2(tEx));
+fB = fftshift(fft2(tBz));
 % dx = 1/40;
 % k = 2*pi/dx;
 k = 2*pi/60;
@@ -89,16 +101,16 @@ xlabel('kx [2\pi/di]');
 ylabel('\omega [\omega_{pe}]');
 title('Ez');
 set(gca,'FontSize',14);
-print(f2, '-dpng','-r300','PSD_E_k_w.png');
+% print(f2, '-dpng','-r300','PSD_E_k_w.png');
 
 %% magnetic field
 f3 = figure;
-slj.Plot.field2d(tB, prm.value.lx(xrange), tt, extra);
+slj.Plot.field2d(tBz, prm.value.lx(xrange), tt, extra);
 xlabel('X [c/\omega_{pi}]');
 ylabel('\Omega_{ci}t');
 title('Bz');
 set(gca,'FontSize', 14);
-print(f3, '-dpng','-r300','Bz_x_t.png');
+% print(f3, '-dpng','-r300','Bz_x_t.png');
 
 %%
 f4 = figure;
@@ -112,4 +124,4 @@ xlabel('kx [2\pi/\lambda_D]');
 ylabel('\omega [\omega_{pi}]');
 title('Bz');
 set(gca,'FontSize',14);
-print(f4, '-dpng','-r300','PSD_B_k_w.png');
+% print(f4, '-dpng','-r300','PSD_B_k_w.png');

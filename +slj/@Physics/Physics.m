@@ -123,5 +123,10 @@ methods (Access = public, Static)
     end
 end
 
+%% ======================================================================== %%
+%% the Fourier transform
+methods (Access = public, Static)
+    [sas, hsas, oft] = fft2d(fx, ft, fd);
+end
 
 end

@@ -78,8 +78,9 @@ for t=1:nt
     tE(t, :) = E.x(pz(t), :);
     tJE(t, :) = JE.value(pz(t), :);
 end
-
+%}
 cd(outdir);
+%{
 %% plot the field
 f1 = figure;
 slj.Plot.field2d(tJE/normJE, prm.value.lx, tt, extra);
@@ -160,3 +161,47 @@ ylabel('Ex');
 xlim([0, w(end)]);
 title(['x=',num2str(x)]);
 set(gca, 'FontSize', 14);
+%}
+%% this is only for electric field
+x1=0;
+x2=50;
+fE=tJE;
+[~, ix1]=min(abs(prm.value.lx-x1));
+[~, ix2]=min(abs(prm.value.lx-x2));
+fE = fE(:, ix1:ix2);
+lx=prm.value.lx(ix1:ix2);
+
+f1 = figure;
+slj.Plot.field2d(fE/normE, lx, tt, extra);
+xlabel('X [c/\omega_{pi}]');
+ylabel('\Omega_{ci}t');
+caxis([-1, 1]);
+title('Ex');
+set(gca,'FontSize', 14);
+% print(f2, '-dpng','-r300','E_x_t.png');
+
+%% the FFT
+dx = 1/40;
+k = 2*pi/dx;
+% k = 2*pi/prm.value.debye;
+[ny, nx]=size(fE);
+k = linspace(-k*0.5, k*0.5, nx);
+% pdt = prm.value.fpi/prm.value.wci;
+f = 1/dt;
+f = linspace(-f*0.5, f*0.5, nt);
+[X, Y] = meshgrid(k, f);
+
+fE = fftshift(fft2(fE));
+
+figure;
+p = pcolor(X, Y, abs(fE));
+shading flat;
+p.FaceColor = 'interp';
+colorbar;
+xlabel('k [2\pi/di]');
+ylabel('\omega [\omega_{ci}]');
+% xlabel('k [2\pi/\lambda_D]');
+% ylabel('\omega [\omega_{pi}]');
+title('PSD, Ex');
+set(gca,'FontSize',14);
+xlim([0, 20]);

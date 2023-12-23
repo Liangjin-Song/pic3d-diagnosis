@@ -6,16 +6,16 @@
 clear;
 %% parameters
 % input/output directory
-indir='Z:\Zhong\moon\run1';
-outdir='Z:\Zhong\moon\run1';
+indir='Z:\Simulation\Zhong\moon\run2';
+outdir='Z:\Simulation\Zhong\moon\run2\out';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=2;
+tt=0:0.1:20;
 % the variable name
 varname={'B','E','J','Vi','Ve','Ni','Ne', 'divE', 'divB'};
 % varname={'B'};
 % figure style
-extra.Visible=true;
+extra.Visible=false;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
 extra.yrange=[prm.value.lz(1), prm.value.lz(end)];
 % extra.xrange=[60,90];

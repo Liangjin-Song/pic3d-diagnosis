@@ -7,11 +7,11 @@ outdir='E:\Asym\cold2_ds1\out\Wave';
 prm=slj.Parameters(indir,outdir);
 % norm=prm.value.vA;
 norm=1;
-name='B';
+name='E';
 tt=28;
-xz=40;
-dir=1;
-xrange=[-15,15];
+xz=-0.76;
+dir=0;
+xrange=[35,45];
 extra.title=['\Omega_{ci}t=',num2str(tt)];
 FontSize=14;
 

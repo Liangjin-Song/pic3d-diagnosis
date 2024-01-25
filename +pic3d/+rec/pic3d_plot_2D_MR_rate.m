@@ -2,8 +2,8 @@
 % writen by Liangjin Song on 20200909
 %%
 clear;
-indir='E:\Simulation\Rec\Data';
-outdir='E:\Simulation\Rec\Out\Global';
+indir='Z:\Simulation\sym\rec1d';
+outdir='E:\';
 prm=slj.Parameters(indir,outdir);
 
 % wci=0.000312;

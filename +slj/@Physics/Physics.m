@@ -124,8 +124,15 @@ methods (Access = public, Static)
 end
 
 %% ======================================================================== %%
+%% utility
+methods (Access = public, Static)
+    vtkwrite(filename, dataType, varargin);
+end
+
+%% ======================================================================== %%
 %% the Fourier transform
 methods (Access = public, Static)
+    [lw, res] = fft1d(ft, fd);
     [sas, hsas, oft] = fft2d(fx, ft, fd);
 end
 

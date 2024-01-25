@@ -18,11 +18,11 @@ dt = 0.05;
 tt=20:dt:40;
 
 % physics quantity
-name = 'B';
+name = 'E';
 
 % normalize
-% norm = prm.value.vA;
-norm = 1;
+norm = prm.value.vA;
+% norm = 1;
 
 %% the variable
 nt = length(tt);
@@ -49,7 +49,7 @@ cd(outdir);
 %% backup
 E = tE;
 
-fd=E.y/norm;
+fd=E.x/norm;
 lx=prm.value.lx;
 %% select the range
 x1 = 33;
@@ -61,7 +61,7 @@ t2 = 40;
 [~, t1] = min(abs(tt - t1));
 [~, t2] = min(abs(tt - t2));
 fd = fd(t1:t2, x1:x2);
-lx = prm.value.lx(x1:x2);
+lx = lx(x1:x2);
 lt = tt(t1:t2);
 
 %% plot the field
@@ -70,7 +70,7 @@ slj.Plot.field2d(fd, lx, lt, []);
 xlabel('X [c/\omega_{pi}]');
 ylabel('\Omega_{ci}t');
 % caxis([-1, 1]);
-title('By');
+title('Ex');
 set(gca,'FontSize', 14);
 
 %% the fourier transform

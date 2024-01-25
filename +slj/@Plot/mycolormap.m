@@ -6,76 +6,6 @@ function map=mycolormap(type)
 % @return: map - the colormap
 %%
 
-%{
-map0=[
-0       0       143
-0       0       159
-0       0       175
-0       0       191
-0       0       207
-0       0       223
-0       0       239
-0       0       255
-0       23      255
-0       46      255
-0       69      255
-0       93      255
-0       116     255
-0       139     255
-0       162     255
-0       185     255
-0       209     255
-0       232     255
-0       255     255
-26      255     255
-51      255     255
-77      255     255
-102     255     255
-128     255     255
-153     255     255
-178     255     255
-204     255     255
-229     255     255
-255     255     255
-255     255     255
-255     255     255
-255     255     255
-255     255     255
-255     255     255
-255     255     232
-255     255     209
-255     255     185
-255     255     162
-255     255     139
-255     255     116
-255     255     93
-255     255     69
-255     255     46
-255     255     23
-255     255     0
-255     232     0
-255     209     0
-255     185     0
-255     162     0
-255     139     0
-255     116     0
-255     93      0
-255     69      0
-255     46      0
-255     23      0
-255     0       0
-239     0       0
-223     0       0
-207     0       0
-191     0       0
-175     0       0
-159     0       0
-143     0       0
-128     0       0
-];
-map0=map0/255;
-%}
-
 mycolorpoint=[[0 0 255];...
     [0 255 255];...
     [255 255 255];...
@@ -107,6 +37,135 @@ if type == 0
     map=map0;
 elseif type == 1
     map=mycolor;
+elseif type == 2
+    map = bluewhitered();
 else
     error('Parameters error!');
+end
+end
+
+%% =============================================================================== %%
+function newmap = bluewhitered(m)
+    %BLUEWHITERED   Blue, white, and red color map.
+    %   BLUEWHITERED(M) returns an M-by-3 matrix containing a blue to white
+    %   to red colormap, with white corresponding to the CAXIS value closest
+    %   to zero.  This colormap is most useful for images and surface plots
+    %   with positive and negative values.  BLUEWHITERED, by itself, is the
+    %   same length as the current colormap.
+    %
+    %   Examples:
+    %   ------------------------------
+    %   figure
+    %   imagesc(peaks(250));
+    %   colormap(bluewhitered(256)), colorbar
+    %
+    %   figure
+    %   imagesc(peaks(250), [0 8])
+    %   colormap(bluewhitered), colorbar
+    %
+    %   figure
+    %   imagesc(peaks(250), [-6 0])
+    %   colormap(bluewhitered), colorbar
+    %
+    %   figure
+    %   surf(peaks)
+    %   colormap(bluewhitered)
+    %   axis tight
+    %
+    %   See also HSV, HOT, COOL, BONE, COPPER, PINK, FLAG, 
+    %   COLORMAP, RGBPLOT.
+    
+    
+    if nargin < 1
+       m = size(get(gcf,'colormap'),1);
+    end
+    
+    
+    bottom = [0 0 0.5];
+    botmiddle = [0 0.5 1];
+    middle = [1 1 1];
+    topmiddle = [1 0 0];
+    top = [0.5 0 0];
+    
+    % Find middle
+    lims = get(gca, 'CLim');
+    
+    % Find ratio of negative to positive
+    if (lims(1) < 0) & (lims(2) > 0)
+        % It has both negative and positive
+        % Find ratio of negative to positive
+        ratio = abs(lims(1)) / (abs(lims(1)) + lims(2));
+        neglen = round(m*ratio);
+        poslen = m - neglen;
+        
+        % Just negative
+        new = [bottom; botmiddle; middle];
+        len = length(new);
+        oldsteps = linspace(0, 1, len);
+        newsteps = linspace(0, 1, neglen);
+        newmap1 = zeros(neglen, 3);
+        
+        for i=1:3
+            % Interpolate over RGB spaces of colormap
+            newmap1(:,i) = min(max(interp1(oldsteps, new(:,i), newsteps)', 0), 1);
+        end
+        
+        % Just positive
+        new = [middle; topmiddle; top];
+        len = length(new);
+        oldsteps = linspace(0, 1, len);
+        newsteps = linspace(0, 1, poslen);
+        newmap = zeros(poslen, 3);
+        
+        for i=1:3
+            % Interpolate over RGB spaces of colormap
+            newmap(:,i) = min(max(interp1(oldsteps, new(:,i), newsteps)', 0), 1);
+        end
+        
+        % And put 'em together
+        newmap = [newmap1; newmap];
+        
+    elseif lims(1) >= 0
+        % Just positive
+        new = [middle; topmiddle; top];
+        len = length(new);
+        oldsteps = linspace(0, 1, len);
+        newsteps = linspace(0, 1, m);
+        newmap = zeros(m, 3);
+        
+        for i=1:3
+            % Interpolate over RGB spaces of colormap
+            newmap(:,i) = min(max(interp1(oldsteps, new(:,i), newsteps)', 0), 1);
+        end
+        
+    else
+        % Just negative
+        new = [bottom; botmiddle; middle];
+        len = length(new);
+        oldsteps = linspace(0, 1, len);
+        newsteps = linspace(0, 1, m);
+        newmap = zeros(m, 3);
+        
+        for i=1:3
+            % Interpolate over RGB spaces of colormap
+            newmap(:,i) = min(max(interp1(oldsteps, new(:,i), newsteps)', 0), 1);
+        end
+        
+    end
+    % 
+    % m = 64;
+    % new = [bottom; botmiddle; middle; topmiddle; top];
+    % % x = 1:m;
+    % 
+    % oldsteps = linspace(0, 1, 5);
+    % newsteps = linspace(0, 1, m);
+    % newmap = zeros(m, 3);
+    % 
+    % for i=1:3
+    %     % Interpolate over RGB spaces of colormap
+    %     newmap(:,i) = min(max(interp1(oldsteps, new(:,i), newsteps)', 0), 1);
+    % end
+    % 
+    % % set(gcf, 'colormap', newmap), colorbar
+    %    
 end

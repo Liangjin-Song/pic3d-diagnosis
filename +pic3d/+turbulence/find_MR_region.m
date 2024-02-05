@@ -57,7 +57,7 @@ norm = 1;
 f1 = figure;
 slj.Plot.overview(fd, ss, prm.value.lx, prm.value.lz, norm, []);
 hold on
-plot(spx, spz, 'rx');
+plot(spx, spz, 'wx');
 xlabel('X [c/\omega_{pe}]');
 ylabel('Z [c/\omega_{pe}]');
 
@@ -71,8 +71,12 @@ for i = 1:nrg
     bnd(:, 2) = bnd(:, 2) + idx.col(1) - 1;
     %
     plot(prm.value.lx(bnd(:, 2)),...
-        prm.value.lz(bnd(:, 1)), '-w');
+        prm.value.lz(bnd(:, 1)), '-r', 'LineWidth', 1.5);
 end
+
+%% save figure
+cd(outdir);
+print('-dpng', '-r300', 'Jy.png');
 
 %% obtain the field range
 function val = field_range(row, col, delt, prm)

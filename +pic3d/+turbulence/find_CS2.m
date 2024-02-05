@@ -1,10 +1,10 @@
 clear;
 %%
 % input/output directory
-indir='Y:\turbulence5.55';
-outdir='C:\Users\Liangjin\Pictures\Turbulence';
+indir='D:\Downloads\simulation\t2d\data';
+outdir='D:\Downloads\simulation\t2d\out';
 prm=slj.Parameters(indir,outdir);
-tt=93;
+tt=150;
 extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
 extra.yrange=[prm.value.lz(1), prm.value.lz(end)];
@@ -52,7 +52,7 @@ for t=1:nt
       [D1x,D1y]=gradient(ss);
 %       L=sub2ind(size(Fx),1008,1008);
       D1=sqrt(D1x.*D1x+D1y.*D1y);
-      rows = reshape(D1,1008*1008,1);
+      rows = reshape(D1,2016*2016,1);
       B_D1=std(rows);
       [Dmx,Dmy]=find(D1<0.015*B_D1);
       
@@ -82,8 +82,8 @@ for t=1:nt
       [J_eigx,~]=find(J_eig<0);
       end  
 %%
-      SP_y=mod(DataCoo_SPlinear,1008);
-      SP_x=floor(DataCoo_SPlinear/1008)+1;
+      SP_y=mod(DataCoo_SPlinear,2016);
+      SP_x=floor(DataCoo_SPlinear/2016)+1;
       linearindSP=sub2ind(size(J.y),SP_x,SP_y);
       
       
@@ -129,7 +129,7 @@ for t=1:nt
       line([V_x1,V_x2],[V_y1,V_y2],'color','r');
       line([V_x3,V_x4],[V_y3,V_y4],'color','r');
       
-      fig.png(prm, ['Jy',num2str(tt(t),'%06.2f')]);
+      %           fig.png(prm, ['Jy',num2str(tt(t),'%06.2f')]);
 %       fig.close();   
 
 end

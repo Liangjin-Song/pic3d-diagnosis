@@ -72,7 +72,7 @@ elseif strcmp(value.model, 'turbulence')
     cmd='value=resolve_turbulence(value, key, word);';
     value=for_parameters(cmd, value);
     value=reset_system_size(value);
-    value=length_scale(value, value.di);
+    value=length_scale(value, value.de);
 elseif strcmp(value.model, 'asym-rec')
     cmd='value=resolve_asym_rec(value, key, word);';
     value=for_parameters(cmd, value);

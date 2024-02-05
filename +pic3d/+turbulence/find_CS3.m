@@ -1,11 +1,11 @@
-clear;
+clc;
+clear all;
 %%
 % input/output directory
 indir='D:\Downloads\simulation\t2d\data';
 outdir='D:\Downloads\simulation\t2d\out';
 prm=slj.Parameters(indir,outdir);
-tt=157;
-extra = [];
+tt=155;
 extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
 extra.yrange=[prm.value.lz(1), prm.value.lz(end)];
@@ -29,7 +29,7 @@ nt=length(tt);
 %% global x0 y0;
 for t=1:nt
       J=prm.read('J',tt(t));
-      % E=prm.read('E',tt(t));
+%     E=prm.read('E',tt(t));
       B=prm.read('B',tt(t));
       Bq=sqrt((B.x).^2+(B.z).^2);
 %     Bq1=sqrt((B.x).^2+(B.y).^2);
@@ -53,9 +53,9 @@ for t=1:nt
       [D1x,D1y]=gradient(ss);
 %       L=sub2ind(size(Fx),1000,1000);
       D1=sqrt(D1x.*D1x+D1y.*D1y);
-      rows = reshape(D1,prm.value.nx*prm.value.nz,1);
+      rows = reshape(D1,2016*2016,1);
       B_D1=std(rows);
-      [Dmx,Dmy]=find(D1<0.005*B_D1);
+      [Dmx,Dmy]=find(D1<0.015*B_D1);
       
 %       D_min=min(min(D1));
    
@@ -83,63 +83,47 @@ for t=1:nt
       [J_eigx,~]=find(J_eig<0);
       end  
 %%
-      SP_x=mod(DataCoo_SPlinear,prm.value.nx);
-      SP_y=floor(DataCoo_SPlinear/prm.value.nz)+1;
+      SP_x=mod(DataCoo_SPlinear,2016);
+      SP_y=floor(DataCoo_SPlinear/2016)+1;
       
       SPX=(SP_x-1008)./4;
       SPY=(SP_y)./4;
 %%
 %%选择坐标画向量
-      % M=1;
-      % theta=atand(E_vectorA(4,M)/E_vectorA(3,M));
-      % theta2=atand(E_vectorA(2,M)/E_vectorA(1,M));
-      % V_x1=SPY(M,1)-15.*cosd(theta);
-      % V_x2=SPY(M,1)+15.*cosd(theta);
-      % V_y1=SPX(M,1)-15.*sind(theta);
-      % V_y2=SPX(M,1)+15.*sind(theta);
-      % 
-      % V_x3=SPY(M,1)-15.*cosd(theta2);
-      % V_x4=SPY(M,1)+15.*cosd(theta2);
-      % V_y3=SPX(M,1)-15.*sind(theta2);
-      % V_y4=SPX(M,1)+15.*sind(theta2);
+      M=1;
+      theta=atand(E_vectorA(4,M)/E_vectorA(3,M));
+      theta2=atand(E_vectorA(2,M)/E_vectorA(1,M));
+      V_x1=SPY(M,1)-15.*cosd(theta);
+      V_x2=SPY(M,1)+15.*cosd(theta);
+      V_y1=SPX(M,1)-15.*sind(theta);
+      V_y2=SPX(M,1)+15.*sind(theta);
+      
+      V_x3=SPY(M,1)-15.*cosd(theta2);
+      V_x4=SPY(M,1)+15.*cosd(theta2);
+      V_y3=SPX(M,1)-15.*sind(theta2);
+      V_y4=SPX(M,1)+15.*sind(theta2);
 %%   
       TS_value=rms(J.y);
-      TS_value=1 * rms(TS_value);
+      TS_value=3*rms(TS_value);
       Jy=J.y;
       Jy(find(abs(Jy)<TS_value))=0;
       
       fig=slj.Plot(extra);
       fig.overview(Jy, ss, lx, lz, normJ, extra);
-      % colormap(jet);
+      colormap(jet);
       title(['Jy  \Omega_{ci}t=',num2str(tt(t))]);
+      colormap(jet);
       
       
       
       hold on
-      plot(SPY,SPX,'rx');   
-      % line([V_x1,V_x2],[V_y1,V_y2],'color','r');
-      % line([V_x3,V_x4],[V_y3,V_y4],'color','r');
+      plot(SPY,SPX,'ro');   
+      line([V_x1,V_x2],[V_y1,V_y2],'color','r');
+      line([V_x3,V_x4],[V_y3,V_y4],'color','r');
       
-      % fig.png(prm, ['Jy',num2str(tt(t),'%06.2f')]);
+      fig.png(prm, ['Jy',num2str(tt(t),'%06.2f')]);
 %       fig.close();   
 
 end
-%}
-%%
-E = prm.read('E', tt);
-Ve = prm.read('Ve', tt);
 
-Bpq = sqrt(B.x.^2 + B.z.^2);
-
-ExBe = E + Ve.cross(B);
-JExBe = J.dot(ExBe);
-JE = J.dot(E);
-
-%%
-fd = J.y;
-f1 = figure;
-slj.Plot.overview(ss, ss, lx, lz, 1, extra);
-hold on
-plot(SPY,SPX,'rx');
-% xlim([470, 475]);
-% ylim([-55, -50]);
+      

@@ -45,6 +45,8 @@ for i = 1:np
 end
 irow = irow(imr);
 icol = icol(imr);
+irow = [irow; 673];
+icol = [icol; 1059];
 spx = prm.value.lx(icol);
 spz = prm.value.lz(irow);
 %}
@@ -52,7 +54,7 @@ spz = prm.value.lz(irow);
 J = prm.read('J', tt);
 
 fd = J.y;
-norm = 1;
+norm = prm.value.qi*prm.value.n0*prm.value.vA;
 %% plot figure
 f1 = figure;
 slj.Plot.overview(fd, ss, prm.value.lx, prm.value.lz, norm, []);
@@ -64,14 +66,22 @@ ylabel('Z [c/\omega_{pe}]');
 %% obtain the region
 nrg = length(icol);
 dlt = 10 * prm.value.de;
+BW = zeros(prm.value.nz, prm.value.nx);
 for i = 1:nrg
     idx = field_range(irow(i), icol(i), dlt, prm);
-    bnd = obtain_boundary(fd, idx, fd(irow(i), icol(i)), [i, irow(i), icol(i)]);
+    [bnd, bw] = obtain_boundary(fd, idx, fd(irow(i), icol(i)), [i, irow(i), icol(i)]);
     bnd(:, 1) = bnd(:, 1) + idx.row(1) - 1;
     bnd(:, 2) = bnd(:, 2) + idx.col(1) - 1;
-    %
-    plot(prm.value.lx(bnd(:, 2)),...
-        prm.value.lz(bnd(:, 1)), '-w', 'LineWidth', 1);
+    % the union
+    BW(idx.row, idx.col) = BW(idx.row, idx.col) | bw;
+end
+
+%% plot figure
+[B, ~] = bwboundaries(BW,'noholes');
+nb = length(B);
+for i = 1:nb
+    plot(prm.value.lx(B{i}(:, 2)),...
+        prm.value.lz(B{i}(:, 1)), '-w', 'LineWidth', 1);
 end
 
 %% save figure
@@ -107,7 +117,7 @@ val.bcl = bcl;
 end
 
 %% obtain the boundary
-function boundary = obtain_boundary(fd, range, val, ip)
+function [boundary, BW] = obtain_boundary(fd, range, val, ip)
 v = fd(range.row, range.col);
 if val < 0
 v = -v;
@@ -131,10 +141,23 @@ ir = ip(2) - range.row(1) + 1;
 ic = ip(3) - range.col(1) + 1;
 
 for i = 1:nb
+    boundary = [];
     if inpolygon(ir, ic, B{i}(:,1), B{i}(:, 2))
         boundary = B{i};
-        return;
+        break;
     end
 end
-disp(['error: ', num2str(ip(1))]);
+if isempty(boundary) == 1
+    error(['error: ', num2str(ip(1))]);
+end
+
+[nr, nc] = size(BW);
+BW = zeros(nr, nc);
+for i = 1:nr
+    for j = 1:nc
+        if inpolygon(i, j, boundary(:, 1), boundary(:, 2))
+            BW(i, j) = 1;
+        end
+    end
+end
 end

@@ -1,8 +1,9 @@
 %% input the data
-outdir = 'E:\Asym\cold2_ds1\out\Test';
-load('E:\Asym\cold2_ds1\out\Wave\E_x_t.mat');
-norm = prm.value.vA;
-fd = E.x/norm;
+outdir = 'E:\Research\Simulation\cold2_ds1\out\Test';
+load('E:\Research\Simulation\cold2_ds1\out\Wave\B_x_t.mat');
+norm = 1;
+fd = B.z/norm;
+name = 'B_z';
 
 %% the point position
 x = 35;
@@ -16,7 +17,7 @@ lfd = fd(:, idx);
 f1 = figure;
 plot(tt, lfd, '-k', 'LineWidth', 2);
 xlabel('\Omega_{ci}t');
-ylabel('E_x');
+ylabel(name);
 title(['x = ', num2str(x)]);
 set(gca, 'FontSize', 14);
 cd(outdir);
@@ -28,7 +29,7 @@ fs = 1/(tt(2) - tt(1));
 f2 = figure;
 plot(lw, lf, '-k', 'LineWidth', 2);
 xlabel('\omega [\Omega_{ci}]');
-ylabel('E_x');
+ylabel(name);
 title(['x = ', num2str(x)]);
 set(gca, 'FontSize', 14);
 cd(outdir);
@@ -51,7 +52,7 @@ end
 % plot figure
 f3 = figure;
 slj.Plot.field2d_suitable(res, tt, lw, []);
-colormap(slj.Plot.mycolormap(1));
+% colormap(slj.Plot.mycolormap(1));
 xlabel('t [\Omega_{ci0}^{-1}]');
 ylabel('\omega [\omega_{ci0}]');
 
@@ -87,7 +88,7 @@ f6 = figure;
 pcolor(tt, f, abs(wt));
 shading interp
 colorbar
-colormap(slj.Plot.mycolormap(1));
+% colormap(slj.Plot.mycolormap(1));
 xlabel('t [\Omega_{ci0}^{-1}]');
 ylabel('\omega [\omega_{ci0}]');
 set(gca, 'FontSize', 14);

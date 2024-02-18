@@ -3,8 +3,8 @@
 clear;
 %% parameters
 % directory
-indir='E:\Asym\cold2_ds1\wave';
-outdir='E:\Asym\cold2_ds1\out\Wave';
+indir='E:\Research\Simulation\cold2_ds1\wave';
+outdir='E:\Research\Simulation\cold2_ds1\out\Wave';
 prm=slj.Parameters(indir,outdir);
 
 % load the position index of the separatrix in z direction
@@ -18,7 +18,7 @@ dt = 0.05;
 tt=20:dt:40;
 
 % physics quantity
-name = 'E';
+name = 'B';
 
 % normalize
 norm = prm.value.vA;
@@ -89,3 +89,6 @@ f3 = figure;
 slj.Plot.field2d_suitable(hsas.ft, hsas.lk, hsas.lw, []);
 xlabel('k_x [d_{i0}^{-1}]');
 ylabel('\omega [\omega_{ci0}]');
+clim([0, 0.02]);
+xlim([0, 5]);
+colormap(slj.Plot.mycolormap(1))

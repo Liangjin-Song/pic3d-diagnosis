@@ -1,4 +1,4 @@
-%{
+%
 %% analysis the electric field Ex in w-kx plane
 clear;
 %% parameters
@@ -21,8 +21,8 @@ tt=20:dt:40;
 name = 'B';
 
 % normalize
-norm = prm.value.vA;
-% norm = 1;
+% norm = prm.value.vA;
+norm = 1;
 
 %% the variable
 nt = length(tt);
@@ -49,7 +49,7 @@ cd(outdir);
 %% backup
 E = tE;
 
-fd=E.x/norm;
+fd=E.y/norm;
 lx=prm.value.lx;
 %% select the range
 x1 = 33;
@@ -65,13 +65,13 @@ lx = lx(x1:x2);
 lt = tt(t1:t2);
 
 %% plot the field
-f1 = figure;
-slj.Plot.field2d(fd, lx, lt, []);
-xlabel('X [c/\omega_{pi}]');
-ylabel('\Omega_{ci}t');
-% caxis([-1, 1]);
-title('Ex');
-set(gca,'FontSize', 14);
+% f1 = figure;
+% slj.Plot.field2d(fd, lx, lt, []);
+% xlabel('X [c/\omega_{pi}]');
+% ylabel('\Omega_{ci}t');
+% % caxis([-1, 1]);
+% title('Ex');
+% set(gca,'FontSize', 14);
 
 %% the fourier transform
 % the sampling frequency
@@ -80,10 +80,10 @@ ft = 1/dt;
 % the fourier transform
 [sas, hsas, ~] = slj.Physics.fft2d(fx, ft, fd);
 % plot the figure
-f2 = figure;
-slj.Plot.field2d_suitable(sas.ft, sas.lk, sas.lw, []);
-xlabel('k_x [d_{i0}^{-1}]');
-ylabel('\omega [\omega_{ci0}]');
+% f2 = figure;
+% slj.Plot.field2d_suitable(sas.ft, sas.lk, sas.lw, []);
+% xlabel('k_x [d_{i0}^{-1}]');
+% ylabel('\omega [\omega_{ci0}]');
 
 f3 = figure;
 slj.Plot.field2d_suitable(hsas.ft, hsas.lk, hsas.lw, []);
@@ -91,4 +91,4 @@ xlabel('k_x [d_{i0}^{-1}]');
 ylabel('\omega [\omega_{ci0}]');
 clim([0, 0.02]);
 xlim([0, 5]);
-colormap(slj.Plot.mycolormap(1))
+colormap(slj.Plot.mycolormap(1));

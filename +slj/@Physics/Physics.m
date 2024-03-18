@@ -136,4 +136,10 @@ methods (Access = public, Static)
     [sas, hsas, oft] = fft2d(fx, ft, fd);
 end
 
+%% ======================================================================== %%
+%% find the X line by Hessian matrix
+methods (Access = public, Static)
+    [ix, iz, ss] = findXline_by_Hessian(B, prm);
+end
+
 end

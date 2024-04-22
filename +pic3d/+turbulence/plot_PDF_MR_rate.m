@@ -2,7 +2,11 @@
 clear;
 
 %% parameters
-tt = 0:166;
+indir='Y:\goon\turbulence9.0';
+outdir='C:\Users\Liangjin\Pictures\Turbulence';
+prm=slj.Parameters(indir,outdir);
+
+tt = 25:166;
 nt = length(tt);
 
 norm = prm.value.vA;
@@ -50,6 +54,7 @@ for i = 1:n
 end
 pdf = pdf / n;
 
+cd(outdir);
 %% plot
 figure;
 plot(bin, pdf, 'k-', 'LineWidth', 2);

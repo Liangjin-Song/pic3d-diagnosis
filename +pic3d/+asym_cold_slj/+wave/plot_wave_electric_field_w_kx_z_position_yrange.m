@@ -3,8 +3,8 @@
 clear;
 %% parameters
 % directory
-indir='E:\Research\Simulation\cold2_ds1\wave';
-outdir='E:\Research\Simulation\cold2_ds1\out\Wave';
+indir='E:\Asym\cold2_ds1\wave';
+outdir='E:\Asym\cold2_ds1\out\Wave';
 prm=slj.Parameters(indir,outdir);
 
 % load the position index of the separatrix in z direction
@@ -18,11 +18,11 @@ dt = 0.05;
 tt=20:dt:40;
 
 % physics quantity
-name = 'B';
+name = 'E';
 
 % normalize
-% norm = prm.value.vA;
-norm = 1;
+norm = prm.value.vA;
+% norm = 1;
 
 %% the variable
 nt = length(tt);
@@ -49,7 +49,7 @@ cd(outdir);
 %% backup
 E = tE;
 
-fd=E.y/norm;
+fd=E.x/norm;
 lx=prm.value.lx;
 %% select the range
 x1 = 33;
@@ -65,13 +65,13 @@ lx = lx(x1:x2);
 lt = tt(t1:t2);
 
 %% plot the field
-% f1 = figure;
-% slj.Plot.field2d(fd, lx, lt, []);
-% xlabel('X [c/\omega_{pi}]');
-% ylabel('\Omega_{ci}t');
-% % caxis([-1, 1]);
-% title('Ex');
-% set(gca,'FontSize', 14);
+f1 = figure;
+slj.Plot.field2d_suitable(fd, lx, lt, []);
+xlabel('X [c/\omega_{pi}]');
+ylabel('\Omega_{ci}t');
+% caxis([-1, 1]);
+title('Ex');
+set(gca,'FontSize', 14);
 
 %% the fourier transform
 % the sampling frequency
@@ -89,6 +89,6 @@ f3 = figure;
 slj.Plot.field2d_suitable(hsas.ft, hsas.lk, hsas.lw, []);
 xlabel('k_x [d_{i0}^{-1}]');
 ylabel('\omega [\omega_{ci0}]');
-clim([0, 0.02]);
+caxis([0, 0.02]);
 xlim([0, 5]);
 colormap(slj.Plot.mycolormap(1));

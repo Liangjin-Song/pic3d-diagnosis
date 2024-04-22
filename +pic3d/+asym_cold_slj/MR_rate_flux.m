@@ -6,7 +6,7 @@
 clear;
 %% parameters
 % directory
-indir='E:\Asym\cold2_ds1\data';
+indir='Z:\Simulation\asym\asym2';
 outdir='E:\Asym\cold2_ds1\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
@@ -46,7 +46,7 @@ ylabel('\Psi [B_0/\omega_{pi}]');
 xlim([tt(1) tt(end)]);
 set(gca,'FontSize',16);
 cd(outdir);
-print(f1,'-dpng','-r300','magnetic_flux.png');
+% print(f1,'-dpng','-r300','magnetic_flux.png');
 
 rate=flux(2:end)-flux(1:end-1);
 nrate=rate/(prm.value.vA*dt/prm.value.wci);
@@ -57,5 +57,5 @@ ylabel('E_R');
 xlim([tt(1) tt(end)-1]);
 set(gca,'FontSize',14);
 cd(outdir);
-print(f2,'-dpng','-r300','MR_rate_by_flux.png');
+% print(f2,'-dpng','-r300','MR_rate_by_flux.png');
 % end

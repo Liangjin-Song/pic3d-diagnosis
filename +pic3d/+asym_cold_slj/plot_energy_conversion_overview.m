@@ -1,11 +1,11 @@
 % function plot_energy_conversion_overview(name)
 clear;
 %% parameters
-indir='Y:\turbulence5.55';
-outdir='C:\Users\Liangjin\Pictures\Turbulence\Energy';
+indir='E:\Asym\cold2_ds1\data';
+outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
 
-tt=50;
+tt=30;
 name='e';
 cmpt = 't';
 

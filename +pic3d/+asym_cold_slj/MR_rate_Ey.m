@@ -6,12 +6,12 @@
 % clear;
 %% parameters
 % directory
-indir='Z:\asym\cold1_ds1\data';
+indir='Z:\Simulation\asym\asym2';
 outdir='Z:\asym\cold1_ds1\out\Global';
 prm=slj.Parameters(indir,outdir);
 % time
-dt=0.5;
-tt=0:dt:66;
+dt=1;
+tt=0:dt:50;
 % the box size
 nx=10;
 nz=10;

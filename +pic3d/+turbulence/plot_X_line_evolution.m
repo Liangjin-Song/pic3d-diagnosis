@@ -2,11 +2,11 @@
 clear;
 
 %% parameters
-indir='Y:\goon\turbulence5.55';
+indir='X:\home\xiaohui\goon\turbulence9.0';
 outdir='C:\Users\Liangjin\Pictures\Turbulence';
 prm=slj.Parameters(indir,outdir);
 
-tt = 0:166;
+tt = 159:160;
 nt = length(tt);
 
 %% the number of X-line
@@ -20,6 +20,7 @@ for t = 1:nt
 end
 
 %% plot
+cd(outdir);
 figure;
 plot(tt, nX, '-k', 'LineWidth', 2);
 xlabel('\Omega_{ci}t');

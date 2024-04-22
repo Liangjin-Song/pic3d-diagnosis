@@ -5,10 +5,10 @@ clear;
 indir='E:\Asym\cold2_ds1\data';
 outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
-tt=28;
-xz=-0.66;
+tt=30;
+xz=-0.96;
 dir=0;
-xrange=[35,45];
+xrange=[30,40];
 FontSize=14;
 
 %% read data
@@ -48,7 +48,7 @@ lrh = slj.Physics.local_gyro_radius(Ph, Nh, B, prm.value.mi, prm.value.qi);
 lri = slj.Physics.local_gyro_radius(Pi, Ni, B, prm.value.mi, prm.value.qi);
 lre = slj.Physics.local_gyro_radius(Pe, Ne, B, prm.value.me, prm.value.qi);
 %% get the line
-norm = 1;
+norm = prm.value.di;
 ldil = dil.get_line2d(xz, dir, prm, norm);
 ldih = dih.get_line2d(xz, dir, prm, norm);
 ldie = die.get_line2d(xz, dir, prm, norm);

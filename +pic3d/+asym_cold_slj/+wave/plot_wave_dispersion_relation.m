@@ -19,12 +19,12 @@ wg= wgi;
 wp2 = wp .^ 2;
 wg2 = wg .^ 2;
 %% linear dispersiont relation
-% v = 2.6;
-% k = -5:5;
-% w = v .* k;
-% hold on
-% p1 = plot(k, w, '--k', 'LineWidth', 2);
-% legend(p1, '\omega = c_{ia}'' k');
+v = 2.5;
+k = -5:5;
+w = v .* k;
+hold on
+p1 = plot(k, w, '--k', 'LineWidth', 2);
+legend(p1, '\omega = c_{ia}'' k');
 % 
 %% parallel L-mode
 % w = 0 : 100;
@@ -63,15 +63,15 @@ wg2 = wg .^ 2;
 % plot(k, w, '--r', 'LineWidth', 2);
 
 %% electron whistler
-k = 0.1:0.1:5;
-k = k ./ di0;
-k2 = k .* k;
-
-% w = wg ./ (1 + wp2 ./ (k2 .* c2));
-w = k2 .* c2 .* wg ./ wp2;
-
-hold on
-p2=plot(k*di0, w/w0, '--b', 'LineWidth', 2);
+% k = 0.1:0.1:5;
+% k = k ./ di0;
+% k2 = k .* k;
+% 
+% % w = wg ./ (1 + wp2 ./ (k2 .* c2));
+% w = k2 .* c2 .* wg ./ wp2;
+% 
+% hold on
+% p2=plot(k*di0, w/w0, '--b', 'LineWidth', 2);
 
 %% R-mode of whistler
 % k = 0.01:0.01:5;

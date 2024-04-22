@@ -5,11 +5,13 @@ clear;
 indir='E:\Asym\cold2_ds1\data';
 outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
-tt=28;
-xz=-0.66;
+tt=30;
+xz=-0.96;
 dir=0;
-xrange=[35,45];
+xrange=[30,40];
 FontSize=14;
+
+norm = prm.value.wci;
 
 %% read data
 B = prm.read('B', tt);
@@ -28,7 +30,7 @@ wph = slj.Physics.local_plasma_frequency(Nh, prm.value.mi, prm.value.qi, prm);
 wpi = slj.Physics.local_plasma_frequency(Ni, prm.value.mi, prm.value.qi, prm);
 wpe = slj.Physics.local_plasma_frequency(Ne, prm.value.me, abs(prm.value.qe), prm);
 %% get the line
-norm = 1;
+% norm = 1;
 lwci = wci.get_line2d(xz, dir, prm, norm);
 lwce = wce.get_line2d(xz, dir, prm, norm);
 lwpl = wpl.get_line2d(xz, dir, prm, norm);

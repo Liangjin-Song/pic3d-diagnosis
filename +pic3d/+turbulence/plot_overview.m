@@ -10,10 +10,10 @@ indir='Z:\PIC\turbulence\test1';
 outdir='E:\';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=8;
+tt=[0, 100, 200, 300];
 % the variable name
-% varname={'B','E','J','Vi','Ve','Ni','Ne','divB','divE'};
-varname={'B'};
+varname={'B','E','J','Vi','Ve','Ni','Ne','divB','divE'};
+% varname={'B'};
 % figure style
 extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];

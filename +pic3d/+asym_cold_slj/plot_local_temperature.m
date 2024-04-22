@@ -4,10 +4,10 @@ clear;
 indir='E:\Asym\cold2_ds1\data';
 outdir='E:\Asym\cold2_ds1\out\Test';
 prm=slj.Parameters(indir,outdir);
-tt=28;
-xz=-0.66;
+tt=30;
+xz=-0.96;
 dir=0;
-xrange=[35,45];
+xrange=[30,40];
 FontSize=14;
 
 %% load data
@@ -42,7 +42,7 @@ P = (P.xx + P.yy + P.zz)/3;
 T = slj.Scalar(P./N);
 
 %% plot
-norm = 1;
+norm = prm.value.tem * prm.value.tle * prm.value.thl;
 lte = Te.get_line2d(xz, dir, prm, norm);
 ltl = Tl.get_line2d(xz, dir, prm, norm);
 lth = Th.get_line2d(xz, dir, prm, norm);

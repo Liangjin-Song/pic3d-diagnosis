@@ -17,7 +17,7 @@ if zrange(1)>=zrange(2)
     error('Parameters error!');
 end
 np=length(obj.value.id);
-value.id=[];
+value.id=[];    
 value.rx=[];
 value.ry=[];
 value.rz=[];

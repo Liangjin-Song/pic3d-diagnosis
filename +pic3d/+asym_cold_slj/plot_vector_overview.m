@@ -11,7 +11,7 @@ prm=slj.Parameters(indir,outdir);
 
 %% variable information
 name='E';
-tt=28;
+tt=30;
 norm=prm.value.vA;
 % norm = 1;
 
@@ -26,11 +26,14 @@ extra.title=['Ex, \Omega_{ci}t=',num2str(tt)];
 
 %% read data
 fd=prm.read(name,tt);
+% Ve = fd;
 fd=slj.Scalar(fd.x);
 ss=prm.read('stream',tt);
 
 %% figure
 f=slj.Plot();
-f.overview(fd,ss,prm.value.lx,prm.value.lz,norm,extra);
+f.overview_suit(fd,ss,prm.value.lx,prm.value.lz,norm,extra);
+% hold on
+% f.plot_vector(Ve.x,Ve.z,prm.value.Lx,prm.value.Lz,40,5,'r')
 cd(outdir);
 % f.png(prm,[name,'x_t',num2str(tt),]);

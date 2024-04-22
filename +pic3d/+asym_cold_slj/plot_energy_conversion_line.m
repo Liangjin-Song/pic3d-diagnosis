@@ -108,7 +108,7 @@ for t=1:nt
     
     %% set figure
     xlim(xrange);
-    legend(['J',sfx,' \cdot E'], ['J',sfx,'xEx'], ['J',sfx,'yEy'], ['J',sfx,'zEz'], 'Location', 'Best');
+    legend(['J',sfx,' \cdot E'], ['J',sfx,'xEx'], ['J',sfx,'yEy'], ['J',sfx,'zEz'], 'Location', 'Best', 'Box', 'off');
     xlabel('X [c/\omega_{pi}]');
     ylabel(['J',sfx,'\cdot E']);
     title(['\Omega_{ci}t = ',num2str(tt(t)),', profiles  ', pstr,' = ',num2str(round(lp(xz)))]);

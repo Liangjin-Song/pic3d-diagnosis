@@ -6,15 +6,15 @@
 clear;
 %% parameters
 % input/output directory
-indir='Z:\PIC\shock3\test1';
-outdir=indir;
+indir='Z:\PIC\shock3\test2';
+outdir='C:\Users\Liangjin\Pictures\Shock';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=31;
+tt=29;
 % the variable name
-% varname={'B','E','J','Vi','Ve','Ni','Ne', 'divE', 'divB'};
-varname={'B', 'E', 'J', 'Vi', 'Ve', 'Ni', 'Ne'};
-% varname={'B', 'E', 'J'};
+varname={'B','E','J','Vi','Ve','Ni','Ne', 'divE', 'divB'};
+% varname={'B', 'E', 'J', 'Vi', 'Ve', 'Ni', 'Ne'};
+% varname={'J', 'Vi', 'Ve', 'Ni', 'Ne'};
 % figure style
 extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];

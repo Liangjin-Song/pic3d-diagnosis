@@ -2,7 +2,6 @@ clear;
 %% parameters
 indir='E:\Asym\cold2_ds1\data';
 outdir='E:\Asym\cold2_ds1\out\Overview\pressure_work';
-disp(outdir);
 prm=slj.Parameters(indir,outdir);
 
 tt = 30;
@@ -66,7 +65,7 @@ caxis([-1, 1]);
 print(f2, '-dpng', '-r300', [spc, '_VdivP_t', num2str(tt, '%06.2f'), '.png']);
 
 f3 = figure;
-extra.title = ['t=', num2str(tt), ', ', spc, ', (P\cdot\nabla)\cdot V)'];
+extra.title = ['t=', num2str(tt), ', ', spc, ', (P\cdot\nabla)\cdot V'];
 slj.Plot.overview(PdivV, ss, prm.value.lx, prm.value.lz, norm, extra);
 caxis([-1, 1]);
 print(f3, '-dpng', '-r300', [spc, '_PdivV_t', num2str(tt, '%06.2f'), '.png']);

@@ -22,8 +22,8 @@ if prm.value.dimension == 2
         end
     end
     % boundary condition
-    fd(:,nx)=fd(:,1);
-    fd(nz,:)=fd(nz-1,:);
+    fd(:,nx)= 0; % fd(:,1);
+    fd(nz,:)= 0; % fd(nz-1,:);
     fd=slj.Scalar(fd);
 else
     error('Parameters error!');

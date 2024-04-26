@@ -35,8 +35,8 @@ end
 %% read data
 spc1 = prm.read(name1);
 spc2 = prm.read(name2);
-spc = spc1.add(spc2);
-spc = spc.subposition([0, 50], [0, 1], [-1, -0.9]);
+spcs = spc1.add(spc2);
+spc = spcs.subposition([0, 50], [0, 1], [-1, -0.85]);
 dst=spc.dstrv(1,vdir,prm.value.vA,prm.value.nx);
 %% plot figure
 f=slj.Plot();

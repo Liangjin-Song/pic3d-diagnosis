@@ -20,10 +20,10 @@ if prm.value.dimension == 2
         end
     end
     % boundary
-    fd.x(:,nx)=fd.x(:,1);
-    fd.z(:,nx)=fd.z(:,1);
-    fd.x(nz,:)=fd.x(nz-1,:);
-    fd.z(nz,:)=fd.z(nz-1,:);
+    fd.x(:,nx)= 0; % fd.x(:,1);
+    fd.z(:,nx)= 0; % fd.z(:,1);
+    fd.x(nz,:)= 0; % fd.x(nz-1,:);
+    fd.z(nz,:)= 0; % fd.z(nz-1,:);
 else
     error('Parameters error!');
 end

@@ -18,11 +18,11 @@ dt = 0.05;
 tt=20:dt:40;
 
 % physics quantity
-name = 'E';
+name = 'B';
 
 % normalize
-norm = prm.value.vA;
-% norm = 1;
+% norm = prm.value.vA;
+norm = 1;
 
 %% the variable
 nt = length(tt);
@@ -70,7 +70,7 @@ slj.Plot.field2d_suitable(fd, lx, lt, []);
 xlabel('X [c/\omega_{pi}]');
 ylabel('\Omega_{ci}t');
 % caxis([-1, 1]);
-title('Ex');
+title('Bx');
 set(gca,'FontSize', 14);
 
 %% the fourier transform
@@ -89,6 +89,6 @@ f3 = figure;
 slj.Plot.field2d_suitable(hsas.ft, hsas.lk, hsas.lw, []);
 xlabel('k_x [d_{i0}^{-1}]');
 ylabel('\omega [\omega_{ci0}]');
-caxis([0, 0.02]);
+% caxis([0, 0.02]);
 xlim([0, 5]);
 colormap(slj.Plot.mycolormap(1));

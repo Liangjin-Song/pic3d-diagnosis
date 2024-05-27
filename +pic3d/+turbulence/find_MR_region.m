@@ -2,17 +2,17 @@
 %% find the magnetic reconnection region
 clear;
 %% parameters
-indir='Y:\goon\turbulence9.0';
-outdir='C:\Users\Liangjin\Pictures\Turbulence';
+indir='E:\Turbulence\9.2\data';
+outdir='E:\Turbulence\9.2\out\reconnection';
 prm=slj.Parameters(indir,outdir);
 
-tt = 157;
+tt = 135;
 
 %% read data
 B = prm.read('B', tt);
 
-[icol, irow, ss] = slj.Physics.findXline_by_Hessian(B, prm);
- %{
+% [icol, irow, ss] = slj.Physics.findXline_by_Hessian(B, prm);
+
 %% vector potential
 ss = slj.Scalar(slj.Physics.stream2d(B.x, B.z));
 
@@ -46,9 +46,7 @@ for i = 1:np
 end
 irow = irow(imr);
 icol = icol(imr);
-% irow = [irow; 673];
-% icol = [icol; 1059];
-%}
+
 spx = prm.value.lx(icol);
 spz = prm.value.lz(irow);
 %% obtain data

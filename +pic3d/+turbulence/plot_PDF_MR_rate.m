@@ -2,17 +2,19 @@
 clear;
 
 %% parameters
-indir='Y:\goon\turbulence9.0';
-outdir='C:\Users\Liangjin\Pictures\Turbulence';
+indir='E:\Turbulence\9.2\data';
+outdir='E:\Turbulence\9.2\out\static';
 prm=slj.Parameters(indir,outdir);
-
-tt = 25:166;
+% time
+tt=0:221;
 nt = length(tt);
 
 norm = prm.value.vA;
 
 %% the reconnection rate
 rate = [];
+dx=0;
+dy=0;
 
 for t = 1:nt
     cd(indir);
@@ -29,7 +31,7 @@ for t = 1:nt
     %% reconnection rate
     n = length(icol);
     for i = 1:n
-        rate = [rate, Er(irow(i), icol(i))];
+        rate = [rate, mean(Er(irow(i)-dx:irow(i)+dx, icol(i)-dy:icol(i)+dy), 'all')];
     end
 end
 

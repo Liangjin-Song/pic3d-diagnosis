@@ -6,13 +6,13 @@
 clear;
 %% parameters
 % input/output directory
-indir='Z:\PIC\turbulence\test1';
-outdir='E:\';
+indir='E:\Turbulence\9.2\data';
+outdir='E:\Turbulence\9.2\out\overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=[0, 100, 200, 300];
+tt=0:221;
 % the variable name
-varname={'B','E','J','Vi','Ve','Ni','Ne','divB','divE'};
+varname={'B','E','Vi','Ve','Ni','Ne'};
 % varname={'B'};
 % figure style
 extra.Visible=true;

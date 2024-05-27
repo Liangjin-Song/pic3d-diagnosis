@@ -2,8 +2,8 @@
 % writen by Liangjin Song on 20200909
 %%
 clear;
-indir='Z:\Simulation\sym\rec1d';
-outdir='E:\';
+indir='Z:\Simulation\Zhong\moon\run4';
+outdir='Z:\Simulation\Zhong\moon\run4\out\global';
 prm=slj.Parameters(indir,outdir);
 
 % wci=0.000312;
@@ -34,4 +34,3 @@ for i=2:nf
     cd(outdir);
     print(f(i), '-dpng','-r300',['MR_rate',num2str(i-1),'.png']);
 end
-

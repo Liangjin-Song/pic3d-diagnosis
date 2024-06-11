@@ -1,11 +1,11 @@
 % function plot_energy_conversion_overview(name)
 clear;
 %% parameters
-indir='Z:\Simulation\Zhong\moon\run3';
-outdir='Z:\Simulation\Zhong\moon\run3\out\range';
+indir='Z:\Simulation\Zhong\moon\run4';
+outdir='Z:\Simulation\Zhong\moon\run4\out\range';
 prm=slj.Parameters(indir,outdir);
 
-tt=10;
+tt=20;
 
 nt=length(tt);
 

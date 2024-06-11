@@ -65,6 +65,10 @@ lx = lx(x1:x2);
 lt = tt(t1:t2);
 
 %% plot the field
+fd0 = fd;
+% high pass
+fd = slj.Physics.highpass2d(fd0);
+
 f1 = figure;
 slj.Plot.field2d_suitable(fd, lx, lt, []);
 xlabel('X [c/\omega_{pi}]');

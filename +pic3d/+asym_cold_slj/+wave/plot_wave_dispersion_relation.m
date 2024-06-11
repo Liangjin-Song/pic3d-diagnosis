@@ -19,11 +19,11 @@ wg= wgi;
 wp2 = wp .^ 2;
 wg2 = wg .^ 2;
 %% linear dispersiont relation
-v = 2.9;
+v = 3.2;
 k = -5:5;
 w = v .* k;
 hold on
-p1 = plot(k, w, '--k', 'LineWidth', 2);
+p1 = plot(k, w, '--b', 'LineWidth', 2);
 legend(p1, '\omega = v_{Aic}k');
 % 
 %% parallel L-mode

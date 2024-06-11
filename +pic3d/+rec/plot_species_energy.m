@@ -1,6 +1,6 @@
 clear;
-indir='Z:\Simulation\Zhong\moon\run3';
-outdir='Z:\Simulation\Zhong\moon\run3\out\global';
+indir='Z:\Simulation\Zhong\moon\run4';
+outdir='Z:\Simulation\Zhong\moon\run4\out\global';
 %% plot energy
 h1=figure;
 en=load([indir,'\energy.dat']);

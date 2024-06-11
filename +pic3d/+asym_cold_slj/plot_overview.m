@@ -15,7 +15,7 @@ tt=28;
 % varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
 % varname={'B','Vh','Nh'};
 % varname={'Ne', 'Nl'};
-varname={'E'};
+varname={'J'};
 % figure style
 extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];

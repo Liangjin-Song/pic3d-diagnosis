@@ -26,7 +26,7 @@ xrange=[tt(1),tt(end)];
 %% plot figure
 for i=2:nf
     f(i)=figure;
-    plot(tt(1:end-1),mrate(:,i),'k','LineWidth',2);
+    plot(tt(1:end-1),slj.Physics.filter1d(mrate(:,i), 15),'k','LineWidth',2);
     xlim(xrange);
     xlabel('\Omega_{ci}t');
     ylabel('E_r');

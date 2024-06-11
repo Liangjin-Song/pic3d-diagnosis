@@ -134,6 +134,7 @@ end
 methods (Access = public, Static)
     [lw, res] = fft1d(ft, fd);
     [sas, hsas, oft] = fft2d(fx, ft, fd);
+    hfd = highpass2d(fd);
 end
 
 %% ======================================================================== %%

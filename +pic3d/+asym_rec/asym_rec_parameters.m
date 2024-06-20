@@ -11,29 +11,29 @@ ny = 1000;
 di = 40;
 
 % the number particles per cell
-ppc = 500;
+ppc = 100;
 
 % the mass ratio between ion and electron
 mie = 100;
 
 % the half width of the current sheet
-L=0.5;
+L=0.6;
 
 % the magnetic ratio between Bsh and Bsh
-Br = 1/1.5;
+Br = 1/2;
 
 % the beta value at the magnetosheath side
-betas = 12;
+betas = 6;
 
 % the temperature between Tsh and Tsp
-Tr = 1;
+Tr = 0.2;
 
 % the temperature between ions and electrons, Ti/Te
-Tie = 2;
+Tie = 5;
 
 % the ratio between electron plasma frequency and gryofrequency
 % at the magnetosheath
-fr = 4;
+fr = 3;
 
 % the current ratio between ion and electron, rate = Ji/Je
 jrate = Tie;

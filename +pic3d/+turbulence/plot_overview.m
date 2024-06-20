@@ -6,16 +6,16 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Turbulence\test';
-outdir='E:\Turbulence\test';
+indir='E:\Turbulence\run1\data';
+outdir='E:\Turbulence\run1\out\overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=218;
+tt=150:179;
 % the variable name
 % varname={'B','E','Vi','Ve','Ni','Ne'};
-varname={'B'};
+varname={'B', 'E', 'J', 'Ni', 'Ne', 'Vi', 'Ve'};
 % figure style
-extra.Visible=true;
+extra.Visible=false;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
 extra.yrange=[prm.value.lz(1), prm.value.lz(end)];
 % extra.xrange=[60,90];
@@ -34,6 +34,7 @@ for t=1:nt
         %% read data
         name=char(varname(n));
         fd=prm.read(name,tt(t));
+        % ss=prm.read('stream', tt(t));
         %% select the variable
         switch name
             % scalar field
@@ -54,7 +55,7 @@ for t=1:nt
             case {'B'}
                 norm=1;
                 fig=slj.Plot(extra);
-                fig.field2d(fd.x/norm, lx, ly, extra);
+               fig.field2d(fd.x/norm, lx, ly, extra);
                 title(['Bx   \Omega_{ci}t=',num2str(tt(t))]);
                 fig.png(prm, ['Bx_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
@@ -71,17 +72,17 @@ for t=1:nt
             case {'E'}
                 norm=prm.value.vA;
                 fig=slj.Plot(extra);
-                fig.field2d(fd.x/norm, lx, ly, extra);
+                 fig.field2d(fd.x/norm, lx, ly, extra);
                 title(['Ex   \Omega_{ci}t=',num2str(tt(t))]);
                 fig.png(prm, ['Ex_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
                 fig=slj.Plot(extra);
-                fig.field2d(fd.y/norm, lx, ly, extra);
+                 fig.field2d(fd.y/norm, lx, ly, extra);
                 title(['Ey   \Omega_{ci}t=',num2str(tt(t))]);
                 fig.png(prm, ['Ey_t',num2str(tt(t),'%06.2f')]);
                 fig.close();
                 fig=slj.Plot(extra);
-                fig.field2d(fd.z/norm, lx, ly, extra);
+                 fig.field2d(fd.z/norm, lx, ly, extra);
                 title(['Ez   \Omega_{ci}t=',num2str(tt(t))]);
                 fig.png(prm, ['Ez_t',num2str(tt(t),'%06.2f')]);
                 fig.close();

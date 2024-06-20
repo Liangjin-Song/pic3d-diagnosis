@@ -1,8 +1,8 @@
 clear;
-indir='Y:\turbulence5.55';
-outdir='C:\Users\Liangjin\Pictures\Turbulence\Energy';
+indir='E:\Turbulence\run1\data';
+outdir='E:\Turbulence\run1\out\global';
 
-xrange = [0, 240];
+xrange = [0, 180];
 en=load([indir,'\energy.dat']);
 tt=0.5*(0:size(en,1)-1);
 %% plot energy
@@ -22,7 +22,7 @@ xlabel('\Omega_{ci}t');
 ylabel('Energy');
 set(gca,'FontSize',14);
 cd(outdir);
-print(h1,'-dpng','-r300','energy.png');
+
 
 de = en;
 for i=1:5
@@ -39,8 +39,6 @@ xlabel('\Omega_{ci}t');
 ylabel('\Delta E');
 xlim(xrange);
 set(gca,'FontSize',14);
-print(h4, '-dpng','-r300','delta_E.png');
-
 
 %% plot energy rate
 h2=figure;
@@ -59,17 +57,13 @@ ylabel('(E(t)-E(1))/E(1)');
 xlim([0,tt(end)]);
 xlim(xrange);
 set(gca,'FontSize',14);
-cd(outdir)
-print(h2, '-dpng','-r300','energy_rate.png');
-
 
 h3=figure;
 % the number of ions
-Ni=1.7280e+09;
 en=load([indir,'\energy.dat']);
 tt=0.5*(0:size(en,1)-1);
-aEe=en(:,3)/Ni;
-aEi=en(:,4)/Ni;
+aEe=en(:,3);
+aEi=en(:,4);
 plot(tt,aEe,'b','LineWidth',2); hold on
 plot(tt,aEi,'r','LineWidth',2);
 % plot(tt,en(:,5),'m','LineWidth',2);
@@ -80,5 +74,8 @@ xlabel('\Omega_{ci}t');
 ylabel('Average Energy');
 xlim(xrange);
 set(gca,'FontSize',14);
-cd(outdir);
 
+cd(outdir);
+print(h1,'-dpng','-r300','energy.png');
+print(h2, '-dpng','-r300','energy_rate.png');
+print(h4, '-dpng','-r300','delta_E.png');

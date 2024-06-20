@@ -2,11 +2,11 @@
 %% find the magnetic reconnection region
 clear;
 %% parameters
-indir='E:\Turbulence\9.2\data';
-outdir='E:\Turbulence\9.2\out\reconnection';
+indir='Y:\goon\turbulence5.55';
+outdir='C:\Users\Liangjin\Pictures\Turbulence';
 prm=slj.Parameters(indir,outdir);
 
-tt = 135;
+tt = 99;
 
 %% read data
 B = prm.read('B', tt);
@@ -31,7 +31,7 @@ D2sz = D2sz.gradient(prm);
 
 %% find the neutral line
 val = D1sq;
-threshold = std(val(:)) * 0.01; % 0.0043;
+threshold = std(val(:)) * 0.015; % 0.0043;
 [irow, icol] = find(val < threshold);
 
 %% find the saddle points

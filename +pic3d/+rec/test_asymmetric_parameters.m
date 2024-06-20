@@ -17,13 +17,13 @@ L = 1;
 Br = 0.5;
 
 % the beta value at the magnetosheath side
-betas = 5;
+betas = 10;
 
 % the temperature between Tsh and Tsp
-Tr = 0.5;
+Tr = 0.18;
 
 % the temperature between electrons and ions
-tie = 4;
+tie = 11;
 
 %% the light speed
 c = 0.5;

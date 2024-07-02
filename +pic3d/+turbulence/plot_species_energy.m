@@ -1,8 +1,8 @@
 clear;
-indir='E:\Turbulence\run1\data';
+indir='E:\Turbulence\run1.1\data';
 outdir='E:\Turbulence\run1\out\global';
 
-xrange = [0, 180];
+xrange = [0, 240];
 en=load([indir,'\energy.dat']);
 tt=0.5*(0:size(en,1)-1);
 %% plot energy

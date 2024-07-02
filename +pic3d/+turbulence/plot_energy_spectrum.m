@@ -3,9 +3,9 @@ indir='E:\Turbulence\run1\data';
 outdir='E:\Turbulence\run1\out\global';
 prm=slj.Parameters(indir,outdir);
 
-tt = [0, 20, 100, 179];
+tt = [0, 20, 100, 170];
 sty = {'-k', '-r', '-g', '--b'};
-spc = 'i';
+spc = 'e';
 
 %% set figure
 figure;

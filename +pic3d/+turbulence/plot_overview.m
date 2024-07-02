@@ -6,11 +6,11 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Turbulence\run1\data';
-outdir='E:\Turbulence\run1\out\overview';
+indir='E:\Turbulence\run1.1\data';
+outdir='E:\Turbulence\run1.1\out\overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=150:179;
+tt=0;
 % the variable name
 % varname={'B','E','Vi','Ve','Ni','Ne'};
 varname={'B', 'E', 'J', 'Ni', 'Ne', 'Vi', 'Ve'};
@@ -20,8 +20,8 @@ extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
 extra.yrange=[prm.value.lz(1), prm.value.lz(end)];
 % extra.xrange=[60,90];
 % extra.yrange=[9,15];
-extra.xlabel='X [c/\omega_{pe}]';
-extra.ylabel='Z [c/\omega_{pe}]';
+extra.xlabel='X [c/\omega_{pi}]';
+extra.ylabel='Z [c/\omega_{pi}]';
 lx=prm.value.lx;
 ly=prm.value.lz;
 

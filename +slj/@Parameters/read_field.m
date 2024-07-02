@@ -45,6 +45,9 @@ switch name
         fd = slj.Tensor(fd);
     case {'spctrmh','spctrmi','spctrme','spctrml','spctrmhe'}
         fd=fd;
+    case {'heste', 'hesti'}
+        id = slj.Parameters.read_binary_file([name,'_t',num2str(time,'%06.2f'),'_id.bsd'], 'uint64');
+        fd = high_energy_particles(fd, id, time, reset);
     otherwise
         error('Parameters error!');
 end
@@ -111,4 +114,39 @@ else
     fd.yz=reshape_scalar(t(:,5),nx,ny,nz);
     fd.zz=reshape_scalar(t(:,6),nx,ny,nz);
 end
+end
+
+%% ======================================================================== %%
+function fd = high_energy_particles(v, id, time, reset)
+%%
+% @brief: read the high energy particles
+% @param: v - the 1-D data
+% @param: id - the particles' id
+% @param: reset - whether the coordinate system has been rotated
+% @return: fd - the high energy particles
+%%
+value.id=id';
+nvar=7;
+np=length(v)/nvar;
+prt=reshape(v,[nvar,np]);
+%%
+value.vx=prt(1,:);
+if reset
+    value.vy=-prt(3,:);
+    value.vz=prt(2,:);
+else
+    value.vy=prt(2,:);
+    value.vz=prt(3,:);
+end
+value.rx=prt(4, :);
+if reset
+    value.ry=prt(6, :);
+    value.rz=prt(5, :);
+else
+    value.ry=prt(5, :);
+    value.rz=prt(6, :);
+end
+%% weight
+value.weight=prt(7,:);
+fd = slj.Species('high energy', time, 1, value);
 end

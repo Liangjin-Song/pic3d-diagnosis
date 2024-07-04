@@ -1,9 +1,9 @@
 %% plot the simulation data
 clear;
 %% parameters
-indir = 'D:\Downloads\mps';
-tt = 0:100;
-name = 'divE';
+indir = 'E:\mps\test';
+tt = 198;
+name = 'E';
 
 %% loop
 nt = length(tt);
@@ -11,9 +11,9 @@ cd(indir);
 figure;
 % ------------------------------------------------------------------- %
 for t = 1:nt
-    fd = mps_read(name, tt(t));
+    fd = others.mps_debug.line.mps_read(name, tt(t));
     % --------------------------------------------------------------- %
-    plot(fd, '-k', 'LineWidth', 2);
+    plot(fd.z, '-k', 'LineWidth', 2);
     title(['t = ', num2str(tt(t))]);
     xlabel('X');
     ylabel(name);

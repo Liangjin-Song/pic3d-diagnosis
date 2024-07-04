@@ -1,12 +1,12 @@
 %% plot the simulation data
 clear;
 %% parameters
-indir = 'E:\mps\turbulence\run1.1\data';
-tt = 50;
+indir = '\\tsclient\_home_liangjin_Downloads\mps';
+tt = 5;
 % name = 'electron_regular_mass';
 name = 'divE';
-nx=2000;
-ny=2000;
+nx=12;
+ny=1;
 
 %% loop
 nt = length(tt);

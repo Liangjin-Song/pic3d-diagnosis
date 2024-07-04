@@ -10,7 +10,7 @@ indir='E:\Turbulence\run1.1\data';
 outdir='E:\Turbulence\run1.1\out\overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0;
+tt=1:9;
 % the variable name
 % varname={'B','E','Vi','Ve','Ni','Ne'};
 varname={'B', 'E', 'J', 'Ni', 'Ne', 'Vi', 'Ve'};

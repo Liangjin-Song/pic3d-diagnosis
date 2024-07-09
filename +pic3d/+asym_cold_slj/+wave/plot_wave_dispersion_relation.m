@@ -1,30 +1,44 @@
-w0 = prm.value.wci;
-di0=prm.value.di;
-vA0 = prm.value.vA;
-
-c = prm.value.c;
-c2 = c .* c;
-
-wge = 114.11 * w0;
-wpe = 160 * w0;
-
-wgi = 1.1 * w0;
-wpic = 7.1 * w0;
-wpih = 14.3 * w0;
-wpi = 16 * w0;
-
-wp= wpic;
-wg= wgi;
-
-wp2 = wp .^ 2;
-wg2 = wg .^ 2;
+% w0 = prm.value.wci;
+% di0=prm.value.di;
+% vA0 = prm.value.vA;
+% 
+% c = prm.value.c;
+% c2 = c .* c;
+% 
+% wge = 114.11 * w0;
+% wpe = 160 * w0;
+% 
+% wgi = 1.1 * w0;
+% wpic = 7.1 * w0;
+% wpih = 14.3 * w0;
+% wpi = 16 * w0;
+% 
+% wp= wpic;
+% wg= wgi;
+% 
+% wp2 = wp .^ 2;
+% wg2 = wg .^ 2;
 %% linear dispersiont relation
-v = 3.2;
+v = 2.5;
 k = -5:5;
 w = v .* k;
 hold on
 p1 = plot(k, w, '--b', 'LineWidth', 2);
-legend(p1, '\omega = v_{Aic}k');
+legend(p1, '\omega = c_{ia}''k');
+
+%% grouth rate of ion-acoustic wave
+k=0:0.01:5;
+mei = 0.01;
+cs = 0.7;
+ve0=2.2;
+tau = 0.32;
+
+w = sqrt(pi./8) .* k .* cs .* (sqrt(mei) .* (ve0 ./ cs - 1) - tau.^(3/2) .* exp(-tau./2));
+hold on;
+p2 = plot(k, 100*w, '--r', 'LineWidth', 2);
+
+disp(ve0 - cs .* (1 + 10 .* tau.^(3/2) .* exp(-tau./2)));
+
 % 
 %% parallel L-mode
 % w = 0 : 100;

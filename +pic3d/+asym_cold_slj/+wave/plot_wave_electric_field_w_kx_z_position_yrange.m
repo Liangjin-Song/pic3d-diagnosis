@@ -18,11 +18,11 @@ dt = 0.05;
 tt=20:dt:40;
 
 % physics quantity
-name = 'B';
+name = 'E';
 
 % normalize
-% norm = prm.value.vA;
-norm = 1;
+norm = prm.value.vA;
+% norm = 1;
 
 %% the variable
 nt = length(tt);

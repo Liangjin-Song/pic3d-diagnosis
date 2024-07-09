@@ -10,11 +10,10 @@ indir='C:\Users\Liangjin\Pictures\Shock\data';
 outdir='C:\Users\Liangjin\Pictures\Shock\out';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0;
+tt=0:3;
 % the variable name
-varname={'B','E','J','Vi','Ve','Ni','Ne', 'divE', 'divB'};
-% varname={'B', 'E', 'J', 'Vi', 'Ve', 'Ni', 'Ne'};
-% varname={'J', 'Vi', 'Ve', 'Ni', 'Ne'};
+varname={'B','E','J','Vi','Ve','Ni','Ne', 'divB', 'divE'};
+% varname={'divE'};
 % figure style
 extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];

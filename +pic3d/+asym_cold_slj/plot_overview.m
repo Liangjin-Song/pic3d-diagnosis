@@ -6,16 +6,16 @@
 clear;
 %% parameters
 % input/output directory
-indir='E:\Asym\cold2_ds1\data';
-outdir='E:\Asym\cold2_ds1\out\Wave';
+indir='Z:\Simulation\asym\cold3_ds1\data';
+outdir='Z:\Simulation\asym\cold3_ds1\out\overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=28;
+tt=20:40;
 % the variable name
-% varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
+varname={'B','E','J','Vl','Vh','Ve','Nl','Nh','Ne', 'divB', 'divE'};
 % varname={'B','Vh','Nh'};
 % varname={'Ne', 'Nl'};
-varname={'J'};
+% varname={'J'};
 % figure style
 extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];

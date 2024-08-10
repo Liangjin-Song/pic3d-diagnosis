@@ -10,12 +10,12 @@ indir='E:\Turbulence\run1.1\data';
 outdir='E:\Turbulence\run1.1\out\overview';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=30:39;
+tt=70:79;
 % the variable name
 % varname={'B','E','Vi','Ve','Ni','Ne'};
 varname={'B', 'E', 'J', 'Ni', 'Ne', 'Vi', 'Ve'};
 % figure style
-extra.Visible=false;
+extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];
 extra.yrange=[prm.value.lz(1), prm.value.lz(end)];
 % extra.xrange=[60,90];
@@ -33,7 +33,7 @@ for t=1:nt
     for n=1:nvar
         %% read data
         name=char(varname(n));
-        fd=prm.read(name,tt(t));
+        fd=prm.read(name, tt(t));
         % ss=prm.read('stream', tt(t));
         %% select the variable
         switch name

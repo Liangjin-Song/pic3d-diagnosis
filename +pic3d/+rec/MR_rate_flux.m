@@ -6,8 +6,8 @@
 clear;
 %% parameters
 % directory
-indir='Z:\Simulation\sym\rec1d';
-outdir='Z:\Simulation\sym\rec1d\out\global';
+indir='Z:\Simulation\Zhong\moon\run2.1';
+outdir='Z:\Simulation\Zhong\moon\run2.1\out\overview2';
 prm=slj.Parameters(indir,outdir);
 % time
 dt=0.5;

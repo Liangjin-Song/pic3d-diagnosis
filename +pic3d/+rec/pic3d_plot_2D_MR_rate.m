@@ -2,8 +2,8 @@
 % writen by Liangjin Song on 20200909
 %%
 clear;
-indir='Z:\Simulation\Zhong\moon\run4';
-outdir='Z:\Simulation\Zhong\moon\run4\out\global';
+indir='Z:\Simulation\Zhong\moon\run2.1';
+outdir='Z:\Simulation\Zhong\moon\run2.1\out\overview2';
 prm=slj.Parameters(indir,outdir);
 
 % wci=0.000312;

@@ -6,11 +6,11 @@
 clear;
 %% parameters
 % input/output directory
-indir='C:\Users\Liangjin\Pictures\Shock\data';
+indir='Z:\guixingyu\run2';
 outdir='C:\Users\Liangjin\Pictures\Shock\out';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:3;
+tt=40;
 % the variable name
 varname={'B','E','J','Vi','Ve','Ni','Ne', 'divB', 'divE'};
 % varname={'divE'};

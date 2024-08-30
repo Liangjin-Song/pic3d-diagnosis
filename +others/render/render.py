@@ -6,8 +6,8 @@ from mayavi import mlab
 from tvtk.util.ctf import PiecewiseFunction
 # mlab.init_notebook()
 
-indir = r'Z:\Simulation\moon\run1.1'
-outidr = r'Z:\Simulation\moon\run1.1\out\render'
+indir = r'Z:\Simulation\moon\run1.2'
+outidr = r'Z:\Simulation\moon\run1.2\out\render'
 
 # scale
 nx, ny, nz = 800, 500, 200
@@ -42,7 +42,7 @@ def read_vector(name):
     return x, y, z
 
 
-norm = vA
+norm = 1
 _, _, s = read_vector('B_t020.00.bsd')
 # s = read_scalar('Ne_t008.00.bsd')
 print(s.shape)

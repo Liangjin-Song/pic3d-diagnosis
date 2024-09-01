@@ -6,14 +6,14 @@
 clear;
 %% parameters
 % input/output directory
-indir='Z:\Simulation\moon\test1.1';
+indir='E:\Turbulence\case1.1\data';
 outdir='Z:\Simulation\moon\test1.1';
 prm=slj.Parameters(indir,outdir);
 % time
-tt=0:10;
+tt=5;
 % the variable name
-varname={'B','E','J','Vi','Ve','Ni','Ne'};
-% varname={'J'};
+% varname={'B','E','J','Vi','Ve','Ni','Ne'};
+varname={'B'};
 % figure style
 extra.Visible=true;
 extra.xrange=[prm.value.lx(1), prm.value.lx(end)];

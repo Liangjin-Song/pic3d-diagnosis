@@ -35,13 +35,13 @@ fd=slj.Parameters.read_binary_file(filename, value.type);
 switch name
     % scalar field
     case {'Ne', 'Nl', 'Nh', 'Nhe', 'Ni', 'stream', 'divE', 'divB', 'Nshi', 'Nshe', 'Nspi', 'Nspe', 'Nsph', 'Nsphe'}
-        fd = reshape_scalar(fd, nx, ny, nz);
+        fd = reshape_scalar(fd, nx, ny, nz, value);
         fd = slj.Scalar(fd);
     case {'B', 'E', 'J', 'Vi', 'Ve', 'Vl', 'Vh', 'Vhe', 'Vshi', 'Vshe', 'Vspi', 'Vspe', 'Vsph', 'Vsphe', 'qfluxe', 'qfluxi', 'qfluxl', 'qfluxh'}
-        fd = reshape_vector(fd, nx, ny, nz, reset);
+        fd = reshape_vector(fd, nx, ny, nz, reset, value);
         fd = slj.Vector(fd);
     case {'Pi', 'Pe', 'Pl', 'Ph', 'Phe', 'Pshi', 'Pshe', 'Pspi', 'Pspe', 'Psph', 'Psphe'}
-        fd = reshape_tensor(fd, nx, ny, nz, reset);
+        fd = reshape_tensor(fd, nx, ny, nz, reset, value);
         fd = slj.Tensor(fd);
     case {'spctrmh','spctrmi','spctrme','spctrml','spctrmhe'}
         fd=fd;
@@ -55,7 +55,7 @@ end
 end
 
 %% ======================================================================== %%
-function fd = reshape_scalar(v, nx, ny, nz)
+function fd = reshape_scalar(v, nx, ny, nz, val)
 %%
 % @brief: reshape the 1-D fd as a Scalar
 % @param: v - the 1-D data
@@ -67,10 +67,15 @@ fd=zeros(ny,nx,nz);
 for k=1:nz
     fd(:,:,k)=data(:,:,k)';
 end
+if val.dimension == 3
+    if val.reset
+        fd = permute(fd, [3, 2, 1]);
+    end
+end
 end
 
 %% ======================================================================== %%
-function fd = reshape_vector(v, nx, ny, nz, reset)
+function fd = reshape_vector(v, nx, ny, nz, reset, val)
 %%
 % @brief: reshape the 1-D fd as a Vector 
 % @param: v - the 1-D data
@@ -79,18 +84,18 @@ function fd = reshape_vector(v, nx, ny, nz, reset)
 % @return: fd - the vector 
 %%
 v=reshape(v,[nx*ny*nz,3,1]);
-fd.x=reshape_scalar(v(:,1),nx,ny,nz);
+fd.x=reshape_scalar(v(:,1),nx,ny,nz, val);
 if reset
-    fd.y=-reshape_scalar(v(:,3),nx,ny,nz);
-    fd.z=reshape_scalar(v(:,2),nx,ny,nz);
+    fd.y=-reshape_scalar(v(:,3),nx,ny,nz, val);
+    fd.z=reshape_scalar(v(:,2),nx,ny,nz, val);
 else
-    fd.y=reshape_scalar(v(:,2),nx,ny,nz);
-    fd.z=reshape_scalar(v(:,3),nx,ny,nz);
+    fd.y=reshape_scalar(v(:,2),nx,ny,nz, val);
+    fd.z=reshape_scalar(v(:,3),nx,ny,nz, val);
 end
 end
 
 %% ======================================================================== %%
-function fd = reshape_tensor(v, nx, ny, nz, reset)
+function fd = reshape_tensor(v, nx, ny, nz, reset, val)
 %%
 % @brief: reshape the 1-D fd as a Tensor
 % @param: v - the 1-D data
@@ -100,19 +105,19 @@ function fd = reshape_tensor(v, nx, ny, nz, reset)
 %%
 t=reshape(v,[nx*ny*nz,6,1]);
 if reset
-    fd.xx=reshape_scalar(t(:,1),nx,ny,nz);
-    fd.xy=-reshape_scalar(t(:,3),nx,ny,nz);
-    fd.xz=reshape_scalar(t(:,2),nx,ny,nz);
-    fd.yy=reshape_scalar(t(:,6),nx,ny,nz);
-    fd.yz=-reshape_scalar(t(:,5),nx,ny,nz);
-    fd.zz=reshape_scalar(t(:,4),nx,ny,nz);
+    fd.xx=reshape_scalar(t(:,1),nx,ny,nz, val);
+    fd.xy=-reshape_scalar(t(:,3),nx,ny,nz, val);
+    fd.xz=reshape_scalar(t(:,2),nx,ny,nz, val);
+    fd.yy=reshape_scalar(t(:,6),nx,ny,nz, val);
+    fd.yz=-reshape_scalar(t(:,5),nx,ny,nz, val);
+    fd.zz=reshape_scalar(t(:,4),nx,ny,nz, val);
 else
-    fd.xx=reshape_scalar(t(:,1),nx,ny,nz);
-    fd.xy=reshape_scalar(t(:,2),nx,ny,nz);
-    fd.xz=reshape_scalar(t(:,3),nx,ny,nz);
-    fd.yy=reshape_scalar(t(:,4),nx,ny,nz);
-    fd.yz=reshape_scalar(t(:,5),nx,ny,nz);
-    fd.zz=reshape_scalar(t(:,6),nx,ny,nz);
+    fd.xx=reshape_scalar(t(:,1),nx,ny,nz, val);
+    fd.xy=reshape_scalar(t(:,2),nx,ny,nz, val);
+    fd.xz=reshape_scalar(t(:,3),nx,ny,nz, val);
+    fd.yy=reshape_scalar(t(:,4),nx,ny,nz, val);
+    fd.yz=reshape_scalar(t(:,5),nx,ny,nz, val);
+    fd.zz=reshape_scalar(t(:,6),nx,ny,nz, val);
 end
 end
 

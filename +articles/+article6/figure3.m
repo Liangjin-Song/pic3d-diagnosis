@@ -1,14 +1,14 @@
 %
-%% analysis the electric field Ex in w-kx plane
+%% figure 3, dispersion relationship
 clear;
-%% parameters
 % directory
 indir='E:\Asym\cold2_ds1\wave';
-outdir='E:\Asym\cold2_ds1\out\Wave';
+wavedir='E:\Asym\cold2_ds1\out\Wave';
+outdir = 'E:\Asym\cold2_ds1\out\Article\Paper6';
 prm=slj.Parameters(indir,outdir);
 
 % load the position index of the separatrix in z direction
-cd(outdir);
+cd(wavedir);
 load('z_position_along_separatrix.mat');
 pz = pz - 400;
 pt = 20:0.1:40;
@@ -64,18 +64,19 @@ fd = fd(t1:t2, x1:x2);
 lx = lx(x1:x2);
 lt = tt(t1:t2);
 
-%% plot the field
-fd0 = fd;
-% high pass
-fd = slj.Physics.highpass2d(fd0);
+%% plot the figure
+f = figure('Position',[500,100,1200,500]);
+h = slj.Plot.subplot(1,2,[0.025,0.1],[0.2,0.05],[0.1,0.05]);
+fontsize=16;
 
-f1 = figure;
+axes(h(1));
 slj.Plot.field2d_suitable(fd, lx, lt, []);
 xlabel('X [c/\omega_{pi}]');
 ylabel('\Omega_{ci}t');
 % caxis([-1, 1]);
-title('Ex');
 set(gca,'FontSize', 14);
+caxis([-1.5,1.5]);
+colormap(h(1), 'parula');
 
 %% the fourier transform
 % the sampling frequency
@@ -89,10 +90,38 @@ ft = 1/dt;
 % xlabel('k_x [d_{i0}^{-1}]');
 % ylabel('\omega [\omega_{ci0}]');
 
-f3 = figure;
+axes(h(2))
 slj.Plot.field2d_suitable(hsas.ft, hsas.lk, hsas.lw, []);
-xlabel('k_x [d_{i0}^{-1}]');
-ylabel('\omega [\omega_{ci0}]');
-% caxis([0, 0.02]);
+xlabel('k_x [d_{i}^{-1}]');
+ylabel('\omega [\omega_{ci}]');
 xlim([0, 5]);
-colormap(slj.Plot.mycolormap(1));
+caxis([0, 0.02]);
+colormap(h(2), slj.Plot.mycolormap(1));
+
+hold on
+v = 2.5;
+k = -5:5;
+w = v .* k;
+hold on
+p1 = plot(k, w, '--k', 'LineWidth', 2);
+legend(p1, '\omega = c_{ia}''k',...
+     'Position',[0.79041666764766 0.495142858126334 0.100833331594865 0.0739999980330469]);
+set(gca, 'FontSize', fontsize);
+
+%%
+annotation(f,'textbox',...
+    [0.0400000000000001 0.877000001609326 0.0470833321784934 0.0739999983906746],...
+    'String',{'(a)'},...
+    'LineStyle','none',...
+    'FontSize',18,...
+    'FontName','Times New Roman');
+annotation(f,'textbox',...
+    [0.514166666666667 0.873000001609326 0.0479166654869915 0.0739999983906746],...
+    'String',{'(b)'},...
+    'LineStyle','none',...
+    'FontSize',18,...
+    'FontName','Times New Roman');
+
+%%
+cd(outdir);
+print('-dpng', '-r300', 'figure3.png');

@@ -4,13 +4,13 @@ indir='Z:\Simulation\moon\run1.2\';
 outdir='Z:\Simulation\moon\run1.2\out\';
 prm = slj.Parameters(indir, outdir);
 
-tt=10;
-name='B';
-cmp = 'z';
+tt=0;
+name='Ve';
+cmp = 'y';
 % norm = prm.value.qi .* prm.value.n0 .* prm.value.vA;
-% norm = prm.value.vA;
+norm = prm.value.vA;
 % norm = prm.value.n0;
-norm = 1;
+% norm = 1;
 nt = length(tt);
 
 %% read data
@@ -35,7 +35,7 @@ for t=1:nt
 %         [prm.value.lz(1), prm.value.lz(end)], []);
     slj.Plot.field3d(fd./norm, prm.value.lx, prm.value.ly, prm.value.lz, ...
         [], ...
-        [prm.value.ly(end/2)], ...
+        [prm.value.ly(41), prm.value.ly(160)], ...
         [], []);
 
     zlim([prm.value.lz(1), prm.value.lz(end)]);
